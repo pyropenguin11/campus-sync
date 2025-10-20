@@ -1,13 +1,4 @@
-import { useMemo, useState } from 'react'
-import {
-  MapContainer,
-  TileLayer,
-  Polyline,
-  CircleMarker,
-  Tooltip,
-} from 'react-leaflet'
-import type { Map as LeafletMap } from 'leaflet'
-import 'leaflet/dist/leaflet.css'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 
 type NodeCategory = 'academic' | 'student' | 'research'
@@ -121,9 +112,177 @@ const nodeColors: Record<NodeCategory, string> = {
 const tunnelStroke = 'rgba(122, 0, 25, 0.7)'
 const tunnelHighlight = '#ffcc33'
 
-const App = () => {
-  const [mapInstance, setMapInstance] = useState<LeafletMap | null>(null)
+type LeafletInstance = any
 
+const leafletVersion = '1.9.4'
+const leafletJsCdn = `https://unpkg.com/leaflet@${leafletVersion}/dist/leaflet.js`
+const leafletCssCdn = `https://unpkg.com/leaflet@${leafletVersion}/dist/leaflet.css`
+
+let leafletLoader: Promise<LeafletInstance | null> | null = null
+
+const ensureLeafletLink = () => {
+  if (typeof document === 'undefined') return
+  const existing = document.querySelector<HTMLLinkElement>('link[data-leaflet]')
+  if (!existing) {
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = leafletCssCdn
+    link.integrity = 'sha512-pMpr2bqBiKx2ATs3nV846dOOxzXMZO08h8tZz7ZxbYlR5c+3F4iAfDdc/K1Ji/7luWGINuD/7++PK5H+0uQ1pg=='
+    link.crossOrigin = ''
+    link.setAttribute('data-leaflet', 'true')
+    document.head.appendChild(link)
+  }
+}
+
+const loadLeaflet = async (): Promise<LeafletInstance | null> => {
+  if (typeof window === 'undefined') return null
+  const existing = (window as typeof window & { L?: LeafletInstance }).L
+  if (existing) return existing
+  if (!leafletLoader) {
+    ensureLeafletLink()
+    leafletLoader = new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = leafletJsCdn
+      script.async = true
+      script.integrity =
+        'sha512-y7m90PgsSjD/F7kh/3Gzdhvj1io8GZFODdgNpTi27C/medfyqCkCmDYJLdnOjFkWDXe4sdRQ4pQMBYbgl2hF0A=='
+      script.crossOrigin = ''
+      script.onload = () => resolve((window as any).L ?? null)
+      script.onerror = () => reject(new Error('Leaflet failed to load'))
+      document.body.appendChild(script)
+    }).catch(() => null)
+  }
+  return leafletLoader
+}
+
+type MapViewProps = {
+  tunnelSegments: Array<[LatLngTuple, LatLngTuple]>
+  routePoints: LatLngTuple[]
+  nodes: TunnelNode[]
+  onMapReady: (map: LeafletInstance | null) => void
+}
+
+const MapView = ({ tunnelSegments, routePoints, nodes, onMapReady }: MapViewProps) => {
+  const [mapError, setMapError] = useState<string | null>(null)
+  const mapContainerRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    let mapInstance: LeafletInstance | null = null
+    let layers: LeafletInstance[] = []
+    let cancelled = false
+
+    setMapError(null)
+
+    loadLeaflet()
+      .then((L) => {
+        if (cancelled) return
+        if (!L) {
+          setMapError('Unable to load map tiles right now.')
+          onMapReady(null)
+          return
+        }
+        const target = mapContainerRef.current
+        if (!target) {
+          onMapReady(null)
+          return
+        }
+        mapInstance = L.map(target, {
+          center: MAP_CENTER,
+          zoom: MAP_ZOOM,
+          scrollWheelZoom: true,
+          zoomControl: false,
+        })
+
+        L.tileLayer(TILE_LAYER_URL, {
+          attribution: TILE_ATTRIBUTION,
+          maxZoom: 20,
+        }).addTo(mapInstance)
+
+        tunnelSegments.forEach((segment) => {
+          const layer = L.polyline(segment, {
+            color: tunnelStroke,
+            weight: 4,
+            opacity: 0.92,
+            lineCap: 'round',
+            lineJoin: 'round',
+          }).addTo(mapInstance)
+          layers.push(layer)
+        })
+
+        if (routePoints.length > 1) {
+          const highlightLayer = L.polyline(routePoints, {
+            color: tunnelHighlight,
+            weight: 6,
+            opacity: 0.88,
+            lineCap: 'round',
+            lineJoin: 'round',
+          }).addTo(mapInstance)
+          layers.push(highlightLayer)
+        }
+
+        nodes.forEach((node) => {
+          const marker = L.circleMarker(node.position, {
+            color: '#ffffff',
+            weight: 2,
+            fillColor: nodeColors[node.type],
+            fillOpacity: 0.95,
+            radius: 9,
+          }).addTo(mapInstance)
+          marker.bindTooltip(
+            `<div class="tooltip-title">${node.name}</div><div class="tooltip-meta">${typeLabel[node.type]}</div>`,
+            {
+              direction: 'top',
+              offset: [0, -12],
+              opacity: 0.95,
+              className: 'node-tooltip',
+            },
+          )
+          layers.push(marker)
+        })
+
+        onMapReady(mapInstance)
+        return null
+      })
+      .catch(() => {
+        if (cancelled) return
+        setMapError('Unable to load map tiles right now.')
+        onMapReady(null)
+      })
+
+    return () => {
+      cancelled = true
+      if (layers.length > 0) {
+        layers.forEach((layer) => {
+          if (layer?.remove) layer.remove()
+        })
+      }
+      if (mapInstance) {
+        mapInstance.remove()
+      }
+      onMapReady(null)
+    }
+  }, [tunnelSegments, routePoints, nodes, onMapReady])
+
+  if (mapError) {
+    return <div className="map-error">{mapError}</div>
+  }
+
+  return (
+    <div
+      ref={mapContainerRef}
+      className="map-shell"
+      role="application"
+      aria-label="Campus map"
+    />
+  )
+}
+
+const App = () => {
+  const [mapInstance, setMapInstance] = useState<LeafletInstance | null>(null)
+
+  const handleMapReady = useCallback((instance: LeafletInstance | null) => {
+    setMapInstance(instance)
+  }, [])
   const routePoints = useMemo(
     () =>
       ROUTE_HIGHLIGHT.map((id) => nodeLookup.get(id)?.position).filter(
@@ -247,62 +406,12 @@ const App = () => {
 
         <main className="map-area">
           <div className="map-canvas">
-            <MapContainer
-              center={MAP_CENTER}
-              zoom={MAP_ZOOM}
-              scrollWheelZoom
-              zoomControl={false}
-              className="map-shell"
-              whenCreated={setMapInstance}
-            >
-              <TileLayer url={TILE_LAYER_URL} attribution={TILE_ATTRIBUTION} />
-
-              {tunnelSegments.map((segment, index) => (
-                <Polyline
-                  key={`segment-${index.toString()}`}
-                  positions={segment}
-                  pathOptions={{
-                    color: tunnelStroke,
-                    weight: 4,
-                    opacity: 0.92,
-                    lineCap: 'round',
-                    lineJoin: 'round',
-                  }}
-                />
-              ))}
-
-              {routePoints.length > 1 && (
-                <Polyline
-                  positions={routePoints}
-                  pathOptions={{
-                    color: tunnelHighlight,
-                    weight: 6,
-                    opacity: 0.88,
-                    lineCap: 'round',
-                    lineJoin: 'round',
-                  }}
-                />
-              )}
-
-              {TUNNEL_NODES.map((node) => (
-                <CircleMarker
-                  key={node.id}
-                  center={node.position}
-                  radius={9}
-                  pathOptions={{
-                    color: '#ffffff',
-                    weight: 2,
-                    fillColor: nodeColors[node.type],
-                    fillOpacity: 0.95,
-                  }}
-                >
-                  <Tooltip direction="top" offset={[0, -12]} opacity={0.95} className="node-tooltip">
-                    <div className="tooltip-title">{node.name}</div>
-                    <div className="tooltip-meta">{typeLabel[node.type]}</div>
-                  </Tooltip>
-                </CircleMarker>
-              ))}
-            </MapContainer>
+            <MapView
+              tunnelSegments={tunnelSegments}
+              routePoints={routePoints}
+              nodes={TUNNEL_NODES}
+              onMapReady={handleMapReady}
+            />
 
             <div className="floating-card directions-card">
               <header>

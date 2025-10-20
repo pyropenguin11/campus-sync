@@ -341,6 +341,20 @@
   font-weight: 600;
 }
 
+.map-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 520px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text-secondary);
+  box-shadow: 0 30px 60px rgba(90, 0, 19, 0.12);
+  text-align: center;
+  padding: 2rem;
+  font-weight: 600;
+}
+
 .node-tooltip.leaflet-tooltip {
   background: rgba(255, 255, 255, 0.94);
   color: var(--text-primary);
