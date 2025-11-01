@@ -1,75 +1,44 @@
-# React + TypeScript + Vite
+# Campus Sync — T3 Stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Campus Sync has been rebuilt on the [T3 stack](https://create.t3.gg/) so it can deploy cleanly to Vercel. The app now runs on Next.js with the App Router and uses tRPC, React Query, Tailwind CSS, and superjson to expose a typed API for tunnel data.
 
-Currently, two official plugins are available:
+## What’s inside
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Next.js 14 App Router** with React 18 for hybrid static/server rendering
+- **tRPC v11** + **React Query** for fully typed client/server communication
+- **Tailwind CSS** alongside the existing handcrafted styles
+- **Superjson** serialization and **Zod** validation scaffolding for future mutations
+- **Type-safe environment handling** via `@t3-oss/env-nextjs`
 
-## React Compiler
+## Getting started
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+nvm use
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The development server runs on `http://localhost:3000`. The map view is still powered by Leaflet (loaded from CDN) and mirrors the Vite prototype.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Quality checks
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run lint
+npm run typecheck
+npm run build
 ```
+
+These align with Vercel’s CI pipeline (`next build`).
+
+## Deployment on Vercel
+
+1. Push the repository to GitHub (or another Git provider).
+2. Create a new project in Vercel and import the repo.
+3. Vercel auto-detects Next.js and uses `npm install`, `npm run build`, and `Next.js` defaults.
+4. No environment variables are required yet. If you add them later, define them in `src/env.mjs` and in the Vercel dashboard.
+
+After the first deployment, Vercel will automatically build & deploy on every `main` branch push. Preview deployments work the same way for PRs.
+
+### Node version
+
+The project targets Node.js 20. Install it with [`nvm`](https://github.com/nvm-sh/nvm) or your preferred version manager, then run `nvm use` (reads `.nvmrc`) before installing dependencies locally or on CI.
