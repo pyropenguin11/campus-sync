@@ -250,6 +250,14 @@ button {
   box-shadow: 0 8px 18px rgba(90, 0, 19, 0.18);
 }
 
+.layer-toggle:disabled,
+.layer-toggle:disabled:hover {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+  box-shadow: none;
+}
+
 .layer-toggle.active {
   background: rgba(255, 204, 51, 0.18);
   border-color: rgba(122, 0, 25, 0.45);
@@ -285,13 +293,12 @@ button {
 }
 
 .popular-list li {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.75rem 0.9rem;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.86);
-  border: 1px solid rgba(122, 0, 25, 0.12);
+  padding: 0;
+}
+
+.popular-list li .layer-toggle {
+  width: 100%;
+  justify-content: flex-start;
 }
 
 .node-badge {
@@ -321,6 +328,70 @@ button {
   height: 6px;
   border-radius: 999px;
   margin-right: 0.65rem;
+}
+
+.route-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.route-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+.route-field input {
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid rgba(122, 0, 25, 0.25);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-primary);
+}
+
+.route-suggestions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.route-suggestions button {
+  width: 100%;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(122, 0, 25, 0.15);
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.route-suggestions button:hover {
+  border-color: rgba(122, 0, 25, 0.3);
+  box-shadow: 0 6px 16px rgba(90, 0, 19, 0.15);
+}
+
+.route-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.route-actions .layer-toggle {
+  flex: 1;
+  justify-content: center;
+}
+
+.route-summary {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
 }
 
 .legend-line.open {

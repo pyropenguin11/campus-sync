@@ -1,0 +1,26 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.2299830923678,
+          44.974379005029
+        ]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "LABEL": "Do not take elevator here! Continue down hall to continue on Gopher Way"
+      }
+    }
+  ]
+}

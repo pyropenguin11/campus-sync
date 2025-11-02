@@ -3,12 +3,6 @@
 "use strict";
 
 __turbopack_context__.s([
-    "LEAFLET_CSS_CDN",
-    ()=>LEAFLET_CSS_CDN,
-    "LEAFLET_JS_CDN",
-    ()=>LEAFLET_JS_CDN,
-    "LEAFLET_VERSION",
-    ()=>LEAFLET_VERSION,
     "MAP_CENTER",
     ()=>MAP_CENTER,
     "MAP_ZOOM",
@@ -25,9 +19,6 @@ const MAP_CENTER = [
 const MAP_ZOOM = 16.5;
 const TILE_LAYER_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const TILE_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-const LEAFLET_VERSION = "1.9.4";
-const LEAFLET_JS_CDN = `https://unpkg.com/leaflet@${LEAFLET_VERSION}/dist/leaflet.js`;
-const LEAFLET_CSS_CDN = `https://unpkg.com/leaflet@${LEAFLET_VERSION}/dist/leaflet.css`;
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
@@ -78,170 +69,757 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-let leafletLoader = null;
-const ensureLeafletStylesheet = ()=>{
-    if (typeof document === "undefined") return;
-    const existing = document.querySelector("link[data-leaflet]");
-    if (existing) return;
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LEAFLET_CSS_CDN"];
-    link.integrity = "sha512-pMpr2bqBiKx2ATs3nV846dOOxzXMZO08h8tZz7ZxbYlR5c+3F4iAfDdc/K1Ji/7luWGINuD/7++PK5H+0uQ1pg==";
-    link.crossOrigin = "";
-    link.setAttribute("data-leaflet", "true");
-    document.head.appendChild(link);
+const createEmptyBounds = ()=>({
+        minLat: Number.POSITIVE_INFINITY,
+        maxLat: Number.NEGATIVE_INFINITY,
+        minLon: Number.POSITIVE_INFINITY,
+        maxLon: Number.NEGATIVE_INFINITY
+    });
+const extendBounds = (bounds, lat, lon)=>{
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
+    if (lat < bounds.minLat) bounds.minLat = lat;
+    if (lat > bounds.maxLat) bounds.maxLat = lat;
+    if (lon < bounds.minLon) bounds.minLon = lon;
+    if (lon > bounds.maxLon) bounds.maxLon = lon;
 };
-const loadLeaflet = async ()=>{
-    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
-    ;
-    const existing = window.L;
-    if (existing) return existing;
-    if (!leafletLoader) {
-        ensureLeafletStylesheet();
-        leafletLoader = new Promise((resolve, reject)=>{
-            const script = document.createElement("script");
-            script.src = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LEAFLET_JS_CDN"];
-            script.async = true;
-            script.integrity = "sha512-y7m90PgsSjD/F7kh/3Gzdhvj1io8GZFODdgNpTi27C/medfyqCkCmDYJLdnOjFkWDXe4sdRQ4pQMBYbgl2hF0A==";
-            script.crossOrigin = "";
-            script.onload = ()=>resolve(window.L ?? null);
-            script.onerror = ()=>reject(new Error("Leaflet failed to load"));
-            document.body.appendChild(script);
-        }).catch(()=>null);
+const isBoundsValid = (bounds)=>Number.isFinite(bounds.minLat) && Number.isFinite(bounds.maxLat) && Number.isFinite(bounds.minLon) && Number.isFinite(bounds.maxLon) && bounds.minLat <= bounds.maxLat && bounds.minLon <= bounds.maxLon;
+const geometryMatches = (geometry, type)=>{
+    if (!geometry) return false;
+    switch(geometry.type){
+        case "Polygon":
+        case "MultiPolygon":
+            return type === "polygon";
+        case "LineString":
+        case "MultiLineString":
+            return type === "line";
+        case "Point":
+        case "MultiPoint":
+            return type === "point";
+        case "GeometryCollection":
+            return geometry.geometries.some((child)=>geometryMatches(child, type));
+        default:
+            return false;
     }
-    return leafletLoader;
 };
-const MapView = ({ tunnelSegments, routePoints, nodes, onMapReady })=>{
+const visitGeometry = (geometry, visit)=>{
+    if (!geometry) return;
+    switch(geometry.type){
+        case "Point":
+            {
+                const [lon, lat] = geometry.coordinates;
+                visit(lat, lon);
+                break;
+            }
+        case "MultiPoint":
+            geometry.coordinates.forEach(([lon, lat])=>visit(lat, lon));
+            break;
+        case "LineString":
+            geometry.coordinates.forEach(([lon, lat])=>visit(lat, lon));
+            break;
+        case "MultiLineString":
+            geometry.coordinates.forEach((line)=>line.forEach(([lon, lat])=>visit(lat, lon)));
+            break;
+        case "Polygon":
+            geometry.coordinates.forEach((ring)=>ring.forEach(([lon, lat])=>visit(lat, lon)));
+            break;
+        case "MultiPolygon":
+            geometry.coordinates.forEach((polygon)=>polygon.forEach((ring)=>ring.forEach(([lon, lat])=>visit(lat, lon))));
+            break;
+        case "GeometryCollection":
+            geometry.geometries.forEach((child)=>visitGeometry(child, visit));
+            break;
+        default:
+            break;
+    }
+};
+const toLonLat = ([lat, lon])=>[
+        lon,
+        lat
+    ];
+const DEFAULT_POLYGON_STYLE = {
+    color: "#2563eb",
+    weight: 1.5,
+    opacity: 0.9,
+    fillColor: "#60a5fa",
+    fillOpacity: 0.2
+};
+const DEFAULT_POINT_STYLE = {
+    radius: 6,
+    color: "#ffffff",
+    weight: 2,
+    fillColor: "#2563eb",
+    fillOpacity: 0.95
+};
+const LAYER_STYLE_OVERRIDES = {
+    GOPHER_WAY_LEVEL_BLDGS: {
+        polygon: {
+            color: "#0ea5e9",
+            fillColor: "#38bdf8",
+            fillOpacity: 0.15
+        }
+    },
+    GW_CIRCULATION_AREAS: {
+        polygon: {
+            color: "#f59e0b",
+            fillColor: "#facc15",
+            fillOpacity: 0.25
+        }
+    },
+    GW_NON_ADA_ACCESSIBLE: {
+        polygon: {
+            color: "#f97316",
+            dashArray: "6 4",
+            fillOpacity: 0.1
+        }
+    },
+    GW_ELEVATORS: {
+        point: {
+            fillColor: "#ef4444",
+            color: "#ffffff",
+            radius: 5,
+            weight: 2
+        }
+    },
+    GW_QR_CODE_LOCS: {
+        point: {
+            fillColor: "#22d3ee",
+            color: "#0f172a",
+            radius: 4
+        }
+    },
+    GW_INFO_LABELS: {
+        point: {
+            fillColor: "#a855f7",
+            color: "#ffffff",
+            radius: 4
+        }
+    },
+    GW_FP_LINES_STAIRS: {
+        polygon: {
+            color: "#34d399",
+            dashArray: "4 4",
+            fillOpacity: 0.08
+        }
+    },
+    GW_FP_GROSS_AREA: {
+        polygon: {
+            color: "#f472b6",
+            fillColor: "#fbcfe8",
+            fillOpacity: 0.12
+        }
+    },
+    GW_PORTION_DIFFERENT_LEVEL: {
+        polygon: {
+            color: "#f87171",
+            fillColor: "#fecaca",
+            fillOpacity: 0.18
+        }
+    },
+    GW_FLOOR_NAME_CHANGE: {
+        polygon: {
+            color: "#22c55e",
+            dashArray: "2 6",
+            fillOpacity: 0.08
+        }
+    }
+};
+const getLayerStyle = (feature)=>{
+    const override = LAYER_STYLE_OVERRIDES[feature] ?? {};
+    return {
+        polygon: {
+            ...DEFAULT_POLYGON_STYLE,
+            ...override.polygon ?? {}
+        },
+        point: {
+            ...DEFAULT_POINT_STYLE,
+            ...override.point ?? {}
+        }
+    };
+};
+const parseDashArray = (value)=>{
+    if (!value) return undefined;
+    const parts = value.split(/\s+/).map((item)=>Number.parseFloat(item)).filter((item)=>Number.isFinite(item) && item > 0);
+    return parts.length > 0 ? parts : undefined;
+};
+const NODE_COLOR_EXPRESSION = [
+    "match",
+    [
+        "get",
+        "nodeType"
+    ],
+    "academic",
+    __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["NODE_COLORS"].academic,
+    "student",
+    __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["NODE_COLORS"].student,
+    "research",
+    __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["NODE_COLORS"].research,
+    __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["NODE_COLORS"].academic
+];
+const MapView = ({ routePoints, nodes, geoJsonLayers, routeNodeIds, startNodeId, endNodeId })=>{
     _s();
+    const containerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const mapRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const layerRegistryRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])({
+        layers: [],
+        sources: []
+    });
+    const ensureSourcesRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])({
+        "MapView.useRef[ensureSourcesRef]": ()=>undefined
+    }["MapView.useRef[ensureSourcesRef]"]);
+    const hasFitBoundsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(false);
     const [mapError, setMapError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    const mapContainerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const routeFeatureCollection = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "MapView.useMemo[routeFeatureCollection]": ()=>{
+            if (routePoints.length < 2) {
+                return null;
+            }
+            return {
+                type: "FeatureCollection",
+                features: [
+                    {
+                        type: "Feature",
+                        properties: {},
+                        geometry: {
+                            type: "LineString",
+                            coordinates: routePoints.map({
+                                "MapView.useMemo[routeFeatureCollection]": (point)=>toLonLat(point)
+                            }["MapView.useMemo[routeFeatureCollection]"])
+                        }
+                    }
+                ]
+            };
+        }
+    }["MapView.useMemo[routeFeatureCollection]"], [
+        routePoints
+    ]);
+    const nodeFeatureCollection = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "MapView.useMemo[nodeFeatureCollection]": ()=>{
+            const routeSet = new Set(routeNodeIds);
+            const features = nodes.filter({
+                "MapView.useMemo[nodeFeatureCollection].features": (node)=>routeSet.has(node.id) || node.id === startNodeId || node.id === endNodeId
+            }["MapView.useMemo[nodeFeatureCollection].features"]).map({
+                "MapView.useMemo[nodeFeatureCollection].features": (node)=>({
+                        type: "Feature",
+                        properties: {
+                            id: node.id,
+                            nodeType: node.type,
+                            name: node.name,
+                            inRoute: routeSet.has(node.id),
+                            isStart: startNodeId === node.id,
+                            isEnd: endNodeId === node.id
+                        },
+                        geometry: {
+                            type: "Point",
+                            coordinates: toLonLat(node.position)
+                        }
+                    })
+            }["MapView.useMemo[nodeFeatureCollection].features"]);
+            return {
+                type: "FeatureCollection",
+                features
+            };
+        }
+    }["MapView.useMemo[nodeFeatureCollection]"], [
+        nodes,
+        routeNodeIds,
+        startNodeId,
+        endNodeId
+    ]);
+    const osmTileUrls = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "MapView.useMemo[osmTileUrls]": ()=>{
+            if (!__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TILE_LAYER_URL"].includes("{s}")) {
+                return [
+                    __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TILE_LAYER_URL"]
+                ];
+            }
+            return [
+                "a",
+                "b",
+                "c"
+            ].map({
+                "MapView.useMemo[osmTileUrls]": (subdomain)=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TILE_LAYER_URL"].replace("{s}", subdomain)
+            }["MapView.useMemo[osmTileUrls]"]);
+        }
+    }["MapView.useMemo[osmTileUrls]"], []);
+    const ensureSources = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "MapView.useCallback[ensureSources]": ()=>{
+            const map = mapRef.current;
+            if (!map) {
+                return;
+            }
+            const { layers, sources } = layerRegistryRef.current;
+            [
+                ...layers
+            ].reverse().forEach({
+                "MapView.useCallback[ensureSources]": (layerId)=>{
+                    if (map.getLayer(layerId)) {
+                        map.removeLayer(layerId);
+                    }
+                }
+            }["MapView.useCallback[ensureSources]"]);
+            [
+                ...sources
+            ].reverse().forEach({
+                "MapView.useCallback[ensureSources]": (sourceId)=>{
+                    if (map.getSource(sourceId)) {
+                        map.removeSource(sourceId);
+                    }
+                }
+            }["MapView.useCallback[ensureSources]"]);
+            const nextLayers = [];
+            const nextSources = [];
+            const bounds = createEmptyBounds();
+            const recordLayer = {
+                "MapView.useCallback[ensureSources].recordLayer": (layerId)=>{
+                    nextLayers.push(layerId);
+                }
+            }["MapView.useCallback[ensureSources].recordLayer"];
+            const recordSource = {
+                "MapView.useCallback[ensureSources].recordSource": (sourceId)=>{
+                    nextSources.push(sourceId);
+                }
+            }["MapView.useCallback[ensureSources].recordSource"];
+            geoJsonLayers.forEach({
+                "MapView.useCallback[ensureSources]": (layer)=>{
+                    const sourceId = `arcgis-${layer.feature}-${layer.layerId}`;
+                    map.addSource(sourceId, {
+                        type: "geojson",
+                        data: layer.featureCollection
+                    });
+                    recordSource(sourceId);
+                    const style = getLayerStyle(layer.feature);
+                    const hasPolygons = layer.featureCollection.features.some({
+                        "MapView.useCallback[ensureSources].hasPolygons": (feature)=>geometryMatches(feature.geometry, "polygon")
+                    }["MapView.useCallback[ensureSources].hasPolygons"]);
+                    const hasLines = layer.featureCollection.features.some({
+                        "MapView.useCallback[ensureSources].hasLines": (feature)=>geometryMatches(feature.geometry, "line")
+                    }["MapView.useCallback[ensureSources].hasLines"]);
+                    const hasPoints = layer.featureCollection.features.some({
+                        "MapView.useCallback[ensureSources].hasPoints": (feature)=>geometryMatches(feature.geometry, "point")
+                    }["MapView.useCallback[ensureSources].hasPoints"]);
+                    layer.featureCollection.features.forEach({
+                        "MapView.useCallback[ensureSources]": (feature)=>{
+                            visitGeometry(feature.geometry, {
+                                "MapView.useCallback[ensureSources]": (lat, lon)=>extendBounds(bounds, lat, lon)
+                            }["MapView.useCallback[ensureSources]"]);
+                        }
+                    }["MapView.useCallback[ensureSources]"]);
+                    if (hasPolygons) {
+                        const fillId = `${sourceId}-fill`;
+                        const polygonFilter = [
+                            "any",
+                            [
+                                "==",
+                                [
+                                    "geometry-type"
+                                ],
+                                "Polygon"
+                            ],
+                            [
+                                "==",
+                                [
+                                    "geometry-type"
+                                ],
+                                "MultiPolygon"
+                            ]
+                        ];
+                        map.addLayer({
+                            id: fillId,
+                            type: "fill",
+                            source: sourceId,
+                            filter: polygonFilter,
+                            paint: {
+                                "fill-color": style.polygon.fillColor,
+                                "fill-opacity": style.polygon.fillOpacity
+                            }
+                        });
+                        recordLayer(fillId);
+                        const outlineId = `${sourceId}-outline`;
+                        const linePaint = {
+                            "line-color": style.polygon.color,
+                            "line-width": style.polygon.weight,
+                            "line-opacity": style.polygon.opacity
+                        };
+                        const dashArray = parseDashArray(style.polygon.dashArray);
+                        if (dashArray) {
+                            linePaint["line-dasharray"] = dashArray;
+                        }
+                        map.addLayer({
+                            id: outlineId,
+                            type: "line",
+                            source: sourceId,
+                            filter: polygonFilter,
+                            paint: linePaint
+                        });
+                        recordLayer(outlineId);
+                    }
+                    if (hasLines) {
+                        const lineId = `${sourceId}-line`;
+                        const lineFilter = [
+                            "any",
+                            [
+                                "==",
+                                [
+                                    "geometry-type"
+                                ],
+                                "LineString"
+                            ],
+                            [
+                                "==",
+                                [
+                                    "geometry-type"
+                                ],
+                                "MultiLineString"
+                            ]
+                        ];
+                        const linePaint = {
+                            "line-color": style.polygon.color,
+                            "line-width": Math.max(style.polygon.weight - 0.5, 1),
+                            "line-opacity": style.polygon.opacity
+                        };
+                        const dashArray = parseDashArray(style.polygon.dashArray);
+                        if (dashArray) {
+                            linePaint["line-dasharray"] = dashArray;
+                        }
+                        map.addLayer({
+                            id: lineId,
+                            type: "line",
+                            source: sourceId,
+                            filter: lineFilter,
+                            paint: linePaint
+                        });
+                        recordLayer(lineId);
+                    }
+                    if (hasPoints) {
+                        layer.featureCollection.features.forEach({
+                            "MapView.useCallback[ensureSources]": (feature)=>{
+                                visitGeometry(feature.geometry, {
+                                    "MapView.useCallback[ensureSources]": (lat, lon)=>extendBounds(bounds, lat, lon)
+                                }["MapView.useCallback[ensureSources]"]);
+                            }
+                        }["MapView.useCallback[ensureSources]"]);
+                    }
+                }
+            }["MapView.useCallback[ensureSources]"]);
+            if (routeFeatureCollection && routeFeatureCollection.features.length > 0) {
+                map.addSource("route-highlight", {
+                    type: "geojson",
+                    data: routeFeatureCollection
+                });
+                recordSource("route-highlight");
+                routeFeatureCollection.features[0].geometry.coordinates.forEach({
+                    "MapView.useCallback[ensureSources]": ([lon, lat])=>extendBounds(bounds, lat, lon)
+                }["MapView.useCallback[ensureSources]"]);
+                map.addLayer({
+                    id: "route-highlight-line",
+                    type: "line",
+                    source: "route-highlight",
+                    paint: {
+                        "line-color": __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TUNNEL_HIGHLIGHT"],
+                        "line-width": 5,
+                        "line-opacity": 0.9
+                    },
+                    layout: {
+                        "line-cap": "round",
+                        "line-join": "round"
+                    }
+                });
+                recordLayer("route-highlight-line");
+            }
+            if (nodeFeatureCollection.features.length > 0) {
+                map.addSource("tunnel-nodes", {
+                    type: "geojson",
+                    data: nodeFeatureCollection
+                });
+                recordSource("tunnel-nodes");
+                nodeFeatureCollection.features.forEach({
+                    "MapView.useCallback[ensureSources]": (feature)=>{
+                        const [lon, lat] = feature.geometry.coordinates;
+                        extendBounds(bounds, lat, lon);
+                    }
+                }["MapView.useCallback[ensureSources]"]);
+                const nodeColorExpression = [
+                    "case",
+                    [
+                        "boolean",
+                        [
+                            "get",
+                            "isStart"
+                        ],
+                        false
+                    ],
+                    "#22c55e",
+                    [
+                        "boolean",
+                        [
+                            "get",
+                            "isEnd"
+                        ],
+                        false
+                    ],
+                    "#ef4444",
+                    [
+                        "boolean",
+                        [
+                            "get",
+                            "inRoute"
+                        ],
+                        false
+                    ],
+                    "#facc15",
+                    NODE_COLOR_EXPRESSION
+                ];
+                const nodeRadiusExpression = [
+                    "case",
+                    [
+                        "boolean",
+                        [
+                            "get",
+                            "isStart"
+                        ],
+                        false
+                    ],
+                    9,
+                    [
+                        "boolean",
+                        [
+                            "get",
+                            "isEnd"
+                        ],
+                        false
+                    ],
+                    9,
+                    [
+                        "boolean",
+                        [
+                            "get",
+                            "inRoute"
+                        ],
+                        false
+                    ],
+                    8,
+                    7
+                ];
+                const nodeStrokeWidthExpression = [
+                    "case",
+                    [
+                        "boolean",
+                        [
+                            "get",
+                            "isStart"
+                        ],
+                        false
+                    ],
+                    3,
+                    [
+                        "boolean",
+                        [
+                            "get",
+                            "isEnd"
+                        ],
+                        false
+                    ],
+                    3,
+                    [
+                        "boolean",
+                        [
+                            "get",
+                            "inRoute"
+                        ],
+                        false
+                    ],
+                    2.5,
+                    2
+                ];
+                map.addLayer({
+                    id: "tunnel-nodes-circle",
+                    type: "circle",
+                    source: "tunnel-nodes",
+                    paint: {
+                        "circle-radius": nodeRadiusExpression,
+                        "circle-color": nodeColorExpression,
+                        "circle-opacity": 0.95,
+                        "circle-stroke-color": "#ffffff",
+                        "circle-stroke-width": nodeStrokeWidthExpression
+                    }
+                });
+                recordLayer("tunnel-nodes-circle");
+            }
+            layerRegistryRef.current = {
+                layers: nextLayers,
+                sources: nextSources
+            };
+            if (isBoundsValid(bounds) && !hasFitBoundsRef.current) {
+                map.fitBounds([
+                    [
+                        bounds.minLon,
+                        bounds.minLat
+                    ],
+                    [
+                        bounds.maxLon,
+                        bounds.maxLat
+                    ]
+                ], {
+                    padding: 60,
+                    maxZoom: 18,
+                    duration: 0
+                });
+                hasFitBoundsRef.current = true;
+            }
+        }
+    }["MapView.useCallback[ensureSources]"], [
+        geoJsonLayers,
+        nodeFeatureCollection,
+        routeFeatureCollection
+    ]);
+    ensureSourcesRef.current = ensureSources;
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "MapView.useEffect": ()=>{
-            let mapInstance = null;
-            let layers = [];
-            let cancelled = false;
+            if (!containerRef.current || mapRef.current) {
+                return;
+            }
+            let isDestroyed = false;
             setMapError(null);
-            loadLeaflet().then({
-                "MapView.useEffect": (L)=>{
-                    if (cancelled) return;
-                    if (!L) {
-                        setMapError("Unable to load map tiles right now.");
-                        onMapReady(null);
-                        return;
-                    }
-                    const target = mapContainerRef.current;
-                    if (!target) {
-                        onMapReady(null);
-                        return;
-                    }
-                    mapInstance = L.map(target, {
-                        center: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MAP_CENTER"],
-                        zoom: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MAP_ZOOM"],
-                        scrollWheelZoom: true,
-                        zoomControl: false
-                    });
-                    L.tileLayer(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TILE_LAYER_URL"], {
-                        attribution: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TILE_ATTRIBUTION"],
-                        maxZoom: 20
-                    }).addTo(mapInstance);
-                    tunnelSegments.forEach({
-                        "MapView.useEffect": (segment)=>{
-                            const layer = L.polyline(segment, {
-                                color: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TUNNEL_STROKE"],
-                                weight: 4,
-                                opacity: 0.92,
-                                lineCap: "round",
-                                lineJoin: "round"
-                            }).addTo(mapInstance);
-                            layers.push(layer);
+            const initialize = {
+                "MapView.useEffect.initialize": async ()=>{
+                    try {
+                        const maplibregl = await __turbopack_context__.A("[project]/node_modules/maplibre-gl/dist/maplibre-gl.js [app-client] (ecmascript, async loader)");
+                        if (isDestroyed || !containerRef.current) {
+                            return;
                         }
-                    }["MapView.useEffect"]);
-                    if (routePoints.length > 1) {
-                        const highlightLayer = L.polyline(routePoints, {
-                            color: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TUNNEL_HIGHLIGHT"],
-                            weight: 6,
-                            opacity: 0.88,
-                            lineCap: "round",
-                            lineJoin: "round"
-                        }).addTo(mapInstance);
-                        layers.push(highlightLayer);
-                    }
-                    nodes.forEach({
-                        "MapView.useEffect": (node)=>{
-                            const marker = L.circleMarker(node.position, {
-                                color: "#ffffff",
-                                weight: 2,
-                                fillColor: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["NODE_COLORS"][node.type],
-                                fillOpacity: 0.95,
-                                radius: 9
-                            }).addTo(mapInstance);
-                            marker.bindTooltip(`<div class="tooltip-title">${node.name}</div><div class="tooltip-meta">${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["NODE_TYPE_LABEL"][node.type]}</div>`, {
-                                direction: "top",
-                                offset: [
-                                    0,
-                                    -12
-                                ],
-                                opacity: 0.95,
-                                className: "node-tooltip"
-                            });
-                            layers.push(marker);
+                        const map = new maplibregl.Map({
+                            container: containerRef.current,
+                            style: {
+                                version: 8,
+                                sources: {
+                                    "osm-base": {
+                                        type: "raster",
+                                        tiles: osmTileUrls,
+                                        tileSize: 256,
+                                        attribution: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TILE_ATTRIBUTION"]
+                                    }
+                                },
+                                layers: [
+                                    {
+                                        id: "osm-base",
+                                        type: "raster",
+                                        source: "osm-base",
+                                        minzoom: 0,
+                                        maxzoom: 19
+                                    }
+                                ]
+                            },
+                            center: [
+                                __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MAP_CENTER"][1],
+                                __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MAP_CENTER"][0]
+                            ],
+                            zoom: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MAP_ZOOM"],
+                            minZoom: 12,
+                            maxZoom: 20,
+                            pitch: 0,
+                            bearing: 0,
+                            maxPitch: 0,
+                            dragRotate: false,
+                            pitchWithRotate: false,
+                            pitchWithTwoFingerDrag: false
+                        });
+                        const mapAny = map;
+                        mapRef.current = map;
+                        if (maplibregl.NavigationControl) {
+                            map.addControl(new maplibregl.NavigationControl({
+                                showCompass: false
+                            }), "top-right");
                         }
-                    }["MapView.useEffect"]);
-                    onMapReady(mapInstance);
-                    return null;
+                        const handleLoad = {
+                            "MapView.useEffect.initialize.handleLoad": ()=>{
+                                if (!isDestroyed) {
+                                    if (typeof mapAny.dragRotate?.disable === "function") {
+                                        mapAny.dragRotate.disable();
+                                    }
+                                    if (typeof mapAny.touchZoomRotate?.disableRotation === "function") {
+                                        mapAny.touchZoomRotate.disableRotation();
+                                    }
+                                    ensureSourcesRef.current();
+                                }
+                            }
+                        }["MapView.useEffect.initialize.handleLoad"];
+                        map.once("load", handleLoad);
+                    } catch (error) {
+                        console.error("Failed to load MapLibre GL", error);
+                        if (!isDestroyed) {
+                            setMapError("Unable to load map view right now.");
+                        }
+                    }
                 }
-            }["MapView.useEffect"]).catch({
-                "MapView.useEffect": ()=>{
-                    if (cancelled) return;
-                    setMapError("Unable to load map tiles right now.");
-                    onMapReady(null);
-                }
-            }["MapView.useEffect"]);
+            }["MapView.useEffect.initialize"];
+            void initialize();
             return ({
                 "MapView.useEffect": ()=>{
-                    cancelled = true;
-                    if (layers.length > 0) {
-                        layers.forEach({
-                            "MapView.useEffect": (layer)=>{
-                                if (layer?.remove) layer.remove();
-                            }
-                        }["MapView.useEffect"]);
+                    isDestroyed = true;
+                    const map = mapRef.current;
+                    if (map) {
+                        map.remove();
+                        mapRef.current = null;
                     }
-                    if (mapInstance) {
-                        mapInstance.remove();
-                    }
-                    onMapReady(null);
+                    layerRegistryRef.current = {
+                        layers: [],
+                        sources: []
+                    };
+                    hasFitBoundsRef.current = false;
                 }
             })["MapView.useEffect"];
         }
     }["MapView.useEffect"], [
-        tunnelSegments,
-        routePoints,
-        nodes,
-        onMapReady
+        osmTileUrls
+    ]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "MapView.useEffect": ()=>{
+            const map = mapRef.current;
+            if (!map) {
+                return;
+            }
+            if (typeof map.isStyleLoaded === "function" && !map.isStyleLoaded()) {
+                const handleLoad = {
+                    "MapView.useEffect.handleLoad": ()=>{
+                        ensureSources();
+                    }
+                }["MapView.useEffect.handleLoad"];
+                map.once("load", handleLoad);
+                return ({
+                    "MapView.useEffect": ()=>{
+                        if (typeof map.off === "function") {
+                            map.off("load", handleLoad);
+                        }
+                    }
+                })["MapView.useEffect"];
+            }
+            ensureSources();
+        }
+    }["MapView.useEffect"], [
+        ensureSources
     ]);
     if (mapError) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "map-error",
+            className: "map-shell map-error",
             children: mapError
         }, void 0, false, {
             fileName: "[project]/src/components/map-view.tsx",
-            lineNumber: 184,
+            lineNumber: 718,
             columnNumber: 12
         }, ("TURBOPACK compile-time value", void 0));
     }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        ref: mapContainerRef,
+        ref: containerRef,
         className: "map-shell",
         role: "application",
         "aria-label": "Campus map"
     }, void 0, false, {
         fileName: "[project]/src/components/map-view.tsx",
-        lineNumber: 188,
+        lineNumber: 722,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
-_s(MapView, "f3Vq5/Pj23t4w3n75S7jzOf7K60=");
+_s(MapView, "IVXWrpp4xLzdrVgRar2TjuSRA+s=");
 _c = MapView;
 var _c;
 __turbopack_context__.k.register(_c, "MapView");
@@ -259,7 +837,6 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$map$2d$view$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/map-view.tsx [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/constants/map.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/constants/tunnels.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$trpc$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/trpc/client.ts [app-client] (ecmascript)");
 ;
@@ -269,14 +846,80 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-;
+const normalizeToken = (value)=>{
+    if (typeof value !== "string") return null;
+    const trimmed = value.trim();
+    if (!trimmed) return null;
+    const normalized = trimmed.replace(/\s+/g, " ").toLowerCase();
+    if (!normalized) return null;
+    return normalized;
+};
+const computeFeatureCentroid = (geometry)=>{
+    if (!geometry) return null;
+    let sumLat = 0;
+    let sumLon = 0;
+    let count = 0;
+    const record = (lon, lat)=>{
+        if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
+        sumLat += lat;
+        sumLon += lon;
+        count += 1;
+    };
+    const walk = (geom)=>{
+        if (!geom) return;
+        switch(geom.type){
+            case "Point":
+                record(geom.coordinates[0], geom.coordinates[1]);
+                break;
+            case "MultiPoint":
+            case "LineString":
+                geom.coordinates.forEach(([lon, lat])=>record(lon, lat));
+                break;
+            case "MultiLineString":
+            case "Polygon":
+                geom.coordinates.forEach((segment)=>{
+                    segment.forEach(([lon, lat])=>record(lon, lat));
+                });
+                break;
+            case "MultiPolygon":
+                geom.coordinates.forEach((polygon)=>{
+                    polygon.forEach((ring)=>{
+                        ring.forEach(([lon, lat])=>record(lon, lat));
+                    });
+                });
+                break;
+            case "GeometryCollection":
+                geom.geometries.forEach((child)=>walk(child));
+                break;
+            default:
+                break;
+        }
+    };
+    walk(geometry);
+    if (count === 0) return null;
+    return [
+        sumLat / count,
+        sumLon / count
+    ];
+};
+const distanceSquared = (a, b)=>{
+    const dLat = a[0] - b[0];
+    const dLon = a[1] - b[1];
+    return dLat * dLat + dLon * dLon;
+};
 function HomePage() {
     _s();
-    const [mapInstance, setMapInstance] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const { data } = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$trpc$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].tunnels.mapData.useQuery();
+    const { data: arcgisData } = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$trpc$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].arcgis.mapData.useQuery();
     const nodes = data?.nodes ?? [];
     const segments = data?.segments ?? [];
-    const highlightRoute = data?.highlightRoute ?? [];
+    const geoJsonLayers = arcgisData?.layers ?? [];
+    const [startBuildingId, setStartBuildingId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [endBuildingId, setEndBuildingId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [startQuery, setStartQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [endQuery, setEndQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [routeNodeIds, setRouteNodeIds] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [routeAttempted, setRouteAttempted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const nodeLookup = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
         "HomePage.useMemo[nodeLookup]": ()=>new Map(nodes.map({
                 "HomePage.useMemo[nodeLookup]": (node)=>[
@@ -287,39 +930,467 @@ function HomePage() {
     }["HomePage.useMemo[nodeLookup]"], [
         nodes
     ]);
-    const tunnelSegments = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "HomePage.useMemo[tunnelSegments]": ()=>segments.map({
-                "HomePage.useMemo[tunnelSegments]": ([from, to])=>{
-                    const start = nodeLookup.get(from);
-                    const end = nodeLookup.get(to);
-                    if (!start || !end) return null;
-                    return [
-                        start.position,
-                        end.position
-                    ];
+    const adjacency = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HomePage.useMemo[adjacency]": ()=>{
+            const map = new Map();
+            nodes.forEach({
+                "HomePage.useMemo[adjacency]": (node)=>{
+                    map.set(node.id, new Set());
                 }
-            }["HomePage.useMemo[tunnelSegments]"]).filter({
-                "HomePage.useMemo[tunnelSegments]": (segment)=>Boolean(segment)
-            }["HomePage.useMemo[tunnelSegments]"])
-    }["HomePage.useMemo[tunnelSegments]"], [
-        segments,
-        nodeLookup
+            }["HomePage.useMemo[adjacency]"]);
+            segments.forEach({
+                "HomePage.useMemo[adjacency]": ([from, to])=>{
+                    map.get(from)?.add(to);
+                    map.get(to)?.add(from);
+                }
+            }["HomePage.useMemo[adjacency]"]);
+            return map;
+        }
+    }["HomePage.useMemo[adjacency]"], [
+        nodes,
+        segments
+    ]);
+    const buildingOptions = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HomePage.useMemo[buildingOptions]": ()=>{
+            const buildingLayer = geoJsonLayers.find({
+                "HomePage.useMemo[buildingOptions].buildingLayer": (layer)=>layer.feature === "EGISADMIN_BUILDING_POLYGON_HOSTED"
+            }["HomePage.useMemo[buildingOptions].buildingLayer"]);
+            if (!buildingLayer) {
+                return [];
+            }
+            const seen = new Map();
+            buildingLayer.featureCollection.features.forEach({
+                "HomePage.useMemo[buildingOptions]": (feature, index)=>{
+                    const properties = feature.properties ?? {};
+                    const rawName = properties.BLDG_NAME_LABEL ?? properties.TRI_BLDG_LONG_NAME ?? properties.TRI_LEGAL_NAME ?? properties.TRI_BLDG_NAME ?? properties.NAME ?? "";
+                    const name = rawName.trim();
+                    if (!name) {
+                        return;
+                    }
+                    const centroid = computeFeatureCentroid(feature.geometry);
+                    if (!centroid) {
+                        return;
+                    }
+                    const rawId = properties.SITE_BUILDING ?? properties.GlobalID ?? properties.OBJECTID ?? `building-${index}`;
+                    const id = String(rawId);
+                    if (seen.has(id)) {
+                        return;
+                    }
+                    const tokenSet = new Set();
+                    const addToken = {
+                        "HomePage.useMemo[buildingOptions].addToken": (value)=>{
+                            const normalized = normalizeToken(value);
+                            if (!normalized) return;
+                            tokenSet.add(normalized);
+                            const cleaned = normalized.replace(/\([^)]*\)/g, "").trim();
+                            if (cleaned && cleaned !== normalized) {
+                                tokenSet.add(cleaned);
+                            }
+                            cleaned.split(/\s+/).filter({
+                                "HomePage.useMemo[buildingOptions].addToken": (part)=>part.length > 2
+                            }["HomePage.useMemo[buildingOptions].addToken"]).forEach({
+                                "HomePage.useMemo[buildingOptions].addToken": (part)=>tokenSet.add(part)
+                            }["HomePage.useMemo[buildingOptions].addToken"]);
+                        }
+                    }["HomePage.useMemo[buildingOptions].addToken"];
+                    addToken(name);
+                    addToken(properties.BLDG_NAME_LABEL_SHORT);
+                    addToken(properties.TRI_BLDG_NAME);
+                    addToken(properties.TRI_BLDG_ABBR);
+                    addToken(properties.SITE_BUILDING);
+                    seen.set(id, {
+                        id,
+                        name,
+                        position: centroid,
+                        tokens: Array.from(tokenSet)
+                    });
+                }
+            }["HomePage.useMemo[buildingOptions]"]);
+            return Array.from(seen.values()).sort({
+                "HomePage.useMemo[buildingOptions]": (a, b)=>a.name.localeCompare(b.name)
+            }["HomePage.useMemo[buildingOptions]"]);
+        }
+    }["HomePage.useMemo[buildingOptions]"], [
+        geoJsonLayers
+    ]);
+    const buildingMap = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HomePage.useMemo[buildingMap]": ()=>new Map(buildingOptions.map({
+                "HomePage.useMemo[buildingMap]": (option)=>[
+                        option.id,
+                        option
+                    ]
+            }["HomePage.useMemo[buildingMap]"]))
+    }["HomePage.useMemo[buildingMap]"], [
+        buildingOptions
+    ]);
+    const buildingToNearestNode = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HomePage.useMemo[buildingToNearestNode]": ()=>{
+            const map = new Map();
+            if (nodes.length === 0) {
+                return map;
+            }
+            buildingOptions.forEach({
+                "HomePage.useMemo[buildingToNearestNode]": (building)=>{
+                    let bestId = null;
+                    let bestDistance = Number.POSITIVE_INFINITY;
+                    nodes.forEach({
+                        "HomePage.useMemo[buildingToNearestNode]": (node)=>{
+                            const distance = distanceSquared(building.position, node.position);
+                            if (distance < bestDistance) {
+                                bestDistance = distance;
+                                bestId = node.id;
+                            }
+                        }
+                    }["HomePage.useMemo[buildingToNearestNode]"]);
+                    if (bestId) {
+                        map.set(building.id, bestId);
+                    }
+                }
+            }["HomePage.useMemo[buildingToNearestNode]"]);
+            return map;
+        }
+    }["HomePage.useMemo[buildingToNearestNode]"], [
+        buildingOptions,
+        nodes
+    ]);
+    const matchExactBuilding = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "HomePage.useCallback[matchExactBuilding]": (value)=>{
+            const normalized = normalizeToken(value);
+            if (!normalized) return null;
+            return buildingOptions.find({
+                "HomePage.useCallback[matchExactBuilding]": (option)=>option.tokens.some({
+                        "HomePage.useCallback[matchExactBuilding]": (token)=>token === normalized
+                    }["HomePage.useCallback[matchExactBuilding]"])
+            }["HomePage.useCallback[matchExactBuilding]"]) ?? null;
+        }
+    }["HomePage.useCallback[matchExactBuilding]"], [
+        buildingOptions
+    ]);
+    const filterOptions = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "HomePage.useCallback[filterOptions]": (query)=>{
+            if (buildingOptions.length === 0) {
+                return [];
+            }
+            const normalized = normalizeToken(query);
+            if (!normalized) {
+                return buildingOptions.slice(0, 12);
+            }
+            return buildingOptions.filter({
+                "HomePage.useCallback[filterOptions]": (option)=>option.tokens.some({
+                        "HomePage.useCallback[filterOptions]": (token)=>token.includes(normalized)
+                    }["HomePage.useCallback[filterOptions]"])
+            }["HomePage.useCallback[filterOptions]"]).slice(0, 12);
+        }
+    }["HomePage.useCallback[filterOptions]"], [
+        buildingOptions
+    ]);
+    const startBuilding = startBuildingId ? buildingMap.get(startBuildingId) ?? null : null;
+    const endBuilding = endBuildingId ? buildingMap.get(endBuildingId) ?? null : null;
+    const startNodeId = startBuildingId ? buildingToNearestNode.get(startBuildingId) ?? null : null;
+    const endNodeId = endBuildingId ? buildingToNearestNode.get(endBuildingId) ?? null : null;
+    const computeNodeRoute = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "HomePage.useCallback[computeNodeRoute]": (startNode, endNode)=>{
+            if (!startNode || !endNode) {
+                return [];
+            }
+            if (!adjacency.has(startNode) || !adjacency.has(endNode)) {
+                return [];
+            }
+            if (startNode === endNode) {
+                return [
+                    startNode
+                ];
+            }
+            const queue = [
+                startNode
+            ];
+            const visited = new Set([
+                startNode
+            ]);
+            const parent = new Map();
+            parent.set(startNode, null);
+            while(queue.length > 0){
+                const current = queue.shift();
+                if (current === endNode) {
+                    break;
+                }
+                const neighbors = adjacency.get(current);
+                if (!neighbors) continue;
+                neighbors.forEach({
+                    "HomePage.useCallback[computeNodeRoute]": (neighbor)=>{
+                        if (!visited.has(neighbor)) {
+                            visited.add(neighbor);
+                            parent.set(neighbor, current);
+                            queue.push(neighbor);
+                        }
+                    }
+                }["HomePage.useCallback[computeNodeRoute]"]);
+            }
+            if (!visited.has(endNode)) {
+                return [];
+            }
+            const path = [];
+            let current = endNode;
+            while(current){
+                path.push(current);
+                current = parent.get(current) ?? null;
+            }
+            path.reverse();
+            return path;
+        }
+    }["HomePage.useCallback[computeNodeRoute]"], [
+        adjacency
     ]);
     const routePoints = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "HomePage.useMemo[routePoints]": ()=>highlightRoute.map({
+        "HomePage.useMemo[routePoints]": ()=>routeNodeIds.map({
                 "HomePage.useMemo[routePoints]": (id)=>nodeLookup.get(id)?.position
             }["HomePage.useMemo[routePoints]"]).filter({
                 "HomePage.useMemo[routePoints]": (value)=>Array.isArray(value) && value.length === 2
             }["HomePage.useMemo[routePoints]"])
     }["HomePage.useMemo[routePoints]"], [
-        highlightRoute,
+        routeNodeIds,
         nodeLookup
     ]);
-    const handleMapReady = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "HomePage.useCallback[handleMapReady]": (instance)=>{
-            setMapInstance(instance);
+    const routeSteps = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HomePage.useMemo[routeSteps]": ()=>{
+            if (routeNodeIds.length === 0) {
+                return [];
+            }
+            return routeNodeIds.map({
+                "HomePage.useMemo[routeSteps]": (nodeId, index)=>{
+                    let label = nodeLookup.get(nodeId)?.name ?? nodeId;
+                    if (index === 0 && startBuilding) {
+                        label = startBuilding.name;
+                    } else if (index === routeNodeIds.length - 1 && endBuilding) {
+                        label = endBuilding.name;
+                    }
+                    return {
+                        id: nodeId,
+                        label
+                    };
+                }
+            }["HomePage.useMemo[routeSteps]"]);
         }
-    }["HomePage.useCallback[handleMapReady]"], []);
+    }["HomePage.useMemo[routeSteps]"], [
+        routeNodeIds,
+        nodeLookup,
+        startBuilding,
+        endBuilding
+    ]);
+    const routeAvailable = routeNodeIds.length > 1;
+    const routeSummary = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HomePage.useMemo[routeSummary]": ()=>{
+            if (!startBuildingId || !endBuildingId) {
+                return "Select two locations to plan a tunnel route.";
+            }
+            if (!routeAttempted) {
+                return "Tap find route to calculate the tunnel path.";
+            }
+            if (routeNodeIds.length === 0) {
+                return "No tunnel connection found between the selected locations.";
+            }
+            if (routeNodeIds.length === 1) {
+                return "You're already at your destination.";
+            }
+            const segmentCount = routeNodeIds.length - 1;
+            if (startBuilding && endBuilding) {
+                return `${startBuilding.name} → ${endBuilding.name} · ${segmentCount} segment${segmentCount === 1 ? "" : "s"}`;
+            }
+            return `${segmentCount} segment${segmentCount === 1 ? "" : "s"} long`;
+        }
+    }["HomePage.useMemo[routeSummary]"], [
+        startBuildingId,
+        endBuildingId,
+        routeAttempted,
+        routeNodeIds,
+        startBuilding,
+        endBuilding
+    ]);
+    const startSuggestions = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HomePage.useMemo[startSuggestions]": ()=>filterOptions(startQuery)
+    }["HomePage.useMemo[startSuggestions]"], [
+        filterOptions,
+        startQuery
+    ]);
+    const endSuggestions = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HomePage.useMemo[endSuggestions]": ()=>filterOptions(endQuery)
+    }["HomePage.useMemo[endSuggestions]"], [
+        filterOptions,
+        endQuery
+    ]);
+    const handleStartInputChange = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "HomePage.useCallback[handleStartInputChange]": (value)=>{
+            setStartQuery(value);
+            const match = matchExactBuilding(value);
+            if (match) {
+                setStartBuildingId(match.id);
+                setRouteNodeIds([]);
+                setRouteAttempted(false);
+            } else {
+                setStartBuildingId("");
+            }
+        }
+    }["HomePage.useCallback[handleStartInputChange]"], [
+        matchExactBuilding
+    ]);
+    const handleEndInputChange = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "HomePage.useCallback[handleEndInputChange]": (value)=>{
+            setEndQuery(value);
+            const match = matchExactBuilding(value);
+            if (match) {
+                setEndBuildingId(match.id);
+                setRouteNodeIds([]);
+                setRouteAttempted(false);
+            } else {
+                setEndBuildingId("");
+            }
+        }
+    }["HomePage.useCallback[handleEndInputChange]"], [
+        matchExactBuilding
+    ]);
+    const handleStartSuggestionSelect = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "HomePage.useCallback[handleStartSuggestionSelect]": (option)=>{
+            setStartBuildingId(option.id);
+            setStartQuery(option.name);
+            setRouteNodeIds([]);
+            setRouteAttempted(false);
+        }
+    }["HomePage.useCallback[handleStartSuggestionSelect]"], []);
+    const handleEndSuggestionSelect = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "HomePage.useCallback[handleEndSuggestionSelect]": (option)=>{
+            setEndBuildingId(option.id);
+            setEndQuery(option.name);
+            setRouteNodeIds([]);
+            setRouteAttempted(false);
+        }
+    }["HomePage.useCallback[handleEndSuggestionSelect]"], []);
+    const handleFindRoute = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "HomePage.useCallback[handleFindRoute]": ()=>{
+            const route = computeNodeRoute(startNodeId, endNodeId);
+            setRouteNodeIds(route);
+            setRouteAttempted(true);
+        }
+    }["HomePage.useCallback[handleFindRoute]"], [
+        computeNodeRoute,
+        startNodeId,
+        endNodeId
+    ]);
+    const handleClear = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "HomePage.useCallback[handleClear]": ()=>{
+            setStartBuildingId("");
+            setEndBuildingId("");
+            setStartQuery("");
+            setEndQuery("");
+            setRouteNodeIds([]);
+            setRouteAttempted(false);
+        }
+    }["HomePage.useCallback[handleClear]"], []);
+    const popularRoutes = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "HomePage.useMemo[popularRoutes]": ()=>{
+            const presets = [
+                {
+                    label: "Northrop → Coffman Union",
+                    startTokens: [
+                        "northrop"
+                    ],
+                    endTokens: [
+                        "coffman"
+                    ]
+                },
+                {
+                    label: "Walter Library → Keller Hall",
+                    startTokens: [
+                        "walter"
+                    ],
+                    endTokens: [
+                        "keller"
+                    ]
+                },
+                {
+                    label: "STSS → Peik Hall",
+                    startTokens: [
+                        "stss",
+                        "science teaching"
+                    ],
+                    endTokens: [
+                        "peik"
+                    ]
+                }
+            ];
+            return presets.map({
+                "HomePage.useMemo[popularRoutes]": (preset)=>{
+                    const startOption = buildingOptions.find({
+                        "HomePage.useMemo[popularRoutes].startOption": (option)=>preset.startTokens.some({
+                                "HomePage.useMemo[popularRoutes].startOption": (token)=>option.tokens.some({
+                                        "HomePage.useMemo[popularRoutes].startOption": (value)=>value.includes(token)
+                                    }["HomePage.useMemo[popularRoutes].startOption"])
+                            }["HomePage.useMemo[popularRoutes].startOption"])
+                    }["HomePage.useMemo[popularRoutes].startOption"]);
+                    const endOption = buildingOptions.find({
+                        "HomePage.useMemo[popularRoutes].endOption": (option)=>preset.endTokens.some({
+                                "HomePage.useMemo[popularRoutes].endOption": (token)=>option.tokens.some({
+                                        "HomePage.useMemo[popularRoutes].endOption": (value)=>value.includes(token)
+                                    }["HomePage.useMemo[popularRoutes].endOption"])
+                            }["HomePage.useMemo[popularRoutes].endOption"])
+                    }["HomePage.useMemo[popularRoutes].endOption"]);
+                    if (!startOption || !endOption) {
+                        return null;
+                    }
+                    return {
+                        label: preset.label,
+                        startId: startOption.id,
+                        endId: endOption.id
+                    };
+                }
+            }["HomePage.useMemo[popularRoutes]"]).filter(Boolean);
+        }
+    }["HomePage.useMemo[popularRoutes]"], [
+        buildingOptions
+    ]);
+    const handlePopularSelect = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "HomePage.useCallback[handlePopularSelect]": (startId, endId)=>{
+            const startOption = buildingMap.get(startId);
+            const endOption = buildingMap.get(endId);
+            if (!startOption || !endOption) {
+                return;
+            }
+            setStartBuildingId(startId);
+            setEndBuildingId(endId);
+            setStartQuery(startOption.name);
+            setEndQuery(endOption.name);
+            const route = computeNodeRoute(buildingToNearestNode.get(startId) ?? null, buildingToNearestNode.get(endId) ?? null);
+            setRouteNodeIds(route);
+            setRouteAttempted(true);
+        }
+    }["HomePage.useCallback[handlePopularSelect]"], [
+        buildingMap,
+        computeNodeRoute,
+        buildingToNearestNode
+    ]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "HomePage.useEffect": ()=>{
+            if (!startBuildingId) return;
+            const option = buildingMap.get(startBuildingId);
+            if (option) {
+                setStartQuery(option.name);
+            }
+        }
+    }["HomePage.useEffect"], [
+        startBuildingId,
+        buildingMap
+    ]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "HomePage.useEffect": ()=>{
+            if (!endBuildingId) return;
+            const option = buildingMap.get(endBuildingId);
+            if (option) {
+                setEndQuery(option.name);
+            }
+        }
+    }["HomePage.useEffect"], [
+        endBuildingId,
+        buildingMap
+    ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "app-shell",
         children: [
@@ -335,7 +1406,7 @@ function HomePage() {
                                 children: "CS"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 63,
+                                lineNumber: 527,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -344,7 +1415,7 @@ function HomePage() {
                                         children: "Campus Sync"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.tsx",
-                                        lineNumber: 67,
+                                        lineNumber: 531,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -352,19 +1423,19 @@ function HomePage() {
                                         children: "UMN Tunnel Explorer"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.tsx",
-                                        lineNumber: 68,
+                                        lineNumber: 532,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 66,
+                                lineNumber: 530,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 62,
+                        lineNumber: 526,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -377,7 +1448,7 @@ function HomePage() {
                                 "aria-label": "Search campus map"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 72,
+                                lineNumber: 536,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -385,13 +1456,13 @@ function HomePage() {
                                 children: "Search"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 77,
+                                lineNumber: 541,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 71,
+                        lineNumber: 535,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -404,7 +1475,7 @@ function HomePage() {
                                 children: "⊞"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 80,
+                                lineNumber: 544,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -414,7 +1485,7 @@ function HomePage() {
                                 children: "☰"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 83,
+                                lineNumber: 547,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -423,19 +1494,19 @@ function HomePage() {
                                 children: "NK"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 86,
+                                lineNumber: 550,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 79,
+                        lineNumber: 543,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 61,
+                lineNumber: 525,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -451,14 +1522,14 @@ function HomePage() {
                                         children: "Explore tunnels"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.tsx",
-                                        lineNumber: 95,
+                                        lineNumber: 559,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         children: "Toggle layers and highlights to plan your trip through the Gopher Way tunnel network."
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.tsx",
-                                        lineNumber: 96,
+                                        lineNumber: 560,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -473,14 +1544,14 @@ function HomePage() {
                                                         "aria-hidden": "true"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/page.tsx",
-                                                        lineNumber: 102,
+                                                        lineNumber: 566,
                                                         columnNumber: 17
                                                     }, this),
                                                     "Open tunnels"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/page.tsx",
-                                                lineNumber: 101,
+                                                lineNumber: 565,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -492,14 +1563,14 @@ function HomePage() {
                                                         "aria-hidden": "true"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/page.tsx",
-                                                        lineNumber: 106,
+                                                        lineNumber: 570,
                                                         columnNumber: 17
                                                     }, this),
                                                     "Limited access"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/page.tsx",
-                                                lineNumber: 105,
+                                                lineNumber: 569,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -511,26 +1582,204 @@ function HomePage() {
                                                         "aria-hidden": "true"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/page.tsx",
-                                                        lineNumber: 110,
+                                                        lineNumber: 574,
                                                         columnNumber: 17
                                                     }, this),
                                                     "Construction updates"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/page.tsx",
-                                                lineNumber: 109,
+                                                lineNumber: 573,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/page.tsx",
-                                        lineNumber: 100,
+                                        lineNumber: 564,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 94,
+                                lineNumber: 558,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+                                className: "panel-section",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                        children: "Plan a route"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/page.tsx",
+                                        lineNumber: 581,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "route-form",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                className: "route-field",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        children: "Start"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/page.tsx",
+                                                        lineNumber: 584,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                        type: "text",
+                                                        value: startQuery,
+                                                        onChange: (event)=>handleStartInputChange(event.target.value),
+                                                        placeholder: "Search building",
+                                                        autoComplete: "off",
+                                                        list: "building-options-list"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/page.tsx",
+                                                        lineNumber: 585,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    startSuggestions.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                                                        className: "route-suggestions",
+                                                        children: startSuggestions.map((option)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                    type: "button",
+                                                                    onClick: ()=>handleStartSuggestionSelect(option),
+                                                                    children: option.name
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/page.tsx",
+                                                                    lineNumber: 597,
+                                                                    columnNumber: 25
+                                                                }, this)
+                                                            }, option.id, false, {
+                                                                fileName: "[project]/src/app/page.tsx",
+                                                                lineNumber: 596,
+                                                                columnNumber: 23
+                                                            }, this))
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/page.tsx",
+                                                        lineNumber: 594,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/page.tsx",
+                                                lineNumber: 583,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                className: "route-field",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        children: "Destination"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/page.tsx",
+                                                        lineNumber: 609,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                        type: "text",
+                                                        value: endQuery,
+                                                        onChange: (event)=>handleEndInputChange(event.target.value),
+                                                        placeholder: "Search building",
+                                                        autoComplete: "off",
+                                                        list: "building-options-list"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/page.tsx",
+                                                        lineNumber: 610,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    endSuggestions.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                                                        className: "route-suggestions",
+                                                        children: endSuggestions.map((option)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                    type: "button",
+                                                                    onClick: ()=>handleEndSuggestionSelect(option),
+                                                                    children: option.name
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/page.tsx",
+                                                                    lineNumber: 622,
+                                                                    columnNumber: 25
+                                                                }, this)
+                                                            }, option.id, false, {
+                                                                fileName: "[project]/src/app/page.tsx",
+                                                                lineNumber: 621,
+                                                                columnNumber: 23
+                                                            }, this))
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/page.tsx",
+                                                        lineNumber: 619,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/page.tsx",
+                                                lineNumber: 608,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "route-actions",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                        type: "button",
+                                                        className: "layer-toggle",
+                                                        onClick: handleFindRoute,
+                                                        disabled: !startBuildingId || !endBuildingId,
+                                                        children: "Find route"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/page.tsx",
+                                                        lineNumber: 634,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                        type: "button",
+                                                        className: "layer-toggle",
+                                                        onClick: handleClear,
+                                                        disabled: !startBuildingId && !endBuildingId && startQuery === "" && endQuery === "" && routeNodeIds.length === 0,
+                                                        children: "Clear"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/page.tsx",
+                                                        lineNumber: 642,
+                                                        columnNumber: 17
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/page.tsx",
+                                                lineNumber: 633,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                className: "route-summary",
+                                                children: routeSummary
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/page.tsx",
+                                                lineNumber: 657,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/page.tsx",
+                                        lineNumber: 582,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("datalist", {
+                                        id: "building-options-list",
+                                        children: buildingOptions.map((option)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                value: option.name
+                                            }, option.id, false, {
+                                                fileName: "[project]/src/app/page.tsx",
+                                                lineNumber: 661,
+                                                columnNumber: 17
+                                            }, this))
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/page.tsx",
+                                        lineNumber: 659,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/page.tsx",
+                                lineNumber: 580,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -540,73 +1789,46 @@ function HomePage() {
                                         children: "Popular connections"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.tsx",
-                                        lineNumber: 117,
+                                        lineNumber: 667,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                                         className: "popular-list",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "node-badge",
-                                                        children: "A"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/app/page.tsx",
-                                                        lineNumber: 120,
-                                                        columnNumber: 17
-                                                    }, this),
-                                                    "Northrop → Coffman Union"
-                                                ]
-                                            }, void 0, true, {
+                                        children: popularRoutes.map((route, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    type: "button",
+                                                    className: "layer-toggle",
+                                                    onClick: ()=>handlePopularSelect(route.startId, route.endId),
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "node-badge",
+                                                            children: String.fromCharCode(65 + index)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/page.tsx",
+                                                            lineNumber: 678,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        route.label
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/app/page.tsx",
+                                                    lineNumber: 671,
+                                                    columnNumber: 19
+                                                }, this)
+                                            }, `${route.startId}-${route.endId}`, false, {
                                                 fileName: "[project]/src/app/page.tsx",
-                                                lineNumber: 119,
-                                                columnNumber: 15
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "node-badge",
-                                                        children: "B"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/app/page.tsx",
-                                                        lineNumber: 124,
-                                                        columnNumber: 17
-                                                    }, this),
-                                                    "Walter Library → Keller Hall"
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/src/app/page.tsx",
-                                                lineNumber: 123,
-                                                columnNumber: 15
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "node-badge",
-                                                        children: "C"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/app/page.tsx",
-                                                        lineNumber: 128,
-                                                        columnNumber: 17
-                                                    }, this),
-                                                    "STSS → Peik Hall"
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/src/app/page.tsx",
-                                                lineNumber: 127,
-                                                columnNumber: 15
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                                lineNumber: 670,
+                                                columnNumber: 17
+                                            }, this))
+                                    }, void 0, false, {
                                         fileName: "[project]/src/app/page.tsx",
-                                        lineNumber: 118,
+                                        lineNumber: 668,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 116,
+                                lineNumber: 666,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -616,7 +1838,7 @@ function HomePage() {
                                         children: "Segment legend"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.tsx",
-                                        lineNumber: 135,
+                                        lineNumber: 689,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -628,14 +1850,14 @@ function HomePage() {
                                                         "aria-hidden": "true"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/page.tsx",
-                                                        lineNumber: 138,
+                                                        lineNumber: 692,
                                                         columnNumber: 17
                                                     }, this),
                                                     "Open underground connector"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/page.tsx",
-                                                lineNumber: 137,
+                                                lineNumber: 691,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -645,14 +1867,14 @@ function HomePage() {
                                                         "aria-hidden": "true"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/page.tsx",
-                                                        lineNumber: 142,
+                                                        lineNumber: 696,
                                                         columnNumber: 17
                                                     }, this),
                                                     "Winter route detour"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/page.tsx",
-                                                lineNumber: 141,
+                                                lineNumber: 695,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -662,14 +1884,14 @@ function HomePage() {
                                                         "aria-hidden": "true"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/page.tsx",
-                                                        lineNumber: 146,
+                                                        lineNumber: 700,
                                                         columnNumber: 17
                                                     }, this),
                                                     __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["NODE_TYPE_LABEL"].academic
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/page.tsx",
-                                                lineNumber: 145,
+                                                lineNumber: 699,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -679,14 +1901,14 @@ function HomePage() {
                                                         "aria-hidden": "true"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/page.tsx",
-                                                        lineNumber: 150,
+                                                        lineNumber: 704,
                                                         columnNumber: 17
                                                     }, this),
                                                     __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["NODE_TYPE_LABEL"].student
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/page.tsx",
-                                                lineNumber: 149,
+                                                lineNumber: 703,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -696,32 +1918,32 @@ function HomePage() {
                                                         "aria-hidden": "true"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/page.tsx",
-                                                        lineNumber: 154,
+                                                        lineNumber: 708,
                                                         columnNumber: 17
                                                     }, this),
                                                     __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$tunnels$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["NODE_TYPE_LABEL"].research
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/page.tsx",
-                                                lineNumber: 153,
+                                                lineNumber: 707,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/page.tsx",
-                                        lineNumber: 136,
+                                        lineNumber: 690,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 134,
+                                lineNumber: 688,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 93,
+                        lineNumber: 557,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -730,13 +1952,15 @@ function HomePage() {
                             className: "map-canvas",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$map$2d$view$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MapView"], {
-                                    tunnelSegments: tunnelSegments,
                                     routePoints: routePoints,
                                     nodes: nodes,
-                                    onMapReady: handleMapReady
+                                    geoJsonLayers: geoJsonLayers,
+                                    routeNodeIds: routeNodeIds,
+                                    startNodeId: startNodeId,
+                                    endNodeId: endNodeId
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 163,
+                                    lineNumber: 717,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -748,95 +1972,60 @@ function HomePage() {
                                                     children: "Route preview"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/page.tsx",
-                                                    lineNumber: 172,
+                                                    lineNumber: 728,
                                                     columnNumber: 17
                                                 }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                routeAvailable && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "badge badge-live",
-                                                    children: "Live"
-                                                }, void 0, false, {
+                                                    children: [
+                                                        routeNodeIds.length - 1,
+                                                        " segment",
+                                                        routeNodeIds.length - 1 === 1 ? "" : "s"
+                                                    ]
+                                                }, void 0, true, {
                                                     fileName: "[project]/src/app/page.tsx",
-                                                    lineNumber: 173,
-                                                    columnNumber: 17
+                                                    lineNumber: 730,
+                                                    columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 171,
+                                            lineNumber: 727,
                                             columnNumber: 15
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ol", {
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                        routeSteps.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ol", {
+                                            children: routeSteps.map((step, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             className: "step-index",
-                                                            children: "A"
+                                                            children: String.fromCharCode(65 + index)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/page.tsx",
-                                                            lineNumber: 177,
-                                                            columnNumber: 19
+                                                            lineNumber: 740,
+                                                            columnNumber: 23
                                                         }, this),
-                                                        "Northrop Auditorium lobby"
+                                                        step.label
                                                     ]
-                                                }, void 0, true, {
+                                                }, step.id, true, {
                                                     fileName: "[project]/src/app/page.tsx",
-                                                    lineNumber: 176,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "step-index",
-                                                            children: "B"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/app/page.tsx",
-                                                            lineNumber: 181,
-                                                            columnNumber: 19
-                                                        }, this),
-                                                        "Follow main tunnel past Morrill Hall"
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/app/page.tsx",
-                                                    lineNumber: 180,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "step-index",
-                                                            children: "C"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/app/page.tsx",
-                                                            lineNumber: 185,
-                                                            columnNumber: 19
-                                                        }, this),
-                                                        "Exit near Coffman Memorial Union"
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/app/page.tsx",
-                                                    lineNumber: 184,
-                                                    columnNumber: 17
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 175,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                            type: "button",
-                                            className: "primary-btn",
-                                            children: "Preview route"
+                                                    lineNumber: 739,
+                                                    columnNumber: 21
+                                                }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 189,
-                                            columnNumber: 15
+                                            lineNumber: 737,
+                                            columnNumber: 17
+                                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            children: routeAttempted && startBuildingId && endBuildingId ? "No tunnel connection found between the selected locations." : "Select a start and destination to preview a tunnel route."
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/page.tsx",
+                                            lineNumber: 748,
+                                            columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 170,
+                                    lineNumber: 726,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -846,20 +2035,20 @@ function HomePage() {
                                             children: "Status"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 195,
+                                            lineNumber: 757,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             children: "Heating plant passage open until 11:30 PM. Expect increased traffic near Coffman due to event setup."
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 196,
+                                            lineNumber: 758,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 194,
+                                    lineNumber: 756,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -869,7 +2058,7 @@ function HomePage() {
                                             children: "Layers"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 203,
+                                            lineNumber: 765,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -880,14 +2069,14 @@ function HomePage() {
                                                             className: "layer-dot open"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/page.tsx",
-                                                            lineNumber: 206,
+                                                            lineNumber: 768,
                                                             columnNumber: 19
                                                         }, this),
                                                         "Winter walkways"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/page.tsx",
-                                                    lineNumber: 205,
+                                                    lineNumber: 767,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -896,14 +2085,14 @@ function HomePage() {
                                                             className: "layer-dot limited"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/page.tsx",
-                                                            lineNumber: 210,
+                                                            lineNumber: 772,
                                                             columnNumber: 19
                                                         }, this),
                                                         "Accessible routes"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/page.tsx",
-                                                    lineNumber: 209,
+                                                    lineNumber: 771,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -912,73 +2101,26 @@ function HomePage() {
                                                             className: "layer-dot detour"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/page.tsx",
-                                                            lineNumber: 214,
+                                                            lineNumber: 776,
                                                             columnNumber: 19
                                                         }, this),
                                                         "Maintenance alerts"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/page.tsx",
-                                                    lineNumber: 213,
+                                                    lineNumber: 775,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 204,
+                                            lineNumber: 766,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 202,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "zoom-controls",
-                                    role: "group",
-                                    "aria-label": "Zoom controls",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                            type: "button",
-                                            "aria-label": "Zoom in",
-                                            onClick: ()=>mapInstance?.zoomIn(),
-                                            disabled: !mapInstance,
-                                            children: "+"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 221,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                            type: "button",
-                                            "aria-label": "Zoom out",
-                                            onClick: ()=>mapInstance?.zoomOut(),
-                                            disabled: !mapInstance,
-                                            children: "−"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 229,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 220,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    type: "button",
-                                    className: "locate-button",
-                                    "aria-label": "Center map",
-                                    onClick: ()=>mapInstance?.flyTo(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MAP_CENTER"], __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$map$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MAP_ZOOM"], {
-                                            duration: 0.8
-                                        }),
-                                    disabled: !mapInstance,
-                                    children: "◎"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 239,
+                                    lineNumber: 764,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -989,14 +2131,14 @@ function HomePage() {
                                             className: "scale-bar"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 252,
+                                            lineNumber: 783,
                                             columnNumber: 15
                                         }, this),
                                         "200 ft"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 251,
+                                    lineNumber: 782,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1004,34 +2146,34 @@ function HomePage() {
                                     children: "Unofficial visualization. Not for outdoor navigation."
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 256,
+                                    lineNumber: 787,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/page.tsx",
-                            lineNumber: 162,
+                            lineNumber: 716,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 161,
+                        lineNumber: 715,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 92,
+                lineNumber: 556,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/page.tsx",
-        lineNumber: 60,
+        lineNumber: 524,
         columnNumber: 5
     }, this);
 }
-_s(HomePage, "NxN+or+H14G1E16/NnMoW/bCy3g=");
+_s(HomePage, "uG+L6brVzDb27hPC8cB3xete8Mg=");
 _c = HomePage;
 var _c;
 __turbopack_context__.k.register(_c, "HomePage");

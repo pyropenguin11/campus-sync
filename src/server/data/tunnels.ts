@@ -75,11 +75,3 @@ export const TUNNEL_SEGMENTS: TunnelSegment[] = [
   ["stss", "peik"],
   ["coffman", "weisman"],
 ];
-
-export const ROUTE_HIGHLIGHT = [
-  "northrop",
-  "morrill",
-  "walter",
-  "stss",
-  "coffman",
-] as const;

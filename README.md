@@ -18,7 +18,7 @@ npm install
 npm run dev
 ```
 
-The development server runs on `http://localhost:3000`. The map view is still powered by Leaflet (loaded from CDN) and mirrors the Vite prototype.
+The development server runs on `http://localhost:3000`. The map view uses MapLibre GL to render the GeoJSON overlays exported from the ArcGIS services.
 
 ### Quality checks
 
@@ -29,6 +29,22 @@ npm run build
 ```
 
 These align with Vercel’s CI pipeline (`next build`).
+
+### Refreshing ArcGIS datasets
+
+Use the helper script to download the ArcGIS services listed in `src/server/data/arcgis-features.txt`. For each feature the script saves the service metadata alongside layer/table data (GeoJSON when geometry is present):
+
+```bash
+node scripts/download-arcgis-data.mjs
+```
+
+Pass `--feature <NAME>` to target a subset or `--features-file <PATH>` to point at a different list. Downloads automatically trim each GeoJSON FeatureCollection to a campus bounding box (≈ 44.94°–45.01° N, −93.26°–−93.18° W) so out-of-area geometry never pollutes the map. To re-trim existing datasets in place, run:
+
+```bash
+node scripts/trim-local-geojson.mjs
+```
+
+The Next.js map view consumes the GeoJSON files in `src/server/data/json`, so refreshing the exports updates the overlays without additional code changes.
 
 ## Deployment on Vercel
 

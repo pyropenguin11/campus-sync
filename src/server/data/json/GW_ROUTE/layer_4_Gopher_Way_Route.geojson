@@ -1,0 +1,5466 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2333246427958,
+            44.9776650036201
+          ],
+          [
+            -93.2333444272917,
+            44.9776420262923
+          ],
+          [
+            -93.2340319996068,
+            44.977910259125
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-057-0B",
+        "BLDG_NAME_LABEL": "Nolte Ctr",
+        "Shape__Length": 91.64209126396736
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2340150771435,
+            44.9779325259129
+          ],
+          [
+            -93.2343562447119,
+            44.9774836096341
+          ],
+          [
+            -93.234403023582,
+            44.9774208279753
+          ],
+          [
+            -93.2343755477108,
+            44.9774102552723
+          ],
+          [
+            -93.2343839730098,
+            44.9773987668763
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 2,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-057-0B",
+        "BLDG_NAME_LABEL": "Nolte Ctr",
+        "Shape__Length": 96.89341831784452
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2350200925204,
+              44.9769337050888
+            ],
+            [
+              -93.2349098827098,
+              44.977140159479
+            ],
+            [
+              -93.2346858015554,
+              44.977189840216
+            ],
+            [
+              -93.2344931290966,
+              44.9772663676957
+            ],
+            [
+              -93.2344557070785,
+              44.9773070807638
+            ]
+          ],
+          [
+            [
+              -93.2344557070785,
+              44.9773070807638
+            ],
+            [
+              -93.2344439912506,
+              44.9773025359797
+            ],
+            [
+              -93.2343666813389,
+              44.9773272469679
+            ],
+            [
+              -93.2343253130218,
+              44.977354130569
+            ]
+          ],
+          [
+            [
+              -93.2344557070785,
+              44.9773070807638
+            ],
+            [
+              -93.2343839730098,
+              44.9773987668763
+            ]
+          ],
+          [
+            [
+              -93.2350509523453,
+              44.9779460165027
+            ],
+            [
+              -93.2349426272002,
+              44.9779020745326
+            ],
+            [
+              -93.2349012741544,
+              44.9779077255871
+            ],
+            [
+              -93.2346993176072,
+              44.9774028185394
+            ],
+            [
+              -93.2344557070785,
+              44.9773070807638
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 3,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-152-02",
+        "BLDG_NAME_LABEL": "Williamson Hall",
+        "Shape__Length": 258.97231688570304
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2340111721669,
+            44.9779357736948
+          ],
+          [
+            -93.2339717244478,
+            44.9779864177183
+          ],
+          [
+            -93.2340064021128,
+            44.9780008049136
+          ],
+          [
+            -93.2339924710393,
+            44.978018569514
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 4,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-022-0B",
+        "BLDG_NAME_LABEL": "Folwell Hall",
+        "Shape__Length": 16.77172037827428
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2333246427958,
+            44.9776650036201
+          ],
+          [
+            -93.2332451787241,
+            44.9777651648101
+          ],
+          [
+            -93.2332056537499,
+            44.9777505418033
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 5,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-061-0B",
+        "BLDG_NAME_LABEL": "10 Church Street Bldg",
+        "Shape__Length": 23.04010255995038
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2350509523453,
+            44.9779460165027
+          ],
+          [
+            -93.2350603352485,
+            44.9779495673932
+          ],
+          [
+            -93.2350925155969,
+            44.9779130875115
+          ],
+          [
+            -93.235148337807,
+            44.9779013399526
+          ],
+          [
+            -93.2351915827048,
+            44.9779177358254
+          ],
+          [
+            -93.2352100817114,
+            44.9778955211388
+          ],
+          [
+            -93.2352408427217,
+            44.9779067158575
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 6,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-017-0B",
+        "BLDG_NAME_LABEL": "Jones Hall",
+        "Shape__Length": 27.804766122903562
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2347492540555,
+            44.9771750289669
+          ],
+          [
+            -93.2348299245646,
+            44.9770402062633
+          ],
+          [
+            -93.234626428305,
+            44.9769788119638
+          ],
+          [
+            -93.2346383956612,
+            44.9769589945048
+          ],
+          [
+            -93.2346603621649,
+            44.9769653605449
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 7,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-002-0B",
+        "BLDG_NAME_LABEL": "Pillsbury Hall",
+        "Shape__Length": 53.69995532797343
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2447119505437,
+            44.9710091978139
+          ],
+          [
+            -93.2447150443416,
+            44.9707411932674
+          ],
+          [
+            -93.2447575121966,
+            44.9707111791258
+          ],
+          [
+            -93.2448141383989,
+            44.9704698725331
+          ],
+          [
+            -93.2450358947133,
+            44.97053537425
+          ],
+          [
+            -93.2450235060472,
+            44.9705570128191
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 8,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-249-0L",
+        "BLDG_NAME_LABEL": "Carlson School of Management",
+        "Shape__Length": 117.76758071553674
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2446560744348,
+            44.9712428917433
+          ],
+          [
+            -93.2446546083842,
+            44.9715073426562
+          ],
+          [
+            -93.2440948995717,
+            44.971501675083
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 9,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-216-0B",
+        "BLDG_NAME_LABEL": "Humphrey School of Public Affairs",
+        "Shape__Length": 103.92480192050832
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2440948995717,
+            44.971501675083
+          ],
+          [
+            -93.2438214712639,
+            44.9715001619082
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 10,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-204-0B",
+        "BLDG_NAME_LABEL": "Wilson Library",
+        "Shape__Length": 30.43883125184843
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 11,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2438213895172,
+            44.9715567060646
+          ],
+          [
+            -93.2438214506026,
+            44.971609002353
+          ],
+          [
+            -93.2434457419131,
+            44.9716081367754
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 11,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-201-0B",
+        "BLDG_NAME_LABEL": "Heller Hall",
+        "Shape__Length": 50.05282457856096
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 12,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2433954524269,
+              44.9715673726327
+            ],
+            [
+              -93.2433958494822,
+              44.9716076258177
+            ]
+          ],
+          [
+            [
+              -93.2434457419131,
+              44.9716081367754
+            ],
+            [
+              -93.2433830314214,
+              44.9716078501561
+            ],
+            [
+              -93.2431850337497,
+              44.9716071676082
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 12,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-203-0B",
+        "BLDG_NAME_LABEL": "Blegen Hall",
+        "Shape__Length": 35.35636156310731
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 13,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2433605232337,
+            44.9730242474276
+          ],
+          [
+            -93.2433891336772,
+            44.9730242607731
+          ],
+          [
+            -93.2436698697799,
+            44.9732226354904
+          ],
+          [
+            -93.2438867895648,
+            44.9732215818287
+          ],
+          [
+            -93.2439137399216,
+            44.9731828549814
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 13,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-207-0G",
+        "BLDG_NAME_LABEL": "Willey Hall",
+        "Shape__Length": 78.29593972983541
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 14,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2439720666347,
+            44.9732453057353
+          ],
+          [
+            -93.2439723478074,
+            44.9732669744216
+          ],
+          [
+            -93.2440403323081,
+            44.9732666954366
+          ],
+          [
+            -93.2440404481908,
+            44.9731909678002
+          ],
+          [
+            -93.2449291407216,
+            44.973191711973
+          ],
+          [
+            -93.2449282837288,
+            44.9732732252104
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 14,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-211-SP",
+        "BLDG_NAME_LABEL": "Mondale Hall",
+        "Shape__Length": 134.65000204660092
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 15,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2431258374674,
+              44.9715080258409
+            ],
+            [
+              -93.2431256928386,
+              44.9715896812857
+            ]
+          ],
+          [
+            [
+              -93.242922726585,
+              44.9715896590425
+            ],
+            [
+              -93.2429224238528,
+              44.9715696649532
+            ]
+          ],
+          [
+            [
+              -93.242922726585,
+              44.9715896590425
+            ],
+            [
+              -93.2427930673502,
+              44.9715817004285
+            ]
+          ],
+          [
+            [
+              -93.2431850337497,
+              44.9716071676082
+            ],
+            [
+              -93.243166369453,
+              44.9716070970655
+            ],
+            [
+              -93.2431665248616,
+              44.9715898109318
+            ],
+            [
+              -93.2430347473992,
+              44.9715895662567
+            ],
+            [
+              -93.242922726585,
+              44.9715896590425
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 15,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-202-0B",
+        "BLDG_NAME_LABEL": "Social Sciences Bldg",
+        "Shape__Length": 62.42005899816382
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 16,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2427930673502,
+            44.9715817004285
+          ],
+          [
+            -93.2427387381401,
+            44.971581313397
+          ],
+          [
+            -93.2423436033826,
+            44.9716147442714
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 16,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-205-01",
+        "BLDG_NAME_LABEL": "Anderson Hall",
+        "Shape__Length": 50.34784090552708
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 17,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2423436033826,
+            44.9716147442714
+          ],
+          [
+            -93.2423754980668,
+            44.9718056806858
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 17,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-205-01",
+        "BLDG_NAME_LABEL": "Anderson Hall",
+        "Shape__Length": 30.25326435408855
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 18,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2423436033826,
+            44.9716147442714
+          ],
+          [
+            -93.2423345115336,
+            44.9715481977211
+          ],
+          [
+            -93.2423585073315,
+            44.9715330755164
+          ],
+          [
+            -93.2423781759446,
+            44.9715172084777
+          ],
+          [
+            -93.2423934131685,
+            44.971500677951
+          ],
+          [
+            -93.2424041165951,
+            44.9714835957874
+          ],
+          [
+            -93.2424102143592,
+            44.9714660401555
+          ],
+          [
+            -93.2424116076462,
+            44.9714482360294
+          ],
+          [
+            -93.2424082784898,
+            44.9714303848692
+          ],
+          [
+            -93.2424002736023,
+            44.9714127472388
+          ],
+          [
+            -93.2423836143454,
+            44.9713888382726
+          ],
+          [
+            -93.2423642610409,
+            44.9713689794795
+          ],
+          [
+            -93.2423419190415,
+            44.9713528645417
+          ],
+          [
+            -93.2423161427827,
+            44.9713401699814
+          ],
+          [
+            -93.2422869439427,
+            44.9713307515374
+          ],
+          [
+            -93.2422528654541,
+            44.971324013091
+          ],
+          [
+            -93.2422125724203,
+            44.9713196514988
+          ],
+          [
+            -93.2421616424353,
+            44.9713171780444
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 18,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-205-01",
+        "BLDG_NAME_LABEL": "Anderson Hall",
+        "Shape__Length": 67.63161322352956
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 19,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2423754980668,
+            44.9718056806858
+          ],
+          [
+            -93.2423363090625,
+            44.9718088201412
+          ],
+          [
+            -93.2423335197935,
+            44.9717912785903
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 19,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-205-01",
+        "BLDG_NAME_LABEL": "Anderson Hall",
+        "Shape__Length": 7.167990099834553
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 20,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2360025278443,
+              44.9747893893263
+            ],
+            [
+              -93.2360040001831,
+              44.975124172262
+            ],
+            [
+              -93.2360551736116,
+              44.975124238352
+            ],
+            [
+              -93.2360532593017,
+              44.9753396321742
+            ]
+          ],
+          [
+            [
+              -93.2360532593017,
+              44.9753396321742
+            ],
+            [
+              -93.2360524292584,
+              44.9754331172909
+            ],
+            [
+              -93.2360063340062,
+              44.9754333352595
+            ],
+            [
+              -93.2360060564268,
+              44.9755415842376
+            ],
+            [
+              -93.2359894259159,
+              44.975567343884
+            ]
+          ],
+          [
+            [
+              -93.2360789017115,
+              44.9753397014413
+            ],
+            [
+              -93.2360532593017,
+              44.9753396321742
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 20,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-042-0B",
+        "BLDG_NAME_LABEL": "Walter Library",
+        "Shape__Length": 136.4618300588061
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 21,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2360436428366,
+            44.9744848536557
+          ],
+          [
+            -93.236008817848,
+            44.9744846445803
+          ],
+          [
+            -93.2360025278443,
+            44.9747893893263
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 21,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-035-0B",
+        "BLDG_NAME_LABEL": "Smith Hall",
+        "Shape__Length": 51.83655124811053
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 22,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2359894259159,
+              44.975567343884
+            ],
+            [
+              -93.2359894582553,
+              44.9757758989847
+            ],
+            [
+              -93.2359805802053,
+              44.9757942844961
+            ]
+          ],
+          [
+            [
+              -93.2359805802053,
+              44.9757942844961
+            ],
+            [
+              -93.2361007756887,
+              44.9757938619065
+            ],
+            [
+              -93.236268735494,
+              44.9757931482702
+            ],
+            [
+              -93.2364262101633,
+              44.9757921543902
+            ],
+            [
+              -93.2364266898636,
+              44.9758240519561
+            ],
+            [
+              -93.2364269602565,
+              44.9758652534556
+            ],
+            [
+              -93.2364321668919,
+              44.9758652420171
+            ]
+          ],
+          [
+            [
+              -93.2359805802053,
+              44.9757942844961
+            ],
+            [
+              -93.2359786955399,
+              44.9757981894784
+            ],
+            [
+              -93.2359788033377,
+              44.9758766944984
+            ],
+            [
+              -93.2357846199126,
+              44.975877197157
+            ],
+            [
+              -93.2357844375546,
+              44.9758696814267
+            ],
+            [
+              -93.2357680801316,
+              44.9758697290871
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 22,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-073-0B",
+        "BLDG_NAME_LABEL": "Johnston Hall",
+        "Shape__Length": 135.19116734003998
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 23,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2357680801316,
+              44.9758697290871
+            ],
+            [
+              -93.2349567100889,
+              44.9758681607414
+            ],
+            [
+              -93.2349156355208,
+              44.9758557175568
+            ],
+            [
+              -93.2348797379438,
+              44.9758545304943
+            ]
+          ],
+          [
+            [
+              -93.2348879997494,
+              44.9762060969291
+            ],
+            [
+              -93.2349578778988,
+              44.9760449761903
+            ],
+            [
+              -93.2349607489144,
+              44.9758681683671
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 23,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-053-0B",
+        "BLDG_NAME_LABEL": "Northrop Memorial Auditorium",
+        "Shape__Length": 153.64210694441766
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 24,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2342416556143,
+            44.9739467678614
+          ],
+          [
+            -93.2342231449295,
+            44.9739466763503
+          ],
+          [
+            -93.2342246621841,
+            44.9741084600831
+          ],
+          [
+            -93.2343316506361,
+            44.9741083310783
+          ],
+          [
+            -93.2343331678906,
+            44.974255292184
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 24,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-071-0B",
+        "BLDG_NAME_LABEL": "Ford Hall",
+        "Shape__Length": 62.55534467036497
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 25,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2343331678906,
+              44.974255292184
+            ],
+            [
+              -93.2343182855013,
+              44.9743625850684
+            ],
+            [
+              -93.2342357473947,
+              44.9743629371293
+            ],
+            [
+              -93.2342347529597,
+              44.9745542927123
+            ]
+          ],
+          [
+            [
+              -93.2342347529597,
+              44.9745542927123
+            ],
+            [
+              -93.2342251814103,
+              44.9745541973893
+            ]
+          ],
+          [
+            [
+              -93.2342347529597,
+              44.9745542927123
+            ],
+            [
+              -93.2342352506263,
+              44.9747009749681
+            ],
+            [
+              -93.2342919810332,
+              44.9747018697313
+            ],
+            [
+              -93.2342921139838,
+              44.9747893092553
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 25,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-062-0B",
+        "BLDG_NAME_LABEL": "Murphy Hall",
+        "Shape__Length": 100.48850737356304
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 26,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.232421450558,
+            44.9741596146089
+          ],
+          [
+            -93.2324231295093,
+            44.9739586185448
+          ],
+          [
+            -93.232589229802,
+            44.973958745008
+          ],
+          [
+            -93.2325895370258,
+            44.9739324425629
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 26,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-066-0B",
+        "BLDG_NAME_LABEL": "Amundson Hall",
+        "Shape__Length": 54.258204221038135
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 27,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2348879997494,
+            44.9762060969291
+          ],
+          [
+            -93.2348787929161,
+            44.9762223617446
+          ],
+          [
+            -93.2348700046977,
+            44.976237229161
+          ],
+          [
+            -93.2348594557813,
+            44.9762530319825
+          ],
+          [
+            -93.2348395607927,
+            44.9762723381339
+          ],
+          [
+            -93.2348199137391,
+            44.9762892765263
+          ],
+          [
+            -93.2348051256729,
+            44.9762983840478
+          ],
+          [
+            -93.2347952999003,
+            44.9763051250871
+          ],
+          [
+            -93.2347877522553,
+            44.9763114327368
+          ],
+          [
+            -93.2347754830652,
+            44.976327147208
+          ],
+          [
+            -93.2347736181626,
+            44.9763396207927
+          ],
+          [
+            -93.2347742703395,
+            44.9763525175957
+          ],
+          [
+            -93.234774015218,
+            44.9766300418593
+          ],
+          [
+            -93.2349592343548,
+            44.976705204476
+          ],
+          [
+            -93.2350312585794,
+            44.9767052298945
+          ],
+          [
+            -93.2350317831955,
+            44.9768503211723
+          ],
+          [
+            -93.2350632808243,
+            44.976863758638
+          ],
+          [
+            -93.2350200925204,
+            44.9769337050888
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 27,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276309894,
+        "SITE_BUILDING_FLOOR": "01-163-0A",
+        "BLDG_NAME_LABEL": "Church Street Garage",
+        "Shape__Length": 141.486126784808
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 28,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2326561309345,
+              44.9758699171869
+            ],
+            [
+              -93.2327207009388,
+              44.9759075962329
+            ],
+            [
+              -93.232535792619,
+              44.9761366630499
+            ],
+            [
+              -93.232398693537,
+              44.9763064957904
+            ],
+            [
+              -93.232203310861,
+              44.9765493912706
+            ],
+            [
+              -93.2317136409962,
+              44.9763524724775
+            ],
+            [
+              -93.2316525510654,
+              44.9763281328176
+            ],
+            [
+              -93.2316382642591,
+              44.9763225515088
+            ],
+            [
+              -93.2316546405467,
+              44.9763018327301
+            ],
+            [
+              -93.2316288247621,
+              44.9762907768654
+            ]
+          ],
+          [
+            [
+              -93.232675017115,
+              44.9758769404262
+            ],
+            [
+              -93.2326748760795,
+              44.9758529392712
+            ],
+            [
+              -93.232672079624,
+              44.9758144429711
+            ],
+            [
+              -93.2326842940169,
+              44.9758143412955
+            ],
+            [
+              -93.232699241085,
+              44.9758141932303
+            ],
+            [
+              -93.2327973901146,
+              44.975885152633
+            ],
+            [
+              -93.232801251972,
+              44.9759854294104
+            ],
+            [
+              -93.2328287062837,
+              44.9759855088443
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 28,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-156-02",
+        "BLDG_NAME_LABEL": "Civil Engineering Bldg",
+        "Shape__Length": 252.33222138762474
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 29,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2281439103303,
+            44.9758296167911
+          ],
+          [
+            -93.2281645697852,
+            44.975837751477
+          ],
+          [
+            -93.2281888638238,
+            44.9758074292563
+          ],
+          [
+            -93.2280590231292,
+            44.9755161315146
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 29,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-188-0B",
+        "BLDG_NAME_LABEL": "University Avenue Ramp",
+        "Shape__Length": 56.18091463189538
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 30,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2293858860078,
+            44.974506878382
+          ],
+          [
+            -93.2293651016871,
+            44.9745071599029
+          ],
+          [
+            -93.2293651816372,
+            44.9745591357576
+          ],
+          [
+            -93.2283321963155,
+            44.9746830619073
+          ],
+          [
+            -93.2282637527757,
+            44.9747505529634
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 30,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-182-0B",
+        "BLDG_NAME_LABEL": "McNamara Alumni Ctr",
+        "Shape__Length": 140.19697669004043
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 31,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2353360614468,
+            44.9724096413965
+          ],
+          [
+            -93.2353354461009,
+            44.9722765119324
+          ],
+          [
+            -93.2350971131745,
+            44.9722747439377
+          ],
+          [
+            -93.2350360645661,
+            44.9722341988851
+          ],
+          [
+            -93.2350373114277,
+            44.9720094367113
+          ],
+          [
+            -93.2357885760931,
+            44.9720050294142
+          ],
+          [
+            -93.2357898543958,
+            44.9719569755539
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 31,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-183-0A",
+        "BLDG_NAME_LABEL": "East River Road Garage",
+        "Shape__Length": 183.36569719788457
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 32,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2346852401083,
+              44.9728480886748
+            ],
+            [
+              -93.2346853038887,
+              44.9728566877028
+            ],
+            [
+              -93.2347099213208,
+              44.9728567213846
+            ],
+            [
+              -93.2347768062836,
+              44.972856094776
+            ],
+            [
+              -93.2347770910495,
+              44.9728192233597
+            ],
+            [
+              -93.2354002882947,
+              44.9728193148726
+            ]
+          ],
+          [
+            [
+              -93.2356079985513,
+              44.9729565776695
+            ],
+            [
+              -93.2356080910778,
+              44.972977757762
+            ],
+            [
+              -93.2356743041008,
+              44.9729772913019
+            ],
+            [
+              -93.2356728614064,
+              44.9728805642817
+            ],
+            [
+              -93.2355022919952,
+              44.9728798487026
+            ],
+            [
+              -93.2355012930686,
+              44.9728203399439
+            ],
+            [
+              -93.2354002882947,
+              44.9728193148726
+            ],
+            [
+              -93.2353976265865,
+              44.9725993200351
+            ],
+            [
+              -93.2353218833367,
+              44.9725987582455
+            ],
+            [
+              -93.2353211027007,
+              44.9725210539284
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 32,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-064-0B",
+        "BLDG_NAME_LABEL": "Coffman Memorial Union",
+        "Shape__Length": 207.51678458918488
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 33,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2336833724282,
+              44.9721895693614
+            ],
+            [
+              -93.2339044100903,
+              44.9722170324168
+            ]
+          ],
+          [
+            [
+              -93.2339044100903,
+              44.9722170324168
+            ],
+            [
+              -93.2340524802969,
+              44.9722347854632
+            ]
+          ],
+          [
+            [
+              -93.2339044100903,
+              44.9722170324168
+            ],
+            [
+              -93.23390185618,
+              44.9724051826537
+            ],
+            [
+              -93.2340583265328,
+              44.9725153343436
+            ],
+            [
+              -93.2343371770717,
+              44.972516740726
+            ],
+            [
+              -93.234338605393,
+              44.9725167426325
+            ]
+          ],
+          [
+            [
+              -93.234338605393,
+              44.9725167426325
+            ],
+            [
+              -93.2343392162474,
+              44.9726225567643
+            ],
+            [
+              -93.2343412715928,
+              44.9731082558874
+            ],
+            [
+              -93.2342363762154,
+              44.9731087560282
+            ],
+            [
+              -93.2342364983863,
+              44.9730619601185
+            ]
+          ],
+          [
+            [
+              -93.2345607812207,
+              44.9725683135655
+            ],
+            [
+              -93.2345072065954,
+              44.9725025504338
+            ],
+            [
+              -93.2343837960417,
+              44.9725012590783
+            ],
+            [
+              -93.2343841535712,
+              44.9725168017349
+            ],
+            [
+              -93.234338605393,
+              44.9725167426325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 33,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-178-01",
+        "BLDG_NAME_LABEL": "Hasselmo Hall",
+        "Shape__Length": 272.40039352314415
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 34,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2304401326556,
+              44.9722726696261
+            ],
+            [
+              -93.2304132739269,
+              44.9722726480186
+            ]
+          ],
+          [
+            [
+              -93.2298453338515,
+              44.9726267746326
+            ],
+            [
+              -93.2298460866397,
+              44.9726121312501
+            ],
+            [
+              -93.2301496633068,
+              44.9724402297862
+            ],
+            [
+              -93.2303927671856,
+              44.9723057442109
+            ],
+            [
+              -93.2304127879384,
+              44.9722957704881
+            ],
+            [
+              -93.2304151172699,
+              44.9721850610315
+            ],
+            [
+              -93.2304159257537,
+              44.9720742592117
+            ],
+            [
+              -93.2304162275876,
+              44.9719608960499
+            ],
+            [
+              -93.2304165581676,
+              44.9718365623709
+            ],
+            [
+              -93.2304180484727,
+              44.9716149342918
+            ],
+            [
+              -93.2304470910058,
+              44.9715909752039
+            ],
+            [
+              -93.230503537545,
+              44.9715533397146
+            ],
+            [
+              -93.2306446763509,
+              44.9714506783377
+            ],
+            [
+              -93.2306645902041,
+              44.97142364707
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 34,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276419810,
+        "SITE_BUILDING_FLOOR": "01-145-01",
+        "BLDG_NAME_LABEL": "Health Sciences Education Ctr",
+        "Shape__Length": 233.72717753259306
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 35,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2298453338515,
+            44.9726267746326
+          ],
+          [
+            -93.2298447840825,
+            44.9727469414864
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 35,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276419810,
+        "SITE_BUILDING_FLOOR": "01-164-0T",
+        "BLDG_NAME_LABEL": "M Health Fairview Patient & Visitor Ramp",
+        "Shape__Length": 18.908899037804566
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 36,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2316932177983,
+            44.9739137971729
+          ],
+          [
+            -93.2316665297495,
+            44.9739137183717
+          ],
+          [
+            -93.2316650663939,
+            44.9737848070047
+          ],
+          [
+            -93.2316246907151,
+            44.9737255292346
+          ],
+          [
+            -93.2316248883445,
+            44.9736007253001
+          ],
+          [
+            -93.2318220263285,
+            44.9735203271923
+          ],
+          [
+            -93.2318722493395,
+            44.973454417081
+          ],
+          [
+            -93.2318956791987,
+            44.9734543065042
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 36,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-158-0B",
+        "BLDG_NAME_LABEL": "Washington Avenue Ramp",
+        "Shape__Length": 92.97115095121681
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 37,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1852504361869,
+            44.9842189481112
+          ],
+          [
+            -93.1852096113505,
+            44.9841985727495
+          ],
+          [
+            -93.185210285087,
+            44.983913215263
+          ],
+          [
+            -93.1848611081394,
+            44.9839122602821
+          ],
+          [
+            -93.1848407172808,
+            44.9839279428071
+          ],
+          [
+            -93.1847657232259,
+            44.9839274389484
+          ],
+          [
+            -93.1847001578883,
+            44.9839111038847
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 37,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-322-0G",
+        "BLDG_NAME_LABEL": "Coffey Hall",
+        "Shape__Length": 108.78405762871306
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 38,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1854267054086,
+            44.9849759097802
+          ],
+          [
+            -93.1854682731517,
+            44.9849759326536
+          ],
+          [
+            -93.1854685112053,
+            44.9847624830566
+          ],
+          [
+            -93.1852478319709,
+            44.98460311903
+          ],
+          [
+            -93.1852504361869,
+            44.9842189481112
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 38,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-376-0B",
+        "BLDG_NAME_LABEL": "Student Ctr",
+        "Shape__Length": 133.7939989032222
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 39,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1847001578883,
+            44.9839111038847
+          ],
+          [
+            -93.1846999467841,
+            44.9838921688277
+          ],
+          [
+            -93.1845107804499,
+            44.9838911611097
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 39,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-412-0G",
+        "BLDG_NAME_LABEL": "Ruttan Hall",
+        "Shape__Length": 24.0386899022125
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 40,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.1825036548477,
+              44.9851496041655
+            ],
+            [
+              -93.1825042171931,
+              44.985210537969
+            ],
+            [
+              -93.1825034742863,
+              44.9853459298111
+            ]
+          ],
+          [
+            [
+              -93.1825034742863,
+              44.9853459298111
+            ],
+            [
+              -93.1825248685631,
+              44.985346047354
+            ]
+          ],
+          [
+            [
+              -93.1825034742863,
+              44.9853459298111
+            ],
+            [
+              -93.1825003023351,
+              44.9855648178651
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 40,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-352-0B",
+        "BLDG_NAME_LABEL": "Snyder Hall",
+        "Shape__Length": 67.73404612899859
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 41,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1830464367053,
+            44.9859450627663
+          ],
+          [
+            -93.1833277351534,
+            44.9859173076659
+          ],
+          [
+            -93.1833375429596,
+            44.985960747912
+          ],
+          [
+            -93.1833524684681,
+            44.9859592344834
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 41,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-338-0G",
+        "BLDG_NAME_LABEL": "McNeal Hall",
+        "Shape__Length": 40.219447016682366
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 42,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.1841844602365,
+              44.9876775303241
+            ],
+            [
+              -93.1842014860061,
+              44.9876863132833
+            ],
+            [
+              -93.1843500880153,
+              44.9877111417818
+            ],
+            [
+              -93.1843796228252,
+              44.987630246925
+            ],
+            [
+              -93.1843850396664,
+              44.9876161620276
+            ],
+            [
+              -93.1843931801995,
+              44.9875904637043
+            ],
+            [
+              -93.1845055675264,
+              44.987610467456
+            ],
+            [
+              -93.1845519709007,
+              44.9876185477372
+            ],
+            [
+              -93.1845869701625,
+              44.9876250339441
+            ],
+            [
+              -93.184815570741,
+              44.9876674048869
+            ],
+            [
+              -93.185011201352,
+              44.9877036638171
+            ]
+          ],
+          [
+            [
+              -93.185011201352,
+              44.9877036638171
+            ],
+            [
+              -93.1850498064513,
+              44.9877107980623
+            ]
+          ],
+          [
+            [
+              -93.185011201352,
+              44.9877036638171
+            ],
+            [
+              -93.1849714724603,
+              44.9878169075447
+            ],
+            [
+              -93.1849529438092,
+              44.9878694202679
+            ],
+            [
+              -93.1849410159789,
+              44.9879028079737
+            ],
+            [
+              -93.1849067093182,
+              44.9878966890242
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 42,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-387-01",
+        "BLDG_NAME_LABEL": "Kaufert Laboratory",
+        "Shape__Length": 150.68854019946656
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 43,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1850498064513,
+            44.9877107980623
+          ],
+          [
+            -93.1850737025362,
+            44.9877152130471
+          ],
+          [
+            -93.1851468487565,
+            44.9875096658848
+          ],
+          [
+            -93.1852961029427,
+            44.9875370205834
+          ],
+          [
+            -93.1852740897266,
+            44.9876029322974
+          ],
+          [
+            -93.1852585219228,
+            44.9875989696676
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 43,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-437-0B",
+        "BLDG_NAME_LABEL": "Skok Hall",
+        "Shape__Length": 65.77571946620796
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 44,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2319926685033,
+            44.973108382988
+          ],
+          [
+            -93.2319673728432,
+            44.9731083003726
+          ],
+          [
+            -93.2319354035989,
+            44.9731081599265
+          ],
+          [
+            -93.2319355419394,
+            44.9732038939089
+          ],
+          [
+            -93.2318627810963,
+            44.9732032755656
+          ],
+          [
+            -93.2318437457955,
+            44.9732032501455
+          ],
+          [
+            -93.2318439290518,
+            44.973113712315
+          ],
+          [
+            -93.2318436748286,
+            44.9730317431947
+          ],
+          [
+            -93.2318442874796,
+            44.9728588153757
+          ],
+          [
+            -93.2318440072052,
+            44.972701900553
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 44,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-142-02",
+        "BLDG_NAME_LABEL": "Moos Tower",
+        "Shape__Length": 110.54854566931125
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 45,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.231935962351,
+              44.9732800155388
+            ],
+            [
+              -93.2319355419394,
+              44.9732038939089
+            ]
+          ],
+          [
+            [
+              -93.231935962351,
+              44.9732800155388
+            ],
+            [
+              -93.231056620384,
+              44.973275426586
+            ]
+          ],
+          [
+            [
+              -93.2318956791987,
+              44.9734543065042
+            ],
+            [
+              -93.2319347379472,
+              44.9734544100905
+            ],
+            [
+              -93.231935962351,
+              44.9732800155388
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 45,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-142-02",
+        "BLDG_NAME_LABEL": "Moos Tower",
+        "Shape__Length": 141.6593238259212
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 46,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2318400734826,
+              44.97217543682
+            ],
+            [
+              -93.2318345434537,
+              44.971973604454
+            ],
+            [
+              -93.2318338876835,
+              44.9719373107898
+            ],
+            [
+              -93.2320622538018,
+              44.9719355262612
+            ],
+            [
+              -93.232060288288,
+              44.9716761405008
+            ]
+          ],
+          [
+            [
+              -93.2318400734826,
+              44.97217543682
+            ],
+            [
+              -93.2318400025157,
+              44.9721957598939
+            ],
+            [
+              -93.231840333994,
+              44.9722470724619
+            ],
+            [
+              -93.2318406807437,
+              44.972319970776
+            ],
+            [
+              -93.2318405307251,
+              44.9724981215672
+            ],
+            [
+              -93.2318412439874,
+              44.9725304207007
+            ],
+            [
+              -93.2318416697888,
+              44.972550366792
+            ],
+            [
+              -93.2318422060831,
+              44.9725892389624
+            ],
+            [
+              -93.2318430603809,
+              44.9726287917357
+            ],
+            [
+              -93.231843171772,
+              44.9726471509292
+            ],
+            [
+              -93.2318434206054,
+              44.9726738969128
+            ],
+            [
+              -93.2318440072052,
+              44.972701900553
+            ]
+          ],
+          [
+            [
+              -93.2310467712552,
+              44.9721754476237
+            ],
+            [
+              -93.2311783951056,
+              44.9721754558854
+            ],
+            [
+              -93.2312723193584,
+              44.9721758810437
+            ],
+            [
+              -93.2313845764296,
+              44.9721757323336
+            ],
+            [
+              -93.2315644685568,
+              44.9721748756618
+            ],
+            [
+              -93.2317266800426,
+              44.972174692634
+            ],
+            [
+              -93.2318400734826,
+              44.97217543682
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 46,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-144-02",
+        "BLDG_NAME_LABEL": "Phillips-Wangensteen Bldg",
+        "Shape__Length": 274.8699867903898
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 47,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2344235887139,
+            44.9753102851495
+          ],
+          [
+            -93.2344232859816,
+            44.9752837011717
+          ],
+          [
+            -93.2344770744059,
+            44.9752841269424
+          ],
+          [
+            -93.2344767312494,
+            44.9751897983011
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 47,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-049-0B",
+        "BLDG_NAME_LABEL": "Tate Hall",
+        "Shape__Length": 25.01525972765617
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 48,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2344767312494,
+            44.9751897983011
+          ],
+          [
+            -93.2342945636896,
+            44.9751888908359
+          ],
+          [
+            -93.2342948008448,
+            44.9749174513365
+          ],
+          [
+            -93.2342921139838,
+            44.9747893092553
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 48,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-049-0B",
+        "BLDG_NAME_LABEL": "Tate Hall",
+        "Shape__Length": 83.1600290914244
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 49,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2318403124345,
+            44.9722437264888
+          ],
+          [
+            -93.232168222666,
+            44.9722445291411
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 49,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-144-02",
+        "BLDG_NAME_LABEL": "Phillips-Wangensteen Bldg",
+        "Shape__Length": 36.5030184997161
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 50,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.231056620384,
+            44.973275426586
+          ],
+          [
+            -93.2309754045974,
+            44.9732761961778
+          ],
+          [
+            -93.230976537373,
+            44.9733322282763
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 50,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-147-02",
+        "BLDG_NAME_LABEL": "Weaver-Densford Hall",
+        "Shape__Length": 17.85961270261683
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 51,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2278254422908,
+            44.9751941951859
+          ],
+          [
+            -93.2278149248154,
+            44.9752078904089
+          ],
+          [
+            -93.2279820806285,
+            44.9752744930833
+          ],
+          [
+            -93.2280590231292,
+            44.9755161315146
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 51,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-182-0B",
+        "BLDG_NAME_LABEL": "McNamara Alumni Ctr",
+        "Shape__Length": 62.78633211198063
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 52,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2418554067549,
+              44.9709140956951
+            ],
+            [
+              -93.2418555217393,
+              44.9709290026193
+            ]
+          ],
+          [
+            [
+              -93.2418555217393,
+              44.9709290026193
+            ],
+            [
+              -93.2418080646411,
+              44.9709289771982
+            ],
+            [
+              -93.2418076262633,
+              44.9708254357682
+            ],
+            [
+              -93.2417473591892,
+              44.9708250728817
+            ],
+            [
+              -93.2417484344726,
+              44.9706942714977
+            ],
+            [
+              -93.2421440722866,
+              44.9706951497996
+            ],
+            [
+              -93.2421462147686,
+              44.9705817546774
+            ]
+          ],
+          [
+            [
+              -93.2421616424353,
+              44.9713171780444
+            ],
+            [
+              -93.2420961283016,
+              44.9713167211035
+            ],
+            [
+              -93.2420963977962,
+              44.9712937259795
+            ],
+            [
+              -93.2419991443869,
+              44.9712929601743
+            ],
+            [
+              -93.2420007847106,
+              44.9709290814247
+            ],
+            [
+              -93.2418555217393,
+              44.9709290026193
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 52,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-215-0B",
+        "BLDG_NAME_LABEL": "Ferguson Hall",
+        "Shape__Length": 208.26435665050815
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 53,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2421462147686,
+            44.9705817546774
+          ],
+          [
+            -93.2421468435893,
+            44.9705441000955
+          ],
+          [
+            -93.2426294850352,
+            44.9705464331309
+          ],
+          [
+            -93.2426291903878,
+            44.9705823508054
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 53,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-209-0B",
+        "BLDG_NAME_LABEL": "Rarig Ctr",
+        "Shape__Length": 65.30566278087132
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 54,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1845107804499,
+            44.9838911611097
+          ],
+          [
+            -93.1844929524848,
+            44.9838911922434
+          ],
+          [
+            -93.1844924889541,
+            44.9839416518287
+          ],
+          [
+            -93.1844518455774,
+            44.9839721012722
+          ],
+          [
+            -93.1834658852643,
+            44.9839682591141
+          ],
+          [
+            -93.1834657972294,
+            44.9839937055438
+          ],
+          [
+            -93.1830210332474,
+            44.9839917225157
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 54,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-373-0G",
+        "BLDG_NAME_LABEL": "Magrath Library",
+        "Shape__Length": 179.79205987964502
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 55,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2353360614468,
+            44.9724096413965
+          ],
+          [
+            -93.2353365734866,
+            44.9725061957168
+          ],
+          [
+            -93.2353211027007,
+            44.9725210539284
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 55,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276419810,
+        "SITE_BUILDING_FLOOR": "01-064-0T",
+        "BLDG_NAME_LABEL": "Coffman Memorial Union",
+        "Shape__Length": 18.097134884213947
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 56,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2444355092864,
+            44.9697423863677
+          ],
+          [
+            -93.2445491785092,
+            44.9697426475748
+          ],
+          [
+            -93.2445489745916,
+            44.9697757776395
+          ],
+          [
+            -93.2445488739803,
+            44.970132512657
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 56,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-250-02",
+        "BLDG_NAME_LABEL": "Hanson Hall",
+        "Shape__Length": 73.99781728799745
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 57,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2432593199321,
+            44.9721726914028
+          ],
+          [
+            -93.243277623106,
+            44.9721979841894
+          ],
+          [
+            -93.2432768173172,
+            44.9727698565895
+          ],
+          [
+            -93.2432876447113,
+            44.9727752552182
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 57,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-212-0P",
+        "BLDG_NAME_LABEL": "West Bank Skyway",
+        "Shape__Length": 95.93215959376833
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 58,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2347991455881,
+            44.9759240416071
+          ],
+          [
+            -93.2347983685453,
+            44.9758542445317
+          ],
+          [
+            -93.2348797379438,
+            44.9758545304943
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 58,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-046-0G",
+        "BLDG_NAME_LABEL": "Morrill Hall",
+        "Shape__Length": 20.041952383432317
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 59,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2346886914357,
+            44.974390334324
+          ],
+          [
+            -93.2347163855976,
+            44.9743903699114
+          ],
+          [
+            -93.2347168006192,
+            44.9743255296933
+          ],
+          [
+            -93.2343521178515,
+            44.974326986235
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 59,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-060-02",
+        "BLDG_NAME_LABEL": "Vincent Hall",
+        "Shape__Length": 53.88315668826951
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 60,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2321122082164,
+            44.9742678272265
+          ],
+          [
+            -93.2321828104079,
+            44.9742682256787
+          ],
+          [
+            -93.2323196319105,
+            44.9743615523988
+          ],
+          [
+            -93.2324260822717,
+            44.9744350174225
+          ],
+          [
+            -93.2324272851158,
+            44.9747103655328
+          ],
+          [
+            -93.2328181995881,
+            44.9747101075258
+          ],
+          [
+            -93.2328410221862,
+            44.9747245934078
+          ],
+          [
+            -93.2328409395412,
+            44.9749582245367
+          ],
+          [
+            -93.2329305923049,
+            44.9749585003361
+          ],
+          [
+            -93.2329304916936,
+            44.9749876886702
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 60,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-165-04",
+        "BLDG_NAME_LABEL": "Keller Hall",
+        "Shape__Length": 187.1686391423736
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 61,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2324953387868,
+            44.9754892635742
+          ],
+          [
+            -93.2323787087168,
+            44.9754892559484
+          ],
+          [
+            -93.2323791381116,
+            44.9755949686389
+          ],
+          [
+            -93.2323761314503,
+            44.9755950906502
+          ],
+          [
+            -93.2323760838396,
+            44.9756131699206
+          ],
+          [
+            -93.2323759284311,
+            44.9757395537115
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 61,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-266-02",
+        "BLDG_NAME_LABEL": "Akerman Hall",
+        "Shape__Length": 52.6868314416694
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 62,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2323759284311,
+            44.9757395537115
+          ],
+          [
+            -93.2323762015189,
+            44.9759612961228
+          ],
+          [
+            -93.2325931913724,
+            44.9759623993009
+          ],
+          [
+            -93.2325917235252,
+            44.9758398262952
+          ],
+          [
+            -93.2326422636414,
+            44.975839180655
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 62,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-125-02",
+        "BLDG_NAME_LABEL": "Shepherd Laboratories",
+        "Shape__Length": 83.96614645667422
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 63,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2315223744009,
+            44.973941362988
+          ],
+          [
+            -93.2305677895457,
+            44.9739473887386
+          ],
+          [
+            -93.2305691567816,
+            44.9739825029264
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 63,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-103-02",
+        "BLDG_NAME_LABEL": "Transportation & Safety Bldg",
+        "Shape__Length": 111.79572612092059
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 64,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2304607103638,
+            44.9742541190691
+          ],
+          [
+            -93.2300828088867,
+            44.9743697088996
+          ],
+          [
+            -93.2300544814126,
+            44.9743787093283
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 64,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-158-03",
+        "BLDG_NAME_LABEL": "Washington Avenue Ramp",
+        "Shape__Length": 49.28853654389511
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 65,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2300544814126,
+            44.9743787093283
+          ],
+          [
+            -93.2293663844814,
+            44.9743815594956
+          ],
+          [
+            -93.2293651780439,
+            44.9744975557812
+          ],
+          [
+            -93.2293859111607,
+            44.9744974649065
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 65,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276419810,
+        "SITE_BUILDING_FLOOR": "Graduate Hotel - 02",
+        "BLDG_NAME_LABEL": "Graduate Hotel",
+        "Shape__Length": 97.1615513773109
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 66,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.23405888259,
+            44.9716518185571
+          ],
+          [
+            -93.2340587325713,
+            44.9716676213712
+          ],
+          [
+            -93.2339555574677,
+            44.9716673093314
+          ],
+          [
+            -93.2336645203836,
+            44.9716510565698
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 66,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-115-06",
+        "BLDG_NAME_LABEL": "Children's Rehabilitation Ctr",
+        "Shape__Length": 46.47104067383119
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 67,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2326119104663,
+            44.9712987809292
+          ],
+          [
+            -93.2326119104663,
+            44.9712828718811
+          ],
+          [
+            -93.232459558889,
+            44.9712833612339
+          ],
+          [
+            -93.2324629661989,
+            44.9714392764496
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 67,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-143-03",
+        "BLDG_NAME_LABEL": "Dwan Variety Research Ctr",
+        "Shape__Length": 43.99950671743112
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 68,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1830160898184,
+            44.9811931949302
+          ],
+          [
+            -93.1830166350958,
+            44.9811151591349
+          ],
+          [
+            -93.1830504009707,
+            44.9811152182284
+          ],
+          [
+            -93.1830502302907,
+            44.9811346047112
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 68,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-374-03",
+        "BLDG_NAME_LABEL": "Veterinary Science",
+        "Shape__Length": 19.09112067484685
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 69,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.1830160898184,
+              44.9811931949302
+            ],
+            [
+              -93.183021929766,
+              44.9812043693073
+            ],
+            [
+              -93.1830229996596,
+              44.9817080406886
+            ],
+            [
+              -93.1827082506452,
+              44.9817065277831
+            ]
+          ],
+          [
+            [
+              -93.1827082506452,
+              44.9817065277831
+            ],
+            [
+              -93.1824581596701,
+              44.9817060296236
+            ]
+          ],
+          [
+            [
+              -93.1827082506452,
+              44.9817065277831
+            ],
+            [
+              -93.1827075544509,
+              44.9818127741904
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 69,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-371-03",
+        "BLDG_NAME_LABEL": "Veterinary Medical Ctr South",
+        "Shape__Length": 160.74190286081551
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 70,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1824581596701,
+            44.9817060296236
+          ],
+          [
+            -93.1821367487497,
+            44.9817045459467
+          ],
+          [
+            -93.1821333441348,
+            44.9816153155842
+          ],
+          [
+            -93.1820993869187,
+            44.9816149495888
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 70,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-385-03",
+        "BLDG_NAME_LABEL": "Veterinary Diagnostic Laboratory",
+        "Shape__Length": 53.60871412848887
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 71,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.1827134905183,
+              44.9821008375125
+            ],
+            [
+              -93.1827137312668,
+              44.981851749372
+            ],
+            [
+              -93.1827075544509,
+              44.9818127741904
+            ]
+          ],
+          [
+            [
+              -93.1827134905183,
+              44.9821008375125
+            ],
+            [
+              -93.1833679374573,
+              44.9821033251162
+            ],
+            [
+              -93.1833678359477,
+              44.9821325638227
+            ],
+            [
+              -93.1834354503425,
+              44.9821331286959
+            ],
+            [
+              -93.1835811894209,
+              44.9822764538022
+            ],
+            [
+              -93.183639997631,
+              44.982277002789
+            ],
+            [
+              -93.183640427924,
+              44.9823105049473
+            ]
+          ],
+          [
+            [
+              -93.1827134905183,
+              44.9821008375125
+            ],
+            [
+              -93.1826683340056,
+              44.982100575091
+            ],
+            [
+              -93.1826694586963,
+              44.9820746131442
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 71,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-427-03",
+        "BLDG_NAME_LABEL": "Veterinary Medical Ctr North",
+        "Shape__Length": 179.07617929397207
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 72,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.185417494982,
+            44.9851812582625
+          ],
+          [
+            -93.1854174365915,
+            44.9851922329918
+          ],
+          [
+            -93.1858206031859,
+            44.9851914483111
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 72,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-390-02",
+        "BLDG_NAME_LABEL": "Dining Ctr",
+        "Shape__Length": 46.60778215463408
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 73,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.182333576815,
+            44.984056858693
+          ],
+          [
+            -93.1823575600364,
+            44.9840569984769
+          ],
+          [
+            -93.1823576516646,
+            44.9840331081255
+          ],
+          [
+            -93.1826840994388,
+            44.9840345752221
+          ],
+          [
+            -93.1827298182969,
+            44.9840011757325
+          ],
+          [
+            -93.1829565988887,
+            44.9840016173231
+          ],
+          [
+            -93.1830210332474,
+            44.9839917225157
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 73,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-426-03",
+        "BLDG_NAME_LABEL": "Learning & Environmental Sciences",
+        "Shape__Length": 82.672423290293
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 74,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1824988281997,
+            44.9851460956553
+          ],
+          [
+            -93.1824991506949,
+            44.9850537630521
+          ],
+          [
+            -93.182498980015,
+            44.9849901516277
+          ],
+          [
+            -93.1824302894384,
+            44.9849899953264
+          ],
+          [
+            -93.1824301717592,
+            44.9850164731449
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 74,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-411-01",
+        "BLDG_NAME_LABEL": "Biological Sciences",
+        "Shape__Length": 36.35782253799551
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 75,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.1830650246452,
+              44.9859059321625
+            ],
+            [
+              -93.1830649896109,
+              44.9859155864731
+            ],
+            [
+              -93.182982980612,
+              44.9859152103394
+            ],
+            [
+              -93.182982533251,
+              44.985871505113
+            ],
+            [
+              -93.1829733479772,
+              44.9857957547302
+            ],
+            [
+              -93.1829775727539,
+              44.9856032148557
+            ],
+            [
+              -93.1829972970626,
+              44.9856032142204
+            ]
+          ],
+          [
+            [
+              -93.1830399329026,
+              44.9859167148741
+            ],
+            [
+              -93.1830734077234,
+              44.986062616434
+            ],
+            [
+              -93.1831167208931,
+              44.9862587070473
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 75,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-438-01",
+        "BLDG_NAME_LABEL": "Ecology Bldg",
+        "Shape__Length": 116.49863599143069
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 76,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.1831167208931,
+              44.9862587070473
+            ],
+            [
+              -93.1831183513354,
+              44.9862660879909
+            ],
+            [
+              -93.1831376983516,
+              44.9862641774721
+            ],
+            [
+              -93.1831471117975,
+              44.9863084459604
+            ]
+          ],
+          [
+            [
+              -93.1831471117975,
+              44.9863084459604
+            ],
+            [
+              -93.1832240273488,
+              44.986690272404
+            ]
+          ],
+          [
+            [
+              -93.1831471117975,
+              44.9863084459604
+            ],
+            [
+              -93.1830837203829,
+              44.9863147448854
+            ],
+            [
+              -93.1827568450105,
+              44.9863450659971
+            ],
+            [
+              -93.1827671639582,
+              44.9863783148125
+            ],
+            [
+              -93.1827471782398,
+              44.9863870776395
+            ]
+          ],
+          [
+            [
+              -93.1830873486783,
+              44.9863300938265
+            ],
+            [
+              -93.1830839521482,
+              44.9863147283662
+            ]
+          ],
+          [
+            [
+              -93.1832240273488,
+              44.986690272404
+            ],
+            [
+              -93.1829059554662,
+              44.9867572105491
+            ]
+          ],
+          [
+            [
+              -93.1832240273488,
+              44.986690272404
+            ],
+            [
+              -93.1834484022522,
+              44.9869836113008
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 76,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-429-02",
+        "BLDG_NAME_LABEL": "Borlaug Hall",
+        "Shape__Length": 214.78266528455214
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 77,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.1827471782398,
+              44.9863870776395
+            ],
+            [
+              -93.182571176716,
+              44.9864244473452
+            ]
+          ],
+          [
+            [
+              -93.1825638985656,
+              44.986407249545
+            ],
+            [
+              -93.182571176716,
+              44.9864244473452
+            ]
+          ],
+          [
+            [
+              -93.182571176716,
+              44.9864244473452
+            ],
+            [
+              -93.182311806144,
+              44.9864795173761
+            ],
+            [
+              -93.1823565970424,
+              44.9865788454678
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 77,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-364-02",
+        "BLDG_NAME_LABEL": "Hayes Hall",
+        "Shape__Length": 69.83697227527105
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 78,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1829059554662,
+            44.9867572105491
+          ],
+          [
+            -93.1825108458616,
+            44.986842400338
+          ],
+          [
+            -93.1825174251227,
+            44.9868579657922
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 78,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-365-02",
+        "BLDG_NAME_LABEL": "Stakman Hall",
+        "Shape__Length": 48.53879047630306
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 79,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1833323354259,
+            44.9877196077007
+          ],
+          [
+            -93.1832925670083,
+            44.9876841512168
+          ],
+          [
+            -93.1833186729488,
+            44.987669062493
+          ],
+          [
+            -93.1833577766131,
+            44.9876469754761
+          ],
+          [
+            -93.1834005139627,
+            44.987622709863
+          ],
+          [
+            -93.1834280536144,
+            44.9876067653171
+          ],
+          [
+            -93.1836511762664,
+            44.9874800690454
+          ],
+          [
+            -93.1836719336376,
+            44.9874682306866
+          ],
+          [
+            -93.1837871910818,
+            44.9875685615419
+          ],
+          [
+            -93.1838235629694,
+            44.9875925647815
+          ],
+          [
+            -93.1838919562035,
+            44.9876310303016
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 79,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-394-02",
+        "BLDG_NAME_LABEL": "Alderman Hall",
+        "Shape__Length": 96.94278956231668
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 80,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.1839447492945,
+              44.9875424222692
+            ],
+            [
+              -93.1839756711032,
+              44.9875600219009
+            ],
+            [
+              -93.18395699962,
+              44.9875770948281
+            ],
+            [
+              -93.1841373624644,
+              44.9876797139926
+            ],
+            [
+              -93.1841558731492,
+              44.9876627834124
+            ],
+            [
+              -93.1841844602365,
+              44.9876775303241
+            ]
+          ],
+          [
+            [
+              -93.1839450996374,
+              44.9875431649851
+            ],
+            [
+              -93.1839709163204,
+              44.9875582575541
+            ],
+            [
+              -93.1838919562035,
+              44.9876310303016
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 80,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-393-02",
+        "BLDG_NAME_LABEL": "Hodson Hall",
+        "Shape__Length": 59.05791172612578
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 81,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1852155995202,
+            44.9874063812103
+          ],
+          [
+            -93.1852049185515,
+            44.9873856804142
+          ],
+          [
+            -93.185087252724,
+            44.9871689378914
+          ],
+          [
+            -93.1850627853106,
+            44.9871754393975
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 81,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-357-0G",
+        "BLDG_NAME_LABEL": "Green Hall",
+        "Shape__Length": 42.9202933754213
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 82,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1834484022522,
+            44.9869836113008
+          ],
+          [
+            -93.1835048065706,
+            44.9870552036653
+          ],
+          [
+            -93.1834002633328,
+            44.9870978475936
+          ],
+          [
+            -93.1834146238009,
+            44.9871149772045
+          ],
+          [
+            -93.1834269765344,
+            44.9871099744768
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 82,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-382-02",
+        "BLDG_NAME_LABEL": "Soil Science",
+        "Shape__Length": 31.05297191940632
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 83,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2325357135673,
+            44.9730807881748
+          ],
+          [
+            -93.2325358348398,
+            44.9730635984463
+          ],
+          [
+            -93.2326203950542,
+            44.9730633760201
+          ],
+          [
+            -93.2326878693118,
+            44.9729476056153
+          ],
+          [
+            -93.232763972786,
+            44.9729257969973
+          ],
+          [
+            -93.2328034833872,
+            44.9728845266578
+          ],
+          [
+            -93.2328503260376,
+            44.972836467815
+          ],
+          [
+            -93.2328956056195,
+            44.9728364544694
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 83,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-186-03",
+        "BLDG_NAME_LABEL": "Molecular & Cellular Biology",
+        "Shape__Length": 63.03319081859371
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 84,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2335484481674,
+            44.9751008768111
+          ],
+          [
+            -93.23354823886,
+            44.9750020435728
+          ],
+          [
+            -93.2335482505381,
+            44.9749756577225
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 84,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-265-02",
+        "BLDG_NAME_LABEL": "Mechanical Engineering",
+        "Shape__Length": 19.7046176558563
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 85,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2324629679955,
+            44.9714392764496
+          ],
+          [
+            -93.232450902723,
+            44.9714478941189
+          ],
+          [
+            -93.2324514524919,
+            44.9714982095885
+          ],
+          [
+            -93.2332662549973,
+            44.9714948921702
+          ],
+          [
+            -93.2332665343734,
+            44.9715232719787
+          ],
+          [
+            -93.2334517319507,
+            44.9715234397561
+          ],
+          [
+            -93.2334522188376,
+            44.9716507864742
+          ],
+          [
+            -93.2336645203836,
+            44.9716510565698
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 85,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-074-03",
+        "BLDG_NAME_LABEL": "Mayo Bldg & Additions",
+        "Shape__Length": 169.28434901119266
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 86,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2328976609649,
+            44.9714963926347
+          ],
+          [
+            -93.2329009182561,
+            44.9718969154805
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 86,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-074-03",
+        "BLDG_NAME_LABEL": "Mayo Bldg & Additions",
+        "Shape__Length": 63.02404309468594
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 87,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2329009182561,
+            44.9718969154805
+          ],
+          [
+            -93.2329033661653,
+            44.9721468463437
+          ],
+          [
+            -93.2329071049535,
+            44.9726223178132
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 87,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-074-03",
+        "BLDG_NAME_LABEL": "Mayo Bldg & Additions",
+        "Shape__Length": 114.14660169998498
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 88,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2329071049535,
+            44.9726223178132
+          ],
+          [
+            -93.2329636107815,
+            44.9726847660001
+          ],
+          [
+            -93.2329445682941,
+            44.9727767219674
+          ],
+          [
+            -93.2329446976515,
+            44.9728073330394
+          ],
+          [
+            -93.2329447892797,
+            44.9728291480575
+          ],
+          [
+            -93.2329272299108,
+            44.9728292052531
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 88,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-074-03",
+        "BLDG_NAME_LABEL": "Mayo Bldg & Additions",
+        "Shape__Length": 36.49574315768739
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 89,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2447119505437,
+              44.9710091978139
+            ],
+            [
+              -93.2447100577934,
+              44.9711666434822
+            ],
+            [
+              -93.2446740353505,
+              44.9711665678548
+            ],
+            [
+              -93.2446740874528,
+              44.9712429514825
+            ]
+          ],
+          [
+            [
+              -93.2446560744348,
+              44.9712428917433
+            ],
+            [
+              -93.2446740874528,
+              44.9712429514825
+            ]
+          ],
+          [
+            [
+              -93.2446741503349,
+              44.9712429514825
+            ],
+            [
+              -93.2446740874528,
+              44.9712429514825
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 89,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-216-0B",
+        "BLDG_NAME_LABEL": "Humphrey School of Public Affairs",
+        "Shape__Length": 42.81623705781969
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 90,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2310467712552,
+            44.9721754476237
+          ],
+          [
+            -93.2310465933888,
+            44.9721812968872
+          ],
+          [
+            -93.2308593755004,
+            44.972181699167
+          ],
+          [
+            -93.2305487389735,
+            44.9721812307938
+          ],
+          [
+            -93.2305484551058,
+            44.9722727579623
+          ],
+          [
+            -93.2304401326556,
+            44.9722726696261
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 90,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-145-02",
+        "BLDG_NAME_LABEL": "Health Sciences Education Ctr",
+        "Shape__Length": 82.80223029399193
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 91,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2326203950542,
+            44.9730633760201
+          ],
+          [
+            -93.2326207112611,
+            44.9730937149439
+          ],
+          [
+            -93.2329260046087,
+            44.9730921217377
+          ],
+          [
+            -93.2330068161534,
+            44.9729468411031
+          ],
+          [
+            -93.2332767643879,
+            44.9729455745423
+          ],
+          [
+            -93.2332820213289,
+            44.9729391070107
+          ],
+          [
+            -93.2335342799388,
+            44.9729398302151
+          ],
+          [
+            -93.2335340876993,
+            44.9729666434256
+          ],
+          [
+            -93.2335522516343,
+            44.9729667165086
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 91,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-032-03",
+        "BLDG_NAME_LABEL": "Jackson Hall",
+        "Shape__Length": 128.87509549311793
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 92,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.232060288288,
+            44.9716761405008
+          ],
+          [
+            -93.2320069184786,
+            44.9716760750424
+          ],
+          [
+            -93.2320075580791,
+            44.9714147313374
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 92,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276419810,
+        "SITE_BUILDING_FLOOR": "Fairview-01",
+        "BLDG_NAME_LABEL": "University of Minnesota Medical Ctr - Fairview",
+        "Shape__Length": 47.06397056574439
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 93,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2318338876835,
+            44.9719373107898
+          ],
+          [
+            -93.2315542214744,
+            44.971935915197
+          ],
+          [
+            -93.2315547981928,
+            44.9718780190353
+          ],
+          [
+            -93.2316125751369,
+            44.9718783075598
+          ],
+          [
+            -93.2316124592542,
+            44.9718899120903
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 93,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-144-02",
+        "BLDG_NAME_LABEL": "Phillips-Wangensteen Bldg",
+        "Shape__Length": 48.50130650987905
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 94,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.1825006329151,
+              44.9855648394674
+            ],
+            [
+              -93.1824992557978,
+              44.985692104175
+            ]
+          ],
+          [
+            [
+              -93.1824992557978,
+              44.985692104175
+            ],
+            [
+              -93.1826292276463,
+              44.9856911816273
+            ]
+          ],
+          [
+            [
+              -93.1824992557978,
+              44.985692104175
+            ],
+            [
+              -93.1824983844319,
+              44.9857693910015
+            ],
+            [
+              -93.1824661717442,
+              44.9857692855313
+            ],
+            [
+              -93.1824662031852,
+              44.9857607259261
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 94,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-410-0B",
+        "BLDG_NAME_LABEL": "Gortner Laboratory",
+        "Shape__Length": 51.597644906549085
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 95,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2334011487154,
+            44.975522321688
+          ],
+          [
+            -93.2333888723387,
+            44.9755225161437
+          ],
+          [
+            -93.2333889603736,
+            44.9754888149278
+          ],
+          [
+            -93.2329320592538,
+            44.9754890456058
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 95,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-265-02",
+        "BLDG_NAME_LABEL": "Mechanical Engineering",
+        "Shape__Length": 57.53226455443621
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 96,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1858206031859,
+            44.9851914483111
+          ],
+          [
+            -93.1859034071939,
+            44.9851911147424
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 96,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-383-02",
+        "BLDG_NAME_LABEL": "Bailey Hall",
+        "Shape__Length": 9.217849508163502
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 97,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.183640427924,
+            44.9823105049473
+          ],
+          [
+            -93.1837248174584,
+            44.9823112057944
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 97,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-416-01",
+        "BLDG_NAME_LABEL": "Animal Science/Veterinary Medicine",
+        "Shape__Length": 9.394847510549562
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 98,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2343252941572,
+            44.9773541559873
+          ],
+          [
+            -93.2343180896686,
+            44.9773603415141
+          ],
+          [
+            -93.2340117515803,
+            44.9772410847699
+          ],
+          [
+            -93.2339615321626,
+            44.9773035037798
+          ],
+          [
+            -93.2340195516519,
+            44.9773263884666
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 98,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-057-0B",
+        "BLDG_NAME_LABEL": "Nolte Ctr",
+        "Shape__Length": 58.88264038206025
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 99,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.23345541684,
+            44.9755613443581
+          ],
+          [
+            -93.233455764488,
+            44.9755223934968
+          ],
+          [
+            -93.2335760695658,
+            44.9755225510949
+          ],
+          [
+            -93.233575896191,
+            44.9752803521984
+          ],
+          [
+            -93.233575545848,
+            44.9751875423477
+          ],
+          [
+            -93.2335559697613,
+            44.9751591776976
+          ],
+          [
+            -93.2335558556753,
+            44.9751009143045
+          ],
+          [
+            -93.2334202963056,
+            44.9751002241723
+          ],
+          [
+            -93.2333599995871,
+            44.9750941489754
+          ],
+          [
+            -93.2333154844715,
+            44.9750598628649
+          ],
+          [
+            -93.2333151673662,
+            44.9750441734658
+          ],
+          [
+            -93.2329302994541,
+            44.9750434115235
+          ],
+          [
+            -93.2329304916936,
+            44.9749876886702
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 99,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-265-02",
+        "BLDG_NAME_LABEL": "Mechanical Engineering",
+        "Shape__Length": 169.65260937677837
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 100,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2329320592538,
+            44.9754890456058
+          ],
+          [
+            -93.2324953387868,
+            44.9754892635742
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 100,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-265-02",
+        "BLDG_NAME_LABEL": "Mechanical Engineering",
+        "Shape__Length": 48.61551209931982
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 101,
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -93.2334047761125,
+              44.975523653646
+            ],
+            [
+              -93.2334044338543,
+              44.9755611746861
+            ]
+          ],
+          [
+            [
+              -93.2334036145908,
+              44.9755898543332
+            ],
+            [
+              -93.2334041284272,
+              44.9755611835828
+            ],
+            [
+              -93.23345541684,
+              44.9755613443581
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 101,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-265-02",
+        "BLDG_NAME_LABEL": "Mechanical Engineering",
+        "Shape__Length": 16.126041571173268
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 102,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2335482505381,
+            44.9749756577225
+          ],
+          [
+            -93.2335344811614,
+            44.9749585378296
+          ],
+          [
+            -93.2335439871337,
+            44.9746467813965
+          ],
+          [
+            -93.2335792424154,
+            44.9746469396325
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 102,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-031-02",
+        "BLDG_NAME_LABEL": "Lind Hall",
+        "Shape__Length": 56.093724661069444
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 103,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2345607812207,
+            44.9725683135655
+          ],
+          [
+            -93.2346841782997,
+            44.9727239119829
+          ],
+          [
+            -93.2346852401083,
+            44.9728480886748
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 103,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-178-01",
+        "BLDG_NAME_LABEL": "Hasselmo Hall",
+        "Shape__Length": 47.614390971517004
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 104,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2340524802969,
+            44.9722347854632
+          ],
+          [
+            -93.2340923358511,
+            44.9722351705838
+          ],
+          [
+            -93.2340931003175,
+            44.9721954059132
+          ],
+          [
+            -93.2341967182905,
+            44.9721959460992
+          ],
+          [
+            -93.2341969949717,
+            44.9722302517163
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 104,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-070-02",
+        "BLDG_NAME_LABEL": "Boynton Health Service",
+        "Shape__Length": 27.627993564772552
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 105,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2329797885414,
+            44.9721809022335
+          ],
+          [
+            -93.232979579234,
+            44.9721469162502
+          ],
+          [
+            -93.2329063584535,
+            44.9721468469792
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 105,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-074-03",
+        "BLDG_NAME_LABEL": "Mayo Bldg & Additions",
+        "Shape__Length": 13.49875804651326
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 106,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2458408579714,
+            44.9708604495476
+          ],
+          [
+            -93.2458922721484,
+            44.970861203919
+          ],
+          [
+            -93.2458928084426,
+            44.9708990203523
+          ],
+          [
+            -93.2458468227849,
+            44.9708993533687
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 106,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-217-03",
+        "BLDG_NAME_LABEL": "19th Avenue Ramp",
+        "Shape__Length": 16.794698412158723
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 107,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2432053266919,
+            44.9730582449655
+          ],
+          [
+            -93.2432043232738,
+            44.9730241762511
+          ],
+          [
+            -93.2433605232337,
+            44.9730242474276
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 107,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-220-0G",
+        "BLDG_NAME_LABEL": "Andersen Library",
+        "Shape__Length": 22.75016717422936
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 108,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2433891336772,
+            44.9730242607731
+          ],
+          [
+            -93.2433079250772,
+            44.9729073819684
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 108,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-207-0G",
+        "BLDG_NAME_LABEL": "Willey Hall",
+        "Shape__Length": 20.4931861946399
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 109,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2334036145908,
+            44.9755898543332
+          ],
+          [
+            -93.2334039460692,
+            44.9756286234029
+          ],
+          [
+            -93.2333606275095,
+            44.9756288083261
+          ],
+          [
+            -93.2333629379764,
+            44.9758991743236
+          ],
+          [
+            -93.2333389772129,
+            44.9758992759991
+          ],
+          [
+            -93.2333398800197,
+            44.9760049212093
+          ],
+          [
+            -93.2329916678628,
+            44.9760055617639
+          ],
+          [
+            -93.2329916678628,
+            44.9762982811021
+          ],
+          [
+            -93.2331175577667,
+            44.976299740771
+          ],
+          [
+            -93.2331185890326,
+            44.976358138936
+          ],
+          [
+            -93.233013337024,
+            44.97635740942
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 109,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-112-02",
+        "BLDG_NAME_LABEL": "Rapson Hall",
+        "Shape__Length": 192.51192138658718
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 110,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1825108458616,
+            44.986842400338
+          ],
+          [
+            -93.1824747964692,
+            44.9868486566358
+          ],
+          [
+            -93.1824277885287,
+            44.9867456674795
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 110,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-365-02",
+        "BLDG_NAME_LABEL": "Stakman Hall",
+        "Shape__Length": 21.165567487718015
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 111,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.1824277885287,
+            44.9867456674795
+          ],
+          [
+            -93.1823565970424,
+            44.9865788454678
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 111,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "02-396-02",
+        "BLDG_NAME_LABEL": "Christensen Laboratory",
+        "Shape__Length": 27.426532200953353
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 112,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.232459558889,
+            44.9712833612339
+          ],
+          [
+            -93.2322782447287,
+            44.9712820571405
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 112,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-143-03",
+        "BLDG_NAME_LABEL": "Dwan Variety Research Ctr",
+        "Shape__Length": 20.18484306190208
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 113,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2322782447287,
+            44.9712820571405
+          ],
+          [
+            -93.2321487435974,
+            44.9712825433157
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 113,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276419810,
+        "SITE_BUILDING_FLOOR": "Fairview-02",
+        "BLDG_NAME_LABEL": "University of Minnesota Medical Ctr - Fairview",
+        "Shape__Length": 14.416202977329814
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 114,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2353211027007,
+            44.9725210539284
+          ],
+          [
+            -93.235283066235,
+            44.9725208518365
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 114,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276419810,
+        "SITE_BUILDING_FLOOR": "01-064-0T",
+        "BLDG_NAME_LABEL": "Coffman Memorial Union",
+        "Shape__Length": 4.234319412385572
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 115,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2305691567816,
+            44.9739825029264
+          ],
+          [
+            -93.2304870184252,
+            44.9739827850853
+          ],
+          [
+            -93.2304889803458,
+            44.9742546846553
+          ],
+          [
+            -93.2304607103638,
+            44.9742541190691
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 115,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-158-03",
+        "BLDG_NAME_LABEL": "Washington Avenue Ramp",
+        "Shape__Length": 55.07822345756028
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 116,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2317107951334,
+            44.9739243215875
+          ],
+          [
+            -93.2316633389336,
+            44.97392437624
+          ],
+          [
+            -93.2316282722982,
+            44.9739406950842
+          ],
+          [
+            -93.2315223744009,
+            44.973941362988
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 116,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-158-03",
+        "BLDG_NAME_LABEL": "Washington Avenue Ramp",
+        "Shape__Length": 21.744269836806204
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 117,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2356866918686,
+            44.9758695721255
+          ],
+          [
+            -93.2356913163956,
+            44.9763336582047
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 117,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-053-0B",
+        "BLDG_NAME_LABEL": "Northrop Memorial Auditorium",
+        "Shape__Length": 73.03221442126699
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 118,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2431260009608,
+            44.9714977221441
+          ],
+          [
+            -93.2431296526124,
+            44.970994445979
+          ],
+          [
+            -93.2435552294782,
+            44.9709941777869
+          ],
+          [
+            -93.2435547812189,
+            44.9710647955213
+          ],
+          [
+            -93.2435270376497,
+            44.9710648006055
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 118,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-204-0B",
+        "BLDG_NAME_LABEL": "Wilson Library",
+        "Shape__Length": 140.76707425583675
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 119,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2431260009608,
+            44.9714977221441
+          ],
+          [
+            -93.2431258374674,
+            44.9715080258409
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 119,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-204-0B",
+        "BLDG_NAME_LABEL": "Wilson Library",
+        "Shape__Length": 1.6214021463354205
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 120,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.2438214712639,
+            44.9715001619082
+          ],
+          [
+            -93.2438213895172,
+            44.9715567060646
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 120,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-204-0B",
+        "BLDG_NAME_LABEL": "Wilson Library",
+        "Shape__Length": 8.897304651165715
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 121,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -93.236544976427,
+            44.9739939742131
+          ],
+          [
+            -93.2365940873236,
+            44.9739949973569
+          ],
+          [
+            -93.2365940864252,
+            44.9740205892925
+          ],
+          [
+            -93.2360445151007,
+            44.9740205899279
+          ],
+          [
+            -93.2360429753883,
+            44.9742296825594
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 121,
+        "CREATED_USER": "lbetanco_umn_egis",
+        "CREATED_DATE": 1726084612129,
+        "LAST_EDITED_USER": "lbetanco_umn_egis",
+        "LAST_EDITED_DATE": 1727276125195,
+        "SITE_BUILDING_FLOOR": "01-122-01",
+        "BLDG_NAME_LABEL": "Kolthoff Hall",
+        "Shape__Length": 103.57741661009922
+      }
+    }
+  ]
+}

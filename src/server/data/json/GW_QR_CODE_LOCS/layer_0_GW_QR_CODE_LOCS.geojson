@@ -1,0 +1,59 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.2318398159483,
+          44.972175298802
+        ]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "SHORT_DESCRIPTION": "Diehl Mayo PWB Junction",
+        "LONG_DESCRIPTION": "Level 2 PWB"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.2339044463375,
+          44.9722170444252
+        ]
+      },
+      "properties": {
+        "OBJECTID": 2,
+        "SHORT_DESCRIPTION": "Boynton Mayo Junction",
+        "LONG_DESCRIPTION": "Tunnel between Hasselmo, Boynton, and Mayo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.2374132310075,
+          44.9778475852376
+        ]
+      },
+      "properties": {
+        "OBJECTID": 3,
+        "SHORT_DESCRIPTION": "Burton Hall Digital Display",
+        "LONG_DESCRIPTION": "Burton Hall Digital Display"
+      }
+    }
+  ]
+}
