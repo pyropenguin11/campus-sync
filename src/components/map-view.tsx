@@ -13,20 +13,18 @@ import {
   TILE_ATTRIBUTION,
   TILE_LAYER_URL,
 } from "@/constants/map";
-import { NODE_COLORS, TUNNEL_HIGHLIGHT } from "@/constants/tunnels";
+import { TUNNEL_HIGHLIGHT } from "@/constants/tunnels";
 import type { ArcgisGeoJsonLayer } from "@/types/arcgis";
 import type { GeoJsonGeometry } from "@/types/geojson";
-import type { LatLngTuple, TunnelNode } from "@/types/tunnels";
+import type { LatLngTuple } from "@/types/tunnels";
 
 type MapLibreModule = typeof import("maplibre-gl");
 
 type MapViewProps = {
-  routePoints: LatLngTuple[];
-  nodes: TunnelNode[];
+  routeLine: LatLngTuple[];
   geoJsonLayers: ArcgisGeoJsonLayer[];
-  routeNodeIds: string[];
-  startNodeId?: string | null;
-  endNodeId?: string | null;
+  startMarker?: LatLngTuple | null;
+  endMarker?: LatLngTuple | null;
 };
 
 type Bounds = {
@@ -140,22 +138,8 @@ type PolygonRenderStyle = {
   dashArray?: string;
 };
 
-type PointRenderStyle = {
-  radius: number;
-  color: string;
-  weight: number;
-  fillColor: string;
-  fillOpacity: number;
-};
-
-type LayerStyle = {
-  polygon: PolygonRenderStyle;
-  point: PointRenderStyle;
-};
-
 type LayerStyleOverrides = {
   polygon?: Partial<PolygonRenderStyle>;
-  point?: Partial<PointRenderStyle>;
 };
 
 const DEFAULT_POLYGON_STYLE: PolygonRenderStyle = {
@@ -164,14 +148,6 @@ const DEFAULT_POLYGON_STYLE: PolygonRenderStyle = {
   opacity: 0.9,
   fillColor: "#60a5fa",
   fillOpacity: 0.2,
-};
-
-const DEFAULT_POINT_STYLE: PointRenderStyle = {
-  radius: 6,
-  color: "#ffffff",
-  weight: 2,
-  fillColor: "#2563eb",
-  fillOpacity: 0.95,
 };
 
 const LAYER_STYLE_OVERRIDES: Record<string, LayerStyleOverrides> = {
@@ -194,28 +170,6 @@ const LAYER_STYLE_OVERRIDES: Record<string, LayerStyleOverrides> = {
       color: "#f97316",
       dashArray: "6 4",
       fillOpacity: 0.1,
-    },
-  },
-  GW_ELEVATORS: {
-    point: {
-      fillColor: "#ef4444",
-      color: "#ffffff",
-      radius: 5,
-      weight: 2,
-    },
-  },
-  GW_QR_CODE_LOCS: {
-    point: {
-      fillColor: "#22d3ee",
-      color: "#0f172a",
-      radius: 4,
-    },
-  },
-  GW_INFO_LABELS: {
-    point: {
-      fillColor: "#a855f7",
-      color: "#ffffff",
-      radius: 4,
     },
   },
   GW_FP_LINES_STAIRS: {
@@ -248,43 +202,19 @@ const LAYER_STYLE_OVERRIDES: Record<string, LayerStyleOverrides> = {
   },
 };
 
-const getLayerStyle = (feature: string): LayerStyle => {
-  const override = LAYER_STYLE_OVERRIDES[feature] ?? {};
-  return {
-    polygon: { ...DEFAULT_POLYGON_STYLE, ...(override.polygon ?? {}) },
-    point: { ...DEFAULT_POINT_STYLE, ...(override.point ?? {}) },
-  };
+const getLayerStyle = (feature: string): PolygonRenderStyle => {
+  const override = LAYER_STYLE_OVERRIDES[feature]?.polygon ?? {};
+  return { ...DEFAULT_POLYGON_STYLE, ...override };
 };
 
-const parseDashArray = (value: string | undefined): number[] | undefined => {
-  if (!value) return undefined;
-  const parts = value
-    .split(/\s+/)
-    .map((item) => Number.parseFloat(item))
-    .filter((item) => Number.isFinite(item) && item > 0);
-
-  return parts.length > 0 ? parts : undefined;
-};
-
-const NODE_COLOR_EXPRESSION: unknown[] = [
-  "match",
-  ["get", "nodeType"],
-  "academic",
-  NODE_COLORS.academic,
-  "student",
-  NODE_COLORS.student,
-  "research",
-  NODE_COLORS.research,
-  NODE_COLORS.academic,
-];
+const START_MARKER_COLOR = "#22c55e";
+const END_MARKER_COLOR = "#ef4444";
 
 export const MapView = ({
-  routePoints,
-  nodes,
+  routeLine,
   geoJsonLayers,
-  routeNodeIds,
-  startNodeId,
-  endNodeId,
+  startMarker,
+  endMarker,
 }: MapViewProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<any>(null);
@@ -292,15 +222,14 @@ export const MapView = ({
     layers: [],
     sources: [],
   });
-  const ensureSourcesRef = useRef<() => void>(() => undefined);
+  const ensureSourcesRef = useRef<(shouldFitBounds: boolean) => void>(() => undefined);
   const hasFitBoundsRef = useRef(false);
   const [mapError, setMapError] = useState<string | null>(null);
 
   const routeFeatureCollection = useMemo(() => {
-    if (routePoints.length < 2) {
+    if (routeLine.length < 2) {
       return null;
     }
-
     return {
       type: "FeatureCollection" as const,
       features: [
@@ -309,43 +238,45 @@ export const MapView = ({
           properties: {},
           geometry: {
             type: "LineString" as const,
-            coordinates: routePoints.map((point) => toLonLat(point)),
+            coordinates: routeLine.map(toLonLat),
           },
         },
       ],
     };
-  }, [routePoints]);
+  }, [routeLine]);
 
-  const nodeFeatureCollection = useMemo(() => {
-    const routeSet = new Set(routeNodeIds);
-    const features = nodes
-      .filter(
-        (node) =>
-          routeSet.has(node.id) ||
-          node.id === startNodeId ||
-          node.id === endNodeId,
-      )
-      .map((node) => ({
-        type: "Feature" as const,
-        properties: {
-          id: node.id,
-          nodeType: node.type,
-          name: node.name,
-          inRoute: routeSet.has(node.id),
-          isStart: startNodeId === node.id,
-          isEnd: endNodeId === node.id,
-        },
-        geometry: {
-          type: "Point" as const,
-          coordinates: toLonLat(node.position),
-        },
-      }));
+  const markerFeatureCollection = useMemo(() => {
+    const features: Array<{
+      type: "Feature";
+      properties: { markerType: "start" | "end" };
+      geometry: { type: "Point"; coordinates: [number, number] };
+    }> = [];
+
+    if (startMarker) {
+      features.push({
+        type: "Feature",
+        properties: { markerType: "start" },
+        geometry: { type: "Point", coordinates: toLonLat(startMarker) },
+      });
+    }
+
+    if (endMarker) {
+      features.push({
+        type: "Feature",
+        properties: { markerType: "end" },
+        geometry: { type: "Point", coordinates: toLonLat(endMarker) },
+      });
+    }
+
+    if (features.length === 0) {
+      return null;
+    }
 
     return {
       type: "FeatureCollection" as const,
       features,
     };
-  }, [nodes, routeNodeIds, startNodeId, endNodeId]);
+  }, [startMarker, endMarker]);
 
   const osmTileUrls = useMemo(() => {
     if (!TILE_LAYER_URL.includes("{s}")) {
@@ -356,36 +287,37 @@ export const MapView = ({
     );
   }, []);
 
-  const ensureSources = useCallback(() => {
-    const map = mapRef.current;
-    if (!map) {
-      return;
-    }
-
-    const { layers, sources } = layerRegistryRef.current;
-    [...layers].reverse().forEach((layerId) => {
-      if (map.getLayer(layerId)) {
-        map.removeLayer(layerId);
+  const ensureSources = useCallback(
+    (shouldFitBounds: boolean) => {
+      const map = mapRef.current;
+      if (!map) {
+        return;
       }
-    });
-    [...sources].reverse().forEach((sourceId) => {
-      if (map.getSource(sourceId)) {
-        map.removeSource(sourceId);
-      }
-    });
 
-    const nextLayers: string[] = [];
-    const nextSources: string[] = [];
+      const { layers, sources } = layerRegistryRef.current;
+      [...layers].reverse().forEach((layerId) => {
+        if (map.getLayer(layerId)) {
+          map.removeLayer(layerId);
+        }
+      });
+      [...sources].reverse().forEach((sourceId) => {
+        if (map.getSource(sourceId)) {
+          map.removeSource(sourceId);
+        }
+      });
 
-    const bounds = createEmptyBounds();
+      const nextLayers: string[] = [];
+      const nextSources: string[] = [];
 
-    const recordLayer = (layerId: string) => {
-      nextLayers.push(layerId);
-    };
+      const bounds = createEmptyBounds();
 
-    const recordSource = (sourceId: string) => {
-      nextSources.push(sourceId);
-    };
+      const recordLayer = (layerId: string) => {
+        nextLayers.push(layerId);
+      };
+
+      const recordSource = (sourceId: string) => {
+        nextSources.push(sourceId);
+      };
 
     geoJsonLayers.forEach((layer) => {
       const sourceId = `arcgis-${layer.feature}-${layer.layerId}`;
@@ -402,86 +334,71 @@ export const MapView = ({
       const hasLines = layer.featureCollection.features.some((feature) =>
         geometryMatches(feature.geometry, "line"),
       );
-      const hasPoints = layer.featureCollection.features.some((feature) =>
-        geometryMatches(feature.geometry, "point"),
-      );
 
       layer.featureCollection.features.forEach((feature) => {
-        visitGeometry(feature.geometry, (lat, lon) => extendBounds(bounds, lat, lon));
+        visitGeometry(
+          feature.geometry as GeoJsonGeometry | null | undefined,
+          (lat, lon) => extendBounds(bounds, lat, lon),
+        );
       });
 
       if (hasPolygons) {
         const fillId = `${sourceId}-fill`;
-        const polygonFilter: unknown[] = [
-          "any",
-          ["==", ["geometry-type"], "Polygon"],
-          ["==", ["geometry-type"], "MultiPolygon"],
-        ];
         map.addLayer({
           id: fillId,
           type: "fill",
           source: sourceId,
-          filter: polygonFilter,
+          filter: ["==", "$type", "Polygon"],
           paint: {
-            "fill-color": style.polygon.fillColor,
-            "fill-opacity": style.polygon.fillOpacity,
+            "fill-color": style.fillColor,
+            "fill-opacity": style.fillOpacity,
           },
         });
         recordLayer(fillId);
 
         const outlineId = `${sourceId}-outline`;
-        const linePaint: Record<string, unknown> = {
-          "line-color": style.polygon.color,
-          "line-width": style.polygon.weight,
-          "line-opacity": style.polygon.opacity,
+        const outlinePaint: Record<string, unknown> = {
+          "line-color": style.color,
+          "line-width": style.weight,
+          "line-opacity": style.opacity,
         };
-        const dashArray = parseDashArray(style.polygon.dashArray);
-        if (dashArray) {
-          linePaint["line-dasharray"] = dashArray;
+        if (style.dashArray) {
+          outlinePaint["line-dasharray"] = style.dashArray
+            .split(/\s+/)
+            .map((chunk) => Number.parseFloat(chunk))
+            .filter((value) => Number.isFinite(value) && value > 0);
         }
         map.addLayer({
           id: outlineId,
           type: "line",
           source: sourceId,
-          filter: polygonFilter,
-          paint: linePaint,
+          filter: ["==", "$type", "Polygon"],
+          paint: outlinePaint,
         });
         recordLayer(outlineId);
       }
 
       if (hasLines) {
         const lineId = `${sourceId}-line`;
-        const lineFilter: unknown[] = [
-          "any",
-          ["==", ["geometry-type"], "LineString"],
-          ["==", ["geometry-type"], "MultiLineString"],
-        ];
         const linePaint: Record<string, unknown> = {
-          "line-color": style.polygon.color,
-          "line-width": Math.max(style.polygon.weight - 0.5, 1),
-          "line-opacity": style.polygon.opacity,
+          "line-color": style.color,
+          "line-width": Math.max(style.weight - 0.5, 1),
+          "line-opacity": style.opacity,
         };
-        const dashArray = parseDashArray(style.polygon.dashArray);
-        if (dashArray) {
-          linePaint["line-dasharray"] = dashArray;
+        if (style.dashArray) {
+          linePaint["line-dasharray"] = style.dashArray
+            .split(/\s+/)
+            .map((chunk) => Number.parseFloat(chunk))
+            .filter((value) => Number.isFinite(value) && value > 0);
         }
-
         map.addLayer({
           id: lineId,
           type: "line",
           source: sourceId,
-          filter: lineFilter,
+          filter: ["any", ["==", "$type", "LineString"], ["==", "$type", "MultiLineString"]],
           paint: linePaint,
         });
         recordLayer(lineId);
-      }
-
-      if (hasPoints) {
-        layer.featureCollection.features.forEach((feature) => {
-          visitGeometry(feature.geometry, (lat, lon) =>
-            extendBounds(bounds, lat, lon),
-          );
-        });
       }
     });
 
@@ -513,88 +430,62 @@ export const MapView = ({
       recordLayer("route-highlight-line");
     }
 
-    if (nodeFeatureCollection.features.length > 0) {
-      map.addSource("tunnel-nodes", {
+    if (markerFeatureCollection && markerFeatureCollection.features.length > 0) {
+      map.addSource("route-markers", {
         type: "geojson",
-        data: nodeFeatureCollection,
+        data: markerFeatureCollection,
       });
-      recordSource("tunnel-nodes");
+      recordSource("route-markers");
 
-      nodeFeatureCollection.features.forEach((feature) => {
+      markerFeatureCollection.features.forEach((feature) => {
         const [lon, lat] = feature.geometry.coordinates;
         extendBounds(bounds, lat, lon);
       });
 
-      const nodeColorExpression: unknown[] = [
-        "case",
-        ["boolean", ["get", "isStart"], false],
-        "#22c55e",
-        ["boolean", ["get", "isEnd"], false],
-        "#ef4444",
-        ["boolean", ["get", "inRoute"], false],
-        "#facc15",
-        NODE_COLOR_EXPRESSION,
-      ];
-      const nodeRadiusExpression: unknown[] = [
-        "case",
-        ["boolean", ["get", "isStart"], false],
-        9,
-        ["boolean", ["get", "isEnd"], false],
-        9,
-        ["boolean", ["get", "inRoute"], false],
-        8,
-        7,
-      ];
-      const nodeStrokeWidthExpression: unknown[] = [
-        "case",
-        ["boolean", ["get", "isStart"], false],
-        3,
-        ["boolean", ["get", "isEnd"], false],
-        3,
-        ["boolean", ["get", "inRoute"], false],
-        2.5,
-        2,
-      ];
-
       map.addLayer({
-        id: "tunnel-nodes-circle",
+        id: "route-markers-circle",
         type: "circle",
-        source: "tunnel-nodes",
+        source: "route-markers",
         paint: {
-          "circle-radius": nodeRadiusExpression,
-          "circle-color": nodeColorExpression,
+          "circle-radius": 8,
+          "circle-color": [
+            "case",
+            ["==", ["get", "markerType"], "start"],
+            START_MARKER_COLOR,
+            ["==", ["get", "markerType"], "end"],
+            END_MARKER_COLOR,
+            START_MARKER_COLOR,
+          ],
           "circle-opacity": 0.95,
           "circle-stroke-color": "#ffffff",
-          "circle-stroke-width": nodeStrokeWidthExpression,
+          "circle-stroke-width": 2,
         },
       });
-      recordLayer("tunnel-nodes-circle");
+      recordLayer("route-markers-circle");
     }
 
-    layerRegistryRef.current = {
-      layers: nextLayers,
-      sources: nextSources,
-    };
+      layerRegistryRef.current = {
+        layers: nextLayers,
+        sources: nextSources,
+      };
 
-    if (isBoundsValid(bounds) && !hasFitBoundsRef.current) {
-      map.fitBounds(
-        [
-          [bounds.minLon, bounds.minLat],
-          [bounds.maxLon, bounds.maxLat],
-        ],
-        {
-          padding: 60,
-          maxZoom: 18,
-          duration: 0,
-        },
-      );
-      hasFitBoundsRef.current = true;
-    }
-  }, [
-    geoJsonLayers,
-    nodeFeatureCollection,
-    routeFeatureCollection,
-  ]);
+      if (shouldFitBounds && isBoundsValid(bounds) && !hasFitBoundsRef.current) {
+        map.fitBounds(
+          [
+            [bounds.minLon, bounds.minLat],
+            [bounds.maxLon, bounds.maxLat],
+          ],
+          {
+            padding: 60,
+            maxZoom: 18,
+            duration: 0,
+          },
+        );
+        hasFitBoundsRef.current = true;
+      }
+    },
+    [geoJsonLayers, routeFeatureCollection, markerFeatureCollection],
+  );
 
   ensureSourcesRef.current = ensureSources;
 
@@ -661,12 +552,10 @@ export const MapView = ({
             if (typeof mapAny.dragRotate?.disable === "function") {
               mapAny.dragRotate.disable();
             }
-            if (
-              typeof mapAny.touchZoomRotate?.disableRotation === "function"
-            ) {
+            if (typeof mapAny.touchZoomRotate?.disableRotation === "function") {
               mapAny.touchZoomRotate.disableRotation();
             }
-            ensureSourcesRef.current();
+            ensureSourcesRef.current(true);
           }
         };
 
@@ -701,7 +590,7 @@ export const MapView = ({
 
     if (typeof map.isStyleLoaded === "function" && !map.isStyleLoaded()) {
       const handleLoad = () => {
-        ensureSources();
+        ensureSources(false);
       };
       map.once("load", handleLoad);
       return () => {
@@ -711,7 +600,7 @@ export const MapView = ({
       };
     }
 
-    ensureSources();
+    ensureSources(false);
   }, [ensureSources]);
 
   if (mapError) {

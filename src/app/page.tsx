@@ -83,11 +83,7 @@ const distanceSquared = (a: LatLngTuple, b: LatLngTuple): number => {
 };
 
 export default function HomePage() {
-  const { data } = api.tunnels.mapData.useQuery();
   const { data: arcgisData } = api.arcgis.mapData.useQuery();
-
-  const nodes = data?.nodes ?? [];
-  const segments = data?.segments ?? [];
   const geoJsonLayers = arcgisData?.layers ?? [];
 
   const [startBuildingId, setStartBuildingId] = useState<string>("");
@@ -97,22 +93,108 @@ export default function HomePage() {
   const [routeNodeIds, setRouteNodeIds] = useState<string[]>([]);
   const [routeAttempted, setRouteAttempted] = useState(false);
 
-  const nodeLookup = useMemo(
-    () => new Map(nodes.map((node) => [node.id, node])),
-    [nodes],
+  const routeLayer = useMemo(
+    () =>
+      geoJsonLayers.find(
+        (layer) => layer.feature === "GW_ROUTE",
+      ) ?? null,
+    [geoJsonLayers],
   );
 
-  const adjacency = useMemo(() => {
-    const map = new Map<string, Set<string>>();
-    nodes.forEach((node) => {
-      map.set(node.id, new Set<string>());
+  type RouteGraphNode = {
+    position: LatLngTuple;
+    neighbors: Map<string, number>;
+  };
+
+  const routeGraph = useMemo(() => {
+    const nodes = new Map<string, RouteGraphNode>();
+    if (!routeLayer) {
+      return { nodes };
+    }
+
+    const keyFor = (lat: number, lon: number): string =>
+      `${lat.toFixed(6)},${lon.toFixed(6)}`;
+
+    const ensureNode = (lat: number, lon: number): string => {
+      const key = keyFor(lat, lon);
+      if (!nodes.has(key)) {
+        nodes.set(key, {
+          position: [lat, lon],
+          neighbors: new Map(),
+        });
+      }
+      return key;
+    };
+
+    const haversineDistance = (a: LatLngTuple, b: LatLngTuple): number => {
+      const R = 6371000;
+      const toRad = (deg: number) => (deg * Math.PI) / 180;
+      const dLat = toRad(b[0] - a[0]);
+      const dLon = toRad(b[1] - a[1]);
+      const lat1 = toRad(a[0]);
+      const lat2 = toRad(b[0]);
+      const sinLat = Math.sin(dLat / 2);
+      const sinLon = Math.sin(dLon / 2);
+      const h =
+        sinLat * sinLat + Math.cos(lat1) * Math.cos(lat2) * sinLon * sinLon;
+      const c = 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+      return R * c;
+    };
+
+    const addEdge = (fromKey: string, toKey: string) => {
+      if (fromKey === toKey) return;
+      const fromNode = nodes.get(fromKey);
+      const toNode = nodes.get(toKey);
+      if (!fromNode || !toNode) return;
+      const distance = haversineDistance(fromNode.position, toNode.position);
+      const existingForward = fromNode.neighbors.get(toKey);
+      if (!existingForward || distance < existingForward) {
+        fromNode.neighbors.set(toKey, distance);
+      }
+      const existingBackward = toNode.neighbors.get(fromKey);
+      if (!existingBackward || distance < existingBackward) {
+        toNode.neighbors.set(fromKey, distance);
+      }
+    };
+
+    const processLine = (coordinates: number[][]) => {
+      for (let index = 0; index < coordinates.length - 1; index += 1) {
+        const [lonA, latA] = coordinates[index];
+        const [lonB, latB] = coordinates[index + 1];
+        const keyA = ensureNode(latA, lonA);
+        const keyB = ensureNode(latB, lonB);
+        addEdge(keyA, keyB);
+      }
+    };
+
+    const walkGeometry = (geometry: GeoJsonGeometry | null | undefined) => {
+      if (!geometry) return;
+      switch (geometry.type) {
+        case "LineString":
+          processLine(geometry.coordinates);
+          break;
+        case "MultiLineString":
+          geometry.coordinates.forEach((segment) => processLine(segment));
+          break;
+        case "GeometryCollection":
+          geometry.geometries.forEach((child) => walkGeometry(child));
+          break;
+        default:
+          break;
+      }
+    };
+
+    routeLayer.featureCollection.features.forEach((feature) => {
+      walkGeometry(feature.geometry as GeoJsonGeometry | null | undefined);
     });
-    segments.forEach(([from, to]) => {
-      map.get(from)?.add(to);
-      map.get(to)?.add(from);
-    });
-    return map;
-  }, [nodes, segments]);
+
+    return { nodes };
+  }, [routeLayer]);
+
+  const routeNodeEntries = useMemo(
+    () => Array.from(routeGraph.nodes.entries()),
+    [routeGraph],
+  );
 
   const buildingOptions = useMemo<BuildingOption[]>(() => {
     const buildingLayer = geoJsonLayers.find(
@@ -197,18 +279,18 @@ export default function HomePage() {
 
   const buildingToNearestNode = useMemo(() => {
     const map = new Map<string, string>();
-    if (nodes.length === 0) {
+    if (routeNodeEntries.length === 0) {
       return map;
     }
 
     buildingOptions.forEach((building) => {
       let bestId: string | null = null;
       let bestDistance = Number.POSITIVE_INFINITY;
-      nodes.forEach((node) => {
+      routeNodeEntries.forEach(([nodeId, node]) => {
         const distance = distanceSquared(building.position, node.position);
         if (distance < bestDistance) {
           bestDistance = distance;
-          bestId = node.id;
+          bestId = nodeId;
         }
       });
       if (bestId) {
@@ -217,7 +299,7 @@ export default function HomePage() {
     });
 
     return map;
-  }, [buildingOptions, nodes]);
+  }, [buildingOptions, routeNodeEntries]);
 
   const matchExactBuilding = useCallback(
     (value: string): BuildingOption | null => {
@@ -269,35 +351,46 @@ export default function HomePage() {
       if (!startNode || !endNode) {
         return [];
       }
-      if (!adjacency.has(startNode) || !adjacency.has(endNode)) {
-        return [];
-      }
       if (startNode === endNode) {
         return [startNode];
       }
 
-      const queue = [startNode];
-      const visited = new Set<string>([startNode]);
-      const parent = new Map<string, string | null>();
-      parent.set(startNode, null);
+      const nodesMap = routeGraph.nodes;
+      if (!nodesMap.has(startNode) || !nodesMap.has(endNode)) {
+        return [];
+      }
+
+      const distances = new Map<string, number>();
+      const previous = new Map<string, string | null>();
+      const queue: Array<{ id: string; distance: number }> = [];
+
+      const enqueue = (id: string, distance: number) => {
+        queue.push({ id, distance });
+        queue.sort((a, b) => a.distance - b.distance);
+      };
+
+      distances.set(startNode, 0);
+      previous.set(startNode, null);
+      enqueue(startNode, 0);
 
       while (queue.length > 0) {
         const current = queue.shift()!;
-        if (current === endNode) {
+        if (current.id === endNode) {
           break;
         }
-        const neighbors = adjacency.get(current);
-        if (!neighbors) continue;
-        neighbors.forEach((neighbor) => {
-          if (!visited.has(neighbor)) {
-            visited.add(neighbor);
-            parent.set(neighbor, current);
-            queue.push(neighbor);
+        const node = nodesMap.get(current.id);
+        if (!node) continue;
+        node.neighbors.forEach((weight, neighbor) => {
+          const candidate = current.distance + weight;
+          if (candidate < (distances.get(neighbor) ?? Number.POSITIVE_INFINITY)) {
+            distances.set(neighbor, candidate);
+            previous.set(neighbor, current.id);
+            enqueue(neighbor, candidate);
           }
         });
       }
 
-      if (!visited.has(endNode)) {
+      if (!previous.has(endNode)) {
         return [];
       }
 
@@ -305,41 +398,37 @@ export default function HomePage() {
       let current: string | null = endNode;
       while (current) {
         path.push(current);
-        current = parent.get(current) ?? null;
+        current = previous.get(current) ?? null;
       }
       path.reverse();
       return path;
     },
-    [adjacency],
+    [routeGraph],
   );
 
-  const routePoints = useMemo(
+  const routeLine = useMemo(
     () =>
       routeNodeIds
-        .map((id) => nodeLookup.get(id)?.position)
+        .map((id) => routeGraph.nodes.get(id)?.position)
         .filter(
           (value): value is LatLngTuple =>
             Array.isArray(value) && value.length === 2,
         ),
-    [routeNodeIds, nodeLookup],
+    [routeNodeIds, routeGraph],
   );
 
   const routeSteps = useMemo(() => {
-    if (routeNodeIds.length === 0) {
-      return [] as Array<{ id: string; label: string }>;
+    const steps: Array<{ id: string; label: string }> = [];
+    if (startBuilding) {
+      steps.push({ id: startBuilding.id, label: startBuilding.name });
     }
-    return routeNodeIds.map((nodeId, index) => {
-      let label = nodeLookup.get(nodeId)?.name ?? nodeId;
-      if (index === 0 && startBuilding) {
-        label = startBuilding.name;
-      } else if (index === routeNodeIds.length - 1 && endBuilding) {
-        label = endBuilding.name;
-      }
-      return { id: nodeId, label };
-    });
-  }, [routeNodeIds, nodeLookup, startBuilding, endBuilding]);
+    if (endBuilding) {
+      steps.push({ id: endBuilding.id, label: endBuilding.name });
+    }
+    return steps;
+  }, [startBuilding, endBuilding]);
 
-  const routeAvailable = routeNodeIds.length > 1;
+  const routeAvailable = routeLine.length > 1;
 
   const routeSummary = useMemo(() => {
     if (!startBuildingId || !endBuildingId) {
@@ -376,6 +465,17 @@ export default function HomePage() {
     () => filterOptions(endQuery),
     [filterOptions, endQuery],
   );
+
+  const normalizedStartQuery = normalizeToken(startQuery);
+  const normalizedEndQuery = normalizeToken(endQuery);
+
+  const showStartSuggestions =
+    normalizedStartQuery !== null &&
+    (!startBuilding || normalizeToken(startBuilding.name) !== normalizedStartQuery);
+
+  const showEndSuggestions =
+    normalizedEndQuery !== null &&
+    (!endBuilding || normalizeToken(endBuilding.name) !== normalizedEndQuery);
 
   const handleStartInputChange = useCallback(
     (value: string) => {
@@ -590,7 +690,7 @@ export default function HomePage() {
                   autoComplete="off"
                   list="building-options-list"
                 />
-                {startSuggestions.length > 0 && (
+                {showStartSuggestions && startSuggestions.length > 0 && (
                   <ul className="route-suggestions">
                     {startSuggestions.map((option) => (
                       <li key={option.id}>
@@ -615,7 +715,7 @@ export default function HomePage() {
                   autoComplete="off"
                   list="building-options-list"
                 />
-                {endSuggestions.length > 0 && (
+                {showEndSuggestions && endSuggestions.length > 0 && (
                   <ul className="route-suggestions">
                     {endSuggestions.map((option) => (
                       <li key={option.id}>
@@ -715,12 +815,10 @@ export default function HomePage() {
         <main className="map-area">
           <div className="map-canvas">
             <MapView
-              routePoints={routePoints}
-              nodes={nodes}
+              routeLine={routeLine}
               geoJsonLayers={geoJsonLayers}
-              routeNodeIds={routeNodeIds}
-              startNodeId={startNodeId}
-              endNodeId={endNodeId}
+              startMarker={startBuilding?.position ?? null}
+              endMarker={endBuilding?.position ?? null}
             />
 
             <div className="floating-card directions-card">
@@ -746,7 +844,7 @@ export default function HomePage() {
                 </ol>
               ) : (
                 <p>
-                  {routeAttempted && startBuildingId && endBuildingId
+                  {routeAttempted && startBuilding && endBuilding
                     ? "No tunnel connection found between the selected locations."
                     : "Select a start and destination to preview a tunnel route."}
                 </p>
