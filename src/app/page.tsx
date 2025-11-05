@@ -1,8 +1,11 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import type {
+  FocusEvent as ReactFocusEvent,
+  KeyboardEvent as ReactKeyboardEvent,
+} from "react";
 import { MapView } from "@/components/map-view";
-import { NODE_TYPE_LABEL } from "@/constants/tunnels";
 import type { GeoJsonGeometry } from "@/types/geojson";
 import type { LatLngTuple } from "@/types/tunnels";
 import { api } from "@/trpc/client";
@@ -12,6 +15,7 @@ type BuildingOption = {
   name: string;
   position: LatLngTuple;
   tokens: string[];
+  exactTokens: string[];
 };
 
 const normalizeToken = (value: unknown): string | null => {
@@ -76,6 +80,13 @@ const computeFeatureCentroid = (
   return [sumLat / count, sumLon / count];
 };
 
+const ROUTING_LAYER_FEATURES = new Set<string>([
+  "GW_ROUTE",
+  "CAMPUS_STREET_NETWORK",
+]);
+
+const ROUTING_BRIDGE_DISTANCE_METERS = 3;
+
 const distanceSquared = (a: LatLngTuple, b: LatLngTuple): number => {
   const dLat = a[0] - b[0];
   const dLon = a[1] - b[1];
@@ -91,13 +102,14 @@ export default function HomePage() {
   const [startQuery, setStartQuery] = useState<string>("");
   const [endQuery, setEndQuery] = useState<string>("");
   const [routeNodeIds, setRouteNodeIds] = useState<string[]>([]);
+  const [fitBoundsSequence, setFitBoundsSequence] = useState(0);
   const [routeAttempted, setRouteAttempted] = useState(false);
 
-  const routeLayer = useMemo(
+  const routingLayers = useMemo(
     () =>
-      geoJsonLayers.find(
-        (layer) => layer.feature === "GW_ROUTE",
-      ) ?? null,
+      geoJsonLayers.filter((layer) =>
+        ROUTING_LAYER_FEATURES.has(layer.feature),
+      ),
     [geoJsonLayers],
   );
 
@@ -108,7 +120,7 @@ export default function HomePage() {
 
   const routeGraph = useMemo(() => {
     const nodes = new Map<string, RouteGraphNode>();
-    if (!routeLayer) {
+    if (routingLayers.length === 0) {
       return { nodes };
     }
 
@@ -184,12 +196,31 @@ export default function HomePage() {
       }
     };
 
-    routeLayer.featureCollection.features.forEach((feature) => {
-      walkGeometry(feature.geometry as GeoJsonGeometry | null | undefined);
+    routingLayers.forEach((layer) => {
+      layer.featureCollection.features.forEach((feature) => {
+        walkGeometry(feature.geometry as GeoJsonGeometry | null | undefined);
+      });
     });
 
+    if (nodes.size > 1 && ROUTING_BRIDGE_DISTANCE_METERS > 0) {
+      const nodeEntries = Array.from(nodes.entries());
+      for (let outer = 0; outer < nodeEntries.length; outer += 1) {
+        const [idA, nodeA] = nodeEntries[outer];
+        for (let inner = outer + 1; inner < nodeEntries.length; inner += 1) {
+          const [idB, nodeB] = nodeEntries[inner];
+          if (nodeA.neighbors.has(idB) || nodeB.neighbors.has(idA)) {
+            continue;
+          }
+          const distance = haversineDistance(nodeA.position, nodeB.position);
+          if (distance <= ROUTING_BRIDGE_DISTANCE_METERS) {
+            addEdge(idA, idB);
+          }
+        }
+      }
+    }
+
     return { nodes };
-  }, [routeLayer]);
+  }, [routingLayers]);
 
   const routeNodeEntries = useMemo(
     () => Array.from(routeGraph.nodes.entries()),
@@ -238,32 +269,46 @@ export default function HomePage() {
         return;
       }
 
-      const tokenSet = new Set<string>();
-      const addToken = (value: unknown) => {
+      const searchTokenSet = new Set<string>();
+      const exactTokenSet = new Set<string>();
+
+      const addExactToken = (value: unknown) => {
         const normalized = normalizeToken(value);
         if (!normalized) return;
-        tokenSet.add(normalized);
+        exactTokenSet.add(normalized);
+      };
+
+      const addSearchToken = (value: unknown) => {
+        const normalized = normalizeToken(value);
+        if (!normalized) return;
+        searchTokenSet.add(normalized);
         const cleaned = normalized.replace(/\([^)]*\)/g, "").trim();
         if (cleaned && cleaned !== normalized) {
-          tokenSet.add(cleaned);
+          searchTokenSet.add(cleaned);
         }
         cleaned
           .split(/\s+/)
           .filter((part) => part.length > 2)
-          .forEach((part) => tokenSet.add(part));
+          .forEach((part) => searchTokenSet.add(part));
       };
 
-      addToken(name);
-      addToken(properties.BLDG_NAME_LABEL_SHORT);
-      addToken(properties.TRI_BLDG_NAME);
-      addToken(properties.TRI_BLDG_ABBR);
-      addToken(properties.SITE_BUILDING);
+      const registerNameVariant = (value: unknown) => {
+        addExactToken(value);
+        addSearchToken(value);
+      };
+
+      registerNameVariant(name);
+      registerNameVariant(properties.BLDG_NAME_LABEL_SHORT);
+      registerNameVariant(properties.TRI_BLDG_NAME);
+      registerNameVariant(properties.TRI_BLDG_ABBR);
+      registerNameVariant(properties.SITE_BUILDING);
 
       seen.set(id, {
         id,
         name,
         position: centroid,
-        tokens: Array.from(tokenSet),
+        tokens: Array.from(searchTokenSet),
+        exactTokens: Array.from(exactTokenSet),
       });
     });
 
@@ -307,27 +352,9 @@ export default function HomePage() {
       if (!normalized) return null;
       return (
         buildingOptions.find((option) =>
-          option.tokens.some((token) => token === normalized),
+          option.exactTokens.some((token) => token === normalized),
         ) ?? null
       );
-    },
-    [buildingOptions],
-  );
-
-  const filterOptions = useCallback(
-    (query: string) => {
-      if (buildingOptions.length === 0) {
-        return [] as BuildingOption[];
-      }
-      const normalized = normalizeToken(query);
-      if (!normalized) {
-        return buildingOptions.slice(0, 12);
-      }
-      return buildingOptions
-        .filter((option) =>
-          option.tokens.some((token) => token.includes(normalized)),
-        )
-        .slice(0, 12);
     },
     [buildingOptions],
   );
@@ -337,13 +364,6 @@ export default function HomePage() {
     : null;
   const endBuilding = endBuildingId
     ? buildingMap.get(endBuildingId) ?? null
-    : null;
-
-  const startNodeId = startBuildingId
-    ? buildingToNearestNode.get(startBuildingId) ?? null
-    : null;
-  const endNodeId = endBuildingId
-    ? buildingToNearestNode.get(endBuildingId) ?? null
     : null;
 
   const computeNodeRoute = useCallback(
@@ -457,75 +477,127 @@ export default function HomePage() {
     endBuilding,
   ]);
 
-  const startSuggestions = useMemo(
-    () => filterOptions(startQuery),
-    [filterOptions, startQuery],
-  );
-  const endSuggestions = useMemo(
-    () => filterOptions(endQuery),
-    [filterOptions, endQuery],
+  const startSelectionReady = useMemo(
+    () => matchExactBuilding(startQuery) !== null,
+    [matchExactBuilding, startQuery],
   );
 
-  const normalizedStartQuery = normalizeToken(startQuery);
-  const normalizedEndQuery = normalizeToken(endQuery);
+  const endSelectionReady = useMemo(
+    () => matchExactBuilding(endQuery) !== null,
+    [matchExactBuilding, endQuery],
+  );
 
-  const showStartSuggestions =
-    normalizedStartQuery !== null &&
-    (!startBuilding || normalizeToken(startBuilding.name) !== normalizedStartQuery);
+  const handleStartInputChange = useCallback((value: string) => {
+    setStartQuery(value);
+    setStartBuildingId("");
+    setRouteNodeIds([]);
+    setRouteAttempted(false);
+  }, []);
 
-  const showEndSuggestions =
-    normalizedEndQuery !== null &&
-    (!endBuilding || normalizeToken(endBuilding.name) !== normalizedEndQuery);
+  const handleEndInputChange = useCallback((value: string) => {
+    setEndQuery(value);
+    setEndBuildingId("");
+    setRouteNodeIds([]);
+    setRouteAttempted(false);
+  }, []);
 
-  const handleStartInputChange = useCallback(
-    (value: string) => {
-      setStartQuery(value);
+  const commitStartSelection = useCallback(
+    (value: string): BuildingOption | null => {
       const match = matchExactBuilding(value);
       if (match) {
         setStartBuildingId(match.id);
-        setRouteNodeIds([]);
-        setRouteAttempted(false);
-      } else {
-        setStartBuildingId("");
+        setStartQuery(match.name);
+        return match;
       }
+      setStartBuildingId("");
+      return null;
     },
     [matchExactBuilding],
   );
 
-  const handleEndInputChange = useCallback(
-    (value: string) => {
-      setEndQuery(value);
+  const commitEndSelection = useCallback(
+    (value: string): BuildingOption | null => {
       const match = matchExactBuilding(value);
       if (match) {
         setEndBuildingId(match.id);
-        setRouteNodeIds([]);
-        setRouteAttempted(false);
-      } else {
-        setEndBuildingId("");
+        setEndQuery(match.name);
+        return match;
       }
+      setEndBuildingId("");
+      return null;
     },
     [matchExactBuilding],
   );
 
-  const handleStartSuggestionSelect = useCallback((option: BuildingOption) => {
-    setStartBuildingId(option.id);
-    setStartQuery(option.name);
-    setRouteNodeIds([]);
-    setRouteAttempted(false);
-  }, []);
+  const suppressMapKeyPropagation = useCallback(
+    (event: ReactKeyboardEvent<HTMLInputElement>) => {
+      event.stopPropagation();
+      const nativeEvent = event.nativeEvent as KeyboardEvent | undefined;
+      nativeEvent?.stopImmediatePropagation?.();
+    },
+    [],
+  );
 
-  const handleEndSuggestionSelect = useCallback((option: BuildingOption) => {
-    setEndBuildingId(option.id);
-    setEndQuery(option.name);
-    setRouteNodeIds([]);
-    setRouteAttempted(false);
-  }, []);
+  const handleStartKeyDown = useCallback(
+    (event: ReactKeyboardEvent<HTMLInputElement>) => {
+      suppressMapKeyPropagation(event);
+      if (event.key === "Enter") {
+        event.preventDefault();
+        commitStartSelection(event.currentTarget.value);
+      }
+    },
+    [commitStartSelection, suppressMapKeyPropagation],
+  );
+
+  const handleEndKeyDown = useCallback(
+    (event: ReactKeyboardEvent<HTMLInputElement>) => {
+      suppressMapKeyPropagation(event);
+      if (event.key === "Enter") {
+        event.preventDefault();
+        commitEndSelection(event.currentTarget.value);
+      }
+    },
+    [commitEndSelection, suppressMapKeyPropagation],
+  );
+
+  const handleStartBlur = useCallback(
+    (event: ReactFocusEvent<HTMLInputElement>) => {
+      commitStartSelection(event.currentTarget.value);
+    },
+    [commitStartSelection],
+  );
+
+  const handleEndBlur = useCallback(
+    (event: ReactFocusEvent<HTMLInputElement>) => {
+      commitEndSelection(event.currentTarget.value);
+    },
+    [commitEndSelection],
+  );
 
   const handleFindRoute = useCallback(() => {
-    const route = computeNodeRoute(startNodeId, endNodeId);
+    const startOption = commitStartSelection(startQuery);
+    const endOption = commitEndSelection(endQuery);
+    if (!startOption || !endOption) {
+      setRouteNodeIds([]);
+      setRouteAttempted(true);
+      return;
+    }
+    const startNode = buildingToNearestNode.get(startOption.id) ?? null;
+    const endNode = buildingToNearestNode.get(endOption.id) ?? null;
+    const route = computeNodeRoute(startNode, endNode);
     setRouteNodeIds(route);
     setRouteAttempted(true);
-  }, [computeNodeRoute, startNodeId, endNodeId]);
+    if (route.length > 0) {
+      setFitBoundsSequence((value) => value + 1);
+    }
+  }, [
+    buildingToNearestNode,
+    commitEndSelection,
+    commitStartSelection,
+    computeNodeRoute,
+    endQuery,
+    startQuery,
+  ]);
 
   const handleClear = useCallback(() => {
     setStartBuildingId("");
@@ -536,147 +608,10 @@ export default function HomePage() {
     setRouteAttempted(false);
   }, []);
 
-  const popularRoutes = useMemo(() => {
-    const presets = [
-      {
-        label: "Northrop → Coffman Union",
-        startTokens: ["northrop"],
-        endTokens: ["coffman"],
-      },
-      {
-        label: "Walter Library → Keller Hall",
-        startTokens: ["walter"],
-        endTokens: ["keller"],
-      },
-      {
-        label: "STSS → Peik Hall",
-        startTokens: ["stss", "science teaching"],
-        endTokens: ["peik"],
-      },
-    ];
-
-    return presets
-      .map((preset) => {
-        const startOption = buildingOptions.find((option) =>
-          preset.startTokens.some((token) =>
-            option.tokens.some((value) => value.includes(token)),
-          ),
-        );
-        const endOption = buildingOptions.find((option) =>
-          preset.endTokens.some((token) =>
-            option.tokens.some((value) => value.includes(token)),
-          ),
-        );
-        if (!startOption || !endOption) {
-          return null;
-        }
-        return {
-          label: preset.label,
-          startId: startOption.id,
-          endId: endOption.id,
-        };
-      })
-      .filter(Boolean) as Array<{
-      label: string;
-      startId: string;
-      endId: string;
-    }>;
-  }, [buildingOptions]);
-
-  const handlePopularSelect = useCallback(
-    (startId: string, endId: string) => {
-      const startOption = buildingMap.get(startId);
-      const endOption = buildingMap.get(endId);
-      if (!startOption || !endOption) {
-        return;
-      }
-      setStartBuildingId(startId);
-      setEndBuildingId(endId);
-      setStartQuery(startOption.name);
-      setEndQuery(endOption.name);
-      const route = computeNodeRoute(
-        buildingToNearestNode.get(startId) ?? null,
-        buildingToNearestNode.get(endId) ?? null,
-      );
-      setRouteNodeIds(route);
-      setRouteAttempted(true);
-    },
-    [buildingMap, computeNodeRoute, buildingToNearestNode],
-  );
-
-  useEffect(() => {
-    if (!startBuildingId) return;
-    const option = buildingMap.get(startBuildingId);
-    if (option) {
-      setStartQuery(option.name);
-    }
-  }, [startBuildingId, buildingMap]);
-
-  useEffect(() => {
-    if (!endBuildingId) return;
-    const option = buildingMap.get(endBuildingId);
-    if (option) {
-      setEndQuery(option.name);
-    }
-  }, [endBuildingId, buildingMap]);
-
   return (
     <div className="app-shell">
-      <header className="top-bar">
-        <div className="brand">
-          <span className="brand-icon" aria-hidden="true">
-            CS
-          </span>
-          <div>
-            <strong>Campus Sync</strong>
-            <span className="brand-subtitle">UMN Tunnel Explorer</span>
-          </div>
-        </div>
-        <div className="search-bar" role="search">
-          <input
-            type="text"
-            placeholder="Search buildings, tunnels, or dining"
-            aria-label="Search campus map"
-          />
-          <button type="button">Search</button>
-        </div>
-        <div className="header-actions">
-          <button type="button" className="icon-button" aria-label="Map layers">
-            ⊞
-          </button>
-          <button type="button" className="icon-button" aria-label="Settings">
-            ☰
-          </button>
-          <div className="avatar" aria-hidden="true">
-            NK
-          </div>
-        </div>
-      </header>
-
       <div className="workspace">
         <aside className="side-panel">
-          <section className="panel-section">
-            <h2>Explore tunnels</h2>
-            <p>
-              Toggle layers and highlights to plan your trip through the Gopher
-              Way tunnel network.
-            </p>
-            <div className="layer-options">
-              <button className="layer-toggle active" type="button">
-                <span className="status-dot open" aria-hidden="true" />
-                Open tunnels
-              </button>
-              <button className="layer-toggle" type="button">
-                <span className="status-dot limited" aria-hidden="true" />
-                Limited access
-              </button>
-              <button className="layer-toggle" type="button">
-                <span className="status-dot construction" aria-hidden="true" />
-                Construction updates
-              </button>
-            </div>
-          </section>
-
           <section className="panel-section">
             <h3>Plan a route</h3>
             <div className="route-form">
@@ -686,24 +621,12 @@ export default function HomePage() {
                   type="text"
                   value={startQuery}
                   onChange={(event) => handleStartInputChange(event.target.value)}
+                  onKeyDown={handleStartKeyDown}
+                  onBlur={handleStartBlur}
                   placeholder="Search building"
                   autoComplete="off"
                   list="building-options-list"
                 />
-                {showStartSuggestions && startSuggestions.length > 0 && (
-                  <ul className="route-suggestions">
-                    {startSuggestions.map((option) => (
-                      <li key={option.id}>
-                        <button
-                          type="button"
-                          onClick={() => handleStartSuggestionSelect(option)}
-                        >
-                          {option.name}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </label>
               <label className="route-field">
                 <span>Destination</span>
@@ -711,31 +634,19 @@ export default function HomePage() {
                   type="text"
                   value={endQuery}
                   onChange={(event) => handleEndInputChange(event.target.value)}
+                  onKeyDown={handleEndKeyDown}
+                  onBlur={handleEndBlur}
                   placeholder="Search building"
                   autoComplete="off"
                   list="building-options-list"
                 />
-                {showEndSuggestions && endSuggestions.length > 0 && (
-                  <ul className="route-suggestions">
-                    {endSuggestions.map((option) => (
-                      <li key={option.id}>
-                        <button
-                          type="button"
-                          onClick={() => handleEndSuggestionSelect(option)}
-                        >
-                          {option.name}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </label>
               <div className="route-actions">
                 <button
                   type="button"
                   className="layer-toggle"
                   onClick={handleFindRoute}
-                  disabled={!startBuildingId || !endBuildingId}
+                  disabled={!startSelectionReady || !endSelectionReady}
                 >
                   Find route
                 </button>
@@ -762,54 +673,6 @@ export default function HomePage() {
               ))}
             </datalist>
           </section>
-
-          <section className="panel-section">
-            <h3>Popular connections</h3>
-            <ul className="popular-list">
-              {popularRoutes.map((route, index) => (
-                <li key={`${route.startId}-${route.endId}`}>
-                  <button
-                    type="button"
-                    className="layer-toggle"
-                    onClick={() =>
-                      handlePopularSelect(route.startId, route.endId)
-                    }
-                  >
-                    <span className="node-badge">
-                      {String.fromCharCode(65 + index)}
-                    </span>
-                    {route.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="panel-section tunnel-legend">
-            <h3>Segment legend</h3>
-            <ul>
-              <li>
-                <span className="legend-line open" aria-hidden="true" />
-                Open underground connector
-              </li>
-              <li>
-                <span className="legend-line detour" aria-hidden="true" />
-                Winter route detour
-              </li>
-              <li>
-                <span className="legend-dot academic" aria-hidden="true" />
-                {NODE_TYPE_LABEL.academic}
-              </li>
-              <li>
-                <span className="legend-dot student" aria-hidden="true" />
-                {NODE_TYPE_LABEL.student}
-              </li>
-              <li>
-                <span className="legend-dot research" aria-hidden="true" />
-                {NODE_TYPE_LABEL.research}
-              </li>
-            </ul>
-          </section>
         </aside>
 
         <main className="map-area">
@@ -819,6 +682,7 @@ export default function HomePage() {
               geoJsonLayers={geoJsonLayers}
               startMarker={startBuilding?.position ?? null}
               endMarker={endBuilding?.position ?? null}
+              fitBoundsSequence={fitBoundsSequence}
             />
 
             <div className="floating-card directions-card">
@@ -849,37 +713,6 @@ export default function HomePage() {
                     : "Select a start and destination to preview a tunnel route."}
                 </p>
               )}
-            </div>
-
-            <div className="floating-card status-card">
-              <strong>Status</strong>
-              <p>
-                Heating plant passage open until 11:30&nbsp;PM. Expect
-                increased traffic near Coffman due to event setup.
-              </p>
-            </div>
-
-            <div className="floating-card layer-card">
-              <strong>Layers</strong>
-              <ul>
-                <li>
-                  <span className="layer-dot open" />
-                  Winter walkways
-                </li>
-                <li>
-                  <span className="layer-dot limited" />
-                  Accessible routes
-                </li>
-                <li>
-                  <span className="layer-dot detour" />
-                  Maintenance alerts
-                </li>
-              </ul>
-            </div>
-
-            <div className="scale-indicator" aria-hidden="true">
-              <div className="scale-bar" />
-              200 ft
             </div>
 
             <div className="map-attribution">

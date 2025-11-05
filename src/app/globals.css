@@ -207,6 +207,7 @@ button {
   gap: 2rem;
   backdrop-filter: blur(12px);
   overflow-y: auto;
+  transition: padding 160ms ease, gap 160ms ease;
 }
 
 .panel-section h2,
@@ -634,31 +635,6 @@ button {
   opacity: 0.6;
 }
 
-.scale-indicator {
-  position: absolute;
-  bottom: 32px;
-  left: 42px;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: rgba(255, 255, 255, 0.92);
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-  box-shadow: 0 12px 25px rgba(90, 0, 19, 0.22);
-}
-
-.scale-bar {
-  width: 60px;
-  height: 4px;
-  background: linear-gradient(
-    90deg,
-    rgba(122, 0, 25, 0.95) 0%,
-    rgba(255, 204, 51, 0.9) 100%
-  );
-  border-radius: 999px;
-}
 
 .map-attribution {
   position: absolute;
@@ -699,26 +675,89 @@ button {
     width: 100%;
     flex-direction: row;
     align-items: flex-start;
-    gap: 1.5rem;
+    gap: 1.25rem;
     overflow-x: auto;
+    padding: 1.25rem 1rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(122, 0, 25, 0.08);
+  }
+
+  .panel-section {
+    flex: 1 1 260px;
+    min-width: 240px;
+  }
+
+  .route-form {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem 0.9rem;
+  }
+
+  .route-field {
+    flex: 1 1 220px;
+    margin: 0;
+  }
+
+  .route-field span {
+    margin-bottom: 0.25rem;
+  }
+
+  .route-actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .route-summary {
+    flex-basis: 100%;
   }
 
   .map-canvas {
     min-height: 520px;
   }
 
-  .directions-card,
-  .status-card,
-  .layer-card {
+  .directions-card {
     position: static;
     margin: 0 1rem 1rem;
   }
 
   .zoom-controls,
   .locate-button,
-  .scale-indicator,
   .map-attribution {
     position: static;
     margin: 0 1rem 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .side-panel {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .panel-section {
+    min-width: 0;
+  }
+
+  .route-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .route-actions {
+    width: 100%;
+  }
+
+  .route-actions .layer-toggle {
+    flex: 1;
+  }
+
+  .route-summary {
+    flex-basis: auto;
   }
 }

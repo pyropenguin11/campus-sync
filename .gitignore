@@ -7,12 +7,18 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependency directories
 node_modules
+
+# Build outputs
 dist
 dist-ssr
+.next/
+.next
+
+# Local caches / metadata
 *.local
 tsconfig.tsbuildinfo
-.next
 
 # Editor directories and files
 .vscode/*

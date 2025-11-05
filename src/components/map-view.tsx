@@ -25,37 +25,8 @@ type MapViewProps = {
   geoJsonLayers: ArcgisGeoJsonLayer[];
   startMarker?: LatLngTuple | null;
   endMarker?: LatLngTuple | null;
+  fitBoundsSequence: number;
 };
-
-type Bounds = {
-  minLat: number;
-  maxLat: number;
-  minLon: number;
-  maxLon: number;
-};
-
-const createEmptyBounds = (): Bounds => ({
-  minLat: Number.POSITIVE_INFINITY,
-  maxLat: Number.NEGATIVE_INFINITY,
-  minLon: Number.POSITIVE_INFINITY,
-  maxLon: Number.NEGATIVE_INFINITY,
-});
-
-const extendBounds = (bounds: Bounds, lat: number, lon: number) => {
-  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
-  if (lat < bounds.minLat) bounds.minLat = lat;
-  if (lat > bounds.maxLat) bounds.maxLat = lat;
-  if (lon < bounds.minLon) bounds.minLon = lon;
-  if (lon > bounds.maxLon) bounds.maxLon = lon;
-};
-
-const isBoundsValid = (bounds: Bounds): boolean =>
-  Number.isFinite(bounds.minLat) &&
-  Number.isFinite(bounds.maxLat) &&
-  Number.isFinite(bounds.minLon) &&
-  Number.isFinite(bounds.maxLon) &&
-  bounds.minLat <= bounds.maxLat &&
-  bounds.minLon <= bounds.maxLon;
 
 type PrimitiveGeometry = "polygon" | "line" | "point";
 
@@ -81,49 +52,6 @@ const geometryMatches = (
       );
     default:
       return false;
-  }
-};
-
-const visitGeometry = (
-  geometry: GeoJsonGeometry | null | undefined,
-  visit: (lat: number, lon: number) => void,
-): void => {
-  if (!geometry) return;
-
-  switch (geometry.type) {
-    case "Point": {
-      const [lon, lat] = geometry.coordinates;
-      visit(lat, lon);
-      break;
-    }
-    case "MultiPoint":
-      geometry.coordinates.forEach(([lon, lat]) => visit(lat, lon));
-      break;
-    case "LineString":
-      geometry.coordinates.forEach(([lon, lat]) => visit(lat, lon));
-      break;
-    case "MultiLineString":
-      geometry.coordinates.forEach((line) =>
-        line.forEach(([lon, lat]) => visit(lat, lon)),
-      );
-      break;
-    case "Polygon":
-      geometry.coordinates.forEach((ring) =>
-        ring.forEach(([lon, lat]) => visit(lat, lon)),
-      );
-      break;
-    case "MultiPolygon":
-      geometry.coordinates.forEach((polygon) =>
-        polygon.forEach((ring) =>
-          ring.forEach(([lon, lat]) => visit(lat, lon)),
-        ),
-      );
-      break;
-    case "GeometryCollection":
-      geometry.geometries.forEach((child) => visitGeometry(child, visit));
-      break;
-    default:
-      break;
   }
 };
 
@@ -215,6 +143,7 @@ export const MapView = ({
   geoJsonLayers,
   startMarker,
   endMarker,
+  fitBoundsSequence,
 }: MapViewProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<any>(null);
@@ -222,8 +151,8 @@ export const MapView = ({
     layers: [],
     sources: [],
   });
-  const ensureSourcesRef = useRef<(shouldFitBounds: boolean) => void>(() => undefined);
-  const hasFitBoundsRef = useRef(false);
+  const ensureSourcesRef = useRef<() => void>(() => undefined);
+  const pendingFitBoundsRef = useRef<number | null>(null);
   const [mapError, setMapError] = useState<string | null>(null);
 
   const routeFeatureCollection = useMemo(() => {
@@ -287,40 +216,37 @@ export const MapView = ({
     );
   }, []);
 
-  const ensureSources = useCallback(
-    (shouldFitBounds: boolean) => {
-      const map = mapRef.current;
-      if (!map) {
-        return;
+  const ensureSources = useCallback(() => {
+    const map = mapRef.current;
+    if (!map) {
+      return;
+    }
+
+    const { layers, sources } = layerRegistryRef.current;
+    [...layers].reverse().forEach((layerId) => {
+      if (map.getLayer(layerId)) {
+        map.removeLayer(layerId);
       }
+    });
+    [...sources].reverse().forEach((sourceId) => {
+      if (map.getSource(sourceId)) {
+        map.removeSource(sourceId);
+      }
+    });
 
-      const { layers, sources } = layerRegistryRef.current;
-      [...layers].reverse().forEach((layerId) => {
-        if (map.getLayer(layerId)) {
-          map.removeLayer(layerId);
-        }
-      });
-      [...sources].reverse().forEach((sourceId) => {
-        if (map.getSource(sourceId)) {
-          map.removeSource(sourceId);
-        }
-      });
+    const nextLayers: string[] = [];
+    const nextSources: string[] = [];
 
-      const nextLayers: string[] = [];
-      const nextSources: string[] = [];
+    const recordLayer = (layerId: string) => {
+      nextLayers.push(layerId);
+    };
 
-      const bounds = createEmptyBounds();
-
-      const recordLayer = (layerId: string) => {
-        nextLayers.push(layerId);
-      };
-
-      const recordSource = (sourceId: string) => {
-        nextSources.push(sourceId);
-      };
+    const recordSource = (sourceId: string) => {
+      nextSources.push(sourceId);
+    };
 
     geoJsonLayers.forEach((layer) => {
-      const sourceId = `arcgis-${layer.feature}-${layer.layerId}`;
+      const sourceId = "arcgis-" + layer.feature + "-" + layer.layerId;
       map.addSource(sourceId, {
         type: "geojson",
         data: layer.featureCollection,
@@ -335,15 +261,8 @@ export const MapView = ({
         geometryMatches(feature.geometry, "line"),
       );
 
-      layer.featureCollection.features.forEach((feature) => {
-        visitGeometry(
-          feature.geometry as GeoJsonGeometry | null | undefined,
-          (lat, lon) => extendBounds(bounds, lat, lon),
-        );
-      });
-
       if (hasPolygons) {
-        const fillId = `${sourceId}-fill`;
+        const fillId = sourceId + "-fill";
         map.addLayer({
           id: fillId,
           type: "fill",
@@ -356,7 +275,7 @@ export const MapView = ({
         });
         recordLayer(fillId);
 
-        const outlineId = `${sourceId}-outline`;
+        const outlineId = sourceId + "-outline";
         const outlinePaint: Record<string, unknown> = {
           "line-color": style.color,
           "line-width": style.weight,
@@ -379,7 +298,7 @@ export const MapView = ({
       }
 
       if (hasLines) {
-        const lineId = `${sourceId}-line`;
+        const lineId = sourceId + "-line";
         const linePaint: Record<string, unknown> = {
           "line-color": style.color,
           "line-width": Math.max(style.weight - 0.5, 1),
@@ -395,7 +314,7 @@ export const MapView = ({
           id: lineId,
           type: "line",
           source: sourceId,
-          filter: ["any", ["==", "$type", "LineString"], ["==", "$type", "MultiLineString"]],
+          filter: ["==", ["geometry-type"], "LineString"],
           paint: linePaint,
         });
         recordLayer(lineId);
@@ -408,10 +327,6 @@ export const MapView = ({
         data: routeFeatureCollection,
       });
       recordSource("route-highlight");
-
-      routeFeatureCollection.features[0].geometry.coordinates.forEach(
-        ([lon, lat]) => extendBounds(bounds, lat, lon),
-      );
 
       map.addLayer({
         id: "route-highlight-line",
@@ -437,11 +352,6 @@ export const MapView = ({
       });
       recordSource("route-markers");
 
-      markerFeatureCollection.features.forEach((feature) => {
-        const [lon, lat] = feature.geometry.coordinates;
-        extendBounds(bounds, lat, lon);
-      });
-
       map.addLayer({
         id: "route-markers-circle",
         type: "circle",
@@ -464,30 +374,86 @@ export const MapView = ({
       recordLayer("route-markers-circle");
     }
 
-      layerRegistryRef.current = {
-        layers: nextLayers,
-        sources: nextSources,
-      };
-
-      if (shouldFitBounds && isBoundsValid(bounds) && !hasFitBoundsRef.current) {
-        map.fitBounds(
-          [
-            [bounds.minLon, bounds.minLat],
-            [bounds.maxLon, bounds.maxLat],
-          ],
-          {
-            padding: 60,
-            maxZoom: 18,
-            duration: 0,
-          },
-        );
-        hasFitBoundsRef.current = true;
-      }
-    },
-    [geoJsonLayers, routeFeatureCollection, markerFeatureCollection],
-  );
+    layerRegistryRef.current = {
+      layers: nextLayers,
+      sources: nextSources,
+    };
+  }, [geoJsonLayers, routeFeatureCollection, markerFeatureCollection]);
 
   ensureSourcesRef.current = ensureSources;
+
+  const applyRouteFit = useCallback(() => {
+    const map = mapRef.current;
+    if (!map) {
+      return;
+    }
+
+    const points: Array<[number, number]> = [];
+    routeLine.forEach(([lat, lon]) => {
+      if (Number.isFinite(lat) && Number.isFinite(lon)) {
+        points.push([lon, lat]);
+      }
+    });
+    if (startMarker) {
+      const [lat, lon] = startMarker;
+      if (Number.isFinite(lat) && Number.isFinite(lon)) {
+        points.push([lon, lat]);
+      }
+    }
+    if (endMarker) {
+      const [lat, lon] = endMarker;
+      if (Number.isFinite(lat) && Number.isFinite(lon)) {
+        points.push([lon, lat]);
+      }
+    }
+
+    if (points.length === 0) {
+      return;
+    }
+
+    let minLat = Number.POSITIVE_INFINITY;
+    let minLon = Number.POSITIVE_INFINITY;
+    let maxLat = Number.NEGATIVE_INFINITY;
+    let maxLon = Number.NEGATIVE_INFINITY;
+
+    points.forEach(([lon, lat]) => {
+      if (lat < minLat) minLat = lat;
+      if (lat > maxLat) maxLat = lat;
+      if (lon < minLon) minLon = lon;
+      if (lon > maxLon) maxLon = lon;
+    });
+
+    if (
+      !Number.isFinite(minLat) ||
+      !Number.isFinite(maxLat) ||
+      !Number.isFinite(minLon) ||
+      !Number.isFinite(maxLon)
+    ) {
+      return;
+    }
+
+    const SINGLE_POINT_PADDING_DEGREES = 0.0008;
+    if (minLat === maxLat) {
+      minLat -= SINGLE_POINT_PADDING_DEGREES;
+      maxLat += SINGLE_POINT_PADDING_DEGREES;
+    }
+    if (minLon === maxLon) {
+      minLon -= SINGLE_POINT_PADDING_DEGREES;
+      maxLon += SINGLE_POINT_PADDING_DEGREES;
+    }
+
+    map.fitBounds(
+      [
+        [minLon, minLat],
+        [maxLon, maxLat],
+      ],
+      {
+        padding: 80,
+        maxZoom: 18,
+        duration: 650,
+      },
+    );
+  }, [endMarker, routeLine, startMarker]);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) {
@@ -537,6 +503,7 @@ export const MapView = ({
           dragRotate: false,
           pitchWithRotate: false,
           pitchWithTwoFingerDrag: false,
+          keyboard: false,
         });
 
         const mapAny: any = map;
@@ -555,7 +522,14 @@ export const MapView = ({
             if (typeof mapAny.touchZoomRotate?.disableRotation === "function") {
               mapAny.touchZoomRotate.disableRotation();
             }
-            ensureSourcesRef.current(true);
+            if (typeof mapAny.keyboard?.disable === "function") {
+              mapAny.keyboard.disable();
+            }
+            ensureSourcesRef.current();
+            if (pendingFitBoundsRef.current !== null) {
+              applyRouteFit();
+              pendingFitBoundsRef.current = null;
+            }
           }
         };
 
@@ -578,9 +552,9 @@ export const MapView = ({
         mapRef.current = null;
       }
       layerRegistryRef.current = { layers: [], sources: [] };
-      hasFitBoundsRef.current = false;
+      pendingFitBoundsRef.current = null;
     };
-  }, [osmTileUrls]);
+  }, [applyRouteFit, osmTileUrls]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -590,7 +564,7 @@ export const MapView = ({
 
     if (typeof map.isStyleLoaded === "function" && !map.isStyleLoaded()) {
       const handleLoad = () => {
-        ensureSources(false);
+        ensureSources();
       };
       map.once("load", handleLoad);
       return () => {
@@ -600,8 +574,21 @@ export const MapView = ({
       };
     }
 
-    ensureSources(false);
+    ensureSources();
   }, [ensureSources]);
+
+  useEffect(() => {
+    if (fitBoundsSequence <= 0) {
+      return;
+    }
+    const map = mapRef.current;
+    if (!map) {
+      pendingFitBoundsRef.current = fitBoundsSequence;
+      return;
+    }
+    pendingFitBoundsRef.current = null;
+    applyRouteFit();
+  }, [applyRouteFit, fitBoundsSequence]);
 
   if (mapError) {
     return <div className="map-shell map-error">{mapError}</div>;
