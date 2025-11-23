@@ -37,13 +37,14 @@ const readGeoJson = (path: string): GeoJsonFeatureCollection => {
 };
 
 export const loadArcgisGeoJsonLayers = (): ArcgisGeoJsonLayer[] => {
-  const features = readdirSync(JSON_ROOT, { withFileTypes: true })
+  const rootEntries = readdirSync(JSON_ROOT, { withFileTypes: true });
+  const layers: ArcgisGeoJsonLayer[] = [];
+
+  const featureDirectories = rootEntries
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name);
 
-  const layers: ArcgisGeoJsonLayer[] = [];
-
-  for (const feature of features) {
+  for (const feature of featureDirectories) {
     const featureDir = join(JSON_ROOT, feature);
 
     const entries = readdirSync(featureDir);
@@ -75,6 +76,33 @@ export const loadArcgisGeoJsonLayers = (): ArcgisGeoJsonLayer[] => {
       });
     }
   }
+
+  const standaloneFiles = rootEntries.filter(
+    (entry) => entry.isFile() && entry.name.toLowerCase().endsWith(".geojson"),
+  );
+
+  standaloneFiles.forEach((entry) => {
+    const filePath = join(JSON_ROOT, entry.name);
+    try {
+      const stats = statSync(filePath);
+      if (!stats.isFile()) {
+        return;
+      }
+    } catch {
+      return;
+    }
+
+    const featureName = entry.name.replace(/\.geojson$/i, "");
+    const displayName = sanitizeLayerName(featureName) || featureName;
+    const featureCollection = readGeoJson(filePath);
+    layers.push({
+      feature: featureName,
+      featureCollection,
+      category: "layer",
+      layerId: 0,
+      name: displayName,
+    });
+  });
 
   return layers.sort((a, b) => {
     const byFeature = a.feature.localeCompare(b.feature);

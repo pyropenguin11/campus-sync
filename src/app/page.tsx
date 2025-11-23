@@ -6,6 +6,7 @@ import type {
   KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import { MapView } from "@/components/map-view";
+import type { ArcgisGeoJsonLayer } from "@/types/arcgis";
 import type { GeoJsonGeometry } from "@/types/geojson";
 import type { LatLngTuple } from "@/types/tunnels";
 import { api } from "@/trpc/client";
@@ -17,6 +18,8 @@ type BuildingOption = {
   tokens: string[];
   exactTokens: string[];
 };
+
+type RouteMode = "tunnel" | "surface";
 
 const normalizeToken = (value: unknown): string | null => {
   if (typeof value !== "string") return null;
@@ -80,10 +83,21 @@ const computeFeatureCentroid = (
   return [sumLat / count, sumLon / count];
 };
 
-const ROUTING_LAYER_FEATURES = new Set<string>([
+const TUNNEL_ROUTING_LAYER_FEATURES = new Set<string>([
   "GW_ROUTE",
-  "CAMPUS_STREET_NETWORK",
   "GW_PORTION_DIFFERENT_LEVEL",
+]);
+
+const FALLBACK_ROUTING_LAYER_FEATURES = new Set<string>([
+  "EAST_BANK",
+  "WEST_BANK",
+  "ST_PAUL",
+  "CAMPUS_STREET_NETWORK",
+]);
+
+const ROUTING_LAYER_FEATURES = new Set<string>([
+  ...TUNNEL_ROUTING_LAYER_FEATURES,
+  ...FALLBACK_ROUTING_LAYER_FEATURES,
 ]);
 
 const ROUTING_BRIDGE_DISTANCE_METERS = 3;
@@ -92,6 +106,206 @@ const distanceSquared = (a: LatLngTuple, b: LatLngTuple): number => {
   const dLat = a[0] - b[0];
   const dLon = a[1] - b[1];
   return dLat * dLat + dLon * dLon;
+};
+
+type RouteGraphNode = {
+  position: LatLngTuple;
+  neighbors: Map<string, number>;
+};
+
+type RouteGraph = {
+  nodes: Map<string, RouteGraphNode>;
+};
+
+const createRouteGraph = (layers: ArcgisGeoJsonLayer[]): RouteGraph => {
+  const nodes = new Map<string, RouteGraphNode>();
+  if (layers.length === 0) {
+    return { nodes };
+  }
+
+  const keyFor = (lat: number, lon: number): string =>
+    `${lat.toFixed(6)},${lon.toFixed(6)}`;
+
+  const ensureNode = (lat: number, lon: number): string => {
+    const key = keyFor(lat, lon);
+    if (!nodes.has(key)) {
+      nodes.set(key, {
+        position: [lat, lon],
+        neighbors: new Map(),
+      });
+    }
+    return key;
+  };
+
+  const haversineDistance = (a: LatLngTuple, b: LatLngTuple): number => {
+    const R = 6371000;
+    const toRad = (deg: number) => (deg * Math.PI) / 180;
+    const dLat = toRad(b[0] - a[0]);
+    const dLon = toRad(b[1] - a[1]);
+    const lat1 = toRad(a[0]);
+    const lat2 = toRad(b[0]);
+    const sinLat = Math.sin(dLat / 2);
+    const sinLon = Math.sin(dLon / 2);
+    const h =
+      sinLat * sinLat + Math.cos(lat1) * Math.cos(lat2) * sinLon * sinLon;
+    const c = 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+    return R * c;
+  };
+
+  const addEdge = (fromKey: string, toKey: string) => {
+    if (fromKey === toKey) return;
+    const fromNode = nodes.get(fromKey);
+    const toNode = nodes.get(toKey);
+    if (!fromNode || !toNode) return;
+    const distance = haversineDistance(fromNode.position, toNode.position);
+    const existingForward = fromNode.neighbors.get(toKey);
+    if (!existingForward || distance < existingForward) {
+      fromNode.neighbors.set(toKey, distance);
+    }
+    const existingBackward = toNode.neighbors.get(fromKey);
+    if (!existingBackward || distance < existingBackward) {
+      toNode.neighbors.set(fromKey, distance);
+    }
+  };
+
+  const processLine = (coordinates: number[][]) => {
+    for (let index = 0; index < coordinates.length - 1; index += 1) {
+      const [lonA, latA] = coordinates[index];
+      const [lonB, latB] = coordinates[index + 1];
+      const keyA = ensureNode(latA, lonA);
+      const keyB = ensureNode(latB, lonB);
+      addEdge(keyA, keyB);
+    }
+  };
+
+  const walkGeometry = (geometry: GeoJsonGeometry | null | undefined) => {
+    if (!geometry) return;
+    switch (geometry.type) {
+      case "LineString":
+        processLine(geometry.coordinates);
+        break;
+      case "MultiLineString":
+        geometry.coordinates.forEach((segment) => processLine(segment));
+        break;
+      case "GeometryCollection":
+        geometry.geometries.forEach((child) => walkGeometry(child));
+        break;
+      default:
+        break;
+    }
+  };
+
+  layers.forEach((layer) => {
+    layer.featureCollection.features.forEach((feature) => {
+      walkGeometry(feature.geometry as GeoJsonGeometry | null | undefined);
+    });
+  });
+
+  if (nodes.size > 1 && ROUTING_BRIDGE_DISTANCE_METERS > 0) {
+    const nodeEntries = Array.from(nodes.entries());
+    for (let outer = 0; outer < nodeEntries.length; outer += 1) {
+      const [idA, nodeA] = nodeEntries[outer];
+      for (let inner = outer + 1; inner < nodeEntries.length; inner += 1) {
+        const [idB, nodeB] = nodeEntries[inner];
+        if (nodeA.neighbors.has(idB) || nodeB.neighbors.has(idA)) {
+          continue;
+        }
+        const distance = haversineDistance(nodeA.position, nodeB.position);
+        if (distance <= ROUTING_BRIDGE_DISTANCE_METERS) {
+          addEdge(idA, idB);
+        }
+      }
+    }
+  }
+
+  return { nodes };
+};
+
+const mapBuildingsToNearestNodes = (
+  buildings: BuildingOption[],
+  graph: RouteGraph,
+): Map<string, string> => {
+  const mapping = new Map<string, string>();
+  if (graph.nodes.size === 0) {
+    return mapping;
+  }
+
+  const nodeEntries = Array.from(graph.nodes.entries());
+
+  buildings.forEach((building) => {
+    let bestId: string | null = null;
+    let bestDistance = Number.POSITIVE_INFINITY;
+    nodeEntries.forEach(([nodeId, node]) => {
+      const distance = distanceSquared(building.position, node.position);
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        bestId = nodeId;
+      }
+    });
+    if (bestId) {
+      mapping.set(building.id, bestId);
+    }
+  });
+
+  return mapping;
+};
+
+const computeNodeRoute = (
+  graph: RouteGraph,
+  startNode: string | null,
+  endNode: string | null,
+): string[] => {
+  if (!startNode || !endNode || startNode.length === 0 || endNode.length === 0) {
+    return [];
+  }
+
+  const nodesMap = graph.nodes;
+  if (!nodesMap.has(startNode) || !nodesMap.has(endNode)) {
+    return [];
+  }
+
+  const distances = new Map<string, number>();
+  const previous = new Map<string, string | null>();
+  const queue: Array<{ id: string; distance: number }> = [];
+
+  const enqueue = (id: string, distance: number) => {
+    queue.push({ id, distance });
+    queue.sort((a, b) => a.distance - b.distance);
+  };
+
+  distances.set(startNode, 0);
+  previous.set(startNode, null);
+  enqueue(startNode, 0);
+
+  while (queue.length > 0) {
+    const current = queue.shift()!;
+    if (current.id === endNode) {
+      break;
+    }
+    const node = nodesMap.get(current.id);
+    if (!node) continue;
+    node.neighbors.forEach((weight, neighbor) => {
+      const candidate = current.distance + weight;
+      if (candidate < (distances.get(neighbor) ?? Number.POSITIVE_INFINITY)) {
+        distances.set(neighbor, candidate);
+        previous.set(neighbor, current.id);
+        enqueue(neighbor, candidate);
+      }
+    });
+  }
+
+  if (!previous.has(endNode)) {
+    return [];
+  }
+
+  const path: string[] = [];
+  let current: string | null = endNode;
+  while (current) {
+    path.push(current);
+    current = previous.get(current) ?? null;
+  }
+  path.reverse();
+  return path;
 };
 
 export default function HomePage() {
@@ -103,6 +317,7 @@ export default function HomePage() {
   const [startQuery, setStartQuery] = useState<string>("");
   const [endQuery, setEndQuery] = useState<string>("");
   const [routeNodeIds, setRouteNodeIds] = useState<string[]>([]);
+  const [routeMode, setRouteMode] = useState<RouteMode | null>(null);
   const [fitBoundsSequence, setFitBoundsSequence] = useState(0);
   const [routeAttempted, setRouteAttempted] = useState(false);
 
@@ -114,118 +329,22 @@ export default function HomePage() {
     [geoJsonLayers],
   );
 
-  type RouteGraphNode = {
-    position: LatLngTuple;
-    neighbors: Map<string, number>;
-  };
+  const tunnelRoutingLayers = useMemo(
+    () =>
+      routingLayers.filter((layer) =>
+        TUNNEL_ROUTING_LAYER_FEATURES.has(layer.feature),
+      ),
+    [routingLayers],
+  );
 
-  const routeGraph = useMemo(() => {
-    const nodes = new Map<string, RouteGraphNode>();
-    if (routingLayers.length === 0) {
-      return { nodes };
-    }
+  const fullRouteGraph = useMemo(
+    () => createRouteGraph(routingLayers),
+    [routingLayers],
+  );
 
-    const keyFor = (lat: number, lon: number): string =>
-      `${lat.toFixed(6)},${lon.toFixed(6)}`;
-
-    const ensureNode = (lat: number, lon: number): string => {
-      const key = keyFor(lat, lon);
-      if (!nodes.has(key)) {
-        nodes.set(key, {
-          position: [lat, lon],
-          neighbors: new Map(),
-        });
-      }
-      return key;
-    };
-
-    const haversineDistance = (a: LatLngTuple, b: LatLngTuple): number => {
-      const R = 6371000;
-      const toRad = (deg: number) => (deg * Math.PI) / 180;
-      const dLat = toRad(b[0] - a[0]);
-      const dLon = toRad(b[1] - a[1]);
-      const lat1 = toRad(a[0]);
-      const lat2 = toRad(b[0]);
-      const sinLat = Math.sin(dLat / 2);
-      const sinLon = Math.sin(dLon / 2);
-      const h =
-        sinLat * sinLat + Math.cos(lat1) * Math.cos(lat2) * sinLon * sinLon;
-      const c = 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
-      return R * c;
-    };
-
-    const addEdge = (fromKey: string, toKey: string) => {
-      if (fromKey === toKey) return;
-      const fromNode = nodes.get(fromKey);
-      const toNode = nodes.get(toKey);
-      if (!fromNode || !toNode) return;
-      const distance = haversineDistance(fromNode.position, toNode.position);
-      const existingForward = fromNode.neighbors.get(toKey);
-      if (!existingForward || distance < existingForward) {
-        fromNode.neighbors.set(toKey, distance);
-      }
-      const existingBackward = toNode.neighbors.get(fromKey);
-      if (!existingBackward || distance < existingBackward) {
-        toNode.neighbors.set(fromKey, distance);
-      }
-    };
-
-    const processLine = (coordinates: number[][]) => {
-      for (let index = 0; index < coordinates.length - 1; index += 1) {
-        const [lonA, latA] = coordinates[index];
-        const [lonB, latB] = coordinates[index + 1];
-        const keyA = ensureNode(latA, lonA);
-        const keyB = ensureNode(latB, lonB);
-        addEdge(keyA, keyB);
-      }
-    };
-
-    const walkGeometry = (geometry: GeoJsonGeometry | null | undefined) => {
-      if (!geometry) return;
-      switch (geometry.type) {
-        case "LineString":
-          processLine(geometry.coordinates);
-          break;
-        case "MultiLineString":
-          geometry.coordinates.forEach((segment) => processLine(segment));
-          break;
-        case "GeometryCollection":
-          geometry.geometries.forEach((child) => walkGeometry(child));
-          break;
-        default:
-          break;
-      }
-    };
-
-    routingLayers.forEach((layer) => {
-      layer.featureCollection.features.forEach((feature) => {
-        walkGeometry(feature.geometry as GeoJsonGeometry | null | undefined);
-      });
-    });
-
-    if (nodes.size > 1 && ROUTING_BRIDGE_DISTANCE_METERS > 0) {
-      const nodeEntries = Array.from(nodes.entries());
-      for (let outer = 0; outer < nodeEntries.length; outer += 1) {
-        const [idA, nodeA] = nodeEntries[outer];
-        for (let inner = outer + 1; inner < nodeEntries.length; inner += 1) {
-          const [idB, nodeB] = nodeEntries[inner];
-          if (nodeA.neighbors.has(idB) || nodeB.neighbors.has(idA)) {
-            continue;
-          }
-          const distance = haversineDistance(nodeA.position, nodeB.position);
-          if (distance <= ROUTING_BRIDGE_DISTANCE_METERS) {
-            addEdge(idA, idB);
-          }
-        }
-      }
-    }
-
-    return { nodes };
-  }, [routingLayers]);
-
-  const routeNodeEntries = useMemo(
-    () => Array.from(routeGraph.nodes.entries()),
-    [routeGraph],
+  const tunnelRouteGraph = useMemo(
+    () => createRouteGraph(tunnelRoutingLayers),
+    [tunnelRoutingLayers],
   );
 
   const buildingOptions = useMemo<BuildingOption[]>(() => {
@@ -323,29 +442,15 @@ export default function HomePage() {
     [buildingOptions],
   );
 
-  const buildingToNearestNode = useMemo(() => {
-    const map = new Map<string, string>();
-    if (routeNodeEntries.length === 0) {
-      return map;
-    }
+  const tunnelBuildingToNode = useMemo(
+    () => mapBuildingsToNearestNodes(buildingOptions, tunnelRouteGraph),
+    [buildingOptions, tunnelRouteGraph],
+  );
 
-    buildingOptions.forEach((building) => {
-      let bestId: string | null = null;
-      let bestDistance = Number.POSITIVE_INFINITY;
-      routeNodeEntries.forEach(([nodeId, node]) => {
-        const distance = distanceSquared(building.position, node.position);
-        if (distance < bestDistance) {
-          bestDistance = distance;
-          bestId = nodeId;
-        }
-      });
-      if (bestId) {
-        map.set(building.id, bestId);
-      }
-    });
-
-    return map;
-  }, [buildingOptions, routeNodeEntries]);
+  const fullBuildingToNode = useMemo(
+    () => mapBuildingsToNearestNodes(buildingOptions, fullRouteGraph),
+    [buildingOptions, fullRouteGraph],
+  );
 
   const matchExactBuilding = useCallback(
     (value: string): BuildingOption | null => {
@@ -367,75 +472,18 @@ export default function HomePage() {
     ? buildingMap.get(endBuildingId) ?? null
     : null;
 
-  const computeNodeRoute = useCallback(
-    (startNode: string | null, endNode: string | null): string[] => {
-      if (!startNode || !endNode) {
-        return [];
-      }
-      if (startNode === endNode) {
-        return [startNode];
-      }
-
-      const nodesMap = routeGraph.nodes;
-      if (!nodesMap.has(startNode) || !nodesMap.has(endNode)) {
-        return [];
-      }
-
-      const distances = new Map<string, number>();
-      const previous = new Map<string, string | null>();
-      const queue: Array<{ id: string; distance: number }> = [];
-
-      const enqueue = (id: string, distance: number) => {
-        queue.push({ id, distance });
-        queue.sort((a, b) => a.distance - b.distance);
-      };
-
-      distances.set(startNode, 0);
-      previous.set(startNode, null);
-      enqueue(startNode, 0);
-
-      while (queue.length > 0) {
-        const current = queue.shift()!;
-        if (current.id === endNode) {
-          break;
-        }
-        const node = nodesMap.get(current.id);
-        if (!node) continue;
-        node.neighbors.forEach((weight, neighbor) => {
-          const candidate = current.distance + weight;
-          if (candidate < (distances.get(neighbor) ?? Number.POSITIVE_INFINITY)) {
-            distances.set(neighbor, candidate);
-            previous.set(neighbor, current.id);
-            enqueue(neighbor, candidate);
-          }
-        });
-      }
-
-      if (!previous.has(endNode)) {
-        return [];
-      }
-
-      const path: string[] = [];
-      let current: string | null = endNode;
-      while (current) {
-        path.push(current);
-        current = previous.get(current) ?? null;
-      }
-      path.reverse();
-      return path;
-    },
-    [routeGraph],
-  );
+  const activeRouteGraph =
+    routeMode === "surface" ? fullRouteGraph : tunnelRouteGraph;
 
   const routeLine = useMemo(
     () =>
       routeNodeIds
-        .map((id) => routeGraph.nodes.get(id)?.position)
+        .map((id) => activeRouteGraph.nodes.get(id)?.position)
         .filter(
           (value): value is LatLngTuple =>
             Array.isArray(value) && value.length === 2,
         ),
-    [routeNodeIds, routeGraph],
+    [routeNodeIds, activeRouteGraph],
   );
 
   const routeSteps = useMemo(() => {
@@ -459,16 +507,20 @@ export default function HomePage() {
       return "Tap find route to calculate the tunnel path.";
     }
     if (routeNodeIds.length === 0) {
-      return "No tunnel connection found between the selected locations.";
+      return "No tunnel or alternate connection found between the selected locations.";
     }
     if (routeNodeIds.length === 1) {
       return "You're already at your destination.";
     }
     const segmentCount = routeNodeIds.length - 1;
-    if (startBuilding && endBuilding) {
-      return `${startBuilding.name} → ${endBuilding.name} · ${segmentCount} segment${segmentCount === 1 ? "" : "s"}`;
+    const baseLabel =
+      startBuilding && endBuilding
+        ? `${startBuilding.name} → ${endBuilding.name} · ${segmentCount} segment${segmentCount === 1 ? "" : "s"}`
+        : `${segmentCount} segment${segmentCount === 1 ? "" : "s"} long`;
+    if (routeMode === "surface") {
+      return `${baseLabel} (includes non-tunnel paths)`;
     }
-    return `${segmentCount} segment${segmentCount === 1 ? "" : "s"} long`;
+    return baseLabel;
   }, [
     startBuildingId,
     endBuildingId,
@@ -476,6 +528,7 @@ export default function HomePage() {
     routeNodeIds,
     startBuilding,
     endBuilding,
+    routeMode,
   ]);
 
   const startSelectionReady = useMemo(
@@ -590,24 +643,56 @@ export default function HomePage() {
     const endOption = commitEndSelection(endQuery);
     if (!startOption || !endOption) {
       setRouteNodeIds([]);
+      setRouteMode(null);
       setRouteAttempted(true);
       return;
     }
-    const startNode = buildingToNearestNode.get(startOption.id) ?? null;
-    const endNode = buildingToNearestNode.get(endOption.id) ?? null;
-    const route = computeNodeRoute(startNode, endNode);
-    setRouteNodeIds(route);
+    let nextRoute: string[] = [];
+    let nextMode: RouteMode | null = null;
+
+    const startTunnelNode = tunnelBuildingToNode.get(startOption.id) ?? null;
+    const endTunnelNode = tunnelBuildingToNode.get(endOption.id) ?? null;
+    if (startTunnelNode && endTunnelNode) {
+      nextRoute = computeNodeRoute(
+        tunnelRouteGraph,
+        startTunnelNode,
+        endTunnelNode,
+      );
+      if (nextRoute.length > 0) {
+        nextMode = "tunnel";
+      }
+    }
+
+    if (nextRoute.length === 0) {
+      const startFullNode = fullBuildingToNode.get(startOption.id) ?? null;
+      const endFullNode = fullBuildingToNode.get(endOption.id) ?? null;
+      if (startFullNode && endFullNode) {
+        nextRoute = computeNodeRoute(
+          fullRouteGraph,
+          startFullNode,
+          endFullNode,
+        );
+        if (nextRoute.length > 0) {
+          nextMode = "surface";
+        }
+      }
+    }
+
+    setRouteNodeIds(nextRoute);
+    setRouteMode(nextMode);
     setRouteAttempted(true);
-    if (route.length > 0) {
+    if (nextRoute.length > 0) {
       setFitBoundsSequence((value) => value + 1);
     }
   }, [
-    buildingToNearestNode,
     commitEndSelection,
     commitStartSelection,
-    computeNodeRoute,
     endQuery,
+    fullBuildingToNode,
+    fullRouteGraph,
     startQuery,
+    tunnelBuildingToNode,
+    tunnelRouteGraph,
   ]);
 
   const handleClear = useCallback(() => {
@@ -616,6 +701,7 @@ export default function HomePage() {
     setStartQuery("");
     setEndQuery("");
     setRouteNodeIds([]);
+    setRouteMode(null);
     setRouteAttempted(false);
   }, []);
 
@@ -720,7 +806,7 @@ export default function HomePage() {
               ) : (
                 <p>
                   {routeAttempted && startBuilding && endBuilding
-                    ? "No tunnel connection found between the selected locations."
+                    ? "No tunnel or alternate connection found between the selected locations."
                     : "Select a start and destination to preview a tunnel route."}
                 </p>
               )}
