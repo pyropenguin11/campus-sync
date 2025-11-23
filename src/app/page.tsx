@@ -92,7 +92,6 @@ const FALLBACK_ROUTING_LAYER_FEATURES = new Set<string>([
   "EAST_BANK",
   "WEST_BANK",
   "ST_PAUL",
-  "CAMPUS_STREET_NETWORK",
 ]);
 
 const ROUTING_LAYER_FEATURES = new Set<string>([
