@@ -83,6 +83,7 @@ const computeFeatureCentroid = (
 const ROUTING_LAYER_FEATURES = new Set<string>([
   "GW_ROUTE",
   "CAMPUS_STREET_NETWORK",
+  "GW_PORTION_DIFFERENT_LEVEL",
 ]);
 
 const ROUTING_BRIDGE_DISTANCE_METERS = 3;
@@ -229,7 +230,7 @@ export default function HomePage() {
 
   const buildingOptions = useMemo<BuildingOption[]>(() => {
     const buildingLayer = geoJsonLayers.find(
-      (layer) => layer.feature === "EGISADMIN_BUILDING_POLYGON_HOSTED",
+      (layer) => layer.feature === "GOPHER_WAY_LEVEL_BLDGS",
     );
     if (!buildingLayer) {
       return [];
@@ -489,41 +490,51 @@ export default function HomePage() {
 
   const handleStartInputChange = useCallback((value: string) => {
     setStartQuery(value);
-    setStartBuildingId("");
-    setRouteNodeIds([]);
     setRouteAttempted(false);
   }, []);
 
   const handleEndInputChange = useCallback((value: string) => {
     setEndQuery(value);
-    setEndBuildingId("");
-    setRouteNodeIds([]);
     setRouteAttempted(false);
   }, []);
 
   const commitStartSelection = useCallback(
-    (value: string): BuildingOption | null => {
+    (
+      value: string,
+      applySelection: boolean = true,
+    ): BuildingOption | null => {
       const match = matchExactBuilding(value);
       if (match) {
-        setStartBuildingId(match.id);
         setStartQuery(match.name);
+        if (applySelection) {
+          setStartBuildingId(match.id);
+        }
         return match;
       }
-      setStartBuildingId("");
+      if (applySelection) {
+        setStartBuildingId("");
+      }
       return null;
     },
     [matchExactBuilding],
   );
 
   const commitEndSelection = useCallback(
-    (value: string): BuildingOption | null => {
+    (
+      value: string,
+      applySelection: boolean = true,
+    ): BuildingOption | null => {
       const match = matchExactBuilding(value);
       if (match) {
-        setEndBuildingId(match.id);
         setEndQuery(match.name);
+        if (applySelection) {
+          setEndBuildingId(match.id);
+        }
         return match;
       }
-      setEndBuildingId("");
+      if (applySelection) {
+        setEndBuildingId("");
+      }
       return null;
     },
     [matchExactBuilding],
@@ -543,7 +554,7 @@ export default function HomePage() {
       suppressMapKeyPropagation(event);
       if (event.key === "Enter") {
         event.preventDefault();
-        commitStartSelection(event.currentTarget.value);
+        commitStartSelection(event.currentTarget.value, false);
       }
     },
     [commitStartSelection, suppressMapKeyPropagation],
@@ -554,7 +565,7 @@ export default function HomePage() {
       suppressMapKeyPropagation(event);
       if (event.key === "Enter") {
         event.preventDefault();
-        commitEndSelection(event.currentTarget.value);
+        commitEndSelection(event.currentTarget.value, false);
       }
     },
     [commitEndSelection, suppressMapKeyPropagation],
@@ -562,14 +573,14 @@ export default function HomePage() {
 
   const handleStartBlur = useCallback(
     (event: ReactFocusEvent<HTMLInputElement>) => {
-      commitStartSelection(event.currentTarget.value);
+      commitStartSelection(event.currentTarget.value, false);
     },
     [commitStartSelection],
   );
 
   const handleEndBlur = useCallback(
     (event: ReactFocusEvent<HTMLInputElement>) => {
-      commitEndSelection(event.currentTarget.value);
+      commitEndSelection(event.currentTarget.value, false);
     },
     [commitEndSelection],
   );
