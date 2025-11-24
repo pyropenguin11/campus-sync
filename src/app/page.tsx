@@ -187,12 +187,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const handleResize = () => {
-      setPanelCollapsed(window.innerWidth <= 900);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    setPanelCollapsed(window.innerWidth <= 900);
   }, []);
 
   const tunnelRouteGraph = useMemo(
