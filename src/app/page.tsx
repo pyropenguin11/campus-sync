@@ -256,6 +256,20 @@ export default function HomePage() {
 
   const routeAvailable = routeLine.length > 1;
 
+  const startMarkerPosition = useMemo(() => {
+    if (routeLine.length > 0) {
+      return routeLine[0];
+    }
+    return startBuilding?.position ?? null;
+  }, [routeLine, startBuilding]);
+
+  const endMarkerPosition = useMemo(() => {
+    if (routeLine.length > 0) {
+      return routeLine[routeLine.length - 1];
+    }
+    return endBuilding?.position ?? null;
+  }, [endBuilding, routeLine]);
+
   const routeSummary = useMemo(() => {
     if (!startBuildingId || !endBuildingId) {
       return "Select two locations to plan a tunnel route.";
@@ -534,8 +548,8 @@ export default function HomePage() {
             <MapView
               routeLine={routeLine}
               geoJsonLayers={geoJsonLayers}
-              startMarker={startBuilding?.position ?? null}
-              endMarker={endBuilding?.position ?? null}
+              startMarker={startMarkerPosition}
+              endMarker={endMarkerPosition}
               fitBoundsSequence={fitBoundsSequence}
             />
 
