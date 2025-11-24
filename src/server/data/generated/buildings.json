@@ -1,0 +1,1500 @@
+[
+  {
+    "id": "13",
+    "name": "10 Church Street Bldg",
+    "position": [
+      44.97777542417767,
+      -93.23319016245624
+    ],
+    "tokens": [
+      "10 church street bldg",
+      "church",
+      "street",
+      "bldg"
+    ],
+    "exactTokens": [
+      "10 church street bldg"
+    ]
+  },
+  {
+    "id": "52",
+    "name": "19th Avenue Ramp",
+    "position": [
+      44.97059256651713,
+      -93.24599868751119
+    ],
+    "tokens": [
+      "19th avenue ramp",
+      "19th",
+      "avenue",
+      "ramp"
+    ],
+    "exactTokens": [
+      "19th avenue ramp"
+    ]
+  },
+  {
+    "id": "57",
+    "name": "Akerman Hall",
+    "position": [
+      44.97552039995574,
+      -93.23241017943427
+    ],
+    "tokens": [
+      "akerman hall",
+      "akerman",
+      "hall"
+    ],
+    "exactTokens": [
+      "akerman hall"
+    ]
+  },
+  {
+    "id": "78",
+    "name": "Alderman Hall",
+    "position": [
+      44.987451201553405,
+      -93.18354110896122
+    ],
+    "tokens": [
+      "alderman hall",
+      "alderman",
+      "hall"
+    ],
+    "exactTokens": [
+      "alderman hall"
+    ]
+  },
+  {
+    "id": "16",
+    "name": "Amundson Hall",
+    "position": [
+      44.97396861761396,
+      -93.233015317332
+    ],
+    "tokens": [
+      "amundson hall",
+      "amundson",
+      "hall"
+    ],
+    "exactTokens": [
+      "amundson hall"
+    ]
+  },
+  {
+    "id": "53",
+    "name": "Andersen Library",
+    "position": [
+      44.97321895001279,
+      -93.24302224021733
+    ],
+    "tokens": [
+      "andersen library",
+      "andersen",
+      "library"
+    ],
+    "exactTokens": [
+      "andersen library"
+    ]
+  },
+  {
+    "id": "36",
+    "name": "Anderson Hall",
+    "position": [
+      44.97201265168893,
+      -93.24230791082871
+    ],
+    "tokens": [
+      "anderson hall",
+      "anderson",
+      "hall"
+    ],
+    "exactTokens": [
+      "anderson hall"
+    ]
+  },
+  {
+    "id": "83",
+    "name": "Animal Science/Veterinary Medicine",
+    "position": [
+      44.98237069690218,
+      -93.18404398634483
+    ],
+    "tokens": [
+      "animal science/veterinary medicine",
+      "animal",
+      "science/veterinary",
+      "medicine"
+    ],
+    "exactTokens": [
+      "animal science/veterinary medicine"
+    ]
+  },
+  {
+    "id": "70",
+    "name": "Bailey Hall",
+    "position": [
+      44.98523804287397,
+      -93.18626649972202
+    ],
+    "tokens": [
+      "bailey hall",
+      "bailey",
+      "hall"
+    ],
+    "exactTokens": [
+      "bailey hall"
+    ]
+  },
+  {
+    "id": "81",
+    "name": "Biological Sciences",
+    "position": [
+      44.98489244486485,
+      -93.18245826254275
+    ],
+    "tokens": [
+      "biological sciences",
+      "biological",
+      "sciences"
+    ],
+    "exactTokens": [
+      "biological sciences"
+    ]
+  },
+  {
+    "id": "46",
+    "name": "Blegen Hall",
+    "position": [
+      44.97195016340303,
+      -93.24358455335516
+    ],
+    "tokens": [
+      "blegen hall",
+      "blegen",
+      "hall"
+    ],
+    "exactTokens": [
+      "blegen hall"
+    ]
+  },
+  {
+    "id": "76",
+    "name": "Borlaug Hall",
+    "position": [
+      44.986627901417215,
+      -93.1831590391554
+    ],
+    "tokens": [
+      "borlaug hall",
+      "borlaug",
+      "hall"
+    ],
+    "exactTokens": [
+      "borlaug hall"
+    ]
+  },
+  {
+    "id": "21",
+    "name": "Boynton Health Service",
+    "position": [
+      44.97219562625852,
+      -93.23428075313531
+    ],
+    "tokens": [
+      "boynton health service",
+      "boynton",
+      "health",
+      "service"
+    ],
+    "exactTokens": [
+      "boynton health service"
+    ]
+  },
+  {
+    "id": "54",
+    "name": "Carlson School of Management",
+    "position": [
+      44.97046776746948,
+      -93.24493343059434
+    ],
+    "tokens": [
+      "carlson school of management",
+      "carlson",
+      "school",
+      "management"
+    ],
+    "exactTokens": [
+      "carlson school of management"
+    ]
+  },
+  {
+    "id": "17",
+    "name": "Children's Rehabilitation Ctr",
+    "position": [
+      44.97154243029502,
+      -93.23405290240534
+    ],
+    "tokens": [
+      "children's rehabilitation ctr",
+      "children's",
+      "rehabilitation",
+      "ctr"
+    ],
+    "exactTokens": [
+      "children's rehabilitation ctr"
+    ]
+  },
+  {
+    "id": "79",
+    "name": "Christensen Laboratory",
+    "position": [
+      44.986676668191166,
+      -93.18231589288824
+    ],
+    "tokens": [
+      "christensen laboratory",
+      "christensen",
+      "laboratory"
+    ],
+    "exactTokens": [
+      "christensen laboratory"
+    ]
+  },
+  {
+    "id": "89",
+    "name": "Church St. Garage",
+    "position": [
+      44.976329226424376,
+      -93.23421348875891
+    ],
+    "tokens": [
+      "church st. garage",
+      "church",
+      "st.",
+      "garage"
+    ],
+    "exactTokens": [
+      "church st. garage"
+    ]
+  },
+  {
+    "id": "33",
+    "name": "Civil Engineering Bldg",
+    "position": [
+      44.9762564274641,
+      -93.23160271146618
+    ],
+    "tokens": [
+      "civil engineering bldg",
+      "civil",
+      "engineering",
+      "bldg"
+    ],
+    "exactTokens": [
+      "civil engineering bldg"
+    ]
+  },
+  {
+    "id": "60",
+    "name": "Coffey Hall",
+    "position": [
+      44.98387914982621,
+      -93.18515699716404
+    ],
+    "tokens": [
+      "coffey hall",
+      "coffey",
+      "hall"
+    ],
+    "exactTokens": [
+      "coffey hall"
+    ]
+  },
+  {
+    "id": "15",
+    "name": "Coffman Memorial Union",
+    "position": [
+      44.97290303235643,
+      -93.23551471313694
+    ],
+    "tokens": [
+      "coffman memorial union",
+      "coffman",
+      "memorial",
+      "union"
+    ],
+    "exactTokens": [
+      "coffman memorial union"
+    ]
+  },
+  {
+    "id": "25",
+    "name": "Diehl Hall",
+    "position": [
+      44.97172972480045,
+      -93.23129146838598
+    ],
+    "tokens": [
+      "diehl hall",
+      "diehl",
+      "hall"
+    ],
+    "exactTokens": [
+      "diehl hall"
+    ]
+  },
+  {
+    "id": "73",
+    "name": "Dining Ctr",
+    "position": [
+      44.98527047412265,
+      -93.18550884995855
+    ],
+    "tokens": [
+      "dining ctr",
+      "dining",
+      "ctr"
+    ],
+    "exactTokens": [
+      "dining ctr"
+    ]
+  },
+  {
+    "id": "28",
+    "name": "Dwan Variety Research Ctr",
+    "position": [
+      44.97117986730335,
+      -93.23258442217794
+    ],
+    "tokens": [
+      "dwan variety research ctr",
+      "dwan",
+      "variety",
+      "research",
+      "ctr"
+    ],
+    "exactTokens": [
+      "dwan variety research ctr"
+    ]
+  },
+  {
+    "id": "91",
+    "name": "East River Road Garage",
+    "position": [
+      44.972069815632615,
+      -93.23589495466392
+    ],
+    "tokens": [
+      "east river road garage",
+      "east",
+      "river",
+      "road",
+      "garage"
+    ],
+    "exactTokens": [
+      "east river road garage"
+    ]
+  },
+  {
+    "id": "85",
+    "name": "Ecology Bldg",
+    "position": [
+      44.985981989311085,
+      -93.18301281591937
+    ],
+    "tokens": [
+      "ecology bldg",
+      "ecology",
+      "bldg"
+    ],
+    "exactTokens": [
+      "ecology bldg"
+    ]
+  },
+  {
+    "id": "50",
+    "name": "Ferguson Hall",
+    "position": [
+      44.97077190069696,
+      -93.24176210994078
+    ],
+    "tokens": [
+      "ferguson hall",
+      "ferguson",
+      "hall"
+    ],
+    "exactTokens": [
+      "ferguson hall"
+    ]
+  },
+  {
+    "id": "1",
+    "name": "Folwell Hall",
+    "position": [
+      44.97827904050632,
+      -93.23446068304547
+    ],
+    "tokens": [
+      "folwell hall",
+      "folwell",
+      "hall"
+    ],
+    "exactTokens": [
+      "folwell hall"
+    ]
+  },
+  {
+    "id": "22",
+    "name": "Ford Hall",
+    "position": [
+      44.9739255703115,
+      -93.23466176998824
+    ],
+    "tokens": [
+      "ford hall",
+      "ford",
+      "hall"
+    ],
+    "exactTokens": [
+      "ford hall"
+    ]
+  },
+  {
+    "id": "80",
+    "name": "Gortner Laboratory",
+    "position": [
+      44.98575401270689,
+      -93.1824855343052
+    ],
+    "tokens": [
+      "gortner laboratory",
+      "gortner",
+      "laboratory"
+    ],
+    "exactTokens": [
+      "gortner laboratory"
+    ]
+  },
+  {
+    "id": "92",
+    "name": "Graduate Minneapolis Hotel",
+    "position": [
+      44.97422047569038,
+      -93.22951417573465
+    ],
+    "tokens": [
+      "graduate minneapolis hotel",
+      "graduate",
+      "minneapolis",
+      "hotel"
+    ],
+    "exactTokens": [
+      "graduate minneapolis hotel"
+    ]
+  },
+  {
+    "id": "62",
+    "name": "Green Hall",
+    "position": [
+      44.98718457977177,
+      -93.18504402221498
+    ],
+    "tokens": [
+      "green hall",
+      "green",
+      "hall"
+    ],
+    "exactTokens": [
+      "green hall"
+    ]
+  },
+  {
+    "id": "55",
+    "name": "Hanson Hall",
+    "position": [
+      44.96956210112785,
+      -93.2445780774676
+    ],
+    "tokens": [
+      "hanson hall",
+      "hanson",
+      "hall"
+    ],
+    "exactTokens": [
+      "hanson hall"
+    ]
+  },
+  {
+    "id": "40",
+    "name": "Hasselmo Hall",
+    "position": [
+      44.97304750758703,
+      -93.23428597735459
+    ],
+    "tokens": [
+      "hasselmo hall",
+      "hasselmo",
+      "hall"
+    ],
+    "exactTokens": [
+      "hasselmo hall"
+    ]
+  },
+  {
+    "id": "63",
+    "name": "Hayes Hall",
+    "position": [
+      44.9864559679002,
+      -93.18234122267239
+    ],
+    "tokens": [
+      "hayes hall",
+      "hayes",
+      "hall"
+    ],
+    "exactTokens": [
+      "hayes hall"
+    ]
+  },
+  {
+    "id": "30",
+    "name": "Health Sciences Education Ctr",
+    "position": [
+      44.97209445351735,
+      -93.23085983311279
+    ],
+    "tokens": [
+      "health sciences education ctr",
+      "health",
+      "sciences",
+      "education",
+      "ctr"
+    ],
+    "exactTokens": [
+      "health sciences education ctr"
+    ]
+  },
+  {
+    "id": "44",
+    "name": "Heller Hall",
+    "position": [
+      44.97165179465254,
+      -93.24377102582226
+    ],
+    "tokens": [
+      "heller hall",
+      "heller",
+      "hall"
+    ],
+    "exactTokens": [
+      "heller hall"
+    ]
+  },
+  {
+    "id": "77",
+    "name": "Hodson Hall",
+    "position": [
+      44.98786695559327,
+      -93.18379331856212
+    ],
+    "tokens": [
+      "hodson hall",
+      "hodson",
+      "hall"
+    ],
+    "exactTokens": [
+      "hodson hall"
+    ]
+  },
+  {
+    "id": "51",
+    "name": "Humphrey School of Public Affairs",
+    "position": [
+      44.97133467818478,
+      -93.24464169402601
+    ],
+    "tokens": [
+      "humphrey school of public affairs",
+      "humphrey",
+      "school",
+      "public",
+      "affairs"
+    ],
+    "exactTokens": [
+      "humphrey school of public affairs"
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Jackson Hall",
+    "position": [
+      44.97305170108233,
+      -93.233555203538
+    ],
+    "tokens": [
+      "jackson hall",
+      "jackson",
+      "hall"
+    ],
+    "exactTokens": [
+      "jackson hall"
+    ]
+  },
+  {
+    "id": "23",
+    "name": "Johnston Hall",
+    "position": [
+      44.97587021930771,
+      -93.23595375366112
+    ],
+    "tokens": [
+      "johnston hall",
+      "johnston",
+      "hall"
+    ],
+    "exactTokens": [
+      "johnston hall"
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Jones Hall",
+    "position": [
+      44.97795971118766,
+      -93.23529404263502
+    ],
+    "tokens": [
+      "jones hall",
+      "jones",
+      "hall"
+    ],
+    "exactTokens": [
+      "jones hall"
+    ]
+  },
+  {
+    "id": "72",
+    "name": "Kaufert Laboratory",
+    "position": [
+      44.987947226478404,
+      -93.18505964233974
+    ],
+    "tokens": [
+      "kaufert laboratory",
+      "kaufert",
+      "laboratory"
+    ],
+    "exactTokens": [
+      "kaufert laboratory"
+    ]
+  },
+  {
+    "id": "38",
+    "name": "Keller Hall",
+    "position": [
+      44.9744782334088,
+      -93.232631479572
+    ],
+    "tokens": [
+      "keller hall",
+      "keller",
+      "hall"
+    ],
+    "exactTokens": [
+      "keller hall"
+    ]
+  },
+  {
+    "id": "18",
+    "name": "Kolthoff Hall",
+    "position": [
+      44.97400732246442,
+      -93.23636980367002
+    ],
+    "tokens": [
+      "kolthoff hall",
+      "kolthoff",
+      "hall"
+    ],
+    "exactTokens": [
+      "kolthoff hall"
+    ]
+  },
+  {
+    "id": "74",
+    "name": "Learning & Environmental Sciences",
+    "position": [
+      44.984057036669306,
+      -93.18236978696395
+    ],
+    "tokens": [
+      "learning & environmental sciences",
+      "learning",
+      "environmental",
+      "sciences"
+    ],
+    "exactTokens": [
+      "learning & environmental sciences"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Lind Hall",
+    "position": [
+      44.974584341567784,
+      -93.2334481861958
+    ],
+    "tokens": [
+      "lind hall",
+      "lind",
+      "hall"
+    ],
+    "exactTokens": [
+      "lind hall"
+    ]
+  },
+  {
+    "id": "37",
+    "name": "M Health Fairview Patient & Visitor Ramp",
+    "position": [
+      44.97279478568907,
+      -93.22959548375323
+    ],
+    "tokens": [
+      "m health fairview patient & visitor ramp",
+      "health",
+      "fairview",
+      "patient",
+      "visitor",
+      "ramp"
+    ],
+    "exactTokens": [
+      "m health fairview patient & visitor ramp"
+    ]
+  },
+  {
+    "id": "66",
+    "name": "Magrath Library",
+    "position": [
+      44.9841077866296,
+      -93.18374580315574
+    ],
+    "tokens": [
+      "magrath library",
+      "magrath",
+      "library"
+    ],
+    "exactTokens": [
+      "magrath library"
+    ]
+  },
+  {
+    "id": "24",
+    "name": "Mayo Bldg & Additions",
+    "position": [
+      44.97206899425144,
+      -93.23287404225157
+    ],
+    "tokens": [
+      "mayo bldg & additions",
+      "mayo",
+      "bldg",
+      "additions"
+    ],
+    "exactTokens": [
+      "mayo bldg & additions"
+    ]
+  },
+  {
+    "id": "41",
+    "name": "McNamara Alumni Ctr",
+    "position": [
+      44.97515447648228,
+      -93.22792958823887
+    ],
+    "tokens": [
+      "mcnamara alumni ctr",
+      "mcnamara",
+      "alumni",
+      "ctr"
+    ],
+    "exactTokens": [
+      "mcnamara alumni ctr"
+    ]
+  },
+  {
+    "id": "61",
+    "name": "McNeal Hall",
+    "position": [
+      44.985224229563144,
+      -93.18348500767395
+    ],
+    "tokens": [
+      "mcneal hall",
+      "mcneal",
+      "hall"
+    ],
+    "exactTokens": [
+      "mcneal hall"
+    ]
+  },
+  {
+    "id": "56",
+    "name": "Mechanical Engineering",
+    "position": [
+      44.97530527127773,
+      -93.23311936904801
+    ],
+    "tokens": [
+      "mechanical engineering",
+      "mechanical",
+      "engineering"
+    ],
+    "exactTokens": [
+      "mechanical engineering"
+    ]
+  },
+  {
+    "id": "42",
+    "name": "Molecular & Cellular Biology",
+    "position": [
+      44.9731134124104,
+      -93.23270396260283
+    ],
+    "tokens": [
+      "molecular & cellular biology",
+      "molecular",
+      "cellular",
+      "biology"
+    ],
+    "exactTokens": [
+      "molecular & cellular biology"
+    ]
+  },
+  {
+    "id": "48",
+    "name": "Mondale Hall",
+    "position": [
+      44.97314240226827,
+      -93.2446373282514
+    ],
+    "tokens": [
+      "mondale hall",
+      "mondale",
+      "hall"
+    ],
+    "exactTokens": [
+      "mondale hall"
+    ]
+  },
+  {
+    "id": "27",
+    "name": "Moos Tower",
+    "position": [
+      44.9729960369745,
+      -93.23154529315397
+    ],
+    "tokens": [
+      "moos tower",
+      "moos",
+      "tower"
+    ],
+    "exactTokens": [
+      "moos tower"
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Morrill Hall",
+    "position": [
+      44.97586809878204,
+      -93.23473780437669
+    ],
+    "tokens": [
+      "morrill hall",
+      "morrill",
+      "hall"
+    ],
+    "exactTokens": [
+      "morrill hall"
+    ]
+  },
+  {
+    "id": "14",
+    "name": "Murphy Hall",
+    "position": [
+      44.97450873568284,
+      -93.23427113145881
+    ],
+    "tokens": [
+      "murphy hall",
+      "murphy",
+      "hall"
+    ],
+    "exactTokens": [
+      "murphy hall"
+    ]
+  },
+  {
+    "id": "11",
+    "name": "Nolte Ctr",
+    "position": [
+      44.9773033000595,
+      -93.23387679338641
+    ],
+    "tokens": [
+      "nolte ctr",
+      "nolte",
+      "ctr"
+    ],
+    "exactTokens": [
+      "nolte ctr"
+    ]
+  },
+  {
+    "id": "88",
+    "name": "Nolte Ctr Garage",
+    "position": [
+      44.977628795851906,
+      -93.233588236348
+    ],
+    "tokens": [
+      "nolte ctr garage",
+      "nolte",
+      "ctr",
+      "garage"
+    ],
+    "exactTokens": [
+      "nolte ctr garage"
+    ]
+  },
+  {
+    "id": "90",
+    "name": "Northrop Garage",
+    "position": [
+      44.97586578037637,
+      -93.2354565851746
+    ],
+    "tokens": [
+      "northrop garage",
+      "northrop",
+      "garage"
+    ],
+    "exactTokens": [
+      "northrop garage"
+    ]
+  },
+  {
+    "id": "10",
+    "name": "Northrop Memorial Auditorium",
+    "position": [
+      44.97631651263003,
+      -93.2353561923127
+    ],
+    "tokens": [
+      "northrop memorial auditorium",
+      "northrop",
+      "memorial",
+      "auditorium"
+    ],
+    "exactTokens": [
+      "northrop memorial auditorium"
+    ]
+  },
+  {
+    "id": "29",
+    "name": "Phillips-Wangensteen Bldg",
+    "position": [
+      44.972405904094124,
+      -93.2314751937593
+    ],
+    "tokens": [
+      "phillips-wangensteen bldg",
+      "phillips-wangensteen",
+      "bldg"
+    ],
+    "exactTokens": [
+      "phillips-wangensteen bldg"
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Pillsbury Hall",
+    "position": [
+      44.97697697889658,
+      -93.2343278770542
+    ],
+    "tokens": [
+      "pillsbury hall",
+      "pillsbury",
+      "hall"
+    ],
+    "exactTokens": [
+      "pillsbury hall"
+    ]
+  },
+  {
+    "id": "26",
+    "name": "Rapson Hall",
+    "position": [
+      44.976454020592776,
+      -93.23322855336215
+    ],
+    "tokens": [
+      "rapson hall",
+      "rapson",
+      "hall"
+    ],
+    "exactTokens": [
+      "rapson hall"
+    ]
+  },
+  {
+    "id": "47",
+    "name": "Rarig Ctr",
+    "position": [
+      44.97051722061395,
+      -93.24247513660758
+    ],
+    "tokens": [
+      "rarig ctr",
+      "rarig",
+      "ctr"
+    ],
+    "exactTokens": [
+      "rarig ctr"
+    ]
+  },
+  {
+    "id": "82",
+    "name": "Ruttan Hall",
+    "position": [
+      44.98359184387379,
+      -93.18440439023996
+    ],
+    "tokens": [
+      "ruttan hall",
+      "ruttan",
+      "hall"
+    ],
+    "exactTokens": [
+      "ruttan hall"
+    ]
+  },
+  {
+    "id": "19",
+    "name": "Shepherd Laboratories",
+    "position": [
+      44.975878398114276,
+      -93.23233966053671
+    ],
+    "tokens": [
+      "shepherd laboratories",
+      "shepherd",
+      "laboratories"
+    ],
+    "exactTokens": [
+      "shepherd laboratories"
+    ]
+  },
+  {
+    "id": "84",
+    "name": "Skok Hall",
+    "position": [
+      44.987593459143305,
+      -93.1852679903077
+    ],
+    "tokens": [
+      "skok hall",
+      "skok",
+      "hall"
+    ],
+    "exactTokens": [
+      "skok hall"
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Smith Hall",
+    "position": [
+      44.97451619433504,
+      -93.23607189429949
+    ],
+    "tokens": [
+      "smith hall",
+      "smith",
+      "hall"
+    ],
+    "exactTokens": [
+      "smith hall"
+    ]
+  },
+  {
+    "id": "59",
+    "name": "Snyder Hall",
+    "position": [
+      44.98535856105984,
+      -93.18247410835968
+    ],
+    "tokens": [
+      "snyder hall",
+      "snyder",
+      "hall"
+    ],
+    "exactTokens": [
+      "snyder hall"
+    ]
+  },
+  {
+    "id": "45",
+    "name": "Social Sciences Bldg",
+    "position": [
+      44.971530284726725,
+      -93.24295586502753
+    ],
+    "tokens": [
+      "social sciences bldg",
+      "social",
+      "sciences",
+      "bldg"
+    ],
+    "exactTokens": [
+      "social sciences bldg"
+    ]
+  },
+  {
+    "id": "69",
+    "name": "Soil Science",
+    "position": [
+      44.98708303075943,
+      -93.18334846479509
+    ],
+    "tokens": [
+      "soil science",
+      "soil",
+      "science"
+    ],
+    "exactTokens": [
+      "soil science"
+    ]
+  },
+  {
+    "id": "64",
+    "name": "Stakman Hall",
+    "position": [
+      44.986859818481655,
+      -93.18246929983833
+    ],
+    "tokens": [
+      "stakman hall",
+      "stakman",
+      "hall"
+    ],
+    "exactTokens": [
+      "stakman hall"
+    ]
+  },
+  {
+    "id": "68",
+    "name": "Student Ctr",
+    "position": [
+      44.98489018470878,
+      -93.1853755591766
+    ],
+    "tokens": [
+      "student ctr",
+      "student",
+      "ctr"
+    ],
+    "exactTokens": [
+      "student ctr"
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Tate Hall",
+    "position": [
+      44.975343798276214,
+      -93.2342741916039
+    ],
+    "tokens": [
+      "tate hall",
+      "tate",
+      "hall"
+    ],
+    "exactTokens": [
+      "tate hall"
+    ]
+  },
+  {
+    "id": "94",
+    "name": "Transportation & Safety Bldg",
+    "position": [
+      44.973849581161446,
+      -93.23090612378569
+    ],
+    "tokens": [
+      "transportation & safety bldg",
+      "transportation",
+      "safety",
+      "bldg"
+    ],
+    "exactTokens": [
+      "transportation & safety bldg"
+    ]
+  },
+  {
+    "id": "43",
+    "name": "University Avenue Ramp",
+    "position": [
+      44.976068691917646,
+      -93.2287505021702
+    ],
+    "tokens": [
+      "university avenue ramp",
+      "university",
+      "avenue",
+      "ramp"
+    ],
+    "exactTokens": [
+      "university avenue ramp"
+    ]
+  },
+  {
+    "id": "93",
+    "name": "University of Minnesota Medical Ctr - Fairview",
+    "position": [
+      44.97109487687215,
+      -93.2312758843917
+    ],
+    "tokens": [
+      "university of minnesota medical ctr - fairview",
+      "university",
+      "minnesota",
+      "medical",
+      "ctr",
+      "fairview"
+    ],
+    "exactTokens": [
+      "university of minnesota medical ctr - fairview"
+    ]
+  },
+  {
+    "id": "20",
+    "name": "Variety Club Research Ctr",
+    "position": [
+      44.97119826202353,
+      -93.23338165164657
+    ],
+    "tokens": [
+      "variety club research ctr",
+      "variety",
+      "club",
+      "research",
+      "ctr"
+    ],
+    "exactTokens": [
+      "variety club research ctr"
+    ]
+  },
+  {
+    "id": "71",
+    "name": "Veterinary Diagnostic Laboratory",
+    "position": [
+      44.98140544700964,
+      -93.18226273919332
+    ],
+    "tokens": [
+      "veterinary diagnostic laboratory",
+      "veterinary",
+      "diagnostic",
+      "laboratory"
+    ],
+    "exactTokens": [
+      "veterinary diagnostic laboratory"
+    ]
+  },
+  {
+    "id": "75",
+    "name": "Veterinary Medical Ctr North",
+    "position": [
+      44.98219261823756,
+      -93.18293874086592
+    ],
+    "tokens": [
+      "veterinary medical ctr north",
+      "veterinary",
+      "medical",
+      "ctr",
+      "north"
+    ],
+    "exactTokens": [
+      "veterinary medical ctr north"
+    ]
+  },
+  {
+    "id": "65",
+    "name": "Veterinary Medical Ctr South",
+    "position": [
+      44.98156532399351,
+      -93.1832742859468
+    ],
+    "tokens": [
+      "veterinary medical ctr south",
+      "veterinary",
+      "medical",
+      "ctr",
+      "south"
+    ],
+    "exactTokens": [
+      "veterinary medical ctr south"
+    ]
+  },
+  {
+    "id": "67",
+    "name": "Veterinary Science",
+    "position": [
+      44.98107750466567,
+      -93.18359432300593
+    ],
+    "tokens": [
+      "veterinary science",
+      "veterinary",
+      "science"
+    ],
+    "exactTokens": [
+      "veterinary science"
+    ]
+  },
+  {
+    "id": "12",
+    "name": "Vincent Hall",
+    "position": [
+      44.97451278903322,
+      -93.2347087575343
+    ],
+    "tokens": [
+      "vincent hall",
+      "vincent",
+      "hall"
+    ],
+    "exactTokens": [
+      "vincent hall"
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Walter Library",
+    "position": [
+      44.97530337497212,
+      -93.23626648569687
+    ],
+    "tokens": [
+      "walter library",
+      "walter",
+      "library"
+    ],
+    "exactTokens": [
+      "walter library"
+    ]
+  },
+  {
+    "id": "34",
+    "name": "Washington Avenue Ramp",
+    "position": [
+      44.97431817486964,
+      -93.23133747315012
+    ],
+    "tokens": [
+      "washington avenue ramp",
+      "washington",
+      "avenue",
+      "ramp"
+    ],
+    "exactTokens": [
+      "washington avenue ramp"
+    ]
+  },
+  {
+    "id": "31",
+    "name": "Weaver-Densford Hall",
+    "position": [
+      44.97339134168593,
+      -93.23094079327723
+    ],
+    "tokens": [
+      "weaver-densford hall",
+      "weaver-densford",
+      "hall"
+    ],
+    "exactTokens": [
+      "weaver-densford hall"
+    ]
+  },
+  {
+    "id": "49",
+    "name": "West Bank Skyway",
+    "position": [
+      44.9723075716771,
+      -93.24331727384431
+    ],
+    "tokens": [
+      "west bank skyway",
+      "west",
+      "bank",
+      "skyway"
+    ],
+    "exactTokens": [
+      "west bank skyway"
+    ]
+  },
+  {
+    "id": "39",
+    "name": "Willey Hall",
+    "position": [
+      44.97289478854045,
+      -93.24329751825793
+    ],
+    "tokens": [
+      "willey hall",
+      "willey",
+      "hall"
+    ],
+    "exactTokens": [
+      "willey hall"
+    ]
+  },
+  {
+    "id": "32",
+    "name": "Williamson Hall",
+    "position": [
+      44.97778589287683,
+      -93.23468936497078
+    ],
+    "tokens": [
+      "williamson hall",
+      "williamson",
+      "hall"
+    ],
+    "exactTokens": [
+      "williamson hall"
+    ]
+  },
+  {
+    "id": "35",
+    "name": "Wilson Library",
+    "position": [
+      44.9709542911698,
+      -93.24358675619304
+    ],
+    "tokens": [
+      "wilson library",
+      "wilson",
+      "library"
+    ],
+    "exactTokens": [
+      "wilson library"
+    ]
+  }
+]

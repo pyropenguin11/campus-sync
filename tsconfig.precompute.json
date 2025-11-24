@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": ".precompute",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "target": "ES2020",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "scripts/precompute-map-data.ts",
+    "src/constants/**/*.ts",
+    "src/lib/**/*.ts",
+    "src/server/data/**/*.ts",
+    "src/types/**/*.ts"
+  ]
+}

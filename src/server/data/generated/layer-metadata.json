@@ -1,0 +1,110 @@
+[
+  {
+    "feature": "EAST_BANK",
+    "layerId": 0,
+    "category": "layer",
+    "name": "EAST BANK",
+    "featureCount": 1991,
+    "geometryTypes": {
+      "polygon": false,
+      "line": true,
+      "point": false
+    },
+    "bbox": [
+      44.9163905,
+      -93.2544576,
+      44.9848829,
+      -93.1984646
+    ]
+  },
+  {
+    "feature": "GOPHER_WAY_LEVEL_BLDGS",
+    "layerId": 0,
+    "category": "layer",
+    "name": "GOPHER WAY LEVEL BLDGS",
+    "featureCount": 91,
+    "geometryTypes": {
+      "polygon": true,
+      "line": false,
+      "point": false
+    },
+    "bbox": [
+      44.969187703275,
+      -93.246302545315,
+      44.9882328128645,
+      -93.1819142683932
+    ]
+  },
+  {
+    "feature": "GW_PORTION_DIFFERENT_LEVEL",
+    "layerId": 3,
+    "category": "layer",
+    "name": "Portion of Route on Different Level",
+    "featureCount": 27,
+    "geometryTypes": {
+      "polygon": false,
+      "line": true,
+      "point": false
+    },
+    "bbox": [
+      44.970132512657,
+      -93.2458408579714,
+      44.9876143500319,
+      -93.1826292276463
+    ]
+  },
+  {
+    "feature": "GW_ROUTE",
+    "layerId": 4,
+    "category": "layer",
+    "name": "Gopher Way Route",
+    "featureCount": 121,
+    "geometryTypes": {
+      "polygon": false,
+      "line": true,
+      "point": false
+    },
+    "bbox": [
+      44.9697423863677,
+      -93.2458928084426,
+      44.9879028079737,
+      -93.1820993869187
+    ]
+  },
+  {
+    "feature": "ST_PAUL",
+    "layerId": 0,
+    "category": "layer",
+    "name": "ST PAUL",
+    "featureCount": 622,
+    "geometryTypes": {
+      "polygon": false,
+      "line": true,
+      "point": false
+    },
+    "bbox": [
+      44.9762339,
+      -93.1973205,
+      44.9988917,
+      -93.1668329
+    ]
+  },
+  {
+    "feature": "WEST_BANK",
+    "layerId": 0,
+    "category": "layer",
+    "name": "WEST BANK",
+    "featureCount": 643,
+    "geometryTypes": {
+      "polygon": false,
+      "line": true,
+      "point": false
+    },
+    "bbox": [
+      44.9163905,
+      -93.2509,
+      44.9809264,
+      -93.1999977
+    ]
+  }
+]

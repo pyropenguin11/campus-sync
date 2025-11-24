@@ -1,0 +1,17 @@
+export const TUNNEL_ROUTING_LAYER_FEATURES = new Set<string>([
+  "GW_ROUTE",
+  "GW_PORTION_DIFFERENT_LEVEL",
+]);
+
+export const FALLBACK_ROUTING_LAYER_FEATURES = new Set<string>([
+  "EAST_BANK",
+  "WEST_BANK",
+  "ST_PAUL",
+]);
+
+export const ROUTING_LAYER_FEATURES = new Set<string>([
+  ...TUNNEL_ROUTING_LAYER_FEATURES,
+  ...FALLBACK_ROUTING_LAYER_FEATURES,
+]);
+
+export const ROUTING_BRIDGE_DISTANCE_METERS = 3;

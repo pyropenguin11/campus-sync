@@ -30,6 +30,16 @@ npm run build
 
 These align with Vercel’s CI pipeline (`next build`).
 
+### Precomputing map data
+
+After refreshing the raw GeoJSON exports, regenerate the lightweight building list, routing graphs, and layer metadata that power the tRPC endpoints:
+
+```bash
+npm run precompute:map
+```
+
+The command compiles the preprocessing helpers and emits JSON artifacts to `src/server/data/generated/`. These files are committed and read at runtime, so always rerun the script (and commit the updated outputs) whenever the underlying ArcGIS data changes.
+
 ### Refreshing ArcGIS datasets
 
 Use the helper script to download the ArcGIS services listed in `src/server/data/arcgis-features.txt`. For each feature the script saves the service metadata alongside layer/table data (GeoJSON when geometry is present):

@@ -15,6 +15,7 @@ dist
 dist-ssr
 .next/
 .next
+.precompute/
 
 # Local caches / metadata
 *.local

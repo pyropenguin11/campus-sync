@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "precompute:map": "tsc -p tsconfig.precompute.json && node .precompute/scripts/precompute-map-data.js"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.11.1",

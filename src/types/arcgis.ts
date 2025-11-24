@@ -9,7 +9,3 @@ export interface ArcgisGeoJsonLayer {
   name: string;
   featureCollection: GeoJsonFeatureCollection;
 }
-
-export interface ArcgisMapPayload {
-  layers: ArcgisGeoJsonLayer[];
-}

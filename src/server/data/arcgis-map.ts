@@ -1,7 +1,7 @@
-import { readdirSync, readFileSync, statSync } from "node:fs";
-import { join } from "node:path";
-import type { ArcgisGeoJsonLayer, ArcgisLayerCategory } from "@/types/arcgis";
-import type { GeoJsonFeatureCollection } from "@/types/geojson";
+import { readdirSync, readFileSync, statSync } from "fs";
+import { join } from "path";
+import type { ArcgisGeoJsonLayer, ArcgisLayerCategory } from "../../types/arcgis";
+import type { GeoJsonFeatureCollection } from "../../types/geojson";
 
 const JSON_ROOT = join(process.cwd(), "src/server/data/json");
 
@@ -36,7 +36,7 @@ const readGeoJson = (path: string): GeoJsonFeatureCollection => {
   return JSON.parse(raw) as GeoJsonFeatureCollection;
 };
 
-export const loadArcgisGeoJsonLayers = (): ArcgisGeoJsonLayer[] => {
+const hydrateLayersFromDisk = (): ArcgisGeoJsonLayer[] => {
   const rootEntries = readdirSync(JSON_ROOT, { withFileTypes: true });
   const layers: ArcgisGeoJsonLayer[] = [];
 
@@ -111,4 +111,30 @@ export const loadArcgisGeoJsonLayers = (): ArcgisGeoJsonLayer[] => {
     }
     return a.layerId - b.layerId;
   });
+};
+
+let cachedLayers: ArcgisGeoJsonLayer[] | null = null;
+
+export const loadArcgisGeoJsonLayers = (): ArcgisGeoJsonLayer[] => {
+  if (!cachedLayers) {
+    cachedLayers = hydrateLayersFromDisk();
+  }
+  return cachedLayers;
+};
+
+export const refreshArcgisGeoJsonLayers = (): ArcgisGeoJsonLayer[] => {
+  cachedLayers = hydrateLayersFromDisk();
+  return cachedLayers;
+};
+
+export const getArcgisLayerById = (
+  feature: string,
+  layerId: number,
+): ArcgisGeoJsonLayer | null => {
+  const layers = loadArcgisGeoJsonLayers();
+  return (
+    layers.find(
+      (layer) => layer.feature === feature && layer.layerId === layerId,
+    ) ?? null
+  );
 };
