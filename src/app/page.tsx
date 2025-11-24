@@ -183,6 +183,17 @@ export default function HomePage() {
   const [routeMode, setRouteMode] = useState<RouteMode | null>(null);
   const [fitBoundsSequence, setFitBoundsSequence] = useState(0);
   const [routeAttempted, setRouteAttempted] = useState(false);
+  const [panelCollapsed, setPanelCollapsed] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handleResize = () => {
+      setPanelCollapsed(window.innerWidth <= 900);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const tunnelRouteGraph = useMemo(
     () => buildRouteGraph(routeGraphBundle?.tunnel),
@@ -243,19 +254,6 @@ export default function HomePage() {
     [routeNodeIds, activeRouteGraph],
   );
 
-  const routeSteps = useMemo(() => {
-    const steps: Array<{ id: string; label: string }> = [];
-    if (startBuilding) {
-      steps.push({ id: startBuilding.id, label: startBuilding.name });
-    }
-    if (endBuilding) {
-      steps.push({ id: endBuilding.id, label: endBuilding.name });
-    }
-    return steps;
-  }, [startBuilding, endBuilding]);
-
-  const routeAvailable = routeLine.length > 1;
-
   const startMarkerPosition = useMemo(() => {
     if (routeLine.length > 0) {
       return routeLine[0];
@@ -272,10 +270,10 @@ export default function HomePage() {
 
   const routeSummary = useMemo(() => {
     if (!startBuildingId || !endBuildingId) {
-      return "Select two locations to plan a tunnel route.";
+      return "Select two locations to plan a route.";
     }
     if (!routeAttempted) {
-      return "Tap find route to calculate the tunnel path.";
+      return "Tap find route to calculate the path.";
     }
     if (routeNodeIds.length === 0) {
       return "No tunnel or alternate connection found between the selected locations.";
@@ -476,12 +474,29 @@ export default function HomePage() {
     setRouteAttempted(false);
   }, []);
 
+  const togglePanelCollapsed = useCallback(() => {
+    setPanelCollapsed((value) => !value);
+  }, []);
+
   return (
     <div className="app-shell">
       <div className="workspace">
-        <aside className="side-panel">
+        <aside
+          className={`side-panel${panelCollapsed ? " collapsed" : ""}`}
+          aria-hidden={panelCollapsed}
+        >
           <section className="panel-section">
-            <h3>Plan a route</h3>
+            <div className="panel-header">
+              <h3>Plan a route</h3>
+              <button
+                type="button"
+                className="panel-collapse-toggle"
+                onClick={togglePanelCollapsed}
+                aria-label={panelCollapsed ? "Show route planner" : "Hide route planner"}
+              >
+                {panelCollapsed ? "Show" : "Hide"}
+              </button>
+            </div>
             <div className="route-form">
               <label className="route-field">
                 <span>Start</span>
@@ -545,6 +560,14 @@ export default function HomePage() {
 
         <main className="map-area">
           <div className="map-canvas">
+            <button
+              type="button"
+              className={`panel-reveal-button${panelCollapsed ? " visible" : ""}`}
+              onClick={togglePanelCollapsed}
+              aria-pressed={!panelCollapsed}
+            >
+              {panelCollapsed ? "Plan a route" : "Hide planner"}
+            </button>
             <MapView
               routeLine={routeLine}
               geoJsonLayers={geoJsonLayers}
@@ -552,36 +575,6 @@ export default function HomePage() {
               endMarker={endMarkerPosition}
               fitBoundsSequence={fitBoundsSequence}
             />
-
-            <div className="floating-card directions-card">
-              <header>
-                <strong>Route preview</strong>
-                {routeAvailable && (
-                  <span className="badge badge-live">
-                    {routeNodeIds.length - 1} segment
-                    {routeNodeIds.length - 1 === 1 ? "" : "s"}
-                  </span>
-                )}
-              </header>
-              {routeSteps.length > 0 ? (
-                <ol>
-                  {routeSteps.map((step, index) => (
-                    <li key={step.id}>
-                      <span className="step-index">
-                        {String.fromCharCode(65 + index)}
-                      </span>
-                      {step.label}
-                    </li>
-                  ))}
-                </ol>
-              ) : (
-                <p>
-                  {routeAttempted && startBuilding && endBuilding
-                    ? "No tunnel or alternate connection found between the selected locations."
-                    : "Select a start and destination to preview a tunnel route."}
-                </p>
-              )}
-            </div>
 
             <div className="map-attribution">
               Unofficial visualization. Not for outdoor navigation.
