@@ -13,7 +13,6 @@ import {
   TILE_ATTRIBUTION,
   TILE_LAYER_URL,
 } from "@/constants/map";
-import { TUNNEL_HIGHLIGHT } from "@/constants/tunnels";
 import type { GeoJsonGeometry } from "@/types/geojson";
 import {
   END_MARKER_COLOR,
@@ -22,7 +21,7 @@ import {
   PrimitiveGeometry,
   START_MARKER_COLOR,
   SURFACE_ROUTE_COLOR,
-  getLayerStyle,
+  TUNNEL_ROUTE_COLOR,
   type RouteSegment,
 } from "./map-view-constants";
 
@@ -162,82 +161,6 @@ export const MapView = ({
       nextSources.push(sourceId);
     };
 
-    geoJsonLayers.forEach((layer) => {
-      const sourceId = "arcgis-" + layer.feature + "-" + layer.layerId;
-      map.addSource(sourceId, {
-        type: "geojson",
-        data: layer.featureCollection,
-      });
-      recordSource(sourceId);
-
-      const style = getLayerStyle(layer.feature);
-      const hasPolygons = layer.featureCollection.features.some((feature) =>
-        geometryMatches(feature.geometry, "polygon"),
-      );
-      const hasLines = layer.featureCollection.features.some((feature) =>
-        geometryMatches(feature.geometry, "line"),
-      );
-
-      if (hasPolygons) {
-        const fillId = sourceId + "-fill";
-        map.addLayer({
-          id: fillId,
-          type: "fill",
-          source: sourceId,
-          filter: ["==", "$type", "Polygon"],
-          paint: {
-            "fill-color": style.fillColor,
-            "fill-opacity": style.fillOpacity,
-          },
-        });
-        recordLayer(fillId);
-
-        const outlineId = sourceId + "-outline";
-        const outlinePaint: Record<string, unknown> = {
-          "line-color": style.color,
-          "line-width": style.weight,
-          "line-opacity": style.opacity,
-        };
-        if (style.dashArray) {
-          outlinePaint["line-dasharray"] = style.dashArray
-            .split(/\s+/)
-            .map((chunk) => Number.parseFloat(chunk))
-            .filter((value) => Number.isFinite(value) && value > 0);
-        }
-        map.addLayer({
-          id: outlineId,
-          type: "line",
-          source: sourceId,
-          filter: ["==", "$type", "Polygon"],
-          paint: outlinePaint,
-        });
-        recordLayer(outlineId);
-      }
-
-      if (hasLines) {
-        const lineId = sourceId + "-line";
-        const linePaint: Record<string, unknown> = {
-          "line-color": style.color,
-          "line-width": Math.max(style.weight - 0.5, 1),
-          "line-opacity": style.opacity,
-        };
-        if (style.dashArray) {
-          linePaint["line-dasharray"] = style.dashArray
-            .split(/\s+/)
-            .map((chunk) => Number.parseFloat(chunk))
-            .filter((value) => Number.isFinite(value) && value > 0);
-        }
-        map.addLayer({
-          id: lineId,
-          type: "line",
-          source: sourceId,
-          filter: ["==", ["geometry-type"], "LineString"],
-          paint: linePaint,
-        });
-        recordLayer(lineId);
-      }
-    });
-
     if (routeFeatureCollection && routeFeatureCollection.features.length > 0) {
       map.addSource("route-highlight", {
         type: "geojson",
@@ -253,7 +176,7 @@ export const MapView = ({
           "line-color": [
             "case",
             ["==", ["get", "viaTunnel"], true],
-            TUNNEL_HIGHLIGHT,
+            TUNNEL_ROUTE_COLOR,
             SURFACE_ROUTE_COLOR,
           ],
           "line-width": 5,
