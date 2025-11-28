@@ -6,7 +6,11 @@ import type {
   KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import { MapView } from "@/components/map-view";
-import type { RouteSegment } from "@/components/map-view-constants";
+import {
+  SURFACE_ROUTE_COLOR,
+  TUNNEL_ROUTE_COLOR,
+  type RouteSegment,
+} from "@/components/map-view-constants";
 import { normalizeToken } from "@/lib/map-data";
 import type { ArcgisGeoJsonLayer } from "@/types/arcgis";
 import type { BuildingSummary, RouteGraphSnapshot } from "@/types/map-data";
@@ -308,11 +312,10 @@ export default function HomePage() {
     if (routeNodeIds.length === 1) {
       return "You're already at your destination.";
     }
-    const segmentCount = routeNodeIds.length - 1;
     const baseLabel =
       startBuilding && endBuilding
-        ? `${startBuilding.name} → ${endBuilding.name} · ${segmentCount} segment${segmentCount === 1 ? "" : "s"}`
-        : `${segmentCount} segment${segmentCount === 1 ? "" : "s"} long`;
+        ? `${startBuilding.name} → ${endBuilding.name}`
+        : "";
     if (routeMode === "surface") {
       return `${baseLabel} (includes non-tunnel paths)`;
     }
@@ -551,11 +554,11 @@ export default function HomePage() {
                   list="building-options-list"
                 />
               </label>
-              <div className="route-actions">
-                <button
-                  type="button"
-                  className="layer-toggle"
-                  onClick={handleFindRoute}
+            <div className="route-actions">
+              <button
+                type="button"
+                className="layer-toggle"
+                onClick={handleFindRoute}
                   disabled={!startSelectionReady || !endSelectionReady}
                 >
                   Find route
@@ -576,7 +579,25 @@ export default function HomePage() {
                 </button>
               </div>
               <p className="route-summary">{routeSummary}</p>
-            </div>
+                <ul className="tunnel-legend">
+                  <li>
+                    <span
+                      className="legend-line"
+                      style={{ background: TUNNEL_ROUTE_COLOR, opacity: 0.9 }}
+                      aria-hidden
+                    />
+                    <span>Tunnel</span>
+                  </li>
+                  <li>
+                    <span
+                      className="legend-line"
+                      style={{ background: SURFACE_ROUTE_COLOR, opacity: 0.8 }}
+                      aria-hidden
+                    />
+                    <span>Outdoor</span>
+                  </li>
+                </ul>
+              </div>
             <datalist id="building-options-list">
               {buildingOptions.map((option) => (
                 <option key={option.id} value={option.name} />
