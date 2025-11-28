@@ -6,6 +6,7 @@ import type {
   KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import { MapView } from "@/components/map-view";
+import type { RouteSegment } from "@/components/map-view-constants";
 import { normalizeToken } from "@/lib/map-data";
 import type { ArcgisGeoJsonLayer } from "@/types/arcgis";
 import type { BuildingSummary, RouteGraphSnapshot } from "@/types/map-data";
@@ -237,6 +238,37 @@ export default function HomePage() {
 
   const activeRouteGraph =
     routeMode === "surface" ? fullRouteGraph : tunnelRouteGraph;
+
+  const routeSegments = useMemo(() => {
+    if (routeNodeIds.length < 2) {
+      return [] as RouteSegment[];
+    }
+
+    const segments: RouteSegment[] = [];
+    for (let index = 0; index < routeNodeIds.length - 1; index += 1) {
+      const startId = routeNodeIds[index];
+      const endId = routeNodeIds[index + 1];
+      const startNode = activeRouteGraph.nodes.get(startId);
+      const endNode = activeRouteGraph.nodes.get(endId);
+
+      if (!startNode || !endNode) {
+        continue;
+      }
+
+      const tunnelStart = tunnelRouteGraph.nodes.get(startId);
+      const tunnelEnd = tunnelRouteGraph.nodes.get(endId);
+      const viaTunnel = Boolean(
+        tunnelStart?.neighbors.has(endId) || tunnelEnd?.neighbors.has(startId),
+      );
+
+      segments.push({
+        coordinates: [startNode.position, endNode.position],
+        viaTunnel,
+      });
+    }
+
+    return segments;
+  }, [routeNodeIds, activeRouteGraph, tunnelRouteGraph]);
 
   const routeLine = useMemo(
     () =>
@@ -565,6 +597,7 @@ export default function HomePage() {
             </button>
             <MapView
               routeLine={routeLine}
+              routeSegments={routeSegments}
               geoJsonLayers={geoJsonLayers}
               startMarker={startMarkerPosition}
               endMarker={endMarkerPosition}

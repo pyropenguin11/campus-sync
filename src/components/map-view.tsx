@@ -14,21 +14,17 @@ import {
   TILE_LAYER_URL,
 } from "@/constants/map";
 import { TUNNEL_HIGHLIGHT } from "@/constants/tunnels";
-import type { ArcgisGeoJsonLayer } from "@/types/arcgis";
 import type { GeoJsonGeometry } from "@/types/geojson";
-import type { LatLngTuple } from "@/types/tunnels";
-
-type MapLibreModule = typeof import("maplibre-gl");
-
-type MapViewProps = {
-  routeLine: LatLngTuple[];
-  geoJsonLayers: ArcgisGeoJsonLayer[];
-  startMarker?: LatLngTuple | null;
-  endMarker?: LatLngTuple | null;
-  fitBoundsSequence: number;
-};
-
-type PrimitiveGeometry = "polygon" | "line" | "point";
+import {
+  END_MARKER_COLOR,
+  MapLibreModule,
+  MapViewProps,
+  PrimitiveGeometry,
+  START_MARKER_COLOR,
+  SURFACE_ROUTE_COLOR,
+  getLayerStyle,
+  type RouteSegment,
+} from "./map-view-constants";
 
 const geometryMatches = (
   geometry: GeoJsonGeometry | null | undefined,
@@ -55,91 +51,11 @@ const geometryMatches = (
   }
 };
 
-const toLonLat = ([lat, lon]: LatLngTuple): [number, number] => [lon, lat];
-
-type PolygonRenderStyle = {
-  color: string;
-  weight: number;
-  opacity: number;
-  fillColor: string;
-  fillOpacity: number;
-  dashArray?: string;
-};
-
-type LayerStyleOverrides = {
-  polygon?: Partial<PolygonRenderStyle>;
-};
-
-const DEFAULT_POLYGON_STYLE: PolygonRenderStyle = {
-  color: "#2563eb",
-  weight: 1.5,
-  opacity: 0.9,
-  fillColor: "#60a5fa",
-  fillOpacity: 0.2,
-};
-
-const LAYER_STYLE_OVERRIDES: Record<string, LayerStyleOverrides> = {
-  GOPHER_WAY_LEVEL_BLDGS: {
-    polygon: {
-      color: "#0ea5e9",
-      fillColor: "#38bdf8",
-      fillOpacity: 0.15,
-    },
-  },
-  GW_CIRCULATION_AREAS: {
-    polygon: {
-      color: "#f59e0b",
-      fillColor: "#facc15",
-      fillOpacity: 0.25,
-    },
-  },
-  GW_NON_ADA_ACCESSIBLE: {
-    polygon: {
-      color: "#f97316",
-      dashArray: "6 4",
-      fillOpacity: 0.1,
-    },
-  },
-  GW_FP_LINES_STAIRS: {
-    polygon: {
-      color: "#34d399",
-      dashArray: "4 4",
-      fillOpacity: 0.08,
-    },
-  },
-  GW_FP_GROSS_AREA: {
-    polygon: {
-      color: "#f472b6",
-      fillColor: "#fbcfe8",
-      fillOpacity: 0.12,
-    },
-  },
-  GW_PORTION_DIFFERENT_LEVEL: {
-    polygon: {
-      color: "#f87171",
-      fillColor: "#fecaca",
-      fillOpacity: 0.18,
-    },
-  },
-  GW_FLOOR_NAME_CHANGE: {
-    polygon: {
-      color: "#22c55e",
-      dashArray: "2 6",
-      fillOpacity: 0.08,
-    },
-  },
-};
-
-const getLayerStyle = (feature: string): PolygonRenderStyle => {
-  const override = LAYER_STYLE_OVERRIDES[feature]?.polygon ?? {};
-  return { ...DEFAULT_POLYGON_STYLE, ...override };
-};
-
-const START_MARKER_COLOR = "#22c55e";
-const END_MARKER_COLOR = "#ef4444";
+const toLonLat = ([lat, lon]: RouteSegment["coordinates"][number]): [number, number] => [lon, lat];
 
 export const MapView = ({
   routeLine,
+  routeSegments,
   geoJsonLayers,
   startMarker,
   endMarker,
@@ -156,23 +72,24 @@ export const MapView = ({
   const [mapError, setMapError] = useState<string | null>(null);
 
   const routeFeatureCollection = useMemo(() => {
-    if (routeLine.length < 2) {
+    if (routeSegments.length === 0) {
       return null;
     }
     return {
       type: "FeatureCollection" as const,
-      features: [
-        {
-          type: "Feature" as const,
-          properties: {},
-          geometry: {
-            type: "LineString" as const,
-            coordinates: routeLine.map(toLonLat),
-          },
+      features: routeSegments.map((segment, index) => ({
+        type: "Feature" as const,
+        properties: {
+          viaTunnel: segment.viaTunnel,
+          segmentIndex: index,
         },
-      ],
+        geometry: {
+          type: "LineString" as const,
+          coordinates: segment.coordinates.map(toLonLat),
+        },
+      })),
     };
-  }, [routeLine]);
+  }, [routeSegments]);
 
   const markerFeatureCollection = useMemo(() => {
     const features: Array<{
@@ -333,7 +250,12 @@ export const MapView = ({
         type: "line",
         source: "route-highlight",
         paint: {
-          "line-color": TUNNEL_HIGHLIGHT,
+          "line-color": [
+            "case",
+            ["==", ["get", "viaTunnel"], true],
+            TUNNEL_HIGHLIGHT,
+            SURFACE_ROUTE_COLOR,
+          ],
           "line-width": 5,
           "line-opacity": 0.9,
         },
