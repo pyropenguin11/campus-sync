@@ -30,6 +30,9 @@ type RouteGraph = {
   nodes: Map<string, RouteGraphNode>;
 };
 
+const OUTDOOR_WALK_SPEED_MPS = 1.4; // roughly 5 km/h
+const TUNNEL_WALK_SPEED_MPS = 1.35;
+
 const buildRouteGraph = (
   snapshot: RouteGraphSnapshot | null | undefined,
 ): RouteGraph => {
@@ -249,6 +252,31 @@ export default function HomePage() {
     }
 
     const segments: RouteSegment[] = [];
+    const edgeDistance = (
+      a: RouteGraphNode,
+      b: RouteGraphNode,
+      aId: string,
+      bId: string,
+    ): number => {
+      const direct = a.neighbors.get(bId);
+      const reverse = b.neighbors.get(aId);
+      if (typeof direct === "number") return direct;
+      if (typeof reverse === "number") return reverse;
+      const [latA, lonA] = a.position;
+      const [latB, lonB] = b.position;
+      const toRad = (deg: number) => (deg * Math.PI) / 180;
+      const dLat = toRad(latB - latA);
+      const dLon = toRad(lonB - lonA);
+      const lat1 = toRad(latA);
+      const lat2 = toRad(latB);
+      const sinLat = Math.sin(dLat / 2);
+      const sinLon = Math.sin(dLon / 2);
+      const h =
+        sinLat * sinLat +
+        Math.cos(lat1) * Math.cos(lat2) * sinLon * sinLon;
+      return 2 * 6371000 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+    };
+
     for (let index = 0; index < routeNodeIds.length - 1; index += 1) {
       const startId = routeNodeIds[index];
       const endId = routeNodeIds[index + 1];
@@ -268,6 +296,7 @@ export default function HomePage() {
       segments.push({
         coordinates: [startNode.position, endNode.position],
         viaTunnel,
+        distanceMeters: edgeDistance(startNode, endNode, startId, endId),
       });
     }
 
@@ -508,6 +537,36 @@ export default function HomePage() {
     setPanelCollapsed((value) => !value);
   }, []);
 
+  const routeTiming = useMemo(() => {
+    if (routeSegments.length === 0) {
+      return null;
+    }
+    const totals = routeSegments.reduce(
+      (acc, segment) => {
+        if (segment.viaTunnel) {
+          acc.tunnelDistance += segment.distanceMeters;
+        } else {
+          acc.outdoorDistance += segment.distanceMeters;
+        }
+        return acc;
+      },
+      { tunnelDistance: 0, outdoorDistance: 0 },
+    );
+
+    const tunnelSeconds = totals.tunnelDistance / TUNNEL_WALK_SPEED_MPS;
+    const outdoorSeconds = totals.outdoorDistance / OUTDOOR_WALK_SPEED_MPS;
+
+    const formatMinutes = (seconds: number): string =>
+      `${Math.round(seconds / 60)} min`;
+
+    return {
+      tunnelMinutes: formatMinutes(tunnelSeconds),
+      outdoorMinutes: formatMinutes(outdoorSeconds),
+      tunnelDistance: Math.round(totals.tunnelDistance),
+      outdoorDistance: Math.round(totals.outdoorDistance),
+    };
+  }, [routeSegments]);
+
   return (
     <div className="app-shell">
       <div className="workspace">
@@ -579,6 +638,19 @@ export default function HomePage() {
                 </button>
               </div>
               <p className="route-summary">{routeSummary}</p>
+              {routeTiming && (
+                <div className="timing-chip">
+                  <div>
+                    <strong>Outside:</strong>{" "}
+                    {routeTiming.outdoorMinutes} (
+                    {routeTiming.outdoorDistance} m)
+                  </div>
+                  <div>
+                    <strong>Tunnels:</strong>{" "}
+                    {routeTiming.tunnelMinutes} ({routeTiming.tunnelDistance} m)
+                  </div>
+                </div>
+              )}
                 <ul className="tunnel-legend">
                   <li>
                     <span

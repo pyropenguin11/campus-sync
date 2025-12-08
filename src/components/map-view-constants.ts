@@ -8,6 +8,7 @@ export type PrimitiveGeometry = "polygon" | "line" | "point";
 export type RouteSegment = {
   coordinates: [LatLngTuple, LatLngTuple];
   viaTunnel: boolean;
+  distanceMeters: number;
 };
 
 export type MapViewProps = {
