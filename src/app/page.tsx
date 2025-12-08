@@ -523,6 +523,9 @@ export default function HomePage() {
     setRouteAttempted(true);
     if (nextRoute.length > 0) {
       setFitBoundsSequence((value) => value + 1);
+      if (typeof window !== "undefined" && window.innerWidth <= 900) {
+        setPanelCollapsed(true);
+      }
     }
   }, [
     commitEndSelection,
