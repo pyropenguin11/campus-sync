@@ -19,6 +19,8 @@ type RouteGraphNode = {
   neighbors: Map<string, number>;
 };
 
+type BuildingSource = "primary" | "egis";
+
 const haversineDistance = (a: LatLngTuple, b: LatLngTuple): number => {
   const R = 6371000;
   const toRad = (deg: number) => (deg * Math.PI) / 180;
@@ -74,6 +76,62 @@ const mapBuildingsToNearestNodes = (
   });
 
   return mapping;
+};
+
+const addBuildingEntrancesToRouteNodes = (
+  buildings: BuildingSummary[],
+  baseRouteNodes: Map<string, RouteGraphNode>,
+  options?: { maxDistanceMeters?: number },
+): { nodes: Map<string, RouteGraphNode>; buildingToNearestNode: Record<string, string> } => {
+  const nodes = new Map<string, RouteGraphNode>(baseRouteNodes);
+  const buildingToNearestNode: Record<string, string> = {};
+
+  if (baseRouteNodes.size === 0) {
+    return { nodes, buildingToNearestNode };
+  }
+
+  const baseEntries = Array.from(baseRouteNodes.entries());
+  const maxDistanceMeters = options?.maxDistanceMeters ?? Number.POSITIVE_INFINITY;
+
+  buildings.forEach((building) => {
+    let bestId: string | null = null;
+    let bestDistance = Number.POSITIVE_INFINITY;
+
+    baseEntries.forEach(([nodeId, node]) => {
+      const candidate = haversineDistance(building.position, node.position);
+      if (candidate < bestDistance) {
+        bestDistance = candidate;
+        bestId = nodeId;
+      }
+    });
+
+    if (!bestId) {
+      return;
+    }
+
+    if (bestDistance > maxDistanceMeters) {
+      return;
+    }
+
+    const buildingNodeId = `building:${building.id}`;
+    const buildingNode: RouteGraphNode = {
+      position: building.position,
+      neighbors: new Map([[bestId, bestDistance]]),
+    };
+    nodes.set(buildingNodeId, buildingNode);
+
+    const neighbor = nodes.get(bestId);
+    if (neighbor) {
+      const current = neighbor.neighbors.get(buildingNodeId);
+      if (!current || bestDistance < current) {
+        neighbor.neighbors.set(buildingNodeId, bestDistance);
+      }
+    }
+
+    buildingToNearestNode[building.id] = buildingNodeId;
+  });
+
+  return { nodes, buildingToNearestNode };
 };
 
 const geometryMatches = (
@@ -181,26 +239,50 @@ export const createRouteGraphNodes = (
 export const buildRouteGraphSnapshot = (
   buildings: BuildingSummary[],
   routeNodes: Map<string, RouteGraphNode>,
-): RouteGraphSnapshot => ({
-  nodes: serializeRouteGraph(routeNodes),
-  buildingToNearestNode: mapBuildingsToNearestNodes(buildings, routeNodes),
-});
+  options?: {
+    maxBuildingLinkDistanceMeters?: number;
+    fallbackToNearestNode?: boolean;
+  },
+): RouteGraphSnapshot => {
+  const fallbackToNearestNode = options?.fallbackToNearestNode ?? true;
+  const baseMapping = fallbackToNearestNode
+    ? mapBuildingsToNearestNodes(buildings, routeNodes)
+    : {};
+  const { nodes, buildingToNearestNode } = addBuildingEntrancesToRouteNodes(
+    buildings,
+    routeNodes,
+    { maxDistanceMeters: options?.maxBuildingLinkDistanceMeters },
+  );
+
+  return {
+    nodes: serializeRouteGraph(nodes),
+    buildingToNearestNode:
+      Object.keys(buildingToNearestNode).length > 0
+        ? { ...baseMapping, ...buildingToNearestNode }
+        : baseMapping,
+  };
+};
 
 export const buildBuildingSummaries = (
   layers: ArcgisGeoJsonLayer[],
 ): BuildingSummary[] => {
-  const buildingLayer = layers.find(
-    (layer) => layer.feature === "GOPHER_WAY_LEVEL_BLDGS",
-  );
-  if (!buildingLayer) {
-    return [];
-  }
+  const normalizeId = (value: unknown): string | null => {
+    if (value === null || value === undefined) return null;
+    const text = String(value).trim();
+    return text || null;
+  };
 
-  const seen = new Map<string, BuildingSummary>();
+  const normalizeFloorAwareId = (value: unknown): string | null => {
+    const normalized = normalizeId(value);
+    if (!normalized) return null;
+    const parts = normalized.split("-");
+    if (parts.length >= 2) {
+      return `${parts[0]}-${parts[1]}`;
+    }
+    return normalized;
+  };
 
-  buildingLayer.featureCollection.features.forEach((feature, index) => {
-    const properties = (feature.properties ?? {}) as Record<string, unknown>;
-
+  const resolveName = (properties: Record<string, unknown>): string | null => {
     const rawName =
       (properties.BLDG_NAME_LABEL as string | undefined) ??
       (properties.TRI_BLDG_LONG_NAME as string | undefined) ??
@@ -209,69 +291,174 @@ export const buildBuildingSummaries = (
       (properties.NAME as string | undefined) ??
       "";
     const name = rawName.trim();
-    if (!name) {
-      return;
-    }
+    return name || null;
+  };
 
-    const centroid = computeFeatureCentroid(
-      feature.geometry as GeoJsonGeometry | null | undefined,
+  const seen = new Map<string, BuildingSummary>();
+  const seenBuildingCodes = new Set<string>();
+  const seenNames = new Set<string>();
+  const buildingByName = new Map<string, { source: BuildingSource; id: string }>();
+  const buildingByCode = new Map<string, { source: BuildingSource; id: string }>();
+
+  type IdResolver = (
+    properties: Record<string, unknown>,
+    index: number,
+  ) => string | null;
+
+  const buildingCodeFor = (properties: Record<string, unknown>): string | null =>
+    normalizeFloorAwareId(
+      properties.SITE_BUILDING_FLOOR ??
+        properties.SITE_BUILDING ??
+        properties.GlobalID ??
+        properties.OBJECTID,
     );
-    if (!centroid) {
-      return;
-    }
 
-    const rawId =
-      properties.SITE_BUILDING ??
-      properties.GlobalID ??
-      properties.OBJECTID ??
-      `building-${index}`;
-    const id = String(rawId);
-    if (seen.has(id)) {
-      return;
-    }
-
-    const searchTokenSet = new Set<string>();
-    const exactTokenSet = new Set<string>();
-
-    const addExactToken = (value: unknown) => {
-      const normalized = normalizeToken(value);
-      if (!normalized) return;
-      exactTokenSet.add(normalized);
-    };
-
-    const addSearchToken = (value: unknown) => {
-      const normalized = normalizeToken(value);
-      if (!normalized) return;
-      searchTokenSet.add(normalized);
-      const cleaned = normalized.replace(/\([^)]*\)/g, "").trim();
-      if (cleaned && cleaned !== normalized) {
-        searchTokenSet.add(cleaned);
+  const registerLayerBuildings = (
+    layer: ArcgisGeoJsonLayer | undefined,
+    resolveId: IdResolver,
+    { source }: { source: BuildingSource },
+  ) => {
+    if (!layer) return;
+    layer.featureCollection.features.forEach((feature, index) => {
+      const properties = (feature.properties ?? {}) as Record<string, unknown>;
+      const name = resolveName(properties);
+      if (!name) {
+        return;
       }
-      cleaned
-        .split(/\s+/)
-        .filter((part) => part.length > 2)
-        .forEach((part) => searchTokenSet.add(part));
-    };
 
-    const registerNameVariant = (value: unknown) => {
-      addExactToken(value);
-      addSearchToken(value);
-    };
+      const centroid = computeFeatureCentroid(
+        feature.geometry as GeoJsonGeometry | null | undefined,
+      );
+      if (!centroid) {
+        return;
+      }
 
-    registerNameVariant(name);
-    registerNameVariant(properties.BLDG_NAME_LABEL_SHORT);
-    registerNameVariant(properties.TRI_BLDG_NAME);
-    registerNameVariant(properties.TRI_BLDG_ABBR);
-    registerNameVariant(properties.SITE_BUILDING);
+      const buildingCode = buildingCodeFor(properties);
+      const normalizedName = normalizeToken(name);
+      const existingByName = normalizedName
+        ? buildingByName.get(normalizedName)
+        : null;
+      const existingByCode = buildingCode
+        ? buildingByCode.get(buildingCode)
+        : null;
 
-    seen.set(id, {
-      id,
-      name,
-      position: centroid,
-      tokens: Array.from(searchTokenSet),
-      exactTokens: Array.from(exactTokenSet),
+      if (
+        source === "egis" &&
+        ((existingByName && existingByName.source === "primary") ||
+          (existingByCode && existingByCode.source === "primary"))
+      ) {
+        return;
+      }
+
+      if (
+        (existingByName && existingByName.source === source) ||
+        (existingByCode && existingByCode.source === source)
+      ) {
+        return;
+      }
+
+      const resolvedId =
+        resolveId(properties, index) ??
+        `building-${layer.feature}-${index.toString()}`;
+      const id = normalizeId(resolvedId);
+      if (!id || seen.has(id)) {
+        return;
+      }
+
+      const searchTokenSet = new Set<string>();
+      const exactTokenSet = new Set<string>();
+
+      const addExactToken = (value: unknown) => {
+        const normalized = normalizeToken(value);
+        if (!normalized) return;
+        exactTokenSet.add(normalized);
+      };
+
+      const addSearchToken = (value: unknown) => {
+        const normalized = normalizeToken(value);
+        if (!normalized) return;
+        searchTokenSet.add(normalized);
+        const cleaned = normalized.replace(/\([^)]*\)/g, "").trim();
+        if (cleaned && cleaned !== normalized) {
+          searchTokenSet.add(cleaned);
+        }
+        cleaned
+          .split(/\s+/)
+          .filter((part) => part.length > 2)
+          .forEach((part) => searchTokenSet.add(part));
+      };
+
+      const registerNameVariant = (value: unknown) => {
+        addExactToken(value);
+        addSearchToken(value);
+      };
+
+      registerNameVariant(name);
+      registerNameVariant(properties.BLDG_NAME_LABEL_SHORT);
+      registerNameVariant(properties.TRI_BLDG_NAME);
+      registerNameVariant(properties.TRI_BLDG_ABBR);
+      registerNameVariant(properties.SITE_BUILDING);
+      registerNameVariant(properties.SITE_BUILDING_FLOOR);
+
+      if (buildingCode) {
+        seenBuildingCodes.add(buildingCode);
+        buildingByCode.set(buildingCode, { source, id });
+      }
+      if (normalizedName) {
+        seenNames.add(normalizedName);
+        buildingByName.set(normalizedName, { source, id });
+      }
+
+      seen.set(id, {
+        id,
+        name,
+        position: centroid,
+        tokens: Array.from(searchTokenSet),
+        exactTokens: Array.from(exactTokenSet),
+      });
     });
-  });
+  };
+
+  const gopherWayLayer = layers.find(
+    (layer) => layer.feature === "GOPHER_WAY_LEVEL_BLDGS",
+  );
+  const gwPortionLayer = layers.find(
+    (layer) => layer.feature === "GW_PORTION_DIFFERENT_LEVEL",
+  );
+  const egisBuildingLayer = layers.find(
+    (layer) => layer.feature === "EGISADMIN_BUILDING_POLYGON_HOSTED",
+  );
+
+  registerLayerBuildings(gopherWayLayer, (properties, index) =>
+    normalizeId(
+      properties.SITE_BUILDING ??
+        properties.GlobalID ??
+        properties.OBJECTID ??
+        `building-${index.toString()}`,
+    ),
+    { source: "primary" },
+  );
+
+  registerLayerBuildings(gwPortionLayer, (properties, index) =>
+    normalizeFloorAwareId(
+      properties.SITE_BUILDING_FLOOR ??
+        properties.SITE_BUILDING ??
+        properties.GlobalID ??
+        properties.OBJECTID ??
+        `gw-portion-${index.toString()}`,
+    ),
+    { source: "primary" },
+  );
+
+  registerLayerBuildings(egisBuildingLayer, (properties, index) =>
+    normalizeId(
+      properties.SITE_BUILDING ??
+        properties.GlobalID ??
+        properties.OBJECTID ??
+        `egis-building-${index.toString()}`,
+    ),
+    { source: "egis" },
+  );
 
   return Array.from(seen.values()).sort((a, b) =>
     a.name.localeCompare(b.name),

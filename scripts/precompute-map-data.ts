@@ -34,8 +34,13 @@ const main = () => {
     layers.filter((layer) => ROUTING_LAYER_FEATURES.has(layer.feature)),
   );
   const routeGraph = {
-    tunnel: buildRouteGraphSnapshot(buildings, tunnelNodes),
-    full: buildRouteGraphSnapshot(buildings, fullNodes),
+    tunnel: buildRouteGraphSnapshot(buildings, tunnelNodes, {
+      maxBuildingLinkDistanceMeters: 20,
+      fallbackToNearestNode: false,
+    }),
+    full: buildRouteGraphSnapshot(buildings, fullNodes, {
+      maxBuildingLinkDistanceMeters: 60,
+    }),
   };
   console.log(
     `Computed route graphs: tunnel=${routeGraph.tunnel.nodes.length} nodes, full=${routeGraph.full.nodes.length} nodes`,

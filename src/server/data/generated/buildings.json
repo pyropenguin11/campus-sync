@@ -17,6 +17,194 @@
     ]
   },
   {
+    "id": "01-224",
+    "name": "1015 Essex St SE Apartments",
+    "position": [
+      44.97160618834311,
+      -93.22329290589121
+    ],
+    "tokens": [
+      "1015 essex st se apartments",
+      "1015",
+      "essex",
+      "apartments",
+      "1015 essex st se apts.",
+      "apts.",
+      "1015 essex st se (224)",
+      "1015 essex st se",
+      "1015essex",
+      "01-224"
+    ],
+    "exactTokens": [
+      "1015 essex st se apartments",
+      "1015 essex st se apts.",
+      "1015 essex st se (224)",
+      "1015essex",
+      "01-224"
+    ]
+  },
+  {
+    "id": "01-106",
+    "name": "104 Union Street",
+    "position": [
+      44.975814762099766,
+      -93.232758980309
+    ],
+    "tokens": [
+      "104 union street",
+      "104",
+      "union",
+      "street",
+      "104 union st",
+      "104 union street (106)",
+      "104unst",
+      "01-106"
+    ],
+    "exactTokens": [
+      "104 union street",
+      "104 union st",
+      "104 union street (106)",
+      "104unst",
+      "01-106"
+    ]
+  },
+  {
+    "id": "01-991",
+    "name": "1200 Washington",
+    "position": [
+      44.97503977248854,
+      -93.25082608379343
+    ],
+    "tokens": [
+      "1200 washington",
+      "1200",
+      "washington",
+      "1200 washington (991)",
+      "1200wash",
+      "01-991"
+    ],
+    "exactTokens": [
+      "1200 washington",
+      "1200 washington (991)",
+      "1200wash",
+      "01-991"
+    ]
+  },
+  {
+    "id": "01-127",
+    "name": "1425 University Avenue SE",
+    "position": [
+      44.97923614343942,
+      -93.23527466831656
+    ],
+    "tokens": [
+      "1425 university avenue se",
+      "1425",
+      "university",
+      "avenue",
+      "1425 univ. ave se",
+      "univ.",
+      "ave",
+      "1425 university ave se (127)",
+      "1425 university ave se",
+      "1425univ",
+      "01-127"
+    ],
+    "exactTokens": [
+      "1425 university avenue se",
+      "1425 univ. ave se",
+      "1425 university ave se (127)",
+      "1425univ",
+      "01-127"
+    ]
+  },
+  {
+    "id": "92-901",
+    "name": "1441 Hunting Valley Rd - Public Storage Self Storage Units",
+    "position": [
+      44.982866167521095,
+      -93.20479886840205
+    ],
+    "tokens": [
+      "1441 hunting valley rd - public storage self storage units",
+      "1441",
+      "hunting",
+      "valley",
+      "public",
+      "storage",
+      "self",
+      "units",
+      "1441 hunting valley rd",
+      "1441 hunting valley rd - public storage (901)",
+      "1441 hunting valley rd - public storage",
+      "1441hunt",
+      "92-901"
+    ],
+    "exactTokens": [
+      "1441 hunting valley rd - public storage self storage units",
+      "1441 hunting valley rd",
+      "1441 hunting valley rd - public storage (901)",
+      "1441hunt",
+      "92-901"
+    ]
+  },
+  {
+    "id": "01-129",
+    "name": "17th Avenue Residence Hall",
+    "position": [
+      44.97827110623341,
+      -93.23159535256441
+    ],
+    "tokens": [
+      "17th avenue residence hall",
+      "17th",
+      "avenue",
+      "residence",
+      "hall",
+      "17th ave res. hall",
+      "ave",
+      "res.",
+      "17th ave residence hall (129)",
+      "17th ave residence hall",
+      "17rh",
+      "01-129"
+    ],
+    "exactTokens": [
+      "17th avenue residence hall",
+      "17th ave res. hall",
+      "17th ave residence hall (129)",
+      "17rh",
+      "01-129"
+    ]
+  },
+  {
+    "id": "01-093",
+    "name": "1901 University Avenue SE",
+    "position": [
+      44.976812382086145,
+      -93.22928056746409
+    ],
+    "tokens": [
+      "1901 university avenue se",
+      "1901",
+      "university",
+      "avenue",
+      "1901 univ. ave se",
+      "univ.",
+      "ave",
+      "1901 university avenue se (093)",
+      "1901univ",
+      "01-093"
+    ],
+    "exactTokens": [
+      "1901 university avenue se",
+      "1901 univ. ave se",
+      "1901 university avenue se (093)",
+      "1901univ",
+      "01-093"
+    ]
+  },
+  {
     "id": "52",
     "name": "19th Avenue Ramp",
     "position": [
@@ -31,6 +219,527 @@
     ],
     "exactTokens": [
       "19th avenue ramp"
+    ]
+  },
+  {
+    "id": "01-005",
+    "name": "216 Pillsbury Drive",
+    "position": [
+      44.97716293783718,
+      -93.23570238876366
+    ],
+    "tokens": [
+      "216 pillsbury drive",
+      "216",
+      "pillsbury",
+      "drive",
+      "216 pillsbury dr.",
+      "dr.",
+      "216 pillsbury drive (005)",
+      "216pills",
+      "01-005"
+    ],
+    "exactTokens": [
+      "216 pillsbury drive",
+      "216 pillsbury dr.",
+      "216 pillsbury drive (005)",
+      "216pills",
+      "01-005"
+    ]
+  },
+  {
+    "id": "01-214",
+    "name": "21st Avenue Ramp",
+    "position": [
+      44.96986202198905,
+      -93.24333798754483
+    ],
+    "tokens": [
+      "21st avenue ramp",
+      "21st",
+      "avenue",
+      "ramp",
+      "21st ave ramp",
+      "ave",
+      "21st ave ramp (214)",
+      "tar",
+      "01-214"
+    ],
+    "exactTokens": [
+      "21st avenue ramp",
+      "21st ave ramp",
+      "21st ave ramp (214)",
+      "tar",
+      "01-214"
+    ]
+  },
+  {
+    "id": "01-229",
+    "name": "2407 University Avenue SE",
+    "position": [
+      44.97428039093414,
+      -93.22168658007969
+    ],
+    "tokens": [
+      "2407 university avenue se",
+      "2407",
+      "university",
+      "avenue",
+      "2407 univ. ave se",
+      "univ.",
+      "ave",
+      "2407 university avenue se (229)",
+      "2407univ",
+      "01-229"
+    ],
+    "exactTokens": [
+      "2407 university avenue se",
+      "2407 univ. ave se",
+      "2407 university avenue se (229)",
+      "2407univ",
+      "01-229"
+    ]
+  },
+  {
+    "id": "01-233",
+    "name": "2407 University Soil Vapor Extraction & Air Sparging System Bldg",
+    "position": [
+      44.97438750194876,
+      -93.22086345518072
+    ],
+    "tokens": [
+      "2407 university soil vapor extraction & air sparging system bldg",
+      "2407",
+      "university",
+      "soil",
+      "vapor",
+      "extraction",
+      "air",
+      "sparging",
+      "system",
+      "bldg",
+      "2407 univ.",
+      "univ.",
+      "2407 usveas system building (233)",
+      "2407 usveas system building",
+      "usveas",
+      "building",
+      "2407univ/sveas",
+      "01-233"
+    ],
+    "exactTokens": [
+      "2407 university soil vapor extraction & air sparging system bldg",
+      "2407 univ.",
+      "2407 usveas system building (233)",
+      "2407univ/sveas",
+      "01-233"
+    ]
+  },
+  {
+    "id": "01-230",
+    "name": "2425 University Avenue SE",
+    "position": [
+      44.97381315658557,
+      -93.2214432678301
+    ],
+    "tokens": [
+      "2425 university avenue se",
+      "2425",
+      "university",
+      "avenue",
+      "2425 univ. ave se",
+      "univ.",
+      "ave",
+      "2425 university avenue se (230)",
+      "2425univ",
+      "01-230"
+    ],
+    "exactTokens": [
+      "2425 university avenue se",
+      "2425 univ. ave se",
+      "2425 university avenue se (230)",
+      "2425univ",
+      "01-230"
+    ]
+  },
+  {
+    "id": "01-231",
+    "name": "325-329 14th Avenue SE",
+    "position": [
+      44.980444811335545,
+      -93.23622212209352
+    ],
+    "tokens": [
+      "325-329 14th avenue se",
+      "325-329",
+      "14th",
+      "avenue",
+      "325-329 14th ave se",
+      "ave",
+      "325-329 14th avenue se (231)",
+      "325-14th",
+      "01-231"
+    ],
+    "exactTokens": [
+      "325-329 14th avenue se",
+      "325-329 14th ave se",
+      "325-329 14th avenue se (231)",
+      "325-14th",
+      "01-231"
+    ]
+  },
+  {
+    "id": "01-988",
+    "name": "3300 University Avenue SE",
+    "position": [
+      44.969073654997025,
+      -93.21134496829097
+    ],
+    "tokens": [
+      "3300 university avenue se",
+      "3300",
+      "university",
+      "avenue",
+      "3300 univ. ave se",
+      "univ.",
+      "ave",
+      "3300 university avenue se (988)",
+      "3300univ",
+      "01-988"
+    ],
+    "exactTokens": [
+      "3300 university avenue se",
+      "3300 univ. ave se",
+      "3300 university avenue se (988)",
+      "3300univ",
+      "01-988"
+    ]
+  },
+  {
+    "id": "01-176",
+    "name": "3M Arena at Mariucci",
+    "position": [
+      44.97801964430354,
+      -93.22805994468253
+    ],
+    "tokens": [
+      "3m arena at mariucci",
+      "arena",
+      "mariucci",
+      "3m arena at mariucci (176)",
+      "3mam",
+      "01-176"
+    ],
+    "exactTokens": [
+      "3m arena at mariucci",
+      "3m arena at mariucci (176)",
+      "3mam",
+      "01-176"
+    ]
+  },
+  {
+    "id": "01-223",
+    "name": "414 Erie St SE Apartments",
+    "position": [
+      44.97189758133615,
+      -93.22462947345778
+    ],
+    "tokens": [
+      "414 erie st se apartments",
+      "414",
+      "erie",
+      "apartments",
+      "414 erie st se apts.",
+      "apts.",
+      "414 erie st se apartments (223)",
+      "414erie",
+      "01-223"
+    ],
+    "exactTokens": [
+      "414 erie st se apartments",
+      "414 erie st se apts.",
+      "414 erie st se apartments (223)",
+      "414erie",
+      "01-223"
+    ]
+  },
+  {
+    "id": "01-226",
+    "name": "415 Erie St SE Apartments",
+    "position": [
+      44.97188402089392,
+      -93.22392539058121
+    ],
+    "tokens": [
+      "415 erie st se apartments",
+      "415",
+      "erie",
+      "apartments",
+      "415 erie st se apts.",
+      "apts.",
+      "415 erie st se apartments (226)",
+      "415erie",
+      "01-226"
+    ],
+    "exactTokens": [
+      "415 erie st se apartments",
+      "415 erie st se apts.",
+      "415 erie st se apartments (226)",
+      "415erie",
+      "01-226"
+    ]
+  },
+  {
+    "id": "01-227",
+    "name": "419 Erie St SE Apartments",
+    "position": [
+      44.97171032501506,
+      -93.22392566423468
+    ],
+    "tokens": [
+      "419 erie st se apartments",
+      "419",
+      "erie",
+      "apartments",
+      "419 erie st se apts.",
+      "apts.",
+      "419 erie st se apartments (227)",
+      "419erie",
+      "01-227"
+    ],
+    "exactTokens": [
+      "419 erie st se apartments",
+      "419 erie st se apts.",
+      "419 erie st se apartments (227)",
+      "419erie",
+      "01-227"
+    ]
+  },
+  {
+    "id": "01-228",
+    "name": "425 Erie St SE Apartments",
+    "position": [
+      44.971536978805425,
+      -93.22392577283101
+    ],
+    "tokens": [
+      "425 erie st se apartments",
+      "425",
+      "erie",
+      "apartments",
+      "425 erie st se apts.",
+      "apts.",
+      "425 erie st se apartments (228)",
+      "425erie",
+      "01-228"
+    ],
+    "exactTokens": [
+      "425 erie st se apartments",
+      "425 erie st se apts.",
+      "425 erie st se apartments (228)",
+      "425erie",
+      "01-228"
+    ]
+  },
+  {
+    "id": "01-170",
+    "name": "4th Street Ramp",
+    "position": [
+      44.97945680517175,
+      -93.23190967929266
+    ],
+    "tokens": [
+      "4th street ramp",
+      "4th",
+      "street",
+      "ramp",
+      "fourth st ramp",
+      "fourth",
+      "4th st ramp (170)",
+      "4th st ramp",
+      "fsr",
+      "01-170"
+    ],
+    "exactTokens": [
+      "4th street ramp",
+      "fourth st ramp",
+      "4th st ramp (170)",
+      "fsr",
+      "01-170"
+    ]
+  },
+  {
+    "id": "01-160",
+    "name": "4th Street Switch Station",
+    "position": [
+      44.97979340915021,
+      -93.23316785342882
+    ],
+    "tokens": [
+      "4th street switch station",
+      "4th",
+      "street",
+      "switch",
+      "station",
+      "4th st switch station",
+      "4th street switch station (160)",
+      "4thss",
+      "01-160"
+    ],
+    "exactTokens": [
+      "4th street switch station",
+      "4th st switch station",
+      "4th street switch station (160)",
+      "4thss",
+      "01-160"
+    ]
+  },
+  {
+    "id": "01-193",
+    "name": "717 Delaware St SE",
+    "position": [
+      44.97281551196759,
+      -93.22780779650397
+    ],
+    "tokens": [
+      "717 delaware st se",
+      "717",
+      "delaware",
+      "717 delaware (193)",
+      "717 delaware",
+      "717del",
+      "01-193"
+    ],
+    "exactTokens": [
+      "717 delaware st se",
+      "717 delaware (193)",
+      "717del",
+      "01-193"
+    ]
+  },
+  {
+    "id": "01-193G",
+    "name": "717 Delaware St SE Garage",
+    "position": [
+      44.972847579724686,
+      -93.22735643098261
+    ],
+    "tokens": [
+      "717 delaware st se garage",
+      "717",
+      "delaware",
+      "garage",
+      "717 delaware st se garage (193g)",
+      "717delg",
+      "01-193g"
+    ],
+    "exactTokens": [
+      "717 delaware st se garage",
+      "717 delaware st se garage (193g)",
+      "717delg",
+      "01-193g"
+    ]
+  },
+  {
+    "id": "01-978",
+    "name": "Academic Office Bldg",
+    "position": [
+      44.968028223864664,
+      -93.23775650007191
+    ],
+    "tokens": [
+      "academic office bldg",
+      "academic",
+      "office",
+      "bldg",
+      "academic office building (978)",
+      "academic office building",
+      "building",
+      "aob",
+      "01-978"
+    ],
+    "exactTokens": [
+      "academic office bldg",
+      "academic office building (978)",
+      "aob",
+      "01-978"
+    ]
+  },
+  {
+    "id": "01-232",
+    "name": "Advanced Operations Ctr",
+    "position": [
+      44.97941320256578,
+      -93.226401608523
+    ],
+    "tokens": [
+      "advanced operations ctr",
+      "advanced",
+      "operations",
+      "ctr",
+      "advanced ops ctr",
+      "ops",
+      "advanced operations center (232)",
+      "advanced operations center",
+      "center",
+      "aoc",
+      "01-232"
+    ],
+    "exactTokens": [
+      "advanced operations ctr",
+      "advanced ops ctr",
+      "advanced operations center (232)",
+      "aoc",
+      "01-232"
+    ]
+  },
+  {
+    "id": "02-423",
+    "name": "Agronomy & Plant Genetics Greenhouse",
+    "position": [
+      44.98727122708407,
+      -93.1799873374924
+    ],
+    "tokens": [
+      "agronomy & plant genetics greenhouse",
+      "agronomy",
+      "plant",
+      "genetics",
+      "greenhouse",
+      "agronomy and plant genetics greenhouse (423)",
+      "agronomy and plant genetics greenhouse",
+      "and",
+      "agrpggh",
+      "02-423"
+    ],
+    "exactTokens": [
+      "agronomy & plant genetics greenhouse",
+      "agronomy and plant genetics greenhouse (423)",
+      "agrpggh",
+      "02-423"
+    ]
+  },
+  {
+    "id": "02-345",
+    "name": "Agronomy Seed House",
+    "position": [
+      44.98550245058842,
+      -93.18146722790058
+    ],
+    "tokens": [
+      "agronomy seed house",
+      "agronomy",
+      "seed",
+      "house",
+      "agronomy seed house (345)",
+      "agrsh",
+      "02-345"
+    ],
+    "exactTokens": [
+      "agronomy seed house",
+      "agronomy seed house (345)",
+      "agrsh",
+      "02-345"
     ]
   },
   {
@@ -114,6 +823,28 @@
     ]
   },
   {
+    "id": "02-422",
+    "name": "Animal Arena",
+    "position": [
+      44.981722028194284,
+      -93.18005698048273
+    ],
+    "tokens": [
+      "animal arena",
+      "animal",
+      "arena",
+      "animal arena (422)",
+      "anaren",
+      "02-422"
+    ],
+    "exactTokens": [
+      "animal arena",
+      "animal arena (422)",
+      "anaren",
+      "02-422"
+    ]
+  },
+  {
     "id": "83",
     "name": "Animal Science/Veterinary Medicine",
     "position": [
@@ -128,6 +859,93 @@
     ],
     "exactTokens": [
       "animal science/veterinary medicine"
+    ]
+  },
+  {
+    "id": "01-037",
+    "name": "Appleby Hall",
+    "position": [
+      44.97485268437421,
+      -93.23734465796944
+    ],
+    "tokens": [
+      "appleby hall",
+      "appleby",
+      "hall",
+      "appleby hall (037)",
+      "aph",
+      "01-037"
+    ],
+    "exactTokens": [
+      "appleby hall",
+      "appleby",
+      "appleby hall (037)",
+      "aph",
+      "01-037"
+    ]
+  },
+  {
+    "id": "01-011",
+    "name": "Armory",
+    "position": [
+      44.977185460328556,
+      -93.23239752446283
+    ],
+    "tokens": [
+      "armory",
+      "armory (011)",
+      "01-011"
+    ],
+    "exactTokens": [
+      "armory",
+      "armory (011)",
+      "01-011"
+    ]
+  },
+  {
+    "id": "01-011G",
+    "name": "Armory Garage",
+    "position": [
+      44.97712915466728,
+      -93.23191566419848
+    ],
+    "tokens": [
+      "armory garage",
+      "armory",
+      "garage",
+      "armory garage (011g)",
+      "armg",
+      "01-011g"
+    ],
+    "exactTokens": [
+      "armory garage",
+      "armory garage (011g)",
+      "armg",
+      "01-011g"
+    ]
+  },
+  {
+    "id": "01-038",
+    "name": "Auxiliary Support Bldg",
+    "position": [
+      44.97809294708222,
+      -93.23992530150737
+    ],
+    "tokens": [
+      "auxiliary support bldg",
+      "auxiliary",
+      "support",
+      "bldg",
+      "auxiliary support (038)",
+      "auxiliary support",
+      "asb",
+      "01-038"
+    ],
+    "exactTokens": [
+      "auxiliary support bldg",
+      "auxiliary support (038)",
+      "asb",
+      "01-038"
     ]
   },
   {
@@ -147,6 +965,205 @@
     ]
   },
   {
+    "id": "01-247",
+    "name": "Barker Ctr For Dance",
+    "position": [
+      44.968737157052885,
+      -93.24286491153735
+    ],
+    "tokens": [
+      "barker ctr for dance",
+      "barker",
+      "ctr",
+      "for",
+      "dance",
+      "barker center (247)",
+      "barker center",
+      "center",
+      "barkerctr",
+      "01-247"
+    ],
+    "exactTokens": [
+      "barker ctr for dance",
+      "barker",
+      "barker center (247)",
+      "barkerctr",
+      "01-247"
+    ]
+  },
+  {
+    "id": "02-346",
+    "name": "Bee Lab Storage Bldg",
+    "position": [
+      44.9890680473472,
+      -93.18080876980414
+    ],
+    "tokens": [
+      "bee lab storage bldg",
+      "bee",
+      "lab",
+      "storage",
+      "bldg",
+      "bee lab storage",
+      "bee lab storage (346)",
+      "blabstor",
+      "02-346"
+    ],
+    "exactTokens": [
+      "bee lab storage bldg",
+      "bee lab storage",
+      "bee lab storage (346)",
+      "blabstor",
+      "02-346"
+    ]
+  },
+  {
+    "id": "02-347",
+    "name": "Bee Research Facility",
+    "position": [
+      44.98923547344648,
+      -93.18141632783943
+    ],
+    "tokens": [
+      "bee research facility",
+      "bee",
+      "research",
+      "facility",
+      "bee research",
+      "bee research facility (347)",
+      "brf",
+      "02-347"
+    ],
+    "exactTokens": [
+      "bee research facility",
+      "bee research",
+      "bee research facility (347)",
+      "brf",
+      "02-347"
+    ]
+  },
+  {
+    "id": "02-302",
+    "name": "Beef Cattle Barn",
+    "position": [
+      44.98516352160569,
+      -93.18145904678927
+    ],
+    "tokens": [
+      "beef cattle barn",
+      "beef",
+      "cattle",
+      "barn",
+      "beef cattle barn (302)",
+      "bcb",
+      "02-302"
+    ],
+    "exactTokens": [
+      "beef cattle barn",
+      "beef cattle barn (302)",
+      "bcb",
+      "02-302"
+    ]
+  },
+  {
+    "id": "02-489",
+    "name": "Bell Museum",
+    "position": [
+      44.99114713363348,
+      -93.18803905487977
+    ],
+    "tokens": [
+      "bell museum",
+      "bell",
+      "museum",
+      "bell museum (489)",
+      "bellmuse",
+      "02-489"
+    ],
+    "exactTokens": [
+      "bell museum",
+      "bell museum (489)",
+      "bellmuse",
+      "02-489"
+    ]
+  },
+  {
+    "id": "02-326",
+    "name": "Ben Pomeroy Student-Alumni Learning Ctr",
+    "position": [
+      44.98253943838583,
+      -93.18291147744357
+    ],
+    "tokens": [
+      "ben pomeroy student-alumni learning ctr",
+      "ben",
+      "pomeroy",
+      "student-alumni",
+      "learning",
+      "ctr",
+      "ben pomeroy",
+      "ben pomeroy student-alumni learning (326)",
+      "ben pomeroy student-alumni learning",
+      "bpomctr",
+      "02-326"
+    ],
+    "exactTokens": [
+      "ben pomeroy student-alumni learning ctr",
+      "ben pomeroy",
+      "ben pomeroy student-alumni learning (326)",
+      "bpomctr",
+      "02-326"
+    ]
+  },
+  {
+    "id": "01-139",
+    "name": "Bierman Athletic Bldg",
+    "position": [
+      44.98113845098895,
+      -93.23264411041781
+    ],
+    "tokens": [
+      "bierman athletic bldg",
+      "bierman",
+      "athletic",
+      "bldg",
+      "bierman athletic building (139)",
+      "bierman athletic building",
+      "building",
+      "bfab",
+      "01-139"
+    ],
+    "exactTokens": [
+      "bierman athletic bldg",
+      "bierman athletic building (139)",
+      "bfab",
+      "01-139"
+    ]
+  },
+  {
+    "id": "01-072",
+    "name": "Bierman Field Clubhouse",
+    "position": [
+      44.980924868738946,
+      -93.22971067537233
+    ],
+    "tokens": [
+      "bierman field clubhouse",
+      "bierman",
+      "field",
+      "clubhouse",
+      "bierman field clubhouse (072)",
+      "bfc",
+      "01-072"
+    ],
+    "exactTokens": [
+      "bierman field clubhouse",
+      "bierman field clubhouse (072)",
+      "bfc",
+      "01-072"
+    ]
+  },
+  {
     "id": "81",
     "name": "Biological Sciences",
     "position": [
@@ -160,6 +1177,37 @@
     ],
     "exactTokens": [
       "biological sciences"
+    ]
+  },
+  {
+    "id": "02-334",
+    "name": "Biosystems & Agricultural Engineering Bldg",
+    "position": [
+      44.982905146023725,
+      -93.18520378063097
+    ],
+    "tokens": [
+      "biosystems & agricultural engineering bldg",
+      "biosystems",
+      "agricultural",
+      "engineering",
+      "bldg",
+      "biosystems & ag. eng.",
+      "ag.",
+      "eng.",
+      "biosystems and ag engineering building (334)",
+      "biosystems and ag engineering building",
+      "and",
+      "building",
+      "bioageng",
+      "02-334"
+    ],
+    "exactTokens": [
+      "biosystems & agricultural engineering bldg",
+      "biosystems & ag. eng.",
+      "biosystems and ag engineering building (334)",
+      "bioageng",
+      "02-334"
     ]
   },
   {
@@ -179,6 +1227,26 @@
     ]
   },
   {
+    "id": "01-190",
+    "name": "Boathouse",
+    "position": [
+      44.96999597576384,
+      -93.23223463691157
+    ],
+    "tokens": [
+      "boathouse",
+      "boathouse (190)",
+      "boath",
+      "01-190"
+    ],
+    "exactTokens": [
+      "boathouse",
+      "boathouse (190)",
+      "boath",
+      "01-190"
+    ]
+  },
+  {
     "id": "76",
     "name": "Borlaug Hall",
     "position": [
@@ -192,6 +1260,57 @@
     ],
     "exactTokens": [
       "borlaug hall"
+    ]
+  },
+  {
+    "id": "02-413",
+    "name": "Boss Laboratory of Meat Science",
+    "position": [
+      44.9818466469554,
+      -93.18478504003116
+    ],
+    "tokens": [
+      "boss laboratory of meat science",
+      "boss",
+      "laboratory",
+      "meat",
+      "science",
+      "boss lab",
+      "lab",
+      "boss laboratory (413)",
+      "boss laboratory",
+      "ablms",
+      "02-413"
+    ],
+    "exactTokens": [
+      "boss laboratory of meat science",
+      "boss lab",
+      "boss laboratory (413)",
+      "ablms",
+      "02-413"
+    ]
+  },
+  {
+    "id": "02-343",
+    "name": "Botany Field House",
+    "position": [
+      44.98906506001734,
+      -93.18604791757666
+    ],
+    "tokens": [
+      "botany field house",
+      "botany",
+      "field",
+      "house",
+      "botany field house (343)",
+      "bfh",
+      "02-343"
+    ],
+    "exactTokens": [
+      "botany field house",
+      "botany field house (343)",
+      "bfh",
+      "02-343"
     ]
   },
   {
@@ -212,6 +1331,129 @@
     ]
   },
   {
+    "id": "01-299",
+    "name": "Bruininks Hall",
+    "position": [
+      44.97406938459334,
+      -93.23731970858528
+    ],
+    "tokens": [
+      "bruininks hall",
+      "bruininks",
+      "hall",
+      "bruininks hall (299)",
+      "bruh",
+      "01-299"
+    ],
+    "exactTokens": [
+      "bruininks hall",
+      "bruininks",
+      "bruininks hall (299)",
+      "bruh",
+      "01-299"
+    ]
+  },
+  {
+    "id": "01-008",
+    "name": "Burton Hall",
+    "position": [
+      44.977660647874245,
+      -93.23766688407497
+    ],
+    "tokens": [
+      "burton hall",
+      "burton",
+      "hall",
+      "burton hall (008)",
+      "buh",
+      "01-008"
+    ],
+    "exactTokens": [
+      "burton hall",
+      "burton",
+      "burton hall (008)",
+      "buh",
+      "01-008"
+    ]
+  },
+  {
+    "id": "01-019",
+    "name": "Campbell Hall",
+    "position": [
+      44.97852158648861,
+      -93.23897453475075
+    ],
+    "tokens": [
+      "campbell hall",
+      "campbell",
+      "hall",
+      "campbell hall (019)",
+      "camph",
+      "01-019"
+    ],
+    "exactTokens": [
+      "campbell hall",
+      "campbell",
+      "campbell hall (019)",
+      "camph",
+      "01-019"
+    ]
+  },
+  {
+    "id": "01-153",
+    "name": "Cancer & Cardiovascular Research Bldg",
+    "position": [
+      44.97794335536926,
+      -93.22173403626991
+    ],
+    "tokens": [
+      "cancer & cardiovascular research bldg",
+      "cancer",
+      "cardiovascular",
+      "research",
+      "bldg",
+      "cancer & cardio. research",
+      "cardio.",
+      "cancer cardio (153)",
+      "cancer cardio",
+      "cardio",
+      "ccrb",
+      "01-153"
+    ],
+    "exactTokens": [
+      "cancer & cardiovascular research bldg",
+      "cancer & cardio. research",
+      "cancer cardio (153)",
+      "ccrb",
+      "01-153"
+    ]
+  },
+  {
+    "id": "02-439",
+    "name": "Cargill Bldg",
+    "position": [
+      44.986419643416355,
+      -93.18120008990432
+    ],
+    "tokens": [
+      "cargill bldg",
+      "cargill",
+      "bldg",
+      "cargill building (439)",
+      "cargill building",
+      "building",
+      "cargillb",
+      "02-439"
+    ],
+    "exactTokens": [
+      "cargill bldg",
+      "cargill",
+      "cargill building (439)",
+      "cargillb",
+      "02-439"
+    ]
+  },
+  {
     "id": "54",
     "name": "Carlson School of Management",
     "position": [
@@ -226,6 +1468,138 @@
     ],
     "exactTokens": [
       "carlson school of management"
+    ]
+  },
+  {
+    "id": "02-332",
+    "name": "Cattle Feeding Shed No. 1",
+    "position": [
+      44.98510963011064,
+      -93.18018888949833
+    ],
+    "tokens": [
+      "cattle feeding shed no. 1",
+      "cattle",
+      "feeding",
+      "shed",
+      "no.",
+      "cattle feeding no. 1",
+      "cattle feeding shed no 1 (332)",
+      "cattle feeding shed no 1",
+      "cfs1",
+      "02-332"
+    ],
+    "exactTokens": [
+      "cattle feeding shed no. 1",
+      "cattle feeding no. 1",
+      "cattle feeding shed no 1 (332)",
+      "cfs1",
+      "02-332"
+    ]
+  },
+  {
+    "id": "02-333",
+    "name": "Cattle Feeding Shed No. 2",
+    "position": [
+      44.984891762124334,
+      -93.1801932495614
+    ],
+    "tokens": [
+      "cattle feeding shed no. 2",
+      "cattle",
+      "feeding",
+      "shed",
+      "no.",
+      "cattle feeding no. 2",
+      "cattle feeding shed no 2 (333)",
+      "cattle feeding shed no 2",
+      "cfs2",
+      "02-333"
+    ],
+    "exactTokens": [
+      "cattle feeding shed no. 2",
+      "cattle feeding no. 2",
+      "cattle feeding shed no 2 (333)",
+      "cfs2",
+      "02-333"
+    ]
+  },
+  {
+    "id": "01-068",
+    "name": "Centennial Hall",
+    "position": [
+      44.972000084834036,
+      -93.22949502685702
+    ],
+    "tokens": [
+      "centennial hall",
+      "centennial",
+      "hall",
+      "centennial hall (068)",
+      "cenh",
+      "01-068"
+    ],
+    "exactTokens": [
+      "centennial hall",
+      "centennial",
+      "centennial hall (068)",
+      "cenh",
+      "01-068"
+    ]
+  },
+  {
+    "id": "02-399",
+    "name": "Cereal Disease Laboratory (USDA)",
+    "position": [
+      44.987796260642455,
+      -93.18017822688891
+    ],
+    "tokens": [
+      "cereal disease laboratory (usda)",
+      "cereal disease laboratory",
+      "cereal",
+      "disease",
+      "laboratory",
+      "cereal disease lab (usda)",
+      "cereal disease lab",
+      "lab",
+      "cereal disease lab (usda) (399)",
+      "cdl",
+      "02-399"
+    ],
+    "exactTokens": [
+      "cereal disease laboratory (usda)",
+      "cereal disease lab (usda)",
+      "cereal disease lab (usda) (399)",
+      "cdl",
+      "02-399"
+    ]
+  },
+  {
+    "id": "01-173",
+    "name": "Child Development Laboratory School",
+    "position": [
+      44.98489326044198,
+      -93.22950670860571
+    ],
+    "tokens": [
+      "child development laboratory school",
+      "child",
+      "development",
+      "laboratory",
+      "school",
+      "child development lab school",
+      "lab",
+      "child development lab school (173)",
+      "cdls",
+      "01-173"
+    ],
+    "exactTokens": [
+      "child development laboratory school",
+      "child development lab school",
+      "child development lab school (173)",
+      "cdls",
+      "01-173"
     ]
   },
   {
@@ -279,6 +1653,31 @@
     ]
   },
   {
+    "id": "01-163",
+    "name": "Church Street Garage",
+    "position": [
+      44.97643639995325,
+      -93.23434171651554
+    ],
+    "tokens": [
+      "church street garage",
+      "church",
+      "street",
+      "garage",
+      "church st garage",
+      "church st garage (163)",
+      "csg",
+      "01-163"
+    ],
+    "exactTokens": [
+      "church street garage",
+      "church st garage",
+      "church st garage (163)",
+      "csg",
+      "01-163"
+    ]
+  },
+  {
     "id": "33",
     "name": "Civil Engineering Bldg",
     "position": [
@@ -293,6 +1692,56 @@
     ],
     "exactTokens": [
       "civil engineering bldg"
+    ]
+  },
+  {
+    "id": "01-039",
+    "name": "Coal Storage Bldg",
+    "position": [
+      44.97908354244818,
+      -93.24034542302427
+    ],
+    "tokens": [
+      "coal storage bldg",
+      "coal",
+      "storage",
+      "bldg",
+      "coal storage",
+      "coal storage (039)",
+      "coalstor",
+      "01-039"
+    ],
+    "exactTokens": [
+      "coal storage bldg",
+      "coal storage",
+      "coal storage (039)",
+      "coalstor",
+      "01-039"
+    ]
+  },
+  {
+    "id": "01-034A",
+    "name": "Coal Unloading Facility",
+    "position": [
+      44.97945326092806,
+      -93.24053930030354
+    ],
+    "tokens": [
+      "coal unloading facility",
+      "coal",
+      "unloading",
+      "facility",
+      "coal unloading",
+      "coal unloading facility (034a)",
+      "coalufac",
+      "01-034a"
+    ],
+    "exactTokens": [
+      "coal unloading facility",
+      "coal unloading",
+      "coal unloading facility (034a)",
+      "coalufac",
+      "01-034a"
     ]
   },
   {
@@ -329,6 +1778,444 @@
     ]
   },
   {
+    "id": "01-225",
+    "name": "Collections Facility",
+    "position": [
+      44.98755597988677,
+      -93.21197798089148
+    ],
+    "tokens": [
+      "collections facility",
+      "collections",
+      "facility",
+      "collections facility (225)",
+      "cf",
+      "01-225"
+    ],
+    "exactTokens": [
+      "collections facility",
+      "collections facility (225)",
+      "cf",
+      "01-225"
+    ]
+  },
+  {
+    "id": "10-418",
+    "name": "Commonwealth Terrace Community Ctr",
+    "position": [
+      44.979292341760036,
+      -93.1834300782804
+    ],
+    "tokens": [
+      "commonwealth terrace community ctr",
+      "commonwealth",
+      "terrace",
+      "community",
+      "ctr",
+      "commonwealth terrace community cent (418)",
+      "commonwealth terrace community cent",
+      "cent",
+      "ctcc",
+      "10-418"
+    ],
+    "exactTokens": [
+      "commonwealth terrace community ctr",
+      "commonwealth terrace community cent (418)",
+      "ctcc",
+      "10-418"
+    ]
+  },
+  {
+    "id": "10-001",
+    "name": "Commonwealth Terrace Student Housing",
+    "position": [
+      44.98012824426996,
+      -93.18690630380438
+    ],
+    "tokens": [
+      "commonwealth terrace student housing",
+      "commonwealth",
+      "terrace",
+      "student",
+      "housing",
+      "unit 01",
+      "unit",
+      "commonwealth housing 2053-2059 knapp (001)",
+      "commonwealth housing 2053-2059 knapp",
+      "2053-2059",
+      "knapp",
+      "ctsh001",
+      "10-001"
+    ],
+    "exactTokens": [
+      "commonwealth terrace student housing",
+      "unit 01",
+      "commonwealth housing 2053-2059 knapp (001)",
+      "ctsh001",
+      "10-001"
+    ]
+  },
+  {
+    "id": "01-171",
+    "name": "Community University Health Care Ctr",
+    "position": [
+      44.96199203487512,
+      -93.25194249192613
+    ],
+    "tokens": [
+      "community university health care ctr",
+      "community",
+      "university",
+      "health",
+      "care",
+      "ctr",
+      "community univ. health care ctr",
+      "univ.",
+      "cuhcc (171)",
+      "cuhcc",
+      "01-171"
+    ],
+    "exactTokens": [
+      "community university health care ctr",
+      "community univ. health care ctr",
+      "cuhcc (171)",
+      "cuhcc",
+      "01-171"
+    ]
+  },
+  {
+    "id": "09-150",
+    "name": "Como Community Ctr",
+    "position": [
+      44.98896689580402,
+      -93.21480882510583
+    ],
+    "tokens": [
+      "como community ctr",
+      "como",
+      "community",
+      "ctr",
+      "como community center (150)",
+      "como community center",
+      "center",
+      "comocc",
+      "09-150"
+    ],
+    "exactTokens": [
+      "como community ctr",
+      "como community center (150)",
+      "comocc",
+      "09-150"
+    ]
+  },
+  {
+    "id": "01-099",
+    "name": "Como Recycling Facility",
+    "position": [
+      44.9886417877067,
+      -93.2107669604314
+    ],
+    "tokens": [
+      "como recycling facility",
+      "como",
+      "recycling",
+      "facility",
+      "como recycling facility (099)",
+      "comorfac",
+      "01-099"
+    ],
+    "exactTokens": [
+      "como recycling facility",
+      "como recycling facility (099)",
+      "comorfac",
+      "01-099"
+    ]
+  },
+  {
+    "id": "09-001",
+    "name": "Como Student Housing",
+    "position": [
+      44.98829098310402,
+      -93.2143811373783
+    ],
+    "tokens": [
+      "como student housing",
+      "como",
+      "student",
+      "housing",
+      "apts. 1000-1010",
+      "apts.",
+      "1000-1010",
+      "como housing 1000-1010 (001)",
+      "como housing 1000-1010",
+      "csh001",
+      "09-001"
+    ],
+    "exactTokens": [
+      "como student housing",
+      "apts. 1000-1010",
+      "como housing 1000-1010 (001)",
+      "csh001",
+      "09-001"
+    ]
+  },
+  {
+    "id": "01-085",
+    "name": "Como Switch Station",
+    "position": [
+      44.98502603826856,
+      -93.21245256456909
+    ],
+    "tokens": [
+      "como switch station",
+      "como",
+      "switch",
+      "station",
+      "como switch station (085)",
+      "comoss",
+      "01-085"
+    ],
+    "exactTokens": [
+      "como switch station",
+      "como switch station (085)",
+      "comoss",
+      "01-085"
+    ]
+  },
+  {
+    "id": "01-063",
+    "name": "Comstock Hall",
+    "position": [
+      44.97230637658865,
+      -93.23686793636233
+    ],
+    "tokens": [
+      "comstock hall",
+      "comstock",
+      "hall",
+      "comstock hall (063)",
+      "comh",
+      "01-063"
+    ],
+    "exactTokens": [
+      "comstock hall",
+      "comstock",
+      "comstock hall (063)",
+      "comh",
+      "01-063"
+    ]
+  },
+  {
+    "id": "02-420",
+    "name": "Continuing Education & Conference Ctr",
+    "position": [
+      44.98381346723687,
+      -93.1805750269994
+    ],
+    "tokens": [
+      "continuing education & conference ctr",
+      "continuing",
+      "education",
+      "conference",
+      "ctr",
+      "cont. ed. & conf. ctr",
+      "cont.",
+      "ed.",
+      "conf.",
+      "continuing education and conf center (420)",
+      "continuing education and conf center",
+      "and",
+      "conf",
+      "center",
+      "cecc",
+      "02-420"
+    ],
+    "exactTokens": [
+      "continuing education & conference ctr",
+      "cont. ed. & conf. ctr",
+      "continuing education and conf center (420)",
+      "cecc",
+      "02-420"
+    ]
+  },
+  {
+    "id": "01-056",
+    "name": "Cooke Hall",
+    "position": [
+      44.97599218638239,
+      -93.2304375490429
+    ],
+    "tokens": [
+      "cooke hall",
+      "cooke",
+      "hall",
+      "cooke hall (056)",
+      "cookeh",
+      "01-056"
+    ],
+    "exactTokens": [
+      "cooke hall",
+      "cooke",
+      "cooke hall (056)",
+      "cookeh",
+      "01-056"
+    ]
+  },
+  {
+    "id": "01-187",
+    "name": "Cowles Stadium",
+    "position": [
+      44.98085738592057,
+      -93.22857284363894
+    ],
+    "tokens": [
+      "cowles stadium",
+      "cowles",
+      "stadium",
+      "cowles stadium (187)",
+      "cowlessta",
+      "01-187"
+    ],
+    "exactTokens": [
+      "cowles stadium",
+      "cowles stadium (187)",
+      "cowlessta",
+      "01-187"
+    ]
+  },
+  {
+    "id": "02-389",
+    "name": "Crop Research Bldg",
+    "position": [
+      44.98634170977254,
+      -93.18043834308418
+    ],
+    "tokens": [
+      "crop research bldg",
+      "crop",
+      "research",
+      "bldg",
+      "crop research",
+      "crop research building (389)",
+      "crop research building",
+      "building",
+      "crres",
+      "02-389"
+    ],
+    "exactTokens": [
+      "crop research bldg",
+      "crop research",
+      "crop research building (389)",
+      "crres",
+      "02-389"
+    ]
+  },
+  {
+    "id": "02-388",
+    "name": "Crop Service Bldg",
+    "position": [
+      44.98632014874734,
+      -93.18016150395763
+    ],
+    "tokens": [
+      "crop service bldg",
+      "crop",
+      "service",
+      "bldg",
+      "crop service",
+      "crop service building (388)",
+      "crop service building",
+      "building",
+      "crserv",
+      "02-388"
+    ],
+    "exactTokens": [
+      "crop service bldg",
+      "crop service",
+      "crop service building (388)",
+      "crserv",
+      "02-388"
+    ]
+  },
+  {
+    "id": "92-902",
+    "name": "Ctr for Art Medicine",
+    "position": [
+      44.96497845542174,
+      -93.19917379110845
+    ],
+    "tokens": [
+      "ctr for art medicine",
+      "ctr",
+      "for",
+      "art",
+      "medicine",
+      "art medicine",
+      "center for art medicine (902)",
+      "center for art medicine",
+      "center",
+      "cfam",
+      "92-902"
+    ],
+    "exactTokens": [
+      "ctr for art medicine",
+      "art medicine",
+      "center for art medicine (902)",
+      "cfam",
+      "92-902"
+    ]
+  },
+  {
+    "id": "01-180",
+    "name": "Ctr for Magnetic Resonance Research",
+    "position": [
+      44.978996339948985,
+      -93.22397609098626
+    ],
+    "tokens": [
+      "ctr for magnetic resonance research",
+      "ctr",
+      "for",
+      "magnetic",
+      "resonance",
+      "research",
+      "magnetic resonance research",
+      "center for magnetic resonance research (180)",
+      "center for magnetic resonance research",
+      "center",
+      "cmrr",
+      "01-180"
+    ],
+    "exactTokens": [
+      "ctr for magnetic resonance research",
+      "magnetic resonance research",
+      "center for magnetic resonance research (180)",
+      "cmrr",
+      "01-180"
+    ]
+  },
+  {
+    "id": "01-179",
+    "name": "CUHCC Trailers",
+    "position": [
+      44.96209992396078,
+      -93.25129643898129
+    ],
+    "tokens": [
+      "cuhcc trailers",
+      "cuhcc",
+      "trailers",
+      "cuhcc trailers (179)",
+      "01-179"
+    ],
+    "exactTokens": [
+      "cuhcc trailers",
+      "cuhcc trailers (179)",
+      "trailers",
+      "01-179"
+    ]
+  },
+  {
     "id": "25",
     "name": "Diehl Hall",
     "position": [
@@ -361,6 +2248,31 @@
     ]
   },
   {
+    "id": "01-044",
+    "name": "Donhowe Bldg",
+    "position": [
+      44.979595839754175,
+      -93.23515270278615
+    ],
+    "tokens": [
+      "donhowe bldg",
+      "donhowe",
+      "bldg",
+      "donhowe building (044)",
+      "donhowe building",
+      "building",
+      "donhoweb",
+      "01-044"
+    ],
+    "exactTokens": [
+      "donhowe bldg",
+      "donhowe",
+      "donhowe building (044)",
+      "donhoweb",
+      "01-044"
+    ]
+  },
+  {
     "id": "28",
     "name": "Dwan Variety Research Ctr",
     "position": [
@@ -376,6 +2288,63 @@
     ],
     "exactTokens": [
       "dwan variety research ctr"
+    ]
+  },
+  {
+    "id": "01-092",
+    "name": "Early Childhood Learning Ctr",
+    "position": [
+      44.97891450973212,
+      -93.23268359081574
+    ],
+    "tokens": [
+      "early childhood learning ctr",
+      "early",
+      "childhood",
+      "learning",
+      "ctr",
+      "early childhood learning center (092)",
+      "early childhood learning center",
+      "center",
+      "eclc",
+      "01-092"
+    ],
+    "exactTokens": [
+      "early childhood learning ctr",
+      "early childhood learning center (092)",
+      "eclc",
+      "01-092"
+    ]
+  },
+  {
+    "id": "01-199",
+    "name": "East Gateway District Steam Distribution Bldg",
+    "position": [
+      44.97493713620344,
+      -93.22587677986388
+    ],
+    "tokens": [
+      "east gateway district steam distribution bldg",
+      "east",
+      "gateway",
+      "district",
+      "steam",
+      "distribution",
+      "bldg",
+      "east gateway district steam distrib.",
+      "distrib.",
+      "east gateway district steam distr (199)",
+      "east gateway district steam distr",
+      "distr",
+      "egdsb",
+      "01-199"
+    ],
+    "exactTokens": [
+      "east gateway district steam distribution bldg",
+      "east gateway district steam distrib.",
+      "east gateway district steam distr (199)",
+      "egdsb",
+      "01-199"
     ]
   },
   {
@@ -397,6 +2366,24 @@
     ]
   },
   {
+    "id": "02-095",
+    "name": "Eastcliff",
+    "position": [
+      44.94634161014828,
+      -93.19793312963621
+    ],
+    "tokens": [
+      "eastcliff",
+      "eastcliff (095)",
+      "02-095"
+    ],
+    "exactTokens": [
+      "eastcliff",
+      "eastcliff (095)",
+      "02-095"
+    ]
+  },
+  {
     "id": "85",
     "name": "Ecology Bldg",
     "position": [
@@ -410,6 +2397,247 @@
     ],
     "exactTokens": [
       "ecology bldg"
+    ]
+  },
+  {
+    "id": "01-001",
+    "name": "Eddy Hall",
+    "position": [
+      44.9776911102664,
+      -93.23671217584922
+    ],
+    "tokens": [
+      "eddy hall",
+      "eddy",
+      "hall",
+      "eddy hall (001)",
+      "eddyh",
+      "01-001"
+    ],
+    "exactTokens": [
+      "eddy hall",
+      "eddy",
+      "eddy hall (001)",
+      "eddyh",
+      "01-001"
+    ]
+  },
+  {
+    "id": "01-041",
+    "name": "Education Sciences Bldg",
+    "position": [
+      44.97851204634128,
+      -93.23956738651339
+    ],
+    "tokens": [
+      "education sciences bldg",
+      "education",
+      "sciences",
+      "bldg",
+      "education sciences",
+      "education sciences (041)",
+      "edscib",
+      "01-041"
+    ],
+    "exactTokens": [
+      "education sciences bldg",
+      "education sciences",
+      "education sciences (041)",
+      "edscib",
+      "01-041"
+    ]
+  },
+  {
+    "id": "01-020",
+    "name": "Elliott Hall",
+    "position": [
+      44.97699197550464,
+      -93.23784969731051
+    ],
+    "tokens": [
+      "elliott hall",
+      "elliott",
+      "hall",
+      "elliott hall (020)",
+      "elth",
+      "01-020"
+    ],
+    "exactTokens": [
+      "elliott hall",
+      "elliott",
+      "elliott hall (020)",
+      "elth",
+      "01-020"
+    ]
+  },
+  {
+    "id": "02-335",
+    "name": "Engineering & Fisheries Laboratory",
+    "position": [
+      44.982942718828056,
+      -93.18473895001685
+    ],
+    "tokens": [
+      "engineering & fisheries laboratory",
+      "engineering",
+      "fisheries",
+      "laboratory",
+      "eng. & fisheries lab",
+      "eng.",
+      "lab",
+      "engineering and fisheries laboratory (335)",
+      "engineering and fisheries laboratory",
+      "and",
+      "engrfishl",
+      "02-335"
+    ],
+    "exactTokens": [
+      "engineering & fisheries laboratory",
+      "eng. & fisheries lab",
+      "engineering and fisheries laboratory (335)",
+      "engrfishl",
+      "02-335"
+    ]
+  },
+  {
+    "id": "02-379",
+    "name": "Facilities Management Bldg",
+    "position": [
+      44.979959019862115,
+      -93.18178603727999
+    ],
+    "tokens": [
+      "facilities management bldg",
+      "facilities",
+      "management",
+      "bldg",
+      "fm bldg",
+      "fm building (379)",
+      "fm building",
+      "building",
+      "fmb",
+      "02-379"
+    ],
+    "exactTokens": [
+      "facilities management bldg",
+      "fm bldg",
+      "fm building (379)",
+      "fmb",
+      "02-379"
+    ]
+  },
+  {
+    "id": "01-951",
+    "name": "Fairview U Med Ctr - East",
+    "position": [
+      44.96757972957797,
+      -93.23690797183696
+    ],
+    "tokens": [
+      "fairview u med ctr - east",
+      "fairview",
+      "med",
+      "ctr",
+      "east",
+      "fairview univ med ctr - east",
+      "univ",
+      "fairview u med ctr east (951)",
+      "fairview u med ctr east",
+      "fumce",
+      "01-951"
+    ],
+    "exactTokens": [
+      "fairview u med ctr - east",
+      "fairview univ med ctr - east",
+      "fairview u med ctr east (951)",
+      "fumce",
+      "01-951"
+    ]
+  },
+  {
+    "id": "01-950",
+    "name": "Fairview U Med Ctr - Riverside West",
+    "position": [
+      44.968034979634915,
+      -93.23815767906854
+    ],
+    "tokens": [
+      "fairview u med ctr - riverside west",
+      "fairview",
+      "med",
+      "ctr",
+      "riverside",
+      "west",
+      "fairview univ. med. ctr - riverside west",
+      "univ.",
+      "med.",
+      "fairview riverside west (950)",
+      "fairview riverside west",
+      "fumcrw",
+      "01-950"
+    ],
+    "exactTokens": [
+      "fairview u med ctr - riverside west",
+      "fairview univ. med. ctr - riverside west",
+      "fairview riverside west (950)",
+      "fumcrw",
+      "01-950"
+    ]
+  },
+  {
+    "id": "01-993",
+    "name": "Fairview University Medical Ctr - Orthopedic",
+    "position": [
+      44.966949085767105,
+      -93.2353709896134
+    ],
+    "tokens": [
+      "fairview university medical ctr - orthopedic",
+      "fairview",
+      "university",
+      "medical",
+      "ctr",
+      "orthopedic",
+      "fairview univ. med. ctr - orthopedic",
+      "univ.",
+      "med.",
+      "fairview u med ctr-orthopedic (993)",
+      "fairview u med ctr-orthopedic",
+      "med",
+      "ctr-orthopedic",
+      "fair-univ",
+      "01-993"
+    ],
+    "exactTokens": [
+      "fairview university medical ctr - orthopedic",
+      "fairview univ. med. ctr - orthopedic",
+      "fairview u med ctr-orthopedic (993)",
+      "fair-univ",
+      "01-993"
+    ]
+  },
+  {
+    "id": "02-355",
+    "name": "Farm Crops Field House",
+    "position": [
+      44.985717081083834,
+      -93.181347635067
+    ],
+    "tokens": [
+      "farm crops field house",
+      "farm",
+      "crops",
+      "field",
+      "house",
+      "farm crops field house (355)",
+      "fcfh",
+      "02-355"
+    ],
+    "exactTokens": [
+      "farm crops field house",
+      "farm crops field house (355)",
+      "fcfh",
+      "02-355"
     ]
   },
   {
@@ -429,6 +2657,80 @@
     ]
   },
   {
+    "id": "01-067",
+    "name": "Field House",
+    "position": [
+      44.97655306584327,
+      -93.23089974314159
+    ],
+    "tokens": [
+      "field house",
+      "field",
+      "house",
+      "field house (067)",
+      "fieldhse",
+      "01-067"
+    ],
+    "exactTokens": [
+      "field house",
+      "field house (067)",
+      "fieldhse",
+      "01-067"
+    ]
+  },
+  {
+    "id": "02-445",
+    "name": "Fitch Avenue Utility Bldg",
+    "position": [
+      44.98335506748018,
+      -93.17979682524236
+    ],
+    "tokens": [
+      "fitch avenue utility bldg",
+      "fitch",
+      "avenue",
+      "utility",
+      "bldg",
+      "fitch ave utility building (445)",
+      "fitch ave utility building",
+      "ave",
+      "building",
+      "utilbldg",
+      "02-445"
+    ],
+    "exactTokens": [
+      "fitch avenue utility bldg",
+      "fitch ave utility building (445)",
+      "utilbldg",
+      "02-445"
+    ]
+  },
+  {
+    "id": "01-185",
+    "name": "Fleet Services Facility",
+    "position": [
+      44.98683280191683,
+      -93.21438850284856
+    ],
+    "tokens": [
+      "fleet services facility",
+      "fleet",
+      "services",
+      "facility",
+      "fleet services",
+      "fleet services (185)",
+      "fleetserv",
+      "01-185"
+    ],
+    "exactTokens": [
+      "fleet services facility",
+      "fleet services",
+      "fleet services (185)",
+      "fleetserv",
+      "01-185"
+    ]
+  },
+  {
     "id": "1",
     "name": "Folwell Hall",
     "position": [
@@ -445,6 +2747,62 @@
     ]
   },
   {
+    "id": "01-113",
+    "name": "Food Operations Bldg",
+    "position": [
+      44.985389713154866,
+      -93.21215248111646
+    ],
+    "tokens": [
+      "food operations bldg",
+      "food",
+      "operations",
+      "bldg",
+      "food ops.",
+      "ops.",
+      "food operations building (113)",
+      "food operations building",
+      "building",
+      "foodopb",
+      "01-113"
+    ],
+    "exactTokens": [
+      "food operations bldg",
+      "food ops.",
+      "food operations building (113)",
+      "foodopb",
+      "01-113"
+    ]
+  },
+  {
+    "id": "02-381",
+    "name": "Food Science & Nutrition",
+    "position": [
+      44.981361609165596,
+      -93.18505708100852
+    ],
+    "tokens": [
+      "food science & nutrition",
+      "food",
+      "science",
+      "nutrition",
+      "food sci. & nutrition",
+      "sci.",
+      "food science and nutrition (381)",
+      "food science and nutrition",
+      "and",
+      "fscn",
+      "02-381"
+    ],
+    "exactTokens": [
+      "food science & nutrition",
+      "food sci. & nutrition",
+      "food science and nutrition (381)",
+      "fscn",
+      "02-381"
+    ]
+  },
+  {
     "id": "22",
     "name": "Ford Hall",
     "position": [
@@ -458,6 +2816,287 @@
     ],
     "exactTokens": [
       "ford hall"
+    ]
+  },
+  {
+    "id": "01-051",
+    "name": "Fraser Hall",
+    "position": [
+      44.975590410876855,
+      -93.23737697377776
+    ],
+    "tokens": [
+      "fraser hall",
+      "fraser",
+      "hall",
+      "fraser hall (051)",
+      "fraserh",
+      "01-051"
+    ],
+    "exactTokens": [
+      "fraser hall",
+      "fraser",
+      "fraser hall (051)",
+      "fraserh",
+      "01-051"
+    ]
+  },
+  {
+    "id": "01-167",
+    "name": "Freeman Aquatics Ctr",
+    "position": [
+      44.97547071823323,
+      -93.22906088201002
+    ],
+    "tokens": [
+      "freeman aquatics ctr",
+      "freeman",
+      "aquatics",
+      "ctr",
+      "freeman aquatics center (167)",
+      "freeman aquatics center",
+      "center",
+      "faqctr",
+      "01-167"
+    ],
+    "exactTokens": [
+      "freeman aquatics ctr",
+      "freeman aquatics center (167)",
+      "faqctr",
+      "01-167"
+    ]
+  },
+  {
+    "id": "01-110",
+    "name": "Frontier Hall",
+    "position": [
+      44.970869975931315,
+      -93.22799278136019
+    ],
+    "tokens": [
+      "frontier hall",
+      "frontier",
+      "hall",
+      "frontier hall (110)",
+      "fronh",
+      "01-110"
+    ],
+    "exactTokens": [
+      "frontier hall",
+      "frontier",
+      "frontier hall (110)",
+      "fronh",
+      "01-110"
+    ]
+  },
+  {
+    "id": "01-023",
+    "name": "Fulton Switch Station",
+    "position": [
+      44.970147763351285,
+      -93.22898981997383
+    ],
+    "tokens": [
+      "fulton switch station",
+      "fulton",
+      "switch",
+      "station",
+      "fulton switch station (023)",
+      "fultss",
+      "01-023"
+    ],
+    "exactTokens": [
+      "fulton switch station",
+      "fulton switch station (023)",
+      "fultss",
+      "01-023"
+    ]
+  },
+  {
+    "id": "02-434",
+    "name": "Gabbert Raptor Ctr",
+    "position": [
+      44.98272148435738,
+      -93.18129680641546
+    ],
+    "tokens": [
+      "gabbert raptor ctr",
+      "gabbert",
+      "raptor",
+      "ctr",
+      "raptor center (434)",
+      "raptor center",
+      "center",
+      "graptctr",
+      "02-434"
+    ],
+    "exactTokens": [
+      "gabbert raptor ctr",
+      "raptor center (434)",
+      "graptctr",
+      "02-434"
+    ]
+  },
+  {
+    "id": "01-159",
+    "name": "Gibson - Nagurski Athletic Ctr",
+    "position": [
+      44.98217714658008,
+      -93.23194541913449
+    ],
+    "tokens": [
+      "gibson - nagurski athletic ctr",
+      "gibson",
+      "nagurski",
+      "athletic",
+      "ctr",
+      "gibson-nagurski athletic center (159)",
+      "gibson-nagurski athletic center",
+      "gibson-nagurski",
+      "center",
+      "gnfpf",
+      "01-159"
+    ],
+    "exactTokens": [
+      "gibson - nagurski athletic ctr",
+      "gibson-nagurski athletic center (159)",
+      "gnfpf",
+      "01-159"
+    ]
+  },
+  {
+    "id": "02-354",
+    "name": "Golf Club House",
+    "position": [
+      44.992155348504966,
+      -93.19608946293653
+    ],
+    "tokens": [
+      "golf club house",
+      "golf",
+      "club",
+      "house",
+      "golf club house (354)",
+      "gch",
+      "02-354"
+    ],
+    "exactTokens": [
+      "golf club house",
+      "golf club house (354)",
+      "gch",
+      "02-354"
+    ]
+  },
+  {
+    "id": "02-360",
+    "name": "Golf Course Driving Range Bldg",
+    "position": [
+      44.99213822117146,
+      -93.1920463513112
+    ],
+    "tokens": [
+      "golf course driving range bldg",
+      "golf",
+      "course",
+      "driving",
+      "range",
+      "bldg",
+      "golf course driving range",
+      "driving range building (360)",
+      "driving range building",
+      "building",
+      "gcdr",
+      "02-360"
+    ],
+    "exactTokens": [
+      "golf course driving range bldg",
+      "golf course driving range",
+      "driving range building (360)",
+      "gcdr",
+      "02-360"
+    ]
+  },
+  {
+    "id": "02-349",
+    "name": "Golf Course Turf Management Ctr",
+    "position": [
+      44.99855705743082,
+      -93.18871323733028
+    ],
+    "tokens": [
+      "golf course turf management ctr",
+      "golf",
+      "course",
+      "turf",
+      "management",
+      "ctr",
+      "golf course turf management",
+      "turf management center (349)",
+      "turf management center",
+      "center",
+      "gctmc",
+      "02-349"
+    ],
+    "exactTokens": [
+      "golf course turf management ctr",
+      "golf course turf management",
+      "turf management center (349)",
+      "gctmc",
+      "02-349"
+    ]
+  },
+  {
+    "id": "02-359",
+    "name": "Golf Course Well & Pump House",
+    "position": [
+      44.99578949189522,
+      -93.18745367371749
+    ],
+    "tokens": [
+      "golf course well & pump house",
+      "golf",
+      "course",
+      "well",
+      "pump",
+      "house",
+      "well and pump house, golf course (359)",
+      "well and pump house, golf course",
+      "and",
+      "house,",
+      "golfwell",
+      "02-359"
+    ],
+    "exactTokens": [
+      "golf course well & pump house",
+      "well and pump house, golf course (359)",
+      "golfwell",
+      "02-359"
+    ]
+  },
+  {
+    "id": "02-483",
+    "name": "Gortner Avenue Ramp",
+    "position": [
+      44.983364397532625,
+      -93.18290095120615
+    ],
+    "tokens": [
+      "gortner avenue ramp",
+      "gortner",
+      "avenue",
+      "ramp",
+      "gortner ave ramp",
+      "ave",
+      "gortner ave ramp (483)",
+      "gar",
+      "02-483"
+    ],
+    "exactTokens": [
+      "gortner avenue ramp",
+      "gortner ave ramp",
+      "gortner ave ramp (483)",
+      "gar",
+      "02-483"
     ]
   },
   {
@@ -510,6 +3149,54 @@
     ]
   },
   {
+    "id": "01-084",
+    "name": "Gymnastics Performance Ctr",
+    "position": [
+      44.98117841457544,
+      -93.23109225270137
+    ],
+    "tokens": [
+      "gymnastics performance ctr",
+      "gymnastics",
+      "performance",
+      "ctr",
+      "gymnastics performance center (084)",
+      "gymnastics performance center",
+      "center",
+      "gympc",
+      "01-084"
+    ],
+    "exactTokens": [
+      "gymnastics performance ctr",
+      "gymnastics performance center (084)",
+      "gympc",
+      "01-084"
+    ]
+  },
+  {
+    "id": "02-350",
+    "name": "Haecker Hall",
+    "position": [
+      44.98221723555349,
+      -93.1848843931762
+    ],
+    "tokens": [
+      "haecker hall",
+      "haecker",
+      "hall",
+      "haecker hall (350)",
+      "hckrh",
+      "02-350"
+    ],
+    "exactTokens": [
+      "haecker hall",
+      "haecker",
+      "haecker hall (350)",
+      "hckrh",
+      "02-350"
+    ]
+  },
+  {
     "id": "55",
     "name": "Hanson Hall",
     "position": [
@@ -558,6 +3245,33 @@
     ]
   },
   {
+    "id": "01-124",
+    "name": "Health Clinics & Surgery Ctr",
+    "position": [
+      44.970794863719725,
+      -93.22510377874521
+    ],
+    "tokens": [
+      "health clinics & surgery ctr",
+      "health",
+      "clinics",
+      "surgery",
+      "ctr",
+      "clinics and surgery center (124)",
+      "clinics and surgery center",
+      "and",
+      "center",
+      "csc",
+      "01-124"
+    ],
+    "exactTokens": [
+      "health clinics & surgery ctr",
+      "clinics and surgery center (124)",
+      "csc",
+      "01-124"
+    ]
+  },
+  {
     "id": "30",
     "name": "Health Sciences Education Ctr",
     "position": [
@@ -573,6 +3287,33 @@
     ],
     "exactTokens": [
       "health sciences education ctr"
+    ]
+  },
+  {
+    "id": "01-117",
+    "name": "Heavy Equipment Bldg",
+    "position": [
+      44.9866845643797,
+      -93.21140612374215
+    ],
+    "tokens": [
+      "heavy equipment bldg",
+      "heavy",
+      "equipment",
+      "bldg",
+      "heavy equipment",
+      "heavy equipment building (117)",
+      "heavy equipment building",
+      "building",
+      "heb",
+      "01-117"
+    ],
+    "exactTokens": [
+      "heavy equipment bldg",
+      "heavy equipment",
+      "heavy equipment building (117)",
+      "heb",
+      "01-117"
     ]
   },
   {
@@ -608,6 +3349,30 @@
     ]
   },
   {
+    "id": "01-264",
+    "name": "Horizontal Groundwater Recovery Well",
+    "position": [
+      44.97419754908932,
+      -93.24232283181794
+    ],
+    "tokens": [
+      "horizontal groundwater recovery well",
+      "horizontal",
+      "groundwater",
+      "recovery",
+      "well",
+      "horizontal groundwater recovery well (264)",
+      "hgrw",
+      "01-264"
+    ],
+    "exactTokens": [
+      "horizontal groundwater recovery well",
+      "horizontal groundwater recovery well (264)",
+      "hgrw",
+      "01-264"
+    ]
+  },
+  {
     "id": "51",
     "name": "Humphrey School of Public Affairs",
     "position": [
@@ -623,6 +3388,55 @@
     ],
     "exactTokens": [
       "humphrey school of public affairs"
+    ]
+  },
+  {
+    "id": "01-196",
+    "name": "Huntington Bank Stadium",
+    "position": [
+      44.97657253663304,
+      -93.22418741885888
+    ],
+    "tokens": [
+      "huntington bank stadium",
+      "huntington",
+      "bank",
+      "stadium",
+      "huntington bank stadium (196)",
+      "hbstad",
+      "01-196"
+    ],
+    "exactTokens": [
+      "huntington bank stadium",
+      "huntington bank stadium (196)",
+      "hbstad",
+      "01-196"
+    ]
+  },
+  {
+    "id": "01-184",
+    "name": "Information Technology",
+    "position": [
+      44.97446960437671,
+      -93.22514237514507
+    ],
+    "tokens": [
+      "information technology",
+      "information",
+      "technology",
+      "info. tech.",
+      "info.",
+      "tech.",
+      "information technology (184)",
+      "infotech",
+      "01-184"
+    ],
+    "exactTokens": [
+      "information technology",
+      "info. tech.",
+      "information technology (184)",
+      "infotech",
+      "01-184"
     ]
   },
   {
@@ -690,6 +3504,58 @@
     ]
   },
   {
+    "id": "01-126",
+    "name": "Keeler Apartments",
+    "position": [
+      44.97857678453837,
+      -93.23225725867205
+    ],
+    "tokens": [
+      "keeler apartments",
+      "keeler",
+      "apartments",
+      "keeler apts.",
+      "apts.",
+      "keeler apartments (126)",
+      "kapts",
+      "01-126"
+    ],
+    "exactTokens": [
+      "keeler apartments",
+      "keeler apts.",
+      "keeler apartments (126)",
+      "kapts",
+      "01-126"
+    ]
+  },
+  {
+    "id": "01-126G",
+    "name": "Keeler Apartments Garage",
+    "position": [
+      44.9784906127488,
+      -93.23239066924589
+    ],
+    "tokens": [
+      "keeler apartments garage",
+      "keeler",
+      "apartments",
+      "garage",
+      "keeler apts. garage",
+      "apts.",
+      "keeler garage (126g)",
+      "keeler garage",
+      "kaptsg",
+      "01-126g"
+    ],
+    "exactTokens": [
+      "keeler apartments garage",
+      "keeler apts. garage",
+      "keeler garage (126g)",
+      "kaptsg",
+      "01-126g"
+    ]
+  },
+  {
     "id": "38",
     "name": "Keller Hall",
     "position": [
@@ -719,6 +3585,180 @@
     ],
     "exactTokens": [
       "kolthoff hall"
+    ]
+  },
+  {
+    "id": "02-353",
+    "name": "KUOM Transmitter Bldg",
+    "position": [
+      44.998522637735206,
+      -93.18817394884118
+    ],
+    "tokens": [
+      "kuom transmitter bldg",
+      "kuom",
+      "transmitter",
+      "bldg",
+      "kuom transmitter building (353)",
+      "kuom transmitter building",
+      "building",
+      "02-353"
+    ],
+    "exactTokens": [
+      "kuom transmitter bldg",
+      "kuom",
+      "kuom transmitter building (353)",
+      "02-353"
+    ]
+  },
+  {
+    "id": "01-198",
+    "name": "Landcare & Facilities Operations",
+    "position": [
+      44.973892844760535,
+      -93.2184686420942
+    ],
+    "tokens": [
+      "landcare & facilities operations",
+      "landcare",
+      "facilities",
+      "operations",
+      "landcare & facilities ops.",
+      "ops.",
+      "landcare and facilities operations (198)",
+      "landcare and facilities operations",
+      "and",
+      "lcf",
+      "01-198"
+    ],
+    "exactTokens": [
+      "landcare & facilities operations",
+      "landcare & facilities ops.",
+      "landcare and facilities operations (198)",
+      "lcf",
+      "01-198"
+    ]
+  },
+  {
+    "id": "01-128",
+    "name": "Landcare Salt & Sand Storage",
+    "position": [
+      44.97997940090865,
+      -93.22940722764339
+    ],
+    "tokens": [
+      "landcare salt & sand storage",
+      "landcare",
+      "salt",
+      "sand",
+      "storage",
+      "salt & sand storage",
+      "landcare salt and sand storage (128)",
+      "landcare salt and sand storage",
+      "and",
+      "lcss",
+      "01-128"
+    ],
+    "exactTokens": [
+      "landcare salt & sand storage",
+      "salt & sand storage",
+      "landcare salt and sand storage (128)",
+      "lcss",
+      "01-128"
+    ]
+  },
+  {
+    "id": "01-166",
+    "name": "Landcare Storage",
+    "position": [
+      44.985056143140895,
+      -93.21125611299489
+    ],
+    "tokens": [
+      "landcare storage",
+      "landcare",
+      "storage",
+      "landcare storage (166)",
+      "landstor",
+      "01-166"
+    ],
+    "exactTokens": [
+      "landcare storage",
+      "landcare storage (166)",
+      "landstor",
+      "01-166"
+    ]
+  },
+  {
+    "id": "02-417",
+    "name": "Large Animal Holding",
+    "position": [
+      44.98228034478588,
+      -93.18098003672019
+    ],
+    "tokens": [
+      "large animal holding",
+      "large",
+      "animal",
+      "holding",
+      "large animal holding (417)",
+      "lganh",
+      "02-417"
+    ],
+    "exactTokens": [
+      "large animal holding",
+      "large animal holding (417)",
+      "lganh",
+      "02-417"
+    ]
+  },
+  {
+    "id": "02-456",
+    "name": "Large Animal Shelter",
+    "position": [
+      44.98247638779044,
+      -93.18055225353916
+    ],
+    "tokens": [
+      "large animal shelter",
+      "large",
+      "animal",
+      "shelter",
+      "large animal shelter (456)",
+      "lgansh",
+      "02-456"
+    ],
+    "exactTokens": [
+      "large animal shelter",
+      "large animal shelter (456)",
+      "lgansh",
+      "02-456"
+    ]
+  },
+  {
+    "id": "01-137",
+    "name": "Larson Football Performance Ctr",
+    "position": [
+      44.98179848222122,
+      -93.23115755790563
+    ],
+    "tokens": [
+      "larson football performance ctr",
+      "larson",
+      "football",
+      "performance",
+      "ctr",
+      "larson football perf ctr (137)",
+      "larson football perf ctr",
+      "perf",
+      "footb",
+      "01-137"
+    ],
+    "exactTokens": [
+      "larson football performance ctr",
+      "larson football perf ctr (137)",
+      "footb",
+      "01-137"
     ]
   },
   {
@@ -755,6 +3795,37 @@
     ]
   },
   {
+    "id": "01-174",
+    "name": "Lions Research Bldg/McGuire Translational Research Facility",
+    "position": [
+      44.97910234459344,
+      -93.2254464011353
+    ],
+    "tokens": [
+      "lions research bldg/mcguire translational research facility",
+      "lions",
+      "research",
+      "bldg/mcguire",
+      "translational",
+      "facility",
+      "lions/mcguire",
+      "lions and mcguire trf (174)",
+      "lions and mcguire trf",
+      "and",
+      "mcguire",
+      "trf",
+      "lrb/mtrf",
+      "01-174"
+    ],
+    "exactTokens": [
+      "lions research bldg/mcguire translational research facility",
+      "lions/mcguire",
+      "lions and mcguire trf (174)",
+      "lrb/mtrf",
+      "01-174"
+    ]
+  },
+  {
     "id": "37",
     "name": "M Health Fairview Patient & Visitor Ramp",
     "position": [
@@ -774,6 +3845,33 @@
     ]
   },
   {
+    "id": "02-485",
+    "name": "MAES/MDA Plant Growth Facilities - East",
+    "position": [
+      44.98691650256238,
+      -93.1799114000097
+    ],
+    "tokens": [
+      "maes/mda plant growth facilities - east",
+      "maes/mda",
+      "plant",
+      "growth",
+      "facilities",
+      "east",
+      "maes/mda plant growth - east",
+      "maes/mda plant growth facilities - east (485)",
+      "pgf-e",
+      "02-485"
+    ],
+    "exactTokens": [
+      "maes/mda plant growth facilities - east",
+      "maes/mda plant growth - east",
+      "maes/mda plant growth facilities - east (485)",
+      "pgf-e",
+      "02-485"
+    ]
+  },
+  {
     "id": "66",
     "name": "Magrath Library",
     "position": [
@@ -787,6 +3885,111 @@
     ],
     "exactTokens": [
       "magrath library"
+    ]
+  },
+  {
+    "id": "01-034",
+    "name": "Main Energy Plant",
+    "position": [
+      44.97884784996031,
+      -93.2406539086508
+    ],
+    "tokens": [
+      "main energy plant",
+      "main",
+      "energy",
+      "plant",
+      "main energy plant (034)",
+      "ep",
+      "01-034"
+    ],
+    "exactTokens": [
+      "main energy plant",
+      "main energy plant (034)",
+      "ep",
+      "01-034"
+    ]
+  },
+  {
+    "id": "01-263",
+    "name": "Main Energy Plant Meter Shed",
+    "position": [
+      44.979338727628246,
+      -93.23942760315938
+    ],
+    "tokens": [
+      "main energy plant meter shed",
+      "main",
+      "energy",
+      "plant",
+      "meter",
+      "shed",
+      "main energy plant meter shed (263)",
+      "epms",
+      "01-263"
+    ],
+    "exactTokens": [
+      "main energy plant meter shed",
+      "main energy plant meter shed (263)",
+      "epms",
+      "01-263"
+    ]
+  },
+  {
+    "id": "36-001",
+    "name": "Masonic Institute for the Developing Brain",
+    "position": [
+      44.95893756445202,
+      -93.21107370149842
+    ],
+    "tokens": [
+      "masonic institute for the developing brain",
+      "masonic",
+      "institute",
+      "for",
+      "the",
+      "developing",
+      "brain",
+      "masonic inst. for the dev. brain",
+      "inst.",
+      "dev.",
+      "masonic inst for the developing brain (001)",
+      "masonic inst for the developing brain",
+      "inst",
+      "midb",
+      "36-001"
+    ],
+    "exactTokens": [
+      "masonic institute for the developing brain",
+      "masonic inst. for the dev. brain",
+      "masonic inst for the developing brain (001)",
+      "midb",
+      "36-001"
+    ]
+  },
+  {
+    "id": "01-191",
+    "name": "MAST Laboratory",
+    "position": [
+      44.97413559704201,
+      -93.21899864765113
+    ],
+    "tokens": [
+      "mast laboratory",
+      "mast",
+      "laboratory",
+      "mast lab",
+      "lab",
+      "mast laboratory (191)",
+      "mastlab",
+      "01-191"
+    ],
+    "exactTokens": [
+      "mast laboratory",
+      "mast lab",
+      "mast laboratory (191)",
+      "mastlab",
+      "01-191"
     ]
   },
   {
@@ -824,6 +4027,35 @@
     ]
   },
   {
+    "id": "01-182A",
+    "name": "McNamara/Graduate Hotel Tunnel Elevator",
+    "position": [
+      44.97490758215908,
+      -93.22821020186603
+    ],
+    "tokens": [
+      "mcnamara/graduate hotel tunnel elevator",
+      "mcnamara/graduate",
+      "hotel",
+      "tunnel",
+      "elevator",
+      "mcnamara/graduate hotel tunnel elev.",
+      "elev.",
+      "mcnamara/graduate hotel tunnel elev (182a)",
+      "mcnamara/graduate hotel tunnel elev",
+      "elev",
+      "tunnelm",
+      "01-182a"
+    ],
+    "exactTokens": [
+      "mcnamara/graduate hotel tunnel elevator",
+      "mcnamara/graduate hotel tunnel elev.",
+      "mcnamara/graduate hotel tunnel elev (182a)",
+      "tunnelm",
+      "01-182a"
+    ]
+  },
+  {
     "id": "61",
     "name": "McNeal Hall",
     "position": [
@@ -856,6 +4088,179 @@
     ]
   },
   {
+    "id": "02-318",
+    "name": "Metering Station",
+    "position": [
+      44.98735611094354,
+      -93.18633901752278
+    ],
+    "tokens": [
+      "metering station",
+      "metering",
+      "station",
+      "metering station (318)",
+      "metsta",
+      "02-318"
+    ],
+    "exactTokens": [
+      "metering station",
+      "metering station (318)",
+      "metsta",
+      "02-318"
+    ]
+  },
+  {
+    "id": "01-149",
+    "name": "Microbiology Research Facility",
+    "position": [
+      44.97851296256142,
+      -93.2217011646084
+    ],
+    "tokens": [
+      "microbiology research facility",
+      "microbiology",
+      "research",
+      "facility",
+      "microbiology research",
+      "microbiology research facility (149)",
+      "mrf",
+      "01-149"
+    ],
+    "exactTokens": [
+      "microbiology research facility",
+      "microbiology research",
+      "microbiology research facility (149)",
+      "mrf",
+      "01-149"
+    ]
+  },
+  {
+    "id": "36-004",
+    "name": "MIDB Gazebo",
+    "position": [
+      44.95881737287593,
+      -93.20963348160561
+    ],
+    "tokens": [
+      "midb gazebo",
+      "midb",
+      "gazebo",
+      "gazebo (004)",
+      "midbg",
+      "36-004"
+    ],
+    "exactTokens": [
+      "midb gazebo",
+      "gazebo",
+      "gazebo (004)",
+      "midbg",
+      "36-004"
+    ]
+  },
+  {
+    "id": "36-003",
+    "name": "MIDB Landcare Shed",
+    "position": [
+      44.96013868268096,
+      -93.21059479214732
+    ],
+    "tokens": [
+      "midb landcare shed",
+      "midb",
+      "landcare",
+      "shed",
+      "landcare shed (003)",
+      "landcare shed",
+      "midbls",
+      "36-003"
+    ],
+    "exactTokens": [
+      "midb landcare shed",
+      "shed",
+      "landcare shed (003)",
+      "midbls",
+      "36-003"
+    ]
+  },
+  {
+    "id": "01-208",
+    "name": "Middlebrook Hall",
+    "position": [
+      44.96967745516527,
+      -93.24105699022401
+    ],
+    "tokens": [
+      "middlebrook hall",
+      "middlebrook",
+      "hall",
+      "middlebrook hall (208)",
+      "mdbh",
+      "01-208"
+    ],
+    "exactTokens": [
+      "middlebrook hall",
+      "middlebrook",
+      "middlebrook hall (208)",
+      "mdbh",
+      "01-208"
+    ]
+  },
+  {
+    "id": "02-474",
+    "name": "Minnesota Crop Improvement Ctr",
+    "position": [
+      44.98575203566357,
+      -93.18056085400967
+    ],
+    "tokens": [
+      "minnesota crop improvement ctr",
+      "minnesota",
+      "crop",
+      "improvement",
+      "ctr",
+      "mn crop improvement",
+      "mn crop improvement center (474)",
+      "mn crop improvement center",
+      "center",
+      "mcic",
+      "02-474"
+    ],
+    "exactTokens": [
+      "minnesota crop improvement ctr",
+      "mn crop improvement",
+      "mn crop improvement center (474)",
+      "mcic",
+      "02-474"
+    ]
+  },
+  {
+    "id": "01-952",
+    "name": "Minnesota Tech Ctr",
+    "position": [
+      44.9754844483658,
+      -93.25230654223631
+    ],
+    "tokens": [
+      "minnesota tech ctr",
+      "minnesota",
+      "tech",
+      "ctr",
+      "mn tech ctr",
+      "minnesota tech center (952)",
+      "minnesota tech center",
+      "center",
+      "mntc",
+      "01-952"
+    ],
+    "exactTokens": [
+      "minnesota tech ctr",
+      "mn tech ctr",
+      "minnesota tech center (952)",
+      "mntc",
+      "01-952"
+    ]
+  },
+  {
     "id": "42",
     "name": "Molecular & Cellular Biology",
     "position": [
@@ -870,6 +4275,31 @@
     ],
     "exactTokens": [
       "molecular & cellular biology"
+    ]
+  },
+  {
+    "id": "02-436",
+    "name": "Molecular & Cellular Therapeutics",
+    "position": [
+      44.98288619219737,
+      -93.18022349661092
+    ],
+    "tokens": [
+      "molecular & cellular therapeutics",
+      "molecular",
+      "cellular",
+      "therapeutics",
+      "molecular and cellular therapeutics (436)",
+      "molecular and cellular therapeutics",
+      "and",
+      "mct",
+      "02-436"
+    ],
+    "exactTokens": [
+      "molecular & cellular therapeutics",
+      "molecular and cellular therapeutics (436)",
+      "mct",
+      "02-436"
     ]
   },
   {
@@ -905,6 +4335,33 @@
     ]
   },
   {
+    "id": "02-367",
+    "name": "Mooty Indoor Golf Facility",
+    "position": [
+      44.99510021423469,
+      -93.1899813872959
+    ],
+    "tokens": [
+      "mooty indoor golf facility",
+      "mooty",
+      "indoor",
+      "golf",
+      "facility",
+      "mooty indoor golf",
+      "indoor golf facility (367)",
+      "indoor golf facility",
+      "jmgolf",
+      "02-367"
+    ],
+    "exactTokens": [
+      "mooty indoor golf facility",
+      "mooty indoor golf",
+      "indoor golf facility (367)",
+      "jmgolf",
+      "02-367"
+    ]
+  },
+  {
     "id": "8",
     "name": "Morrill Hall",
     "position": [
@@ -921,6 +4378,34 @@
     ]
   },
   {
+    "id": "01-195",
+    "name": "Mpls Park Board Toilet Facility",
+    "position": [
+      44.970272275844,
+      -93.23293467065629
+    ],
+    "tokens": [
+      "mpls park board toilet facility",
+      "mpls",
+      "park",
+      "board",
+      "toilet",
+      "facility",
+      "mprb toilet facility",
+      "mprb",
+      "mpls park board toilet facility (195)",
+      "pbtf",
+      "01-195"
+    ],
+    "exactTokens": [
+      "mpls park board toilet facility",
+      "mprb toilet facility",
+      "mpls park board toilet facility (195)",
+      "pbtf",
+      "01-195"
+    ]
+  },
+  {
     "id": "14",
     "name": "Murphy Hall",
     "position": [
@@ -934,6 +4419,28 @@
     ],
     "exactTokens": [
       "murphy hall"
+    ]
+  },
+  {
+    "id": "35-104",
+    "name": "Murphy Warehouse",
+    "position": [
+      44.98309849752216,
+      -93.22002745797045
+    ],
+    "tokens": [
+      "murphy warehouse",
+      "murphy",
+      "warehouse",
+      "murphy warehouse (104)",
+      "muwc",
+      "35-104"
+    ],
+    "exactTokens": [
+      "murphy warehouse",
+      "murphy warehouse (104)",
+      "muwc",
+      "35-104"
     ]
   },
   {
@@ -970,6 +4477,71 @@
     ]
   },
   {
+    "id": "02-391",
+    "name": "North Central Forest Experiment Station (USDA)",
+    "position": [
+      44.987874601490375,
+      -93.18440842391882
+    ],
+    "tokens": [
+      "north central forest experiment station (usda)",
+      "north central forest experiment station",
+      "north",
+      "central",
+      "forest",
+      "experiment",
+      "station",
+      "nc forest experiment station (usda)",
+      "nc forest experiment station",
+      "north central forest exp sta (usda) (391)",
+      "north central forest exp sta",
+      "exp",
+      "sta",
+      "ncfes",
+      "02-391"
+    ],
+    "exactTokens": [
+      "north central forest experiment station (usda)",
+      "nc forest experiment station (usda)",
+      "north central forest exp sta (usda) (391)",
+      "ncfes",
+      "02-391"
+    ]
+  },
+  {
+    "id": "02-479",
+    "name": "North Central Forest Experiment Station Greenhouse (USDA)",
+    "position": [
+      44.988481868399916,
+      -93.17996036102453
+    ],
+    "tokens": [
+      "north central forest experiment station greenhouse (usda)",
+      "north central forest experiment station greenhouse",
+      "north",
+      "central",
+      "forest",
+      "experiment",
+      "station",
+      "greenhouse",
+      "nc forest experiment station greenhouse (usda)",
+      "nc forest experiment station greenhouse",
+      "north central forest exp sta greenhouse (usda) (479)",
+      "north central forest exp sta greenhouse",
+      "exp",
+      "sta",
+      "ncfor",
+      "02-479"
+    ],
+    "exactTokens": [
+      "north central forest experiment station greenhouse (usda)",
+      "nc forest experiment station greenhouse (usda)",
+      "north central forest exp sta greenhouse (usda) (479)",
+      "ncfor",
+      "02-479"
+    ]
+  },
+  {
     "id": "90",
     "name": "Northrop Garage",
     "position": [
@@ -1003,6 +4575,174 @@
     ]
   },
   {
+    "id": "01-053G",
+    "name": "Northrop Memorial Auditorium Garage",
+    "position": [
+      44.9762972730093,
+      -93.23590552406688
+    ],
+    "tokens": [
+      "northrop memorial auditorium garage",
+      "northrop",
+      "memorial",
+      "auditorium",
+      "garage",
+      "northrop garage",
+      "northrop garage (053g)",
+      "nmag",
+      "01-053g"
+    ],
+    "exactTokens": [
+      "northrop memorial auditorium garage",
+      "northrop garage",
+      "northrop garage (053g)",
+      "nmag",
+      "01-053g"
+    ]
+  },
+  {
+    "id": "01-141",
+    "name": "Oak Street Ramp",
+    "position": [
+      44.972242453127876,
+      -93.22632993514898
+    ],
+    "tokens": [
+      "oak street ramp",
+      "oak",
+      "street",
+      "ramp",
+      "oak st ramp",
+      "oak st ramp (141)",
+      "osr",
+      "01-141"
+    ],
+    "exactTokens": [
+      "oak street ramp",
+      "oak st ramp",
+      "oak st ramp (141)",
+      "osr",
+      "01-141"
+    ]
+  },
+  {
+    "id": "01-912",
+    "name": "Off-Campus Safety Ctr",
+    "position": [
+      44.980047416654784,
+      -93.23658496888444
+    ],
+    "tokens": [
+      "off-campus safety ctr",
+      "off-campus",
+      "safety",
+      "ctr",
+      "off-campus safety center (912)",
+      "off-campus safety center",
+      "center",
+      "ocsc",
+      "01-912"
+    ],
+    "exactTokens": [
+      "off-campus safety ctr",
+      "off-campus safety center (912)",
+      "ocsc",
+      "01-912"
+    ]
+  },
+  {
+    "id": "36-002",
+    "name": "Parkway South Ramp",
+    "position": [
+      44.95818363367362,
+      -93.21034042662879
+    ],
+    "tokens": [
+      "parkway south ramp",
+      "parkway",
+      "south",
+      "ramp",
+      "parkway south ramp (002)",
+      "psr",
+      "36-002"
+    ],
+    "exactTokens": [
+      "parkway south ramp",
+      "parkway south ramp (002)",
+      "psr",
+      "36-002"
+    ]
+  },
+  {
+    "id": "01-003",
+    "name": "Pattee Hall",
+    "position": [
+      44.97873849206433,
+      -93.23834586873123
+    ],
+    "tokens": [
+      "pattee hall",
+      "pattee",
+      "hall",
+      "pattee hall (003)",
+      "pth",
+      "01-003"
+    ],
+    "exactTokens": [
+      "pattee hall",
+      "pattee",
+      "pattee hall (003)",
+      "pth",
+      "01-003"
+    ]
+  },
+  {
+    "id": "01-267",
+    "name": "Peik Hall",
+    "position": [
+      44.9789537821429,
+      -93.23714621518431
+    ],
+    "tokens": [
+      "peik hall",
+      "peik",
+      "hall",
+      "peik hall (267)",
+      "peikh",
+      "01-267"
+    ],
+    "exactTokens": [
+      "peik hall",
+      "peik",
+      "peik hall (267)",
+      "peikh",
+      "01-267"
+    ]
+  },
+  {
+    "id": "02-372",
+    "name": "Peters Hall",
+    "position": [
+      44.98346866700211,
+      -93.18109735322015
+    ],
+    "tokens": [
+      "peters hall",
+      "peters",
+      "hall",
+      "peters hall (372)",
+      "peth",
+      "02-372"
+    ],
+    "exactTokens": [
+      "peters hall",
+      "peters",
+      "peters hall (372)",
+      "peth",
+      "02-372"
+    ]
+  },
+  {
     "id": "29",
     "name": "Phillips-Wangensteen Bldg",
     "position": [
@@ -1019,6 +4759,64 @@
     ]
   },
   {
+    "id": "01-155",
+    "name": "Physics & Nanotechnology Bldg",
+    "position": [
+      44.97527419217215,
+      -93.23148350061074
+    ],
+    "tokens": [
+      "physics & nanotechnology bldg",
+      "physics",
+      "nanotechnology",
+      "bldg",
+      "physics & nanotech.",
+      "nanotech.",
+      "physics and nano building (155)",
+      "physics and nano building",
+      "and",
+      "nano",
+      "building",
+      "pan",
+      "01-155"
+    ],
+    "exactTokens": [
+      "physics & nanotechnology bldg",
+      "physics & nanotech.",
+      "physics and nano building (155)",
+      "pan",
+      "01-155"
+    ]
+  },
+  {
+    "id": "08-001",
+    "name": "Pillsbury Court Apts",
+    "position": [
+      44.98428634342819,
+      -93.23953045019827
+    ],
+    "tokens": [
+      "pillsbury court apts",
+      "pillsbury",
+      "court",
+      "apts",
+      "apts. 1000-1010",
+      "apts.",
+      "1000-1010",
+      "pillsbury court apts 1000-1010 (001)",
+      "pillsbury court apts 1000-1010",
+      "pc001",
+      "08-001"
+    ],
+    "exactTokens": [
+      "pillsbury court apts",
+      "apts. 1000-1010",
+      "pillsbury court apts 1000-1010 (001)",
+      "pc001",
+      "08-001"
+    ]
+  },
+  {
     "id": "4",
     "name": "Pillsbury Hall",
     "position": [
@@ -1032,6 +4830,230 @@
     ],
     "exactTokens": [
       "pillsbury hall"
+    ]
+  },
+  {
+    "id": "01-052",
+    "name": "Pioneer Hall",
+    "position": [
+      44.97088421047197,
+      -93.22944194200026
+    ],
+    "tokens": [
+      "pioneer hall",
+      "pioneer",
+      "hall",
+      "pioneer hall (052)",
+      "pioh",
+      "01-052"
+    ],
+    "exactTokens": [
+      "pioneer hall",
+      "pioneer",
+      "pioneer hall (052)",
+      "pioh",
+      "01-052"
+    ]
+  },
+  {
+    "id": "02-369",
+    "name": "Plant Growth Facilities-West 369",
+    "position": [
+      44.98772004250143,
+      -93.18134420515999
+    ],
+    "tokens": [
+      "plant growth facilities-west 369",
+      "plant",
+      "growth",
+      "facilities-west",
+      "369",
+      "plant growth-west 369",
+      "growth-west",
+      "plant growth facilities-west 369 (369)",
+      "pgf-w369",
+      "02-369"
+    ],
+    "exactTokens": [
+      "plant growth facilities-west 369",
+      "plant growth-west 369",
+      "plant growth facilities-west 369 (369)",
+      "pgf-w369",
+      "02-369"
+    ]
+  },
+  {
+    "id": "02-370",
+    "name": "Plant Growth Facilities-West 370",
+    "position": [
+      44.988572184212074,
+      -93.18130642570767
+    ],
+    "tokens": [
+      "plant growth facilities-west 370",
+      "plant",
+      "growth",
+      "facilities-west",
+      "370",
+      "plant growth-west 370",
+      "growth-west",
+      "plant growth facilities-west 370 (370)",
+      "pgf-w370",
+      "02-370"
+    ],
+    "exactTokens": [
+      "plant growth facilities-west 370",
+      "plant growth-west 370",
+      "plant growth facilities-west 370 (370)",
+      "pgf-w370",
+      "02-370"
+    ]
+  },
+  {
+    "id": "02-415",
+    "name": "Plant Growth Facilities-West 415",
+    "position": [
+      44.98725595682199,
+      -93.18120827770841
+    ],
+    "tokens": [
+      "plant growth facilities-west 415",
+      "plant",
+      "growth",
+      "facilities-west",
+      "415",
+      "plant growth-west 415",
+      "growth-west",
+      "plant growth facilities-west 415 (415)",
+      "pgf-w415",
+      "02-415"
+    ],
+    "exactTokens": [
+      "plant growth facilities-west 415",
+      "plant growth-west 415",
+      "plant growth facilities-west 415 (415)",
+      "pgf-w415",
+      "02-415"
+    ]
+  },
+  {
+    "id": "02-432",
+    "name": "Plant Growth Facilities-West 432",
+    "position": [
+      44.9870136860761,
+      -93.18123970991172
+    ],
+    "tokens": [
+      "plant growth facilities-west 432",
+      "plant",
+      "growth",
+      "facilities-west",
+      "432",
+      "plant growth-west 432",
+      "growth-west",
+      "plant growth facilities-west 432 (432)",
+      "pgf-w432",
+      "02-432"
+    ],
+    "exactTokens": [
+      "plant growth facilities-west 432",
+      "plant growth-west 432",
+      "plant growth facilities-west 432 (432)",
+      "pgf-w432",
+      "02-432"
+    ]
+  },
+  {
+    "id": "01-134",
+    "name": "Printing Services Bldg",
+    "position": [
+      44.98756032048957,
+      -93.21330631087353
+    ],
+    "tokens": [
+      "printing services bldg",
+      "printing",
+      "services",
+      "bldg",
+      "printing services",
+      "printing services (134)",
+      "psb",
+      "01-134"
+    ],
+    "exactTokens": [
+      "printing services bldg",
+      "printing services",
+      "printing services (134)",
+      "psb",
+      "01-134"
+    ]
+  },
+  {
+    "id": "01-222",
+    "name": "Prospect Park Ramp",
+    "position": [
+      44.97209286075873,
+      -93.21565723829453
+    ],
+    "tokens": [
+      "prospect park ramp",
+      "prospect",
+      "park",
+      "ramp",
+      "prospect park ramp (222)",
+      "ppr",
+      "01-222"
+    ],
+    "exactTokens": [
+      "prospect park ramp",
+      "prospect park ramp (222)",
+      "ppr",
+      "01-222"
+    ]
+  },
+  {
+    "id": "02-378",
+    "name": "Pump House No. 3",
+    "position": [
+      44.98131572637,
+      -93.18041817243717
+    ],
+    "tokens": [
+      "pump house no. 3",
+      "pump",
+      "house",
+      "no.",
+      "pump house no 3 (378)",
+      "pump house no 3",
+      "well",
+      "02-378"
+    ],
+    "exactTokens": [
+      "pump house no. 3",
+      "pump house no 3 (378)",
+      "well",
+      "02-378"
+    ]
+  },
+  {
+    "id": "01-983",
+    "name": "Radius @15th",
+    "position": [
+      44.98359771889717,
+      -93.23246901761003
+    ],
+    "tokens": [
+      "radius @15th",
+      "radius",
+      "@15th",
+      "radius @15th (983)",
+      "01-983"
+    ],
+    "exactTokens": [
+      "radius @15th",
+      "radius @15th (983)",
+      "radius",
+      "01-983"
     ]
   },
   {
@@ -1067,6 +5089,247 @@
     ]
   },
   {
+    "id": "01-136",
+    "name": "Recreational & Wellness Field Complex",
+    "position": [
+      44.97548542622173,
+      -93.21720608900793
+    ],
+    "tokens": [
+      "recreational & wellness field complex",
+      "recreational",
+      "wellness",
+      "field",
+      "complex",
+      "rec well field complex (136)",
+      "rec well field complex",
+      "rec",
+      "well",
+      "srsf",
+      "01-136"
+    ],
+    "exactTokens": [
+      "recreational & wellness field complex",
+      "rec well field complex (136)",
+      "srsf",
+      "01-136"
+    ]
+  },
+  {
+    "id": "01-241",
+    "name": "Regis Ctr for Art-East",
+    "position": [
+      44.96948460246663,
+      -93.24220753466821
+    ],
+    "tokens": [
+      "regis ctr for art-east",
+      "regis",
+      "ctr",
+      "for",
+      "art-east",
+      "regis - east",
+      "east",
+      "regis center east (241)",
+      "regis center east",
+      "center",
+      "regctr-e",
+      "01-241"
+    ],
+    "exactTokens": [
+      "regis ctr for art-east",
+      "regis - east",
+      "regis center east (241)",
+      "regctr-e",
+      "01-241"
+    ]
+  },
+  {
+    "id": "01-242",
+    "name": "Regis Ctr for Art-West",
+    "position": [
+      44.96915637623798,
+      -93.2429810051346
+    ],
+    "tokens": [
+      "regis ctr for art-west",
+      "regis",
+      "ctr",
+      "for",
+      "art-west",
+      "regis - west",
+      "west",
+      "regis center west (242)",
+      "regis center west",
+      "center",
+      "regctr-w",
+      "01-242"
+    ],
+    "exactTokens": [
+      "regis ctr for art-west",
+      "regis - west",
+      "regis center west (242)",
+      "regctr-w",
+      "01-242"
+    ]
+  },
+  {
+    "id": "01-154",
+    "name": "Reuse Program & AHC Warehouse",
+    "position": [
+      44.98619787838588,
+      -93.21403607800087
+    ],
+    "tokens": [
+      "reuse program & ahc warehouse",
+      "reuse",
+      "program",
+      "ahc",
+      "warehouse",
+      "reuse and ahc warehouse (154)",
+      "reuse and ahc warehouse",
+      "and",
+      "ahcware",
+      "01-154"
+    ],
+    "exactTokens": [
+      "reuse program & ahc warehouse",
+      "reuse",
+      "reuse and ahc warehouse (154)",
+      "ahcware",
+      "01-154"
+    ]
+  },
+  {
+    "id": "01-181",
+    "name": "Ridder Arena/Baseline Tennis Ctr",
+    "position": [
+      44.97839682880574,
+      -93.22949228006391
+    ],
+    "tokens": [
+      "ridder arena/baseline tennis ctr",
+      "ridder",
+      "arena/baseline",
+      "tennis",
+      "ctr",
+      "ridder arena/baseline tennis",
+      "ridder arena/baseline tennis (181)",
+      "riddera",
+      "01-181"
+    ],
+    "exactTokens": [
+      "ridder arena/baseline tennis ctr",
+      "ridder arena/baseline tennis",
+      "ridder arena/baseline tennis (181)",
+      "riddera",
+      "01-181"
+    ]
+  },
+  {
+    "id": "01-947",
+    "name": "Riverside Park Plaza Bldg",
+    "position": [
+      44.96632513274988,
+      -93.23559263322775
+    ],
+    "tokens": [
+      "riverside park plaza bldg",
+      "riverside",
+      "park",
+      "plaza",
+      "bldg",
+      "riverside park plaza",
+      "riverside park plaza building (947)",
+      "riverside park plaza building",
+      "building",
+      "rppb",
+      "01-947"
+    ],
+    "exactTokens": [
+      "riverside park plaza bldg",
+      "riverside park plaza",
+      "riverside park plaza building (947)",
+      "rppb",
+      "01-947"
+    ]
+  },
+  {
+    "id": "01-946",
+    "name": "Riverside Professional Bldg",
+    "position": [
+      44.967288251628744,
+      -93.23823277331375
+    ],
+    "tokens": [
+      "riverside professional bldg",
+      "riverside",
+      "professional",
+      "bldg",
+      "riverside professional building (946)",
+      "riverside professional building",
+      "building",
+      "rpb",
+      "01-946"
+    ],
+    "exactTokens": [
+      "riverside professional bldg",
+      "riverside professional building (946)",
+      "rpb",
+      "01-946"
+    ]
+  },
+  {
+    "id": "02-481",
+    "name": "Robbie Stadium",
+    "position": [
+      44.99458184621126,
+      -93.18951898324214
+    ],
+    "tokens": [
+      "robbie stadium",
+      "robbie",
+      "stadium",
+      "robbie stadium (481)",
+      "robbiesta",
+      "02-481"
+    ],
+    "exactTokens": [
+      "robbie stadium",
+      "robbie stadium (481)",
+      "robbiesta",
+      "02-481"
+    ]
+  },
+  {
+    "id": "02-428",
+    "name": "Robbie Stadium Support Bldg",
+    "position": [
+      44.99385201101912,
+      -93.18744502132431
+    ],
+    "tokens": [
+      "robbie stadium support bldg",
+      "robbie",
+      "stadium",
+      "support",
+      "bldg",
+      "robbie stadium support",
+      "robbie stadium support building (428)",
+      "robbie stadium support building",
+      "building",
+      "rssb",
+      "02-428"
+    ],
+    "exactTokens": [
+      "robbie stadium support bldg",
+      "robbie stadium support",
+      "robbie stadium support building (428)",
+      "rssb",
+      "02-428"
+    ]
+  },
+  {
     "id": "82",
     "name": "Ruttan Hall",
     "position": [
@@ -1080,6 +5343,120 @@
     ],
     "exactTokens": [
       "ruttan hall"
+    ]
+  },
+  {
+    "id": "01-028",
+    "name": "Sanford Hall",
+    "position": [
+      44.9805152351495,
+      -93.24032452018209
+    ],
+    "tokens": [
+      "sanford hall",
+      "sanford",
+      "hall",
+      "sanford hall (028)",
+      "sanh",
+      "01-028"
+    ],
+    "exactTokens": [
+      "sanford hall",
+      "sanford",
+      "sanford hall (028)",
+      "sanh",
+      "01-028"
+    ]
+  },
+  {
+    "id": "01-040",
+    "name": "Scott Hall",
+    "position": [
+      44.97688376096082,
+      -93.2370146101821
+    ],
+    "tokens": [
+      "scott hall",
+      "scott",
+      "hall",
+      "scott hall (040)",
+      "scotth",
+      "01-040"
+    ],
+    "exactTokens": [
+      "scott hall",
+      "scott",
+      "scott hall (040)",
+      "scotth",
+      "01-040"
+    ]
+  },
+  {
+    "id": "02-471",
+    "name": "Seed Stocks",
+    "position": [
+      44.985811399239985,
+      -93.1808013596613
+    ],
+    "tokens": [
+      "seed stocks",
+      "seed",
+      "stocks",
+      "seed stocks (471)",
+      "ss",
+      "02-471"
+    ],
+    "exactTokens": [
+      "seed stocks",
+      "seed stocks (471)",
+      "ss",
+      "02-471"
+    ]
+  },
+  {
+    "id": "02-473",
+    "name": "Seed Storage North",
+    "position": [
+      44.98584447859272,
+      -93.1810198228716
+    ],
+    "tokens": [
+      "seed storage north",
+      "seed",
+      "storage",
+      "north",
+      "seed storage north (473)",
+      "ssn",
+      "02-473"
+    ],
+    "exactTokens": [
+      "seed storage north",
+      "seed storage north (473)",
+      "ssn",
+      "02-473"
+    ]
+  },
+  {
+    "id": "02-472",
+    "name": "Seed Storage South",
+    "position": [
+      44.98576884627906,
+      -93.1810183932328
+    ],
+    "tokens": [
+      "seed storage south",
+      "seed",
+      "storage",
+      "south",
+      "seed storage south (472)",
+      "sss",
+      "02-472"
+    ],
+    "exactTokens": [
+      "seed storage south",
+      "seed storage south (472)",
+      "sss",
+      "02-472"
     ]
   },
   {
@@ -1099,6 +5476,51 @@
     ]
   },
   {
+    "id": "01-021",
+    "name": "Shevlin Hall",
+    "position": [
+      44.97825691186819,
+      -93.2379304699487
+    ],
+    "tokens": [
+      "shevlin hall",
+      "shevlin",
+      "hall",
+      "shevlin hall (021)",
+      "shevh",
+      "01-021"
+    ],
+    "exactTokens": [
+      "shevlin hall",
+      "shevlin",
+      "shevlin hall (021)",
+      "shevh",
+      "01-021"
+    ]
+  },
+  {
+    "id": "01-138",
+    "name": "Siebert Stadium",
+    "position": [
+      44.982661372030954,
+      -93.22987337299142
+    ],
+    "tokens": [
+      "siebert stadium",
+      "siebert",
+      "stadium",
+      "siebert stadium (138)",
+      "siebstad",
+      "01-138"
+    ],
+    "exactTokens": [
+      "siebert stadium",
+      "siebert stadium (138)",
+      "siebstad",
+      "01-138"
+    ]
+  },
+  {
     "id": "84",
     "name": "Skok Hall",
     "position": [
@@ -1112,6 +5534,54 @@
     ],
     "exactTokens": [
       "skok hall"
+    ]
+  },
+  {
+    "id": "01-158A",
+    "name": "Skyway",
+    "position": [
+      44.974335790278964,
+      -93.23016324549707
+    ],
+    "tokens": [
+      "skyway",
+      "washington ave parking ramp skyway (158a)",
+      "washington ave parking ramp skyway",
+      "washington",
+      "ave",
+      "parking",
+      "ramp",
+      "skywayw",
+      "01-158a"
+    ],
+    "exactTokens": [
+      "skyway",
+      "washington ave parking ramp skyway (158a)",
+      "skywayw",
+      "01-158a"
+    ]
+  },
+  {
+    "id": "01-905",
+    "name": "Smiley's Family Practice Clinic",
+    "position": [
+      44.95271261525652,
+      -93.24277632740815
+    ],
+    "tokens": [
+      "smiley's family practice clinic",
+      "smiley's",
+      "family",
+      "practice",
+      "clinic",
+      "smiley's family practice clinic (905)",
+      "01-905"
+    ],
+    "exactTokens": [
+      "smiley's family practice clinic",
+      "smiley's",
+      "smiley's family practice clinic (905)",
+      "01-905"
     ]
   },
   {
@@ -1180,6 +5650,184 @@
     ]
   },
   {
+    "id": "01-059",
+    "name": "Southeast Steam Plant",
+    "position": [
+      44.98076988077115,
+      -93.24966355114141
+    ],
+    "tokens": [
+      "southeast steam plant",
+      "southeast",
+      "steam",
+      "plant",
+      "se steam plant (059)",
+      "se steam plant",
+      "sesteam",
+      "01-059"
+    ],
+    "exactTokens": [
+      "southeast steam plant",
+      "se steam plant (059)",
+      "sesteam",
+      "01-059"
+    ]
+  },
+  {
+    "id": "02-377",
+    "name": "Spherical Water Tank",
+    "position": [
+      44.987391802603284,
+      -93.18451764820337
+    ],
+    "tokens": [
+      "spherical water tank",
+      "spherical",
+      "water",
+      "tank",
+      "spherical water tank (377)",
+      "wat",
+      "02-377"
+    ],
+    "exactTokens": [
+      "spherical water tank",
+      "spherical water tank (377)",
+      "wat",
+      "02-377"
+    ]
+  },
+  {
+    "id": "01-210",
+    "name": "Sportsfield Service Bldg",
+    "position": [
+      44.97445732957657,
+      -93.24510583240813
+    ],
+    "tokens": [
+      "sportsfield service bldg",
+      "sportsfield",
+      "service",
+      "bldg",
+      "sportsfield service building (210)",
+      "sportsfield service building",
+      "building",
+      "spfldser",
+      "01-210"
+    ],
+    "exactTokens": [
+      "sportsfield service bldg",
+      "sportsfield service building (210)",
+      "spfldser",
+      "01-210"
+    ]
+  },
+  {
+    "id": "01-058",
+    "name": "St. Anthony Falls Laboratory",
+    "position": [
+      44.982383654295525,
+      -93.2548389173873
+    ],
+    "tokens": [
+      "st. anthony falls laboratory",
+      "st.",
+      "anthony",
+      "falls",
+      "laboratory",
+      "st. anthony falls lab",
+      "lab",
+      "st anthony falls laboratory (058)",
+      "st anthony falls laboratory",
+      "safl",
+      "01-058"
+    ],
+    "exactTokens": [
+      "st. anthony falls laboratory",
+      "st. anthony falls lab",
+      "st anthony falls laboratory (058)",
+      "safl",
+      "01-058"
+    ]
+  },
+  {
+    "id": "02-440",
+    "name": "St. Paul Chiller Plant",
+    "position": [
+      44.98684810163835,
+      -93.18676981837434
+    ],
+    "tokens": [
+      "st. paul chiller plant",
+      "st.",
+      "paul",
+      "chiller",
+      "plant",
+      "st paul chiller plant (440)",
+      "st paul chiller plant",
+      "chplnt",
+      "02-440"
+    ],
+    "exactTokens": [
+      "st. paul chiller plant",
+      "st paul chiller plant (440)",
+      "chplnt",
+      "02-440"
+    ]
+  },
+  {
+    "id": "02-342",
+    "name": "St. Paul Gymnasium",
+    "position": [
+      44.9877729696812,
+      -93.18630369647147
+    ],
+    "tokens": [
+      "st. paul gymnasium",
+      "st.",
+      "paul",
+      "gymnasium",
+      "st. paul gym",
+      "gym",
+      "st paul gymnasium (342)",
+      "st paul gymnasium",
+      "02-342"
+    ],
+    "exactTokens": [
+      "st. paul gymnasium",
+      "st. paul gym",
+      "st paul gymnasium (342)",
+      "gym",
+      "02-342"
+    ]
+  },
+  {
+    "id": "02-380",
+    "name": "St. Paul Heating Plant",
+    "position": [
+      44.98010181193223,
+      -93.18246534835895
+    ],
+    "tokens": [
+      "st. paul heating plant",
+      "st.",
+      "paul",
+      "heating",
+      "plant",
+      "heating plant",
+      "st paul heating plant (380)",
+      "st paul heating plant",
+      "stphp",
+      "02-380"
+    ],
+    "exactTokens": [
+      "st. paul heating plant",
+      "heating plant",
+      "st paul heating plant (380)",
+      "stphp",
+      "02-380"
+    ]
+  },
+  {
     "id": "64",
     "name": "Stakman Hall",
     "position": [
@@ -1193,6 +5841,56 @@
     ],
     "exactTokens": [
       "stakman hall"
+    ]
+  },
+  {
+    "id": "01-119",
+    "name": "Steam Utilities Bldg",
+    "position": [
+      44.98633714829681,
+      -93.21139328154663
+    ],
+    "tokens": [
+      "steam utilities bldg",
+      "steam",
+      "utilities",
+      "bldg",
+      "steam utilities",
+      "steam utilities building (119)",
+      "steam utilities building",
+      "building",
+      "sub",
+      "01-119"
+    ],
+    "exactTokens": [
+      "steam utilities bldg",
+      "steam utilities",
+      "steam utilities building (119)",
+      "sub",
+      "01-119"
+    ]
+  },
+  {
+    "id": "01-270",
+    "name": "Storage at Hydraulic Lab",
+    "position": [
+      44.98167920759052,
+      -93.25432039370476
+    ],
+    "tokens": [
+      "storage at hydraulic lab",
+      "storage",
+      "hydraulic",
+      "lab",
+      "storage at hydraulic lab (270)",
+      "storhl",
+      "01-270"
+    ],
+    "exactTokens": [
+      "storage at hydraulic lab",
+      "storage at hydraulic lab (270)",
+      "storhl",
+      "01-270"
     ]
   },
   {
@@ -1228,6 +5926,161 @@
     ]
   },
   {
+    "id": "01-273",
+    "name": "Ted Mann Concert Hall",
+    "position": [
+      44.97067986425583,
+      -93.24116927132006
+    ],
+    "tokens": [
+      "ted mann concert hall",
+      "ted",
+      "mann",
+      "concert",
+      "hall",
+      "ted mann",
+      "ted mann concert hall (273)",
+      "mannconc",
+      "01-273"
+    ],
+    "exactTokens": [
+      "ted mann concert hall",
+      "ted mann",
+      "ted mann concert hall (273)",
+      "mannconc",
+      "01-273"
+    ]
+  },
+  {
+    "id": "01-161",
+    "name": "Telecommunications Bldg",
+    "position": [
+      44.976117864844376,
+      -93.23436736998744
+    ],
+    "tokens": [
+      "telecommunications bldg",
+      "telecommunications",
+      "bldg",
+      "telecom. bldg",
+      "telecom.",
+      "telecommunications building (161)",
+      "telecommunications building",
+      "building",
+      "telecomb",
+      "01-161"
+    ],
+    "exactTokens": [
+      "telecommunications bldg",
+      "telecom. bldg",
+      "telecommunications building (161)",
+      "telecomb",
+      "01-161"
+    ]
+  },
+  {
+    "id": "01-105",
+    "name": "Territorial Hall",
+    "position": [
+      44.97204931585756,
+      -93.22799477966252
+    ],
+    "tokens": [
+      "territorial hall",
+      "territorial",
+      "hall",
+      "territorial hall (105)",
+      "terrh",
+      "01-105"
+    ],
+    "exactTokens": [
+      "territorial hall",
+      "territorial",
+      "territorial hall (105)",
+      "terrh",
+      "01-105"
+    ]
+  },
+  {
+    "id": "91-905",
+    "name": "The M on Hennepin",
+    "position": [
+      44.98710576894362,
+      -93.25807963703998
+    ],
+    "tokens": [
+      "the m on hennepin",
+      "the",
+      "hennepin",
+      "m on hennepin",
+      "m on hennepin (905)",
+      "tmoh",
+      "91-905"
+    ],
+    "exactTokens": [
+      "the m on hennepin",
+      "m on hennepin",
+      "m on hennepin (905)",
+      "tmoh",
+      "91-905"
+    ]
+  },
+  {
+    "id": "01-177",
+    "name": "Thompson Ctr for Environmental Management",
+    "position": [
+      44.97616607592907,
+      -93.22146773157617
+    ],
+    "tokens": [
+      "thompson ctr for environmental management",
+      "thompson",
+      "ctr",
+      "for",
+      "environmental",
+      "management",
+      "thompson center (177)",
+      "thompson center",
+      "center",
+      "thompctr",
+      "01-177"
+    ],
+    "exactTokens": [
+      "thompson ctr for environmental management",
+      "thompson",
+      "thompson center (177)",
+      "thompctr",
+      "01-177"
+    ]
+  },
+  {
+    "id": "01-130",
+    "name": "Track & Field Facility",
+    "position": [
+      44.980888613063414,
+      -93.22688870488722
+    ],
+    "tokens": [
+      "track & field facility",
+      "track",
+      "field",
+      "facility",
+      "track & field",
+      "track and field facility (130)",
+      "track and field facility",
+      "and",
+      "tfs",
+      "01-130"
+    ],
+    "exactTokens": [
+      "track & field facility",
+      "track & field",
+      "track and field facility (130)",
+      "tfs",
+      "01-130"
+    ]
+  },
+  {
     "id": "94",
     "name": "Transportation & Safety Bldg",
     "position": [
@@ -1242,6 +6095,58 @@
     ],
     "exactTokens": [
       "transportation & safety bldg"
+    ]
+  },
+  {
+    "id": "01-188A",
+    "name": "Tunnel - Univ Av Ramp To Mcnamara",
+    "position": [
+      44.975699997884995,
+      -93.22807593535175
+    ],
+    "tokens": [
+      "tunnel - univ av ramp to mcnamara",
+      "tunnel",
+      "univ",
+      "ramp",
+      "mcnamara",
+      "tunnel - univ ave ramp to mcnamara",
+      "ave",
+      "tunnel - univ av ramp to mcnamara (188a)",
+      "tunnelr",
+      "01-188a"
+    ],
+    "exactTokens": [
+      "tunnel - univ av ramp to mcnamara",
+      "tunnel - univ ave ramp to mcnamara",
+      "tunnel - univ av ramp to mcnamara (188a)",
+      "tunnelr",
+      "01-188a"
+    ]
+  },
+  {
+    "id": "01-121",
+    "name": "U Market Services",
+    "position": [
+      44.99043878755577,
+      -93.21190757982284
+    ],
+    "tokens": [
+      "u market services",
+      "market",
+      "services",
+      "u market svcs.",
+      "svcs.",
+      "u market services (121)",
+      "umarkets",
+      "01-121"
+    ],
+    "exactTokens": [
+      "u market services",
+      "u market svcs.",
+      "u market services (121)",
+      "umarkets",
+      "01-121"
     ]
   },
   {
@@ -1262,6 +6167,33 @@
     ]
   },
   {
+    "id": "92-999",
+    "name": "University Enterprise Laboratories",
+    "position": [
+      44.971346042829765,
+      -93.20413521514877
+    ],
+    "tokens": [
+      "university enterprise laboratories",
+      "university",
+      "enterprise",
+      "laboratories",
+      "univ. enterprise labs",
+      "univ.",
+      "labs",
+      "university enterprise laboratories (999)",
+      "uel",
+      "92-999"
+    ],
+    "exactTokens": [
+      "university enterprise laboratories",
+      "univ. enterprise labs",
+      "university enterprise laboratories (999)",
+      "uel",
+      "92-999"
+    ]
+  },
+  {
     "id": "93",
     "name": "University of Minnesota Medical Ctr - Fairview",
     "position": [
@@ -1278,6 +6210,166 @@
     ],
     "exactTokens": [
       "university of minnesota medical ctr - fairview"
+    ]
+  },
+  {
+    "id": "01-192",
+    "name": "University Office Plaza",
+    "position": [
+      44.97491230587592,
+      -93.22394091669662
+    ],
+    "tokens": [
+      "university office plaza",
+      "university",
+      "office",
+      "plaza",
+      "u. office plaza",
+      "university office plaza (192)",
+      "uoffpl",
+      "01-192"
+    ],
+    "exactTokens": [
+      "university office plaza",
+      "u. office plaza",
+      "university office plaza (192)",
+      "uoffpl",
+      "01-192"
+    ]
+  },
+  {
+    "id": "01-192G",
+    "name": "University Office Plaza Garage",
+    "position": [
+      44.9752862870556,
+      -93.224075640051
+    ],
+    "tokens": [
+      "university office plaza garage",
+      "university",
+      "office",
+      "plaza",
+      "garage",
+      "u. office plaza garage",
+      "university office plaza garage (192g)",
+      "uopg",
+      "01-192g"
+    ],
+    "exactTokens": [
+      "university office plaza garage",
+      "u. office plaza garage",
+      "university office plaza garage (192g)",
+      "uopg",
+      "01-192g"
+    ]
+  },
+  {
+    "id": "01-221",
+    "name": "University Park Plaza",
+    "position": [
+      44.97166318355427,
+      -93.21594376636085
+    ],
+    "tokens": [
+      "university park plaza",
+      "university",
+      "park",
+      "plaza",
+      "univ. park plaza",
+      "univ.",
+      "university park plaza (221)",
+      "upp",
+      "01-221"
+    ],
+    "exactTokens": [
+      "university park plaza",
+      "univ. park plaza",
+      "university park plaza (221)",
+      "upp",
+      "01-221"
+    ]
+  },
+  {
+    "id": "01-169",
+    "name": "University Recreation & Wellness Ctr",
+    "position": [
+      44.975781383459356,
+      -93.2299199062752
+    ],
+    "tokens": [
+      "university recreation & wellness ctr",
+      "university",
+      "recreation",
+      "wellness",
+      "ctr",
+      "univ. recreation & wellness ctr",
+      "univ.",
+      "recreation and wellness center (169)",
+      "recreation and wellness center",
+      "and",
+      "center",
+      "recwellctr",
+      "01-169"
+    ],
+    "exactTokens": [
+      "university recreation & wellness ctr",
+      "univ. recreation & wellness ctr",
+      "recreation and wellness center (169)",
+      "recwellctr",
+      "01-169"
+    ]
+  },
+  {
+    "id": "01-098",
+    "name": "University Stores South",
+    "position": [
+      44.98582598656315,
+      -93.21324307619805
+    ],
+    "tokens": [
+      "university stores south",
+      "university",
+      "stores",
+      "south",
+      "univ. stores south",
+      "univ.",
+      "university stores south (098)",
+      "ustors",
+      "01-098"
+    ],
+    "exactTokens": [
+      "university stores south",
+      "univ. stores south",
+      "university stores south (098)",
+      "ustors",
+      "01-098"
+    ]
+  },
+  {
+    "id": "01-986",
+    "name": "University Village Apartments",
+    "position": [
+      44.973368345860294,
+      -93.21984962579677
+    ],
+    "tokens": [
+      "university village apartments",
+      "university",
+      "village",
+      "apartments",
+      "university village apts.",
+      "apts.",
+      "u village apartments (986)",
+      "u village apartments",
+      "uvillapts",
+      "01-986"
+    ],
+    "exactTokens": [
+      "university village apartments",
+      "university village apts.",
+      "u village apartments (986)",
+      "uvillapts",
+      "01-986"
     ]
   },
   {
@@ -1313,6 +6405,32 @@
     ],
     "exactTokens": [
       "veterinary diagnostic laboratory"
+    ]
+  },
+  {
+    "id": "02-409",
+    "name": "Veterinary Isolation Facility",
+    "position": [
+      44.98159725606266,
+      -93.181031035566
+    ],
+    "tokens": [
+      "veterinary isolation facility",
+      "veterinary",
+      "isolation",
+      "facility",
+      "vet. isolation facility",
+      "vet.",
+      "veterinary isolation facility (409)",
+      "vif",
+      "02-409"
+    ],
+    "exactTokens": [
+      "veterinary isolation facility",
+      "vet. isolation facility",
+      "veterinary isolation facility (409)",
+      "vif",
+      "02-409"
     ]
   },
   {
@@ -1384,6 +6502,32 @@
     ]
   },
   {
+    "id": "01-197",
+    "name": "Wallin Medical Biosciences Bldg",
+    "position": [
+      44.97818938289769,
+      -93.22287215265501
+    ],
+    "tokens": [
+      "wallin medical biosciences bldg",
+      "wallin",
+      "medical",
+      "biosciences",
+      "bldg",
+      "wallin medical biosciences (197)",
+      "wallin medical biosciences",
+      "wmbb",
+      "01-197"
+    ],
+    "exactTokens": [
+      "wallin medical biosciences bldg",
+      "wallin",
+      "wallin medical biosciences (197)",
+      "wmbb",
+      "01-197"
+    ]
+  },
+  {
     "id": "7",
     "name": "Walter Library",
     "position": [
@@ -1397,6 +6541,33 @@
     ],
     "exactTokens": [
       "walter library"
+    ]
+  },
+  {
+    "id": "01-123",
+    "name": "Washington Avenue Pedestrian Bridge",
+    "position": [
+      44.97314824866788,
+      -93.2394286624528
+    ],
+    "tokens": [
+      "washington avenue pedestrian bridge",
+      "washington",
+      "avenue",
+      "pedestrian",
+      "bridge",
+      "washington ave pedestrian bridge",
+      "ave",
+      "washington ave pedestrian bridge (123)",
+      "peds",
+      "01-123"
+    ],
+    "exactTokens": [
+      "washington avenue pedestrian bridge",
+      "washington ave pedestrian bridge",
+      "washington ave pedestrian bridge (123)",
+      "peds",
+      "01-123"
     ]
   },
   {
@@ -1433,6 +6604,136 @@
     ]
   },
   {
+    "id": "02-398",
+    "name": "Weed Research Laboratory (USDA)",
+    "position": [
+      44.98746176274587,
+      -93.1802110164305
+    ],
+    "tokens": [
+      "weed research laboratory (usda)",
+      "weed research laboratory",
+      "weed",
+      "research",
+      "laboratory",
+      "weed research lab (usda)",
+      "weed research lab",
+      "lab",
+      "weed research lab (usda) (398)",
+      "wrl",
+      "02-398"
+    ],
+    "exactTokens": [
+      "weed research laboratory (usda)",
+      "weed research lab (usda)",
+      "weed research lab (usda) (398)",
+      "wrl",
+      "02-398"
+    ]
+  },
+  {
+    "id": "01-172",
+    "name": "Weisman Art Museum",
+    "position": [
+      44.97309171205316,
+      -93.23708211635929
+    ],
+    "tokens": [
+      "weisman art museum",
+      "weisman",
+      "art",
+      "museum",
+      "weisman (172)",
+      "weismanar",
+      "01-172"
+    ],
+    "exactTokens": [
+      "weisman art museum",
+      "weisman (172)",
+      "weismanar",
+      "01-172"
+    ]
+  },
+  {
+    "id": "01-172G",
+    "name": "Weisman Art Museum Garage",
+    "position": [
+      44.97323361729,
+      -93.23741058243462
+    ],
+    "tokens": [
+      "weisman art museum garage",
+      "weisman",
+      "art",
+      "museum",
+      "garage",
+      "weisman garage",
+      "weisman garage (172g)",
+      "wamg",
+      "01-172g"
+    ],
+    "exactTokens": [
+      "weisman art museum garage",
+      "weisman garage",
+      "weisman garage (172g)",
+      "wamg",
+      "01-172g"
+    ]
+  },
+  {
+    "id": "01-218",
+    "name": "West Bank Office Bldg",
+    "position": [
+      44.97581015949227,
+      -93.2481492727258
+    ],
+    "tokens": [
+      "west bank office bldg",
+      "west",
+      "bank",
+      "office",
+      "bldg",
+      "west bank office building (218)",
+      "west bank office building",
+      "building",
+      "wbob",
+      "01-218"
+    ],
+    "exactTokens": [
+      "west bank office bldg",
+      "west bank office building (218)",
+      "wbob",
+      "01-218"
+    ]
+  },
+  {
+    "id": "01-219",
+    "name": "West Bank Office Bldg Ramp",
+    "position": [
+      44.97627909705125,
+      -93.24785704031346
+    ],
+    "tokens": [
+      "west bank office bldg ramp",
+      "west",
+      "bank",
+      "office",
+      "bldg",
+      "ramp",
+      "west bank office building ramp (219)",
+      "west bank office building ramp",
+      "building",
+      "wbobr",
+      "01-219"
+    ],
+    "exactTokens": [
+      "west bank office bldg ramp",
+      "west bank office building ramp (219)",
+      "wbobr",
+      "01-219"
+    ]
+  },
+  {
     "id": "49",
     "name": "West Bank Skyway",
     "position": [
@@ -1450,6 +6751,78 @@
     ]
   },
   {
+    "id": "01-213",
+    "name": "West Bank Student Housing",
+    "position": [
+      44.96803399436065,
+      -93.24116032263979
+    ],
+    "tokens": [
+      "west bank student housing",
+      "west",
+      "bank",
+      "student",
+      "housing",
+      "west bank student housing (213)",
+      "wbstuh",
+      "01-213"
+    ],
+    "exactTokens": [
+      "west bank student housing",
+      "west bank student housing (213)",
+      "wbstuh",
+      "01-213"
+    ]
+  },
+  {
+    "id": "01-989",
+    "name": "Westgate I Business Ctr",
+    "position": [
+      44.96915487305856,
+      -93.20401966932037
+    ],
+    "tokens": [
+      "westgate i business ctr",
+      "westgate",
+      "business",
+      "ctr",
+      "westgate i business center (989)",
+      "westgate i business center",
+      "center",
+      "westi",
+      "01-989"
+    ],
+    "exactTokens": [
+      "westgate i business ctr",
+      "westgate i business center (989)",
+      "westi",
+      "01-989"
+    ]
+  },
+  {
+    "id": "01-030",
+    "name": "Wilkins Hall",
+    "position": [
+      44.98016602091585,
+      -93.23919914472698
+    ],
+    "tokens": [
+      "wilkins hall",
+      "wilkins",
+      "hall",
+      "wilkins hall (030)",
+      "wilkinsh",
+      "01-030"
+    ],
+    "exactTokens": [
+      "wilkins hall",
+      "wilkins",
+      "wilkins hall (030)",
+      "wilkinsh",
+      "01-030"
+    ]
+  },
+  {
     "id": "39",
     "name": "Willey Hall",
     "position": [
@@ -1463,6 +6836,32 @@
     ],
     "exactTokens": [
       "willey hall"
+    ]
+  },
+  {
+    "id": "01-050",
+    "name": "Williams Arena & Maturi Pavilion",
+    "position": [
+      44.97698434281796,
+      -93.22837382578575
+    ],
+    "tokens": [
+      "williams arena & maturi pavilion",
+      "williams",
+      "arena",
+      "maturi",
+      "pavilion",
+      "williams arena and maturi pavilion (050)",
+      "williams arena and maturi pavilion",
+      "and",
+      "wmsa",
+      "01-050"
+    ],
+    "exactTokens": [
+      "williams arena & maturi pavilion",
+      "williams arena and maturi pavilion (050)",
+      "wmsa",
+      "01-050"
     ]
   },
   {
@@ -1495,6 +6894,52 @@
     ],
     "exactTokens": [
       "wilson library"
+    ]
+  },
+  {
+    "id": "01-006",
+    "name": "Wulling Hall",
+    "position": [
+      44.976229661396516,
+      -93.23732896977242
+    ],
+    "tokens": [
+      "wulling hall",
+      "wulling",
+      "hall",
+      "wulling hall (006)",
+      "wullh",
+      "01-006"
+    ],
+    "exactTokens": [
+      "wulling hall",
+      "wulling",
+      "wulling hall (006)",
+      "wullh",
+      "01-006"
+    ]
+  },
+  {
+    "id": "01-189",
+    "name": "Yudof Hall",
+    "position": [
+      44.97191636604891,
+      -93.23597920055938
+    ],
+    "tokens": [
+      "yudof hall",
+      "yudof",
+      "hall",
+      "yudof hall (189)",
+      "mgyh",
+      "01-189"
+    ],
+    "exactTokens": [
+      "yudof hall",
+      "yudof",
+      "yudof hall (189)",
+      "mgyh",
+      "01-189"
     ]
   }
 ]

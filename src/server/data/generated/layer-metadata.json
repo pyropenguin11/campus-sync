@@ -18,6 +18,24 @@
     ]
   },
   {
+    "feature": "EGISADMIN_BUILDING_POLYGON_HOSTED",
+    "layerId": 0,
+    "category": "layer",
+    "name": "EGISADMIN BUILDING POLYGON",
+    "featureCount": 374,
+    "geometryTypes": {
+      "polygon": true,
+      "line": false,
+      "point": false
+    },
+    "bbox": [
+      44.9461403349686,
+      -93.2583234321379,
+      44.998600697233,
+      -93.1795250776225
+    ]
+  },
+  {
     "feature": "GOPHER_WAY_LEVEL_BLDGS",
     "layerId": 0,
     "category": "layer",
