@@ -756,6 +756,15 @@
     ],
     "exactTokens": [
       "akerman hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM"
     ]
   },
   {
@@ -772,6 +781,15 @@
     ],
     "exactTokens": [
       "alderman hall"
+    ],
+    "hours": [
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -788,6 +806,15 @@
     ],
     "exactTokens": [
       "amundson hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -820,6 +847,15 @@
     ],
     "exactTokens": [
       "anderson hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -882,6 +918,15 @@
       "appleby hall (037)",
       "aph",
       "01-037"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -900,6 +945,15 @@
       "armory",
       "armory (011)",
       "01-011"
+    ],
+    "hours": [
+      "5:00 AM-10:00 PM",
+      "5:00 AM-10:00 PM",
+      "5:00 AM-10:00 PM",
+      "5:00 AM-10:00 PM",
+      "5:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -962,6 +1016,15 @@
     ],
     "exactTokens": [
       "bailey hall"
+    ],
+    "hours": [
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "closed"
     ]
   },
   {
@@ -1040,6 +1103,15 @@
       "bee research facility (347)",
       "brf",
       "02-347"
+    ],
+    "hours": [
+      "7:45 AM-4:30 PM",
+      "7:45 AM-4:30 PM",
+      "7:45 AM-4:30 PM",
+      "7:45 AM-4:30 PM",
+      "7:45 AM-4:30 PM",
+      "closed",
+      "closed"
     ]
   },
   {
@@ -1177,6 +1249,15 @@
     ],
     "exactTokens": [
       "biological sciences"
+    ],
+    "hours": [
+      "7:00 AM-9:30 PM",
+      "7:00 AM-9:30 PM",
+      "7:00 AM-9:30 PM",
+      "7:00 AM-9:30 PM",
+      "7:00 AM-9:30 PM",
+      "1:00 PM-6:00 PM",
+      "11:30 AM-6:00 PM"
     ]
   },
   {
@@ -1224,6 +1305,15 @@
     ],
     "exactTokens": [
       "blegen hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "closed"
     ]
   },
   {
@@ -1260,6 +1350,15 @@
     ],
     "exactTokens": [
       "borlaug hall"
+    ],
+    "hours": [
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-4:00 PM",
+      "closed"
     ]
   },
   {
@@ -1328,6 +1427,15 @@
     ],
     "exactTokens": [
       "boynton health service"
+    ],
+    "hours": [
+      "7:00 AM-4:30 PM",
+      "7:00 AM-4:30 PM",
+      "7:00 AM-4:30 PM",
+      "7:00 AM-4:30 PM",
+      "7:00 AM-4:30 PM",
+      "closed",
+      "closed"
     ]
   },
   {
@@ -1351,6 +1459,15 @@
       "bruininks hall (299)",
       "bruh",
       "01-299"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -1374,6 +1491,15 @@
       "burton hall (008)",
       "buh",
       "01-008"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -1545,6 +1671,15 @@
       "centennial hall (068)",
       "cenh",
       "01-068"
+    ],
+    "hours": [
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM"
     ]
   },
   {
@@ -1758,6 +1893,15 @@
     ],
     "exactTokens": [
       "coffey hall"
+    ],
+    "hours": [
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "closed",
+      "closed"
     ]
   },
   {
@@ -2059,6 +2203,15 @@
       "cooke hall (056)",
       "cookeh",
       "01-056"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -2468,6 +2621,15 @@
       "elliott hall (020)",
       "elth",
       "01-020"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -2654,6 +2816,15 @@
     ],
     "exactTokens": [
       "ferguson hall"
+    ],
+    "hours": [
+      "6:00 AM-12:15 AM",
+      "6:00 AM-12:15 AM",
+      "6:00 AM-12:15 AM",
+      "6:00 AM-12:15 AM",
+      "6:00 AM-12:15 AM",
+      "6:00 AM-12:15 AM",
+      "6:00 AM-12:15 AM"
     ]
   },
   {
@@ -2744,6 +2915,15 @@
     ],
     "exactTokens": [
       "folwell hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -2816,6 +2996,15 @@
     ],
     "exactTokens": [
       "ford hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -2839,6 +3028,15 @@
       "fraser hall (051)",
       "fraserh",
       "01-051"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -3146,6 +3344,15 @@
     ],
     "exactTokens": [
       "green hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-7:00 PM",
+      "8:00 AM-5:00 PM"
     ]
   },
   {
@@ -3194,6 +3401,15 @@
       "haecker hall (350)",
       "hckrh",
       "02-350"
+    ],
+    "hours": [
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -3210,6 +3426,15 @@
     ],
     "exactTokens": [
       "hanson hall"
+    ],
+    "hours": [
+      "10:00 PM-6:00 AM",
+      "10:00 PM-6:00 AM",
+      "10:00 PM-6:00 AM",
+      "10:00 PM-6:00 AM",
+      "10:00 PM-6:00 AM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -3242,6 +3467,15 @@
     ],
     "exactTokens": [
       "hayes hall"
+    ],
+    "hours": [
+      "6:00 AM-7:00 PM",
+      "6:00 AM-7:00 PM",
+      "6:00 AM-7:00 PM",
+      "6:00 AM-7:00 PM",
+      "6:00 AM-7:00 PM",
+      "7:00 AM-4:00 PM",
+      "7:00 AM-4:00 PM"
     ]
   },
   {
@@ -3330,6 +3564,15 @@
     ],
     "exactTokens": [
       "heller hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -3453,6 +3696,15 @@
     ],
     "exactTokens": [
       "jackson hall"
+    ],
+    "hours": [
+      "5:30 AM-6:20 PM",
+      "5:30 AM-6:00 PM",
+      "5:30 AM-6:20 PM",
+      "5:30 AM-6:20 PM",
+      "5:30 AM-6:00 PM",
+      "closed",
+      "closed"
     ]
   },
   {
@@ -3469,6 +3721,15 @@
     ],
     "exactTokens": [
       "johnston hall"
+    ],
+    "hours": [
+      "6:00 AM-7:00 AM",
+      "6:00 AM-7:00 AM",
+      "6:00 AM-7:00 AM",
+      "6:00 AM-7:00 AM",
+      "6:00 AM-7:00 AM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -3485,6 +3746,15 @@
     ],
     "exactTokens": [
       "jones hall"
+    ],
+    "hours": [
+      "6:00 AM-9:00 PM",
+      "6:00 AM-9:00 PM",
+      "6:00 AM-9:00 PM",
+      "6:00 AM-9:00 PM",
+      "6:00 AM-5:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -3569,6 +3839,15 @@
     ],
     "exactTokens": [
       "keller hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -3585,6 +3864,15 @@
     ],
     "exactTokens": [
       "kolthoff hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -3792,6 +4080,15 @@
     ],
     "exactTokens": [
       "lind hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "8:00 AM-10:00 PM",
+      "9:00 AM-10:00 PM"
     ]
   },
   {
@@ -3885,6 +4182,15 @@
     ],
     "exactTokens": [
       "magrath library"
+    ],
+    "hours": [
+      "6:00 AM-2:00 AM",
+      "6:00 AM-2:00 AM",
+      "6:00 AM-2:00 AM",
+      "6:00 AM-2:00 AM",
+      "6:00 AM-2:00 AM",
+      "6:00 PM-2:00 AM",
+      "10:00 PM-2:00 AM"
     ]
   },
   {
@@ -4069,6 +4375,15 @@
     ],
     "exactTokens": [
       "mcneal hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "1:00 PM-5:00 PM"
     ]
   },
   {
@@ -4085,6 +4400,15 @@
     ],
     "exactTokens": [
       "mechanical engineering"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM"
     ]
   },
   {
@@ -4132,6 +4456,15 @@
       "microbiology research facility (149)",
       "mrf",
       "01-149"
+    ],
+    "hours": [
+      "6:30 AM-6:30 PM",
+      "6:30 AM-6:30 PM",
+      "6:30 AM-6:30 PM",
+      "6:30 AM-6:30 PM",
+      "6:30 AM-6:30 PM",
+      "closed",
+      "closed"
     ]
   },
   {
@@ -4275,6 +4608,15 @@
     ],
     "exactTokens": [
       "molecular & cellular biology"
+    ],
+    "hours": [
+      "7:00 AM-9:30 PM",
+      "7:00 AM-9:30 PM",
+      "7:00 AM-9:30 PM",
+      "7:00 AM-9:30 PM",
+      "7:00 AM-6:00 PM",
+      "closed",
+      "closed"
     ]
   },
   {
@@ -4332,6 +4674,15 @@
     ],
     "exactTokens": [
       "moos tower"
+    ],
+    "hours": [
+      "6:00 AM-12:00 AM",
+      "6:00 AM-12:00 AM",
+      "6:00 AM-12:00 AM",
+      "6:00 AM-12:00 AM",
+      "6:00 AM-12:00 AM",
+      "6:00 AM-6:00 PM",
+      "6:00 AM-4:00 PM"
     ]
   },
   {
@@ -4375,6 +4726,15 @@
     ],
     "exactTokens": [
       "morrill hall"
+    ],
+    "hours": [
+      "6:00 AM-7:00 AM",
+      "6:00 AM-7:00 AM",
+      "6:00 AM-7:00 AM",
+      "6:00 AM-7:00 AM",
+      "6:00 AM-7:00 AM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -4419,6 +4779,15 @@
     ],
     "exactTokens": [
       "murphy hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -4694,6 +5063,15 @@
       "pattee hall (003)",
       "pth",
       "01-003"
+    ],
+    "hours": [
+      "7:00 AM-6:00 PM",
+      "7:00 AM-6:00 PM",
+      "7:00 AM-6:00 PM",
+      "7:00 AM-6:00 PM",
+      "7:00 AM-6:00 PM",
+      "closed",
+      "closed"
     ]
   },
   {
@@ -4717,6 +5095,15 @@
       "peik hall (267)",
       "peikh",
       "01-267"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -4740,6 +5127,15 @@
       "peters hall (372)",
       "peth",
       "02-372"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -4756,6 +5152,15 @@
     ],
     "exactTokens": [
       "phillips-wangensteen bldg"
+    ],
+    "hours": [
+      "5:00 AM-8:00 PM",
+      "5:00 AM-8:00 PM",
+      "5:00 AM-8:00 PM",
+      "5:00 AM-8:00 PM",
+      "5:00 AM-8:00 PM",
+      "5:00 AM-8:00 PM",
+      "5:00 AM-8:00 PM"
     ]
   },
   {
@@ -4853,6 +5258,15 @@
       "pioneer hall (052)",
       "pioh",
       "01-052"
+    ],
+    "hours": [
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "7:00 AM-7:00 PM",
+      "closed",
+      "closed"
     ]
   },
   {
@@ -5070,6 +5484,15 @@
     ],
     "exactTokens": [
       "rapson hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -5343,6 +5766,15 @@
     ],
     "exactTokens": [
       "ruttan hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -5389,6 +5821,15 @@
       "scott hall (040)",
       "scotth",
       "01-040"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -5496,6 +5937,15 @@
       "shevlin hall (021)",
       "shevh",
       "01-021"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -5534,6 +5984,15 @@
     ],
     "exactTokens": [
       "skok hall"
+    ],
+    "hours": [
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "7:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -5598,6 +6057,15 @@
     ],
     "exactTokens": [
       "smith hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -5841,6 +6309,15 @@
     ],
     "exactTokens": [
       "stakman hall"
+    ],
+    "hours": [
+      "6:30 AM-6:00 PM",
+      "6:30 AM-6:00 PM",
+      "6:30 AM-6:00 PM",
+      "6:30 AM-6:00 PM",
+      "6:30 AM-6:00 PM",
+      "closed",
+      "closed"
     ]
   },
   {
@@ -5923,6 +6400,15 @@
     ],
     "exactTokens": [
       "tate hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -6095,6 +6581,15 @@
     ],
     "exactTokens": [
       "transportation & safety bldg"
+    ],
+    "hours": [
+      "24 hours",
+      "24 hours",
+      "24 hours",
+      "24 hours",
+      "24 hours",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -6235,6 +6730,15 @@
       "university office plaza (192)",
       "uoffpl",
       "01-192"
+    ],
+    "hours": [
+      "6:00 AM-7:00 PM",
+      "6:00 AM-7:00 PM",
+      "6:00 AM-7:00 PM",
+      "6:00 AM-7:00 PM",
+      "6:00 AM-7:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -6499,6 +7003,15 @@
     ],
     "exactTokens": [
       "vincent hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "8:00 AM-6:00 PM",
+      "10:00 AM-6:00 PM"
     ]
   },
   {
@@ -6525,6 +7038,15 @@
       "wallin medical biosciences (197)",
       "wmbb",
       "01-197"
+    ],
+    "hours": [
+      "7:00 AM-6:00 PM",
+      "7:00 AM-6:00 PM",
+      "7:00 AM-6:00 PM",
+      "7:00 AM-6:00 PM",
+      "7:00 AM-6:00 PM",
+      "closed",
+      "closed"
     ]
   },
   {
@@ -6541,6 +7063,15 @@
     ],
     "exactTokens": [
       "walter library"
+    ],
+    "hours": [
+      "7:00 AM-12:00 AM",
+      "7:00 AM-12:00 AM",
+      "7:00 AM-12:00 AM",
+      "7:00 AM-12:00 AM",
+      "7:00 AM-9:00 PM",
+      "10:00 AM-9:00 PM",
+      "10:00 AM-12:00 AM"
     ]
   },
   {
@@ -6601,6 +7132,15 @@
     ],
     "exactTokens": [
       "weaver-densford hall"
+    ],
+    "hours": [
+      "6:00 AM-8:00 PM",
+      "6:00 AM-8:00 PM",
+      "6:00 AM-8:00 PM",
+      "6:00 AM-8:00 PM",
+      "6:00 AM-8:00 PM",
+      "6:00 AM-6:00 PM",
+      "6:00 AM-4:00 PM"
     ]
   },
   {
@@ -6652,6 +7192,15 @@
       "weisman (172)",
       "weismanar",
       "01-172"
+    ],
+    "hours": [
+      "7:00 AM-9:00 PM",
+      "7:00 AM-9:00 PM",
+      "7:00 AM-9:00 PM",
+      "7:00 AM-9:00 PM",
+      "7:00 AM-9:00 PM",
+      "10:00 AM-6:00 PM",
+      "10:00 AM-6:00 PM"
     ]
   },
   {
@@ -6836,6 +7385,15 @@
     ],
     "exactTokens": [
       "willey hall"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "closed"
     ]
   },
   {
@@ -6878,6 +7436,15 @@
     ],
     "exactTokens": [
       "williamson hall"
+    ],
+    "hours": [
+      "6:00 AM-6:00 PM",
+      "6:00 AM-6:00 PM",
+      "6:00 AM-6:00 PM",
+      "6:00 AM-6:00 PM",
+      "6:00 AM-6:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -6894,6 +7461,15 @@
     ],
     "exactTokens": [
       "wilson library"
+    ],
+    "hours": [
+      "6:00 AM-8:00 AM",
+      "6:00 AM-8:00 AM",
+      "6:00 AM-8:00 AM",
+      "6:00 AM-8:00 AM",
+      "6:00 AM-8:00 AM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {
@@ -6917,6 +7493,15 @@
       "wulling hall (006)",
       "wullh",
       "01-006"
+    ],
+    "hours": [
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "6:00 AM-10:00 PM",
+      "24 hours",
+      "24 hours"
     ]
   },
   {

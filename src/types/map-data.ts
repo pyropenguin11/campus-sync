@@ -7,6 +7,7 @@ export interface BuildingSummary {
   position: LatLngTuple;
   tokens: string[];
   exactTokens: string[];
+  hours?: string[]; // Monday-Sunday public hours strings
 }
 
 export interface RouteGraphNeighbor {

@@ -33,6 +33,18 @@ type RouteGraph = {
 const OUTDOOR_WALK_SPEED_MPS = 1.4; // roughly 5 km/h
 const TUNNEL_WALK_SPEED_MPS = 1.35;
 
+const CENTRAL_TIMEZONE = "America/Chicago";
+
+const getCentralClock = (): { dayIndex: number; minutes: number } => {
+  const central = new Date(
+    new Date().toLocaleString("en-US", { timeZone: CENTRAL_TIMEZONE }),
+  );
+  return {
+    dayIndex: central.getDay(),
+    minutes: central.getHours() * 60 + central.getMinutes(),
+  };
+};
+
 const buildRouteGraph = (
   snapshot: RouteGraphSnapshot | null | undefined,
 ): RouteGraph => {
@@ -567,6 +579,68 @@ export default function HomePage() {
     };
   }, [routeSegments]);
 
+  const parseTimeRange = (value: string): Array<{ start: number; end: number }> => {
+    const trimmed = value.trim().toLowerCase();
+    if (trimmed === "closed") return [];
+    if (trimmed === "24 hours") return [{ start: 0, end: 24 * 60 }];
+    const match = trimmed.match(
+      /(\d{1,2}:\d{2}\s*[ap]\.?m)\s*[-–—]\s*(\d{1,2}:\d{2}\s*[ap]\.?m)/i,
+    );
+    if (!match) return [];
+    const toMinutes = (time: string) => {
+      const parts = time.trim().match(/(\d{1,2}):(\d{2})\s*([ap])\.?m/i);
+      if (!parts) return null;
+      let hour = Number(parts[1]) % 12;
+      const minute = Number(parts[2]);
+      if (parts[3].toLowerCase() === "p") hour += 12;
+      return hour * 60 + minute;
+    };
+    const start = toMinutes(match[1]);
+    const end = toMinutes(match[2]);
+    if (start === null || end === null) return [];
+
+    return [{ start, end }];
+  };
+
+  const formatClock = (minutes: number): string => {
+    const normalized = ((minutes % (24 * 60)) + (24 * 60)) % (24 * 60);
+    const hours = Math.floor(normalized / 60);
+    const mins = normalized % 60;
+    const period = hours >= 12 ? "PM" : "AM";
+    const hour12 = hours % 12 === 0 ? 12 : hours % 12;
+    return `${hour12}:${mins.toString().padStart(2, "0")} ${period} CT`;
+  };
+
+  type OpenStatus = { state: "open" | "closed" | "unknown"; closesAt?: number };
+
+  // building.hours is Monday-first; JS day index is Sunday-first.
+  const getBuildingStatus = (building: BuildingSummary | null): OpenStatus => {
+    if (!building?.hours || building.hours.length !== 7) return { state: "unknown" };
+    const { dayIndex, minutes } = getCentralClock();
+    const mondayFirstIndex = (dayIndex + 6) % 7; // shift Sunday(0) -> 6
+
+    const evaluate = (hoursForDay: string | undefined): OpenStatus => {
+      if (!hoursForDay) return { state: "unknown" };
+      const ranges = parseTimeRange(hoursForDay);
+      if (ranges.length === 0) return { state: "closed" };
+      const active = ranges.find(
+        (range) => minutes >= range.start && minutes <= range.end,
+      );
+      if (active) {
+        return { state: "open", closesAt: active.end };
+      }
+      return { state: "closed" };
+    };
+
+    const primary = evaluate(building.hours[mondayFirstIndex]);
+    if (primary.state === "open") return primary;
+    const fallback = evaluate(building.hours[dayIndex]);
+    if (fallback.state === "open") return fallback;
+    return primary.state !== "unknown" ? primary : fallback;
+  };
+
+  const endStatus = getBuildingStatus(endBuilding);
+
   return (
     <div className="app-shell">
       <div className="workspace">
@@ -638,6 +712,33 @@ export default function HomePage() {
                 </button>
               </div>
               <p className="route-summary">{routeSummary}</p>
+              {(routeAttempted &&
+                routeNodeIds.length > 0 &&
+                endBuilding &&
+                endStatus.state !== "open") && (
+                <div className="timing-chip warning">
+                  {endBuilding && (
+                    <div>
+                      <strong>{endBuilding.name}:</strong>{" "}
+                      {endStatus.state === "closed"
+                        ? "Currently closed"
+                        : "Hours unknown — may be closed"}
+                    </div>
+                  )}
+                </div>
+              )}
+              {(routeAttempted &&
+                routeNodeIds.length > 0 &&
+                endBuilding &&
+                endStatus.state === "open" &&
+                typeof endStatus.closesAt === "number") && (
+                <div className="timing-chip success">
+                  <div>
+                    <strong>{endBuilding.name}:</strong>{" "}
+                    Open until {formatClock(endStatus.closesAt)}
+                  </div>
+                </div>
+              )}
               {routeTiming && (
                 <div className="timing-chip">
                   <div>

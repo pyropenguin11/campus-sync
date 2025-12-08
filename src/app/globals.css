@@ -474,6 +474,16 @@ button {
   font-size: 0.95rem;
 }
 
+.timing-chip.warning {
+  background: rgba(255, 138, 76, 0.16);
+  border-color: rgba(255, 138, 76, 0.32);
+}
+
+.timing-chip.success {
+  background: rgba(34, 197, 94, 0.14);
+  border-color: rgba(34, 197, 94, 0.35);
+}
+
 .legend-line.open {
   background: rgba(122, 0, 25, 0.7);
 }

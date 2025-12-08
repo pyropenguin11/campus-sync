@@ -4,6 +4,8 @@ import {
   distanceSquared,
   normalizeToken,
 } from "../../lib/map-data";
+import { readFileSync } from "fs";
+import { join } from "path";
 import type { ArcgisGeoJsonLayer } from "../../types/arcgis";
 import type { GeoJsonGeometry } from "../../types/geojson";
 import type {
@@ -20,6 +22,72 @@ type RouteGraphNode = {
 };
 
 type BuildingSource = "primary" | "egis";
+
+const HOURS_FILE = join(
+  process.cwd(),
+  "src",
+  "server",
+  "data",
+  "building_hours.txt",
+);
+
+const DAYS_PER_WEEK = 7;
+
+const loadBuildingHours = (): Map<string, string[]> => {
+  let raw: string;
+  try {
+    raw = readFileSync(HOURS_FILE, "utf-8");
+  } catch {
+    return new Map();
+  }
+
+  const rangePattern =
+    /(\d{1,2}:\d{2}\s*[AP]M-\d{1,2}:\d{2}\s*[AP]M|24\s*hours|closed)/gi;
+
+  const hoursMap = new Map<string, { hours: string[]; priority: number }>();
+  let currentName: string | null = null;
+
+  const record = (name: string, kind: string, rest: string) => {
+    const ranges = Array.from(rest.matchAll(rangePattern)).map((m) => m[0]);
+    if (ranges.length !== DAYS_PER_WEEK) return;
+    const priority = kind.toLowerCase().startsWith("university") ? 2 : 1;
+    const existing = hoursMap.get(name);
+    if (!existing || priority > existing.priority) {
+      hoursMap.set(name, { hours: ranges, priority });
+    }
+  };
+
+  raw
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line.toLowerCase().includes(" hours "))
+    .forEach((line) => {
+      const named = line.match(/^(.*?)\s+(Public Hours|University Hours)\s+(.*)$/i);
+      if (named) {
+        const [, namePart, kind, rest] = named;
+        const normalized = normalizeToken(namePart);
+        if (!normalized) {
+          return;
+        }
+        currentName = normalized;
+        record(normalized, kind, rest);
+        return;
+      }
+
+      const unnamed = line.match(/^(Public Hours|University Hours)\s+(.*)$/i);
+      if (unnamed && currentName) {
+        const [, kind, rest] = unnamed;
+        record(currentName, kind, rest);
+      }
+    });
+
+  const cleaned = new Map<string, string[]>();
+  hoursMap.forEach((value, key) => {
+    cleaned.set(key, value.hours);
+  });
+
+  return cleaned;
+};
 
 const haversineDistance = (a: LatLngTuple, b: LatLngTuple): number => {
   const R = 6371000;
@@ -299,6 +367,7 @@ export const buildBuildingSummaries = (
   const seenNames = new Set<string>();
   const buildingByName = new Map<string, { source: BuildingSource; id: string }>();
   const buildingByCode = new Map<string, { source: BuildingSource; id: string }>();
+  const hoursMap = loadBuildingHours();
 
   type IdResolver = (
     properties: Record<string, unknown>,
@@ -415,6 +484,7 @@ export const buildBuildingSummaries = (
         position: centroid,
         tokens: Array.from(searchTokenSet),
         exactTokens: Array.from(exactTokenSet),
+        hours: normalizedName ? hoursMap.get(normalizedName) : undefined,
       });
     });
   };
